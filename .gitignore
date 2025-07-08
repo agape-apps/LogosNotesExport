@@ -1,0 +1,12 @@
+LogosDocuments/
+__pycache__/
+screenshots/
+
+.DS_Store
+.vscode/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
