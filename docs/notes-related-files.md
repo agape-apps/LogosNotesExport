@@ -26,7 +26,7 @@ The LogosDocuments directory contains 22 main subdirectories, with several conta
 **Purpose:** Notes tool management and configuration
 **Files:**
 - `notestool.db` (2.9 MB) - Main notes tool database
-- `notestool-test.db` (2.9 MB) - Test notes tool database
+- `notestool-test.db` (2.9 MB) - Test/backup notes tool database
 - `notestool.db-wal` (3.1 MB) - Large WAL file indicating active usage
 - `notestool.db-shm` - Shared memory file
 - `notestool.db.flock` - File lock

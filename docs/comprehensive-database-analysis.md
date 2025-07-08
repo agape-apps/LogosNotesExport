@@ -68,27 +68,16 @@ CREATE TABLE NoteAnchorFacetReferences (
 
 ### Reference Pattern: `bible+version.book.chapter.verse(-endverse)`
 
-**Examples:**
-- `bible+nkjv.63.1.12-63.1.14` = 2 John 1:12-14 (NKJV)
-- `bible+esv.19.86.9` = Psalms 86:9 (ESV)
-- `bible+nkjv.62.9.42` = 1 John 9:42 (NKJV) - *unusual verse number*
 
 ### Book Number Mapping (Logos System)
 
-Based on analysis of 1,689 Bible references:
+- see docs/complete-ot-nt-mapping.md
 
-| Book# | Likely Book | Count | Notes |
-|-------|-------------|-------|-------|
-| 1     | Genesis     | ~123  | Old Testament start |
-| 19    | Psalms      | High  | Many references |
-| 20    | Proverbs    | ~173  | Wisdom literature |
-| 40    | Matthew     | ?     | NT start (standard) |
-| 62    | 1 John      | Many  | Based on samples |
-| 63    | 2 John      | Few   | Your example |
-| 64    | 3 John      | Few   | Sequential |
-| 66    | Revelation  | Some  | NT end |
+**Examples:**
 
-**Note**: Logos uses a proprietary book numbering system that may not follow standard biblical order exactly.
+- `bible+nkjv.63.1.12-63.1.14`
+- `bible+esv.19.86.9` 
+- `bible+nkjv.62.9.42`
 
 ### Bible Versions Found
 - `nkjv` - New King James Version
@@ -97,6 +86,7 @@ Based on analysis of 1,689 Bible references:
 - `kjv` - King James Version
 - `leb2` - Lexham English Bible
 - `csb2` - Christian Standard Bible
+- and some German versions
 
 ## Data Extraction Opportunities
 
@@ -121,7 +111,7 @@ Based on analysis of 1,689 Bible references:
 ### Notes Database (notes.db)
 - **Size**: 1.7MB
 - **Main content**: 1,048 notes with attachments
-- **Storage**: Compressed BLOB format
+- **Storage**: Base64 encoded or Compressed BLOB format
 - **Key table**: Notes (primary content)
 
 ### NotesTool Database (notestool.db)  
@@ -133,7 +123,7 @@ Based on analysis of 1,689 Bible references:
 ## Technical Recommendations
 
 ### For Complete Note Extraction:
-1. **Decompress BLOB content** from Notes table
+1. **Decode or Decompress BLOB content** from Notes table
 2. **Map Bible references** using NoteAnchorFacetReferences
 3. **Combine metadata** from both databases using NoteId relationship
 4. **Resolve book numbers** to standard Bible book names
@@ -159,7 +149,7 @@ The analysis successfully identified:
 - **Strong database relationships** through matching note IDs
 - **Structured Bible reference system** in predictable format  
 - **Comprehensive note metadata** across both databases
-- **Compression-based content storage** requiring decompression
+- **Encoded and/or compression-based content storage** requiring decoding and/or decompression
 - **Clear path for complete note extraction** combining both databases
 
 Both databases are well-structured and contain complementary information necessary for complete notes extraction with Bible reference mapping. 

@@ -2,6 +2,7 @@ LogosDocuments/
 __pycache__/
 screenshots/
 
+node_modules/
 .DS_Store
 .vscode/
 .env

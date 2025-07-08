@@ -1,0 +1,21 @@
+{
+  "dependencies": {},
+  "name": "logos-notes-export",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "export": "bun run index.ts export",
+    "process": "bun run index.ts process",
+    "stats": "bun run index.ts stats",
+    "help": "bun run index.ts --help",
+    "export:range": "bun run index.ts export --from-id",
+    "dev": "bun run src/cli.ts"
+  }
+}

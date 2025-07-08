@@ -58,8 +58,35 @@ CREATE INDEX Notes_MarkupStyleName on Notes(MarkupStyleName);
 
 ## Sample Notes Data
 
-### First 5 Notes (truncated for readability)
+### First few Notes (decoded and reformatted)
 ```
+5: OrangeHighlighter
+<Paragraph><Run Text="to those who love Me and keep My commandments. "/></Paragraph>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Love and commandments go hand in hand" /></Paragraph>
+
+7: None
+<Paragraph><Run Text="Introduction"/></Paragraph>
+
+[DECODE ERROR: Error: Could not decode format 0x01]
+
+8: None
+<Paragraph><Run Text="And you will hear of wars and rumors of wars. See that you are not troubled; for all these things must come to pass, but the end is not yet.  For nation will rise against nation, and kingdom against k"/></Paragraph>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Do not be troubled" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="These things must come to pass" /></Paragraph>
+
+9: None
+<Paragraph><Run Text="earthen vessels"/></Paragraph>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Clay jars - Jer 18:1-3" /></Paragraph>
+
+10: OrangeHighlighter
+<Span><Run Text="Finally, brethren, whatever things are ﻿l﻿true, whatever things are ﻿m﻿noble, whatever things are ﻿n﻿just, ﻿o﻿whatever things are pure, whatever things are ﻿p﻿lovely, whatever things are of good report, if there is any virtue and if there is anything praiseworthy—meditate on these things." /></Span>
+
+
+11: OrangeHighlighter
+<Paragraph><Run Text="You have heaped up treasure in the last days. ﻿4﻿ Indeed ﻿e﻿the wages of the laborers who mowed your fields, which you kept back by fraud, cry out; and ﻿f﻿the cries of the reapers have reached the ears of the Lord of ﻿2﻿Sabaoth. "/></Paragraph>
+
 ```
 
 ## Statistics
