@@ -14,8 +14,7 @@ The command takes one or more database files as input
 It outputs the following:
 - an intermediate JSON file
 - an intermediate text file with the Blobs decoded into XAML
-- possibly more intermediate files on the path from XAML to Markdown
-- a directory of properly formatted Markdown files - one file per not with YAML metadata on top
+- a directory of properly formatted Markdown files - one file per not with YAML metadata front matter
 
 ## Architecture
 

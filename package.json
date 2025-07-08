@@ -1,5 +1,7 @@
 {
-  "dependencies": {},
+  "dependencies": {
+    "fast-xml-parser": "^5.2.5"
+  },
   "name": "logos-notes-export",
   "module": "index.ts",
   "type": "module",
