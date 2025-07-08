@@ -1,0 +1,58 @@
+# Missing Notes Analysis - 6 notes with content but failed conversion
+# Generated: 2025-07-08T16:25:09.035Z
+# Format: Note ID, Decoded Length, XAML Content
+
+
+=== Note ID: 154 ===
+Decoded Length: 110 characters
+Conversion Error: Content exists but produces no markdown
+XAML Content:
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+--- End Note 154 ---
+
+
+=== Note ID: 391 ===
+Decoded Length: 110 characters
+Conversion Error: Content exists but produces no markdown
+XAML Content:
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+--- End Note 391 ---
+
+
+=== Note ID: 488 ===
+Decoded Length: 110 characters
+Conversion Error: Content exists but produces no markdown
+XAML Content:
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+--- End Note 488 ---
+
+
+=== Note ID: 586 ===
+Decoded Length: 110 characters
+Conversion Error: Content exists but produces no markdown
+XAML Content:
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+--- End Note 586 ---
+
+
+=== Note ID: 765 ===
+Decoded Length: 110 characters
+Conversion Error: Content exists but produces no markdown
+XAML Content:
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+--- End Note 765 ---
+
+
+=== Note ID: 784 ===
+Decoded Length: 110 characters
+Conversion Error: Content exists but produces no markdown
+XAML Content:
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+--- End Note 784 ---
+

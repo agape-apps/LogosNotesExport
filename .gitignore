@@ -1,6 +1,8 @@
 LogosDocuments/
 __pycache__/
 screenshots/
+data/notes*
+data/debug*
 
 node_modules/
 .DS_Store

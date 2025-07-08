@@ -15,6 +15,7 @@
   "scripts": {
     "export": "bun run index.ts export",
     "process": "bun run index.ts process",
+    "markdown": "bun run index.ts markdown",
     "stats": "bun run index.ts stats",
     "help": "bun run index.ts --help",
     "export:range": "bun run index.ts export --from-id",
