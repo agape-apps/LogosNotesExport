@@ -108,8 +108,12 @@ export class MarkdownFileGenerator {
     const filePath = path.join(outputDir, filename);
 
     try {
-      // Skip notes with no compressed content
-      if (!note.CompressedContent || note.CompressedContent.trim() === '') {
+      // Check for content in both CompressedContent and CompressedUserTitle
+      const hasCompressedContent = !!(note.CompressedContent && note.CompressedContent.trim());
+      const hasCompressedTitle = !!(note.CompressedUserTitle && note.CompressedUserTitle.trim());
+      
+      // Skip notes with no compressed content in either field
+      if (!hasCompressedContent && !hasCompressedTitle) {
         return {
           filename,
           content: '',
@@ -119,11 +123,23 @@ export class MarkdownFileGenerator {
         };
       }
 
-      // Decode the compressed content
-      const decodedContent = decodeLogosContent(note.CompressedContent);
+      // Decode both fields
+      let decodedTitle = '';
+      let decodedContent = '';
+      
+      if (hasCompressedTitle) {
+        decodedTitle = decodeLogosContent(note.CompressedUserTitle!);
+      }
+      
+      if (hasCompressedContent) {
+        decodedContent = decodeLogosContent(note.CompressedContent!);
+      }
+      
+      // Combine title and content (similar to processor.ts)
+      const combinedContent = [decodedTitle, decodedContent].filter(Boolean).join('\n\n');
       
       // Skip empty notes if configured
-      if (!this.options.includeEmptyNotes && !decodedContent.trim()) {
+      if (!this.options.includeEmptyNotes && !combinedContent.trim()) {
         return {
           filename,
           content: '',
@@ -134,11 +150,11 @@ export class MarkdownFileGenerator {
       }
 
       // Convert XAML to Markdown
-      const markdownContent = this.converter.convertToMarkdown(decodedContent);
+      const markdownContent = this.converter.convertToMarkdown(combinedContent);
       
       // Debug: Log conversion details
       if (process.env.DEBUG) {
-        console.log(`Note ${note.Id}: XAML length: ${decodedContent.length}, Markdown length: ${markdownContent.length}`);
+        console.log(`Note ${note.Id}: XAML length: ${combinedContent.length}, Markdown length: ${markdownContent.length}`);
       }
 
       // Generate front matter
@@ -293,8 +309,23 @@ Front matter includes: Note ID, MarkupStyle, Reference placeholder
     fullContent: string; 
     decodedXaml: string;
   }> {
-    // Decode the compressed content
-    const decodedXaml = decodeLogosContent(note.CompressedContent);
+    // Decode both fields (same logic as generateSingleMarkdownFile)
+    const hasCompressedContent = !!(note.CompressedContent && note.CompressedContent.trim());
+    const hasCompressedTitle = !!(note.CompressedUserTitle && note.CompressedUserTitle.trim());
+    
+    let decodedTitle = '';
+    let decodedContent = '';
+    
+    if (hasCompressedTitle) {
+      decodedTitle = decodeLogosContent(note.CompressedUserTitle!);
+    }
+    
+    if (hasCompressedContent) {
+      decodedContent = decodeLogosContent(note.CompressedContent!);
+    }
+    
+    // Combine title and content
+    const decodedXaml = [decodedTitle, decodedContent].filter(Boolean).join('\n\n');
     
     // Convert XAML to Markdown
     const markdownContent = this.converter.convertToMarkdown(decodedXaml);

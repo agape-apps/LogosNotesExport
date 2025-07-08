@@ -6,6 +6,12 @@ import { processAllNotes, type ProcessOptions } from './processor.js';
 import { decodeLogosContent } from './decoder.js';
 import { MarkdownFileGenerator, type MarkdownGenerationOptions } from './markdown-generator.js';
 import { NotesAnalyzer } from './analyzer.js';
+import { findAndGenerateMissingNotes } from './missing-notes-finder.js';
+import { analyzeConversionGap } from './decode-analysis.js';
+import { findAllNotesInDecodedFile } from './simple-finder.js';
+import { extractMissingNotesFromDecoded } from './extract-missing.js';
+import { debugMissingNoteConversion } from './debug-missing.js';
+import { debugDatabaseContent } from './db-debug.js';
 import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
@@ -40,6 +46,8 @@ COMMANDS:
   stats          Show database statistics
   decode         Decode a single base64 string
   analyze        Analyze notes to identify missing conversions
+  find-missing   Find notes missing from decoded_notes.txt
+  gap-analysis   Analyze gap between decoded_notes.txt and Markdown conversions
 
 OPTIONS:
   --database, -d   Path to notes.db file (default: ${DEFAULT_DB_PATH})
@@ -80,6 +88,12 @@ EXAMPLES:
 
   # Analyze notes to find missing conversions
   bun run src/cli.ts analyze
+
+  # Find notes missing from decoded_notes.txt
+  bun run src/cli.ts find-missing
+
+  # Analyze gap between decoded notes and Markdown conversions
+  bun run src/cli.ts gap-analysis
 
   # Use custom database location
   bun run src/cli.ts export --database ./path/to/notes.db
@@ -334,6 +348,70 @@ async function analyzeCommand(options: CliOptions): Promise<void> {
   }
 }
 
+async function findMissingCommand(options: CliOptions): Promise<void> {
+  try {
+    const notesJsonFile = options.input || path.join('data', 'NotesTable.json');
+    const decodedNotesFile = path.join('data', 'decoded_notes.txt');
+    const outputFile = options.output || path.join('data', 'decoded_notes_missing.txt');
+
+    console.log(`🔍 Finding notes missing from decoded_notes.txt...`);
+    console.log(`📂 Notes JSON: ${notesJsonFile}`);
+    console.log(`📄 Decoded notes: ${decodedNotesFile}`);
+    console.log(`📝 Output: ${outputFile}`);
+    console.log();
+
+    if (!existsSync(notesJsonFile)) {
+      console.error(`❌ Notes JSON file not found: ${notesJsonFile}`);
+      console.error(`💡 Run 'export' command first to generate the JSON file`);
+      process.exit(1);
+    }
+
+    if (!existsSync(decodedNotesFile)) {
+      console.error(`❌ Decoded notes file not found: ${decodedNotesFile}`);
+      console.error(`💡 Run 'process' command first to generate the decoded notes file`);
+      process.exit(1);
+    }
+    
+    await findAndGenerateMissingNotes(notesJsonFile, decodedNotesFile, outputFile);
+    
+  } catch (error) {
+    console.error(`❌ Find missing failed: ${error instanceof Error ? error.message : String(error)}`);
+    process.exit(1);
+  }
+}
+
+async function gapAnalysisCommand(options: CliOptions): Promise<void> {
+  try {
+    const notesJsonFile = options.input || path.join('data', 'NotesTable.json');
+    const decodedNotesFile = path.join('data', 'decoded_notes.txt');
+    const outputFile = options.output || path.join('data', 'decoded_notes_missing.txt');
+
+    console.log(`🔍 Analyzing gap between decoded_notes.txt and Markdown conversions...`);
+    console.log(`📂 Notes JSON: ${notesJsonFile}`);
+    console.log(`📄 Decoded notes: ${decodedNotesFile}`);
+    console.log(`📝 Output: ${outputFile}`);
+    console.log();
+
+    if (!existsSync(notesJsonFile)) {
+      console.error(`❌ Notes JSON file not found: ${notesJsonFile}`);
+      console.error(`💡 Run 'export' command first to generate the JSON file`);
+      process.exit(1);
+    }
+
+    if (!existsSync(decodedNotesFile)) {
+      console.error(`❌ Decoded notes file not found: ${decodedNotesFile}`);
+      console.error(`💡 Run 'process' command first to generate the decoded notes file`);
+      process.exit(1);
+    }
+    
+    await analyzeConversionGap(notesJsonFile, decodedNotesFile, outputFile);
+    
+  } catch (error) {
+    console.error(`❌ Gap analysis failed: ${error instanceof Error ? error.message : String(error)}`);
+    process.exit(1);
+  }
+}
+
 async function main(): Promise<void> {
   const { command, options, positionals } = parseCliArgs();
 
@@ -358,8 +436,50 @@ async function main(): Promise<void> {
     case 'stats':
       await statsCommand(options);
       break;
+    // from here down to debug-db was all for debugging only
+    // these options and related code should be removed later
     case 'analyze':
       await analyzeCommand(options);
+      break;
+    case 'find-missing':
+      await findMissingCommand(options);
+      break;
+    case 'gap-analysis':
+      await gapAnalysisCommand(options);
+      break;
+    case 'simple-missing':
+      try {
+        await findAllNotesInDecodedFile();
+      } catch (error) {
+        console.error(`❌ Simple missing analysis failed: ${error instanceof Error ? error.message : String(error)}`);
+        process.exit(1);
+      }
+      break;
+    case 'extract-missing':
+      try {
+        await extractMissingNotesFromDecoded();
+      } catch (error) {
+        console.error(`❌ Extract missing failed: ${error instanceof Error ? error.message : String(error)}`);
+        process.exit(1);
+      }
+      break;
+    case 'debug-missing':
+      try {
+        const sampleIds = [10, 11, 44, 50, 82, 99, 111, 114, 115, 116];
+        await debugMissingNoteConversion('data/NotesTable.json', sampleIds);
+      } catch (error) {
+        console.error(`❌ Debug missing failed: ${error instanceof Error ? error.message : String(error)}`);
+        process.exit(1);
+      }
+      break;
+    case 'debug-db':
+      try {
+        const sampleIds = [10, 11, 44, 50, 82];
+        await debugDatabaseContent(options.database || DEFAULT_DB_PATH, sampleIds);
+      } catch (error) {
+        console.error(`❌ Debug database failed: ${error instanceof Error ? error.message : String(error)}`);
+        process.exit(1);
+      }
       break;
     default:
       console.error(`❌ Unknown command: ${command}`);
@@ -376,4 +496,4 @@ if (import.meta.main) {
   });
 }
 
-export { main, exportCommand, processCommand, markdownCommand, decodeCommand, statsCommand, analyzeCommand }; 
+export { main, exportCommand, processCommand, markdownCommand, decodeCommand, statsCommand, analyzeCommand, findMissingCommand, gapAnalysisCommand }; 
