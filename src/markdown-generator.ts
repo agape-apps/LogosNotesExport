@@ -135,11 +135,27 @@ export class MarkdownFileGenerator {
         decodedContent = decodeLogosContent(note.CompressedContent!);
       }
       
-      // Combine title and content (similar to processor.ts)
-      const combinedContent = [decodedTitle, decodedContent].filter(Boolean).join('\n\n');
+      // Convert each field to Markdown separately, then combine
+      let markdownTitle = '';
+      let markdownContent = '';
+      
+      if (decodedTitle.trim()) {
+        markdownTitle = this.converter.convertToMarkdown(decodedTitle).trim();
+      }
+      
+      if (decodedContent.trim()) {
+        markdownContent = this.converter.convertToMarkdown(decodedContent).trim();
+      }
+      
+      // Combine markdown outputs with proper formatting:
+      // CompressedUserTitle
+      // (blank line if both have content)
+      // CompressedContent
+      const markdownParts = [markdownTitle, markdownContent].filter(Boolean);
+      const finalMarkdownContent = markdownParts.join('\n\n');
       
       // Skip empty notes if configured
-      if (!this.options.includeEmptyNotes && !combinedContent.trim()) {
+      if (!this.options.includeEmptyNotes && !finalMarkdownContent.trim()) {
         return {
           filename,
           content: '',
@@ -148,20 +164,17 @@ export class MarkdownFileGenerator {
           error: 'Empty note content (skipped)'
         };
       }
-
-      // Convert XAML to Markdown
-      const markdownContent = this.converter.convertToMarkdown(combinedContent);
       
       // Debug: Log conversion details
       if (process.env.DEBUG) {
-        console.log(`Note ${note.Id}: XAML length: ${combinedContent.length}, Markdown length: ${markdownContent.length}`);
+        console.log(`Note ${note.Id}: Title length: ${markdownTitle.length}, Content length: ${markdownContent.length}, Combined: ${finalMarkdownContent.length}`);
       }
 
       // Generate front matter
       const frontMatter = this.generateFrontMatter(note);
 
       // Combine front matter and content
-      const fullContent = frontMatter + markdownContent;
+      const fullContent = frontMatter + finalMarkdownContent;
 
       // Write file
       await writeFile(filePath, fullContent, 'utf-8');
@@ -324,11 +337,21 @@ Front matter includes: Note ID, MarkupStyle, Reference placeholder
       decodedContent = decodeLogosContent(note.CompressedContent!);
     }
     
-    // Combine title and content
-    const decodedXaml = [decodedTitle, decodedContent].filter(Boolean).join('\n\n');
+    // Convert each field to Markdown separately, then combine (same as generateSingleMarkdownFile)
+    let markdownTitle = '';
+    let markdownContentPart = '';
     
-    // Convert XAML to Markdown
-    const markdownContent = this.converter.convertToMarkdown(decodedXaml);
+    if (decodedTitle.trim()) {
+      markdownTitle = this.converter.convertToMarkdown(decodedTitle).trim();
+    }
+    
+    if (decodedContent.trim()) {
+      markdownContentPart = this.converter.convertToMarkdown(decodedContent).trim();
+    }
+    
+    // Combine for display
+    const markdownContent = [markdownTitle, markdownContentPart].filter(Boolean).join('\n\n');
+    const decodedXaml = [decodedTitle, decodedContent].filter(Boolean).join('\n\n');
 
     // Generate front matter
     const frontMatter = this.generateFrontMatter(note);
