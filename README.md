@@ -46,6 +46,14 @@ bun install
 chmod +x src/cli.ts
 ```
 
+## Build Binaries for macOS and Windows
+
+```sh
+bun run binary:macx64    # Build for macOS Intel
+bun run binary:macarm    # Build for macOS Apple Silicon  
+bun run binary:windows   # Build for Windows x64
+```
+
 ## 📖 Usage
 
 ### Basic Export
