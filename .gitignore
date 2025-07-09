@@ -5,6 +5,7 @@ data/notes*
 data/debug*
 exported-notes/
 test-export/
+bin/
 
 node_modules/
 .DS_Store

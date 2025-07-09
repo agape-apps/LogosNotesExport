@@ -1,5 +1,6 @@
 import type { OrganizedNote, NotebookGroup, FilePathInfo } from './types.js';
 import { XamlToMarkdownConverter } from './xaml-converter.js';
+import { cleanXamlText } from './unicode-cleaner.js';
 
 export interface MarkdownOptions {
   /** Include YAML frontmatter */
@@ -354,8 +355,8 @@ export class MarkdownConverter {
     
     // Use the first reference as title
     const firstRef = note.references[0];
-    if (firstRef && typeof firstRef.formatted === 'string') {
-      return firstRef.formatted;
+    if (firstRef && firstRef.formatted) {
+      return String(firstRef.formatted);
     }
     return null;
   }
@@ -369,7 +370,7 @@ export class MarkdownConverter {
     // Extract text from Text attributes
     const textMatches = xaml.match(/Text="([^"]*?)"/g) || [];
     const texts = textMatches.map(match => 
-      match.replace(/Text="([^"]*?)"/, '$1').trim()
+      cleanXamlText(match.replace(/Text="([^"]*?)"/, '$1').trim())
     ).filter(text => text);
 
     return texts.join(' ');

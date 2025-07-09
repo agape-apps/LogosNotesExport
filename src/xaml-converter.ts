@@ -1,4 +1,5 @@
 import { XMLParser } from 'fast-xml-parser';
+import { cleanXamlText, UnicodeCleaner } from './unicode-cleaner.js';
 
 export interface XamlConverterOptions {
   /** Font sizes that correspond to heading levels [H1, H2, H3, H4, H5, H6, H7] */
@@ -39,6 +40,7 @@ interface XamlElement {
 export class XamlToMarkdownConverter {
   private options: XamlConverterOptions;
   private parser: XMLParser;
+  private unicodeCleaner: UnicodeCleaner;
 
   constructor(options: Partial<XamlConverterOptions> = {}) {
     this.options = { ...DEFAULT_OPTIONS, ...options };
@@ -51,6 +53,7 @@ export class XamlToMarkdownConverter {
       trimValues: true,
       processEntities: true,
     });
+    this.unicodeCleaner = new UnicodeCleaner();
   }
 
   private isXamlElement(value: unknown): value is XamlElement {
@@ -343,7 +346,8 @@ export class XamlToMarkdownConverter {
   private applyInlineFormatting(text: string, element: XamlElement): string {
     if (!text) return '';
 
-    let formatted = text;
+    // Clean Unicode issues first
+    let formatted = this.unicodeCleaner.cleanXamlText(text);
 
     // Check for inline code (monospace font)
     const fontFamily = element['@_FontFamily'] || '';
@@ -371,14 +375,14 @@ export class XamlToMarkdownConverter {
 
     let content = '';
 
-    // Direct text
+    // Direct text - clean Unicode issues
     if (element['#text']) {
-      content += element['#text'];
+      content += this.unicodeCleaner.cleanXamlText(element['#text']);
     }
 
-    // Text attribute
+    // Text attribute - clean Unicode issues
     if (element['@_Text']) {
-      content += element['@_Text'];
+      content += this.unicodeCleaner.cleanXamlText(element['@_Text']);
     }
 
     // Process child elements
@@ -494,7 +498,8 @@ export class XamlToMarkdownConverter {
         const cellArray = Array.isArray(value) ? value : [value];
         for (const cell of cellArray) {
           if (this.isXamlElement(cell)) {
-            const content = this.extractElementContent(cell).trim();
+            // TypeScript workaround: cell is confirmed to be XamlElement by type guard
+            const content = this.extractElementContent(cell as any).trim();
             cells.push(content || '');
           }
         }
@@ -508,13 +513,13 @@ export class XamlToMarkdownConverter {
     // Fallback text extraction using regex
     const textMatches = xamlContent.match(/Text="([^"]*?)"/g) || [];
     const plainTexts = textMatches.map(match => 
-      match.replace(/Text="([^"]*?)"/, '$1')
+      this.unicodeCleaner.cleanXamlText(match.replace(/Text="([^"]*?)"/, '$1'))
     );
 
     // Extract content between tags
     const contentMatches = xamlContent.match(/>([^<]+)</g) || [];
     const contents = contentMatches.map(match => 
-      match.replace(/^>([^<]+)<$/, '$1').trim()
+      this.unicodeCleaner.cleanXamlText(match.replace(/^>([^<]+)<$/, '$1').trim())
     ).filter(text => text && !text.startsWith('<?') && !text.startsWith('<!--'));
 
     return [...plainTexts, ...contents].join(' ').trim();

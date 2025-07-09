@@ -45,30 +45,6 @@ def clean_unicode_text(text):
     # This targets patterns like: ltrue, mnoble, njust, owhatever, plovely, ethe, fthe, 2Sabaoth
     # These are single letters/numbers followed by common words that got merged due to removed zero-width chars
     
-    # Common words that get prefixed with single letters/numbers due to cross-references
-    cross_ref_patterns = [
-        # Single letter + common words
-        r'\b[a-z]true\b', r'\b[a-z]false\b', r'\b[a-z]noble\b', r'\b[a-z]just\b', 
-        r'\b[a-z]pure\b', r'\b[a-z]lovely\b', r'\b[a-z]whatever\b', r'\b[a-z]things\b',
-        r'\b[a-z]the\b', r'\b[a-z]and\b', r'\b[a-z]that\b', r'\b[a-z]with\b',
-        r'\b[a-z]will\b', r'\b[a-z]shall\b', r'\b[a-z]have\b', r'\b[a-z]was\b',
-        r'\b[a-z]were\b', r'\b[a-z]are\b', r'\b[a-z]you\b', r'\b[a-z]your\b',
-        r'\b[a-z]his\b', r'\b[a-z]her\b', r'\b[a-z]their\b', r'\b[a-z]who\b',
-        r'\b[a-z]which\b', r'\b[a-z]when\b', r'\b[a-z]where\b', r'\b[a-z]what\b',
-        r'\b[a-z]how\b', r'\b[a-z]why\b', r'\b[a-z]all\b', r'\b[a-z]every\b',
-        r'\b[a-z]any\b', r'\b[a-z]some\b', r'\b[a-z]many\b', r'\b[a-z]much\b',
-        r'\b[a-z]into\b', r'\b[a-z]unto\b', r'\b[a-z]upon\b', r'\b[a-z]from\b',
-        r'\b[a-z]before\b', r'\b[a-z]after\b', r'\b[a-z]above\b', r'\b[a-z]below\b',
-        r'\b[a-z]Lord\b', r'\b[a-z]God\b', r'\b[a-z]Jesus\b', r'\b[a-z]Christ\b',
-        r'\b[a-z]Spirit\b', r'\b[a-z]Father\b', r'\b[a-z]Son\b', r'\b[a-z]Holy\b',
-        
-        # Number + common words  
-        r'\b\d+Sabaoth\b', r'\b\d+the\b', r'\b\d+and\b', r'\b\d+that\b',
-        r'\b\d+will\b', r'\b\d+shall\b', r'\b\d+Lord\b', r'\b\d+God\b',
-        
-        # Specific patterns observed
-        r'\b[a-z]Indeed\b', r'\b[a-z]wages\b', r'\b[a-z]cries\b'
-    ]
     
     # Remove the prefixed letters/numbers from these patterns
     for pattern in cross_ref_patterns:

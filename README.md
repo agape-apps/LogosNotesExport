@@ -21,6 +21,8 @@ This tool extracts notes from Logos Bible Software's NotesTool database and conv
 - **📁 Flexible Output**: Customizable directory structure and file organization
 - **🔍 Dry Run Mode**: Preview what will be exported before writing files
 - **📊 Statistics**: Detailed export statistics and progress reporting
+- **✨ Unicode Cleaning**: Automatically removes footnote markers and problematic Unicode characters that appear as question marks
+- **🧹 Text Sanitization**: Cleans XAML content and removes zero-width characters, control characters, and footnote artifacts
 
 ## 🛠 Installation
 
@@ -198,6 +200,9 @@ The project follows a modular architecture:
 - **`notebook-organizer.ts`**: Note organization by notebooks
 - **`file-organizer.ts`**: File structure and path management
 - **`markdown-converter.ts`**: Markdown generation with YAML frontmatter
+- **`xaml-converter.ts`**: XAML-to-Markdown conversion with formatting preservation
+- **`unicode-cleaner.ts`**: Advanced Unicode text cleaning and footnote marker removal
+- **`validator.ts`**: Export quality assurance and validation
 - **`cli.ts`**: Command-line interface
 
 ## 🧪 Development

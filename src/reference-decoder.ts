@@ -65,14 +65,31 @@ export class BibleReferenceDecoder {
     const [, version, bookNum, chapter, verse, endBook, endChapter, endVerse] = match;
     const bookId = parseInt(bookNum || '0');
     const bookName = this.getBookName(anchorBookId || bookId);
+    
+    // Check if this is a single-chapter book
+    const bookMapping = this.bookMappings.get(anchorBookId || bookId);
+    const isSingleChapterBook = bookMapping?.chapterCount === 1;
+
+    let actualChapter: number;
+    let actualVerse: number | undefined;
+
+    if (isSingleChapterBook) {
+      // For single-chapter books: bible+nkjv.86.1.24 means Jude verse 24
+      actualChapter = parseInt(verse || '0'); // The "verse" field is actually the verse number
+      actualVerse = undefined; // No separate verse for formatting
+    } else {
+      // For multi-chapter books: normal chapter:verse
+      actualChapter = parseInt(chapter || '0');
+      actualVerse = parseInt(verse || '0');
+    }
 
     const result: DecodedReference = {
       bookName,
-      chapter: parseInt(chapter || '0'),
-      verse: parseInt(verse || '0'),
+      chapter: actualChapter,
+      verse: actualVerse,
       reference,
       anchorBookId: anchorBookId || bookId,
-      formatted: this.formatReference(bookName, parseInt(chapter || '0'), parseInt(verse || '0'), 
+      formatted: this.formatReference(bookName, actualChapter, actualVerse, 
         endChapter ? parseInt(endChapter || '0') : undefined, 
         endVerse ? parseInt(endVerse || '0') : undefined)
     };
@@ -132,17 +149,33 @@ export class BibleReferenceDecoder {
                          endChapter?: number, endVerse?: number): string {
     let formatted = bookName;
 
+    // Check if this is a single-chapter book
+    const bookMapping = Array.from(this.bookMappings.values()).find(b => b.englishName === bookName);
+    const isSingleChapterBook = bookMapping?.chapterCount === 1;
+
     if (chapter) {
-      formatted += ` ${chapter}`;
-      
-      if (verse) {
-        formatted += `:${verse}`;
+      if (isSingleChapterBook) {
+        // For single-chapter books, the "chapter" is actually the verse number
+        // Format: "Jude 24" instead of "Jude 1:24"
+        formatted += ` ${chapter}`;
         
-        if (endChapter && endVerse) {
-          if (endChapter === chapter) {
-            formatted += `-${endVerse}`;
-          } else {
-            formatted += `-${endChapter}:${endVerse}`;
+        if (verse) {
+          // If there's a verse, it means we have verse range: "Jude 24-25"
+          formatted += `-${verse}`;
+        }
+      } else {
+        // Multi-chapter books: normal "Book chapter:verse" format
+        formatted += ` ${chapter}`;
+        
+        if (verse) {
+          formatted += `:${verse}`;
+          
+          if (endChapter && endVerse) {
+            if (endChapter === chapter) {
+              formatted += `-${endVerse}`;
+            } else {
+              formatted += `-${endChapter}:${endVerse}`;
+            }
           }
         }
       }
@@ -199,39 +232,61 @@ export class BibleReferenceDecoder {
       { anchorId: 39, englishName: 'Malachi', osisId: 39, chapterCount: 4, status: 'Complete' }
     ];
 
-    // New Testament Books
+    // Apocrypha Books (Books 40-60 according to Logos numbering - NRSV arrangement)
+    const apocryphaBooks: BibleBookMapping[] = [
+      { anchorId: 40, englishName: 'Tobit', osisId: 67, chapterCount: 14, status: 'Complete' },
+      { anchorId: 41, englishName: 'Judith', osisId: 68, chapterCount: 16, status: 'Complete' },
+      { anchorId: 42, englishName: 'Esther (Greek)', osisId: 69, chapterCount: 16, status: 'Complete' },
+      { anchorId: 43, englishName: 'The Wisdom of Solomon', osisId: 70, chapterCount: 19, status: 'Complete' },
+      { anchorId: 44, englishName: 'Ecclesiasticus (Sirach)', osisId: 71, chapterCount: 51, status: 'Complete' },
+      { anchorId: 45, englishName: 'Baruch', osisId: 72, chapterCount: 6, status: 'Complete' },
+      { anchorId: 46, englishName: 'The Letter of Jeremiah', osisId: 73, chapterCount: 1, status: 'Complete' },
+      { anchorId: 47, englishName: 'The Prayer of Azariah and the Song of the Three Jews', osisId: 74, chapterCount: 1, status: 'Complete' },
+      { anchorId: 48, englishName: 'Susanna', osisId: 75, chapterCount: 1, status: 'Complete' },
+      { anchorId: 49, englishName: 'Bel and the Dragon', osisId: 76, chapterCount: 1, status: 'Complete' },
+      { anchorId: 50, englishName: '1 Maccabees', osisId: 77, chapterCount: 16, status: 'Complete' },
+      { anchorId: 51, englishName: '2 Maccabees', osisId: 78, chapterCount: 15, status: 'Complete' },
+      { anchorId: 52, englishName: '1 Esdras', osisId: 79, chapterCount: 9, status: 'Complete' },
+      { anchorId: 53, englishName: 'Prayer of Manasseh', osisId: 80, chapterCount: 1, status: 'Complete' },
+      { anchorId: 54, englishName: 'Psalm 151', osisId: 81, chapterCount: 1, status: 'Complete' },
+      { anchorId: 55, englishName: '3 Maccabees', osisId: 82, chapterCount: 7, status: 'Complete' },
+      { anchorId: 56, englishName: '2 Esdras', osisId: 83, chapterCount: 16, status: 'Complete' },
+      { anchorId: 57, englishName: '4 Maccabees', osisId: 84, chapterCount: 18, status: 'Complete' }
+    ];
+
+    // New Testament Books (Books 61-87 according to Logos numbering)
     const ntBooks: BibleBookMapping[] = [
-      { anchorId: 40, englishName: 'Matthew', osisId: 40, chapterCount: 28, status: 'Complete' },
-      { anchorId: 41, englishName: 'Mark', osisId: 41, chapterCount: 16, status: 'Complete' },
-      { anchorId: 42, englishName: 'Luke', osisId: 42, chapterCount: 24, status: 'Complete' },
-      { anchorId: 43, englishName: 'John', osisId: 43, chapterCount: 21, status: 'Complete' },
-      { anchorId: 44, englishName: 'Acts', osisId: 44, chapterCount: 28, status: 'Complete' },
-      { anchorId: 45, englishName: 'Romans', osisId: 45, chapterCount: 16, status: 'Complete' },
-      { anchorId: 46, englishName: '1 Corinthians', osisId: 46, chapterCount: 16, status: 'Complete' },
-      { anchorId: 47, englishName: '2 Corinthians', osisId: 47, chapterCount: 13, status: 'Complete' },
-      { anchorId: 48, englishName: 'Galatians', osisId: 48, chapterCount: 6, status: 'Complete' },
-      { anchorId: 49, englishName: 'Ephesians', osisId: 49, chapterCount: 6, status: 'Complete' },
-      { anchorId: 50, englishName: 'Philippians', osisId: 50, chapterCount: 4, status: 'Complete' },
-      { anchorId: 51, englishName: 'Colossians', osisId: 51, chapterCount: 4, status: 'Complete' },
-      { anchorId: 52, englishName: '1 Thessalonians', osisId: 52, chapterCount: 5, status: 'Complete' },
-      { anchorId: 53, englishName: '2 Thessalonians', osisId: 53, chapterCount: 3, status: 'Complete' },
-      { anchorId: 54, englishName: '1 Timothy', osisId: 54, chapterCount: 6, status: 'Complete' },
-      { anchorId: 55, englishName: '2 Timothy', osisId: 55, chapterCount: 4, status: 'Complete' },
-      { anchorId: 56, englishName: 'Titus', osisId: 56, chapterCount: 3, status: 'Complete' },
-      { anchorId: 57, englishName: 'Philemon', osisId: 57, chapterCount: 1, status: 'Complete' },
-      { anchorId: 58, englishName: 'Hebrews', osisId: 58, chapterCount: 13, status: 'Complete' },
-      { anchorId: 59, englishName: 'James', osisId: 59, chapterCount: 5, status: 'Complete' },
-      { anchorId: 60, englishName: '1 Peter', osisId: 60, chapterCount: 5, status: 'Complete' },
-      { anchorId: 61, englishName: '2 Peter', osisId: 61, chapterCount: 3, status: 'Complete' },
-      { anchorId: 62, englishName: '1 John', osisId: 62, chapterCount: 5, status: 'Complete' },
-      { anchorId: 63, englishName: '2 John', osisId: 63, chapterCount: 1, status: 'Complete' },
-      { anchorId: 64, englishName: '3 John', osisId: 64, chapterCount: 1, status: 'Complete' },
-      { anchorId: 65, englishName: 'Jude', osisId: 65, chapterCount: 1, status: 'Complete' },
-      { anchorId: 66, englishName: 'Revelation', osisId: 66, chapterCount: 22, status: 'Complete' }
+      { anchorId: 61, englishName: 'Matthew', osisId: 40, chapterCount: 28, status: 'Complete' },
+      { anchorId: 62, englishName: 'Mark', osisId: 41, chapterCount: 16, status: 'Complete' },
+      { anchorId: 63, englishName: 'Luke', osisId: 42, chapterCount: 24, status: 'Complete' },
+      { anchorId: 64, englishName: 'John', osisId: 43, chapterCount: 21, status: 'Complete' },
+      { anchorId: 65, englishName: 'Acts', osisId: 44, chapterCount: 28, status: 'Complete' },
+      { anchorId: 66, englishName: 'Romans', osisId: 45, chapterCount: 16, status: 'Complete' },
+      { anchorId: 67, englishName: '1 Corinthians', osisId: 46, chapterCount: 16, status: 'Complete' },
+      { anchorId: 68, englishName: '2 Corinthians', osisId: 47, chapterCount: 13, status: 'Complete' },
+      { anchorId: 69, englishName: 'Galatians', osisId: 48, chapterCount: 6, status: 'Complete' },
+      { anchorId: 70, englishName: 'Ephesians', osisId: 49, chapterCount: 6, status: 'Complete' },
+      { anchorId: 71, englishName: 'Philippians', osisId: 50, chapterCount: 4, status: 'Complete' },
+      { anchorId: 72, englishName: 'Colossians', osisId: 51, chapterCount: 4, status: 'Complete' },
+      { anchorId: 73, englishName: '1 Thessalonians', osisId: 52, chapterCount: 5, status: 'Complete' },
+      { anchorId: 74, englishName: '2 Thessalonians', osisId: 53, chapterCount: 3, status: 'Complete' },
+      { anchorId: 75, englishName: '1 Timothy', osisId: 54, chapterCount: 6, status: 'Complete' },
+      { anchorId: 76, englishName: '2 Timothy', osisId: 55, chapterCount: 4, status: 'Complete' },
+      { anchorId: 77, englishName: 'Titus', osisId: 56, chapterCount: 3, status: 'Complete' },
+      { anchorId: 78, englishName: 'Philemon', osisId: 57, chapterCount: 1, status: 'Complete' },
+      { anchorId: 79, englishName: 'Hebrews', osisId: 58, chapterCount: 13, status: 'Complete' },
+      { anchorId: 80, englishName: 'James', osisId: 59, chapterCount: 5, status: 'Complete' },
+      { anchorId: 81, englishName: '1 Peter', osisId: 60, chapterCount: 5, status: 'Complete' },
+      { anchorId: 82, englishName: '2 Peter', osisId: 61, chapterCount: 3, status: 'Complete' },
+      { anchorId: 83, englishName: '1 John', osisId: 62, chapterCount: 5, status: 'Complete' },
+      { anchorId: 84, englishName: '2 John', osisId: 63, chapterCount: 1, status: 'Complete' },
+      { anchorId: 85, englishName: '3 John', osisId: 64, chapterCount: 1, status: 'Complete' },
+      { anchorId: 86, englishName: 'Jude', osisId: 65, chapterCount: 1, status: 'Complete' },
+      { anchorId: 87, englishName: 'Revelation', osisId: 66, chapterCount: 22, status: 'Complete' }
     ];
 
     // Populate the map
-    [...otBooks, ...ntBooks].forEach(book => {
+    [...otBooks, ...apocryphaBooks, ...ntBooks].forEach(book => {
       this.bookMappings.set(book.anchorId, book);
     });
   }

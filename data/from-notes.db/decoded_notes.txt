@@ -1,0 +1,1980 @@
+### 5: OrangeHighlighter
+
+<Paragraph><Run Text="to those who love Me and keep My commandments. "/></Paragraph>
+
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Love and commandments go hand in hand" /></Paragraph>
+
+---
+
+### 7: None
+
+<Paragraph><Run Text="Introduction"/></Paragraph>
+
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="What" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="How" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="When" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Why" /></Paragraph>
+
+---
+
+### 8: None
+
+<Paragraph><Run Text="And you will hear of wars and rumors of wars. See that you are not troubled; for all these things must come to pass, but the end is not yet.  For nation will rise against nation, and kingdom against k"/></Paragraph>
+
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Do not be troubled" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="These things must come to pass" /></Paragraph>
+
+---
+
+### 9: None
+
+<Paragraph><Run Text="earthen vessels"/></Paragraph>
+
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Clay jars - Jer 18:1-3" /></Paragraph>
+
+---
+
+### 10: OrangeHighlighter
+
+<Span><Run Text="Finally, brethren, whatever things are ﻿l﻿true, whatever things are ﻿m﻿noble, whatever things are ﻿n﻿just, ﻿o﻿whatever things are pure, whatever things are ﻿p﻿lovely, whatever things are of good report, if there is any virtue and if there is anything praiseworthy—meditate on these things." /></Span>
+
+---
+
+### 11: OrangeHighlighter
+
+<Paragraph><Run Text="You have heaped up treasure in the last days. ﻿4﻿ Indeed ﻿e﻿the wages of the laborers who mowed your fields, which you kept back by fraud, cry out; and ﻿f﻿the cries of the reapers have reached the ears of the Lord of ﻿2﻿Sabaoth. "/></Paragraph>
+
+
+---
+
+### 12: None
+
+<Paragraph><Run Text="let us lay aside every weight, and the sin which so easily ensnares us,"/></Paragraph>
+
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Distinguished between weights and sin" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="All things are allowed but not all things benefit" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="1 Corinthians 6:12" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph>
+
+---
+
+### 13: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontItalic="True" Text="fall by the sword" /></Paragraph>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="here the word " /><Run Text=" " /><Run Language="el" FontFamily="Skolar PE" Text="μάχαιρα" /><Run Text=" (" /><Run Language="x-tl" FontItalic="True" Text="machaira" /><Run Text=") denotes a sword of war as used by an invading army which happened as the Roman army destroyed Jerusalem and scattared the Jews. The same word is used elsewhere in Luke for the swords the disciples were wearing." /></Paragraph>
+
+---
+
+### 14: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Jesus gives general instructions to buy a sword" /></Paragraph>
+
+---
+
+### 15: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="really, Timothy was the only one he could trust!? this sounds so pessimistic, yet it echoes his warnings regarding the end times when people will be lovers of self, lovers of pleasure etc. 2 Tim 3" /></Paragraph>
+
+---
+
+### 16: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="I wonder what Paul is sayng here: &quot;what was lacking in your service towards me&quot; Epaph was working himself to death, because the Philippians didn't do enough?" /></Paragraph>
+
+---
+
+### 17: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="see also Col 2:8-19 " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="“" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" Text="Let no one cheat you of your reward, taking delight in false humility and worship of angels, intruding into those things which he has not seen, vainly puffed up by his fleshly mind," /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="” (Colossians 2:18, NKJV)" /></Paragraph>
+
+---
+
+### 19: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="Warning of enemies of the cross, false teachers (deceivers), circumcision teachers." /></Paragraph>
+
+---
+
+### 20: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="True circumcision is of the heart Rom. 2:29. " /></Paragraph>
+
+---
+
+### 21: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11.000249862670898" Text="No confidence in the flesh. " /><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="Not just no confidence in the religious symbol of circumcision, but also: NOT" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Nationality (Hebrew of Hebrews)" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Citizenship (Roman)" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Religious position (Pharisee, like a Bishop or Cardinal)" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Academic achievement (like a Professor)" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Political Position, Office" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Power, influence (persecuting the church)" /></Paragraph>
+
+---
+
+### 22: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="All things we value today, he counted loss:" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Nationality, Citizenship" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Career, Academic Achievements" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Fame, Glory, Recognition" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Power" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="- Money" /></Paragraph>
+
+---
+
+### 23: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="key verse here. " /></Paragraph>
+
+---
+
+### 24: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="forward looking lifestyle based on - not optimism - but the resurrection" /></Paragraph>
+
+---
+
+### 26: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="real resurrection, transformation" /></Paragraph>
+
+---
+
+### 27: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="like a colony of expatriates" /></Paragraph>
+
+---
+
+### 28: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="colony of heavenly citizens" /></Paragraph>
+
+---
+
+### 29: OrangeHighlighter
+
+<Span><Run Text="blood"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="See Ezekiel 3:17" /></Paragraph>
+
+---
+
+### 30: OrangeHighlighter
+
+<Span><Run Text="they swirl about"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Like a typhoon on the satellite view" /></Paragraph>
+
+---
+
+### 31: OrangeHighlighter
+
+<Span><Run Text="be filled with ﻿﻿the knowledge of His will ﻿﻿in all wisdom and spiritual understanding;"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="What a mature Christian looks like:" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="-spiritual understanding " /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Col 3:16 wisdom from scripture" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Spirit of Wisdom, Truth" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Col . 1:28 present all mature" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="head, heart, hands (conviction, ministry)" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph>
+
+---
+
+### 32: OrangeHighlighter
+
+<Span><Run Text="Judas"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Bio" /></Paragraph>
+
+---
+
+### 33: OrangeHighlighter
+
+<Span><Run Text="Peter"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Bio" /></Paragraph>
+
+---
+
+### 34: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="not always bringing drunkenness, but gladness" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 35: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="pharmakeia - sorceries/enchantments" /></Paragraph>
+
+---
+
+### 39: None
+
+<Span><Run Language="en-US" FontFamily="Skolar PE" FontSize="11" FontItalic="True" Text="Babylon:… multitude of your sorceries" /></Span>
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="Referring to the Whore of Babylon:" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="“" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" Text="But these two things shall come to you In a moment, in one day: The loss of children, and widowhood. They shall come upon you in their fullness Because of the multitude of your " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" FontBold="True" Text="sorceries (" /><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11.000249862670898" FontItalic="True" FontBold="True" Text="pharmakeia" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" FontBold="True" Text=")" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" Text=", For the great abundance of your enchantments. “For you have trusted in your wickedness; You have said, ‘No one sees me’; Your wisdom and your knowledge have warped you; And you have said in your heart, ‘I am, and there is no one else besides me.’" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="” (Isaiah 47:9–10, NKJV)" /></Paragraph>
+
+---
+
+### 41: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Herbal" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 42: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="Symbol of Medicine :  " /><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11.000249862670898" Text="Serpents " /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Times" FontSize="9" Text="In " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontColor="FF0000E9" HasUnderline="True" Text="Greek mythology" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=", the " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontBold="True" Text="Rod of " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontBold="True" FontColor="FF0000E9" HasUnderline="True" Text="Asclepius" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=" (" /><Run Language="en-US" FontFamily="Menlo" FontSize="9" Text="⚕" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text="; sometimes also spelled " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontBold="True" Text="Asklepios" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=" or " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontBold="True" Text="Aesculapius" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text="), also known as the " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontBold="True" Text="asklepian" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text="," /><Run Language="en-US" FontFamily="Times" FontSize="7.5" FontColor="FF0000E9" Text="[" /><Run Language="en-US" FontFamily="Times" FontSize="7.5" FontColor="FF0000E9" HasUnderline="True" Text="1" /><Run Language="en-US" FontFamily="Times" FontSize="7.5" FontColor="FF0000E9" Text="]" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=" is a serpent-entwined rod wielded by the Greek god " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontColor="FF0000E9" HasUnderline="True" Text="Asclepius" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=", a deity associated with healing and medicine. The symbol has continued to be used in modern times, where it is associated with medicine and health care, yet frequently confused with the staff of the god " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontColor="FF0000E9" HasUnderline="True" Text="Hermes" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=", the " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontColor="FF0000E9" HasUnderline="True" Text="caduceus" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text="." /></Paragraph><List TextAlignment="Left" Kind="Disc"><ListItem><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="Caduceus: - Staff of Hermes with 2 snakes: &quot;" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text="The long-standing and abundantly attested historical " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontBold="True" Text="associations of the caduceus with commerce, theft, deception, and death" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=" are considered by many to be inappropriate in a symbol used by those engaged in the healing arts.&quot; [Engle, Bernice (Dec 1929). &quot;The Use of Mercury's Caduceus as a Medical Emblem&quot;&quot;. " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontItalic="True" Text="The Classical Journal" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=" " /><Run Language="en-US" FontFamily="Times" FontSize="9" FontBold="True" Text="25" /><Run Language="en-US" FontFamily="Times" FontSize="9" Text=" (1): 205.]" /></Paragraph></ListItem></List><List TextAlignment="Left" Kind="Disc"><ListItem><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="Star of life with Rod of Asclepius." /></Paragraph></ListItem></List>
+
+---
+
+### 43: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="Jesus refusing to be drugged: " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" The most common drink was vinegar-wine; the strongest and most stupefactive mixture, wormwood. Jesus refused this intoxicating draught decidedly, and that, too, knowing its nature: “" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontBold="True" Text="when He had tasted, He would not drink." /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="”" /></Paragraph><Paragraph TextAlignment="Left"><ResourceLink IsLink="True" ResourceId="lange61mt" Position="Article=MAT.PT6.SEC10.EXE|ArticleLength=55418|Context=tradition.%20The%20most%20|Offset=12825|OffsetInContext=10|Resource=LLS:LANGE61MT|Version=2012-10-22T19:03:20Z"><Run Language="en-US" FontFamily="Skolar PE" FontSize="10" Text="Lange, J. P., &amp; Schaff, P. (2008). " /></ResourceLink><ResourceLink IsLink="True" ResourceId="lange61mt" Position="Article=MAT.PT6.SEC10.EXE|ArticleLength=55418|Context=tradition.%20The%20most%20|Offset=12825|OffsetInContext=10|Resource=LLS:LANGE61MT|Version=2012-10-22T19:03:20Z"><Run Language="en-US" FontFamily="Skolar PE" FontSize="10" FontItalic="True" Text="A commentary on the Holy Scriptures: Matthew" /></ResourceLink><ResourceLink IsLink="True" ResourceId="lange61mt" Position="Article=MAT.PT6.SEC10.EXE|ArticleLength=55418|Context=tradition.%20The%20most%20|Offset=12825|OffsetInContext=10|Resource=LLS:LANGE61MT|Version=2012-10-22T19:03:20Z"><Run Language="en-US" FontFamily="Skolar PE" FontSize="10" Text=" (522). Bellingham, WA: Logos Bible Software." /></ResourceLink></Paragraph><Paragraph TextAlignment="Left" /><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" Even on the cross Jesus refused the drugging effects of wine mixed with gall (Matt. 27:34)." /></Paragraph><Paragraph TextAlignment="Left"><ResourceLink IsLink="True" ResourceId="hlmnillbbldict" Position="Article=D.DRUGS|ArticleLength=1293|Context=ess.%205:6).%20Even%20on%20t|Offset=832|OffsetInContext=10|Resource=LLS:HLMNILLBBLDICT|Version=2012-10-31T14:11:43Z"><Run Language="en-US" FontFamily="Skolar PE" FontSize="10" Text="Wright, P. H. (2003). Drugs. In C. Brand, C. Draper, A. England, S. Bond, E. R. Clendenen &amp; T. C. Butler (Eds.), " /></ResourceLink><ResourceLink IsLink="True" ResourceId="hlmnillbbldict" Position="Article=D.DRUGS|ArticleLength=1293|Context=ess.%205:6).%20Even%20on%20t|Offset=832|OffsetInContext=10|Resource=LLS:HLMNILLBBLDICT|Version=2012-10-31T14:11:43Z"><Run Language="en-US" FontFamily="Skolar PE" FontSize="10" FontItalic="True" Text="Holman Illustrated Bible Dictionary" /></ResourceLink><ResourceLink IsLink="True" ResourceId="hlmnillbbldict" Position="Article=D.DRUGS|ArticleLength=1293|Context=ess.%205:6).%20Even%20on%20t|Offset=832|OffsetInContext=10|Resource=LLS:HLMNILLBBLDICT|Version=2012-10-31T14:11:43Z"><Run Language="en-US" FontFamily="Skolar PE" FontSize="10" Text=" (C. Brand, C. Draper, A. England, S. Bond, E. R. Clendenen &amp; T. C. Butler, Ed.) (443). Nashville, TN: Holman Bible Publishers." /></ResourceLink></Paragraph>
+
+---
+
+### 44: None
+
+<Span><Run Language="en-US" FontFamily="Skolar PE" FontSize="11" FontItalic="True" Text="sorcery, witchcraft, black magic" /></Span>
+
+---
+
+### 45: None
+
+<Span><Run Language="en-US" FontFamily="Skolar PE" FontSize="11" FontItalic="True" Text="pharmakon - sorceries" /></Span>
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="or drugs (NU, M - NKJV note)" /></Paragraph>
+
+---
+
+### 46: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Lucida Grande" FontSize="11" Text="φαρ" /><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="μ" /><Run Language="en-US" FontFamily="Lucida Grande" FontSize="11" Text="ακεία - " /><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11.000249862670898" Text="pharmakeia" /></Paragraph>
+
+---
+
+### 47: None
+
+<Span><Run Language="en-US" FontFamily="Skolar PE" FontSize="11.000249862670898" FontItalic="True" Text="pharmakos" /><Run Language="en-US" FontFamily="Skolar PE" FontSize="11" FontItalic="True" Text=" - sorcerers" /></Span>
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="&quot;shall have their part in the lake which burns with fire and brimstone, which is the second death" /><Run Language="en-US" FontFamily="Skolar PE" FontSize="10" Text="&quot;" /></Paragraph>
+
+---
+
+### 48: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Herbal medicine" /></Paragraph>
+
+---
+
+### 49: None
+
+<Span><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11.000249862670898" Text="pharmakeia" /><Run Language="el" FontFamily="Skolar PE" FontSize="11" Text=" - φαρμακεία" /></Span>
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11.000249862670898" Text="pharmakeia" /><Run Language="en-US" FontFamily="Skolar PE" FontSize="10.5" FontBold="True" Text=" - φαρμακεία, ας, ἡ" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" (also-" /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="κία" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="; X., Pla. et al.; Vett. Val., pap, LXX; En, AscIs; Philo, Spec. Leg. 3, 94; 98; Ar. 13, 7; Tat. 18, 1) " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" FontBold="True" Text="sorcery, magic" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" (" /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="φάρμακον" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="; Polyb. 38, 16, 7; Ex 7:11, 22; 8:14; Is 47:9, 12; Wsd 12:4; 18:13; En 7:1; SibOr 5, 165) " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontBold="True" Text="Rv 18:23." /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" Pl. " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" Text="magic arts" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontBold="True" Text="9:21" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" (v.l. " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="φαρμάκων" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="). In a list of vices " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontBold="True" Text="Gal 5:20" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="; B 20:1 (AscIs 2:5 " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="ἐπλήθυνεν [ἡ] φαρμακία καὶ ἡ μαγία καὶ ἡ μαντία " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="…" /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text=" καὶ ἡ πορνία " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="…" /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text=" " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="); pl. D 5:1.—B. 1495. DELG s.v. " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="φάρμακον" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=". M-M." /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Skolar PE" FontSize="10" Text="BDAG" /></Paragraph>
+
+---
+
+### 50: None
+
+<Span><Run Language="en-US" FontFamily="Skolar PE" FontSize="11" FontItalic="True" Text="pharmakon - a drug used … a controlling medium" /></Span>
+
+---
+
+### 51: None
+
+<Span><Run Language="en-US" FontFamily="Skolar PE" FontSize="11" FontItalic="True" Text="pharmakos - skilled in … drugs, prob. poisoner" /></Span>
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Skolar PE" FontSize="10.5" FontBold="True" Text="φάρμακος, ου, ὁ" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" (LXX; other edd. " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="ός" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="; on the accent and differentiation fr. " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="φαρμακός" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" ‘scapegoat’ [Hipponax et al.] see L-S-J-M under both words, w. ref. to Herodian, Gr. I, 150; s. PKatz, TLZ 82, ’57, 112, The Text of the Septuagint ’73, 95; B-D-F §13; " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="φάρ" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=". is masc. Ex 7:11; fem. Mal 3:5; so also Orig., C. Cels. 5, 38, 38 w. " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="μάγοι" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="). In our lit. only masc." /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Libronix Symbols" FontSize="13.5" Text="①" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontBold="True" Text="one skilled in arcane uses of herbs or drugs," /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" prob. " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" FontBold="True" Text="poisoner" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" Hv 3, 9, 7ab, but w. implication of the role described in 2 next:" /></Paragraph><Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Libronix Symbols" FontSize="13.5" Text="②" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontBold="True" Text="one who does extraordinary things through occult means," /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontItalic="True" FontBold="True" Text="sorcerer, magician" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" (Ex 7:11; 9:11 al.; SibOr 3, 225) " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontBold="True" Text="Rv 21:8" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" (s. " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="φαρμακεύς" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="); " /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" FontBold="True" Text="22:15." /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text="—L-S-J-M s.v. fails to differentiate mng. in LXX pass. listed after a series of glosses.—For a vivid poetic description of a sorcerer’s procedures s. Horace, Epodes 5.—DELG s.v. " /><Run Language="en-US" FontFamily="Skolar PE" FontSize="9" Text="φάρμακον" /><Run Language="en-US" FontFamily="Helvetica" FontSize="9" Text=" C. M-M. (BDAG)" /></Paragraph>
+
+---
+
+### 53: YellowHighlighter
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Here the soul appears to be separated from the body" /></Paragraph>
+
+---
+
+### 81: YellowHighlighter
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Is there such a thing of different levels of resurrection?" /></Paragraph>
+
+---
+
+### 82: YellowHighlighter
+
+<Span><Run Text="This is the first resurrection"/></Span>
+
+---
+
+### 92: None
+
+<Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="test note" /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 94: Yellow
+
+<Span><Run Text="test" /></Span>
+
+<Paragraph><Run Text="Hi"/></Paragraph>
+
+---
+
+### 97: GreenHighlighter
+
+<Span><Run Text="all might believe through him"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="All" /></Paragraph>
+
+---
+
+### 98: OrangeHighlighter
+
+<Span><Run Text="abolished death and brought life and immortality to light through the gospel" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Thru the Gospel" /></Paragraph>
+
+---
+
+### 99: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="are reserved for fire until the day of judgment" /></Span>
+
+---
+
+### 100: None
+
+<Span><Run Text="will die in your sin. Where I go you cannot come.” " /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="will die or be tortured in hell? " /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="See 8:22-24 ... " /><Run FontSize="12" Text="for if you do not believe that I am " /><Run FontSize="12" FontItalic="True" Text="He," /><Run FontSize="12" Text=" you will die in your sins." /></Paragraph>
+
+---
+
+### 101: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="a slave does not abide in the house forever, but a son abides forever." /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Only sons have eternal life" /></Paragraph>
+
+---
+
+### 102: None
+
+<Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="punishment for breaking the Mosaic covenant" /></Paragraph>
+
+---
+
+### 103: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="wicked He will rain coals" /></Span>
+
+<Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Language="en-US" Text="'Upon the " /><Run Language="en-US" Text="wicked He will rain coals;" /><Run Language="en-US" Text=" " /><Run Language="en-US" Text="Fire and brimstone and a burning wind" /><Run Language="en-US" Text="'" /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Language="en-US" Text="like in Sodom " /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 106: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Reference IsLink="True" Reference="bible+nkjv.1.9.11"><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text="Genesis 9:11" /></Reference><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text=" (NKJV) — 11" /><Run FontFamily="Helvetica" FontSize="9" Text=" Thus I establish My covenant with you: Never again shall all flesh be cut off by the waters of the flood; never again shall there be a flood to destroy the earth.”" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 111: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="wicked He will destroy." /></Span>
+
+---
+
+### 114: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="Like thorns cut … burned in the fire." /></Span>
+
+---
+
+### 115: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="earth old die ... salvation will be forever" /></Span>
+
+---
+
+### 116: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="the worm will … eat them like wool" /></Span>
+
+---
+
+### 118: None
+
+<Span Language="en-US" FontSize="12" FontBold="True" FlowDirection="LeftToRight"><Run FontBold="False" Text="devoured " /><Run Text="By the fire of His jealousy" /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="36,0,0,0" TextIndent="-18"><Run Text="But the whole land shall be devoured" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="36,0,0,0" TextIndent="-18"><Run Text="By the fire of His jealousy," /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 119: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontItalic="True" FontVariant="Superscript" Text="3" /><Run FontItalic="True" Text=" wicked: ashes under your feet " /></Paragraph>
+
+---
+
+### 120: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontItalic="True" Text="vanish from all the earth" /></Paragraph>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Reference IsLink="True" Reference="bible.40.14.7"><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text="Tobit 14:7" /></Reference><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text=" (NRSV) — 7" /><Run FontFamily="Helvetica" FontSize="9" Text=" and in righteousness they will praise the eternal God. All the Israelites who are saved in those days and are truly mindful of God will be gathered together; they will go to Jerusalem and" /><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text=" live in safety forever" /><Run FontFamily="Helvetica" FontSize="9" Text=" in the land of Abraham, and it will be given over to them. Those who sincerely love God will rejoice, but those who commit sin and injustice will vanish from all the earth." /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 123: GreenHighlighter
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="To whom he wills" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph>
+
+---
+
+### 130: BlueHighlighter
+
+<Span><Run Text="For this is the will of my Father, that everyone who looks on the Son and believes in him should have eternal life, and I will raise him up on the last day.” "/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Jesus will raise us up" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Those who believe in him" /></Paragraph>
+
+---
+
+### 131: BlueHighlighter
+
+<Span><Run Text="Whoever feeds on my flesh and drinks my blood has eternal life, and I will raise him up on the last day."/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Jesus will raise us up" /></Paragraph>
+
+---
+
+### 139: BlueHighlighter
+
+<Span><Run Text="Jesus said to her, “Your brother will rise again.” Martha said to him, “I know that he will rise again in the resurrection on the last day.” Jesus said to her, “I am the resurrection and the life. Who"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Resurrection is the hope" /></Paragraph>
+
+---
+
+### 140: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="the wicked will… (v. 38). " /></Span>
+
+---
+
+### 141: None
+
+<Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Language="en-US" Text="They say nothing of conscious unending torment." /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="None of them hints at a fire that tortures but does not kill. They do not envision the presence of the wicked forever—even in a distant place" /></Paragraph>
+
+---
+
+### 142: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text=" cup does stand for fatal judgment" /></Span>
+
+<Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Language="en-US" Text="I urge that the cup does stand for fatal judgment in " /><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" Text="Rev " /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="14" /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" Text=":" /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="9" /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" Text="–" /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="11" /></Reference><Run Language="en-US" Text=" for two reasons. First, outside Revelation, ultimate extinction is everywhere else in Scripture the clearly-described destiny of the wicked. Second, the three other symbols used in " /><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" Text="Rev " /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="14" /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" Text=":" /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="9" /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" Text="–" /></Reference><Reference IsLink="True" Reference="bible.87.14.9-87.14.11"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="11" /></Reference><Run Language="en-US" Text=", when used in Scripture outside Revelation, either mean (fire and brimstone; smoke ascending) or are consistent with (no rest day or night) a judgment that ends in death." /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 143: None
+
+<Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Language="en-US" FontFamily="Cambria" FontColor="FF0000FF" HasUnderline="True" Text="46" /><Run Language="en-US" Text=". " /><Reference IsLink="True" Reference="bible.87.14.10-87.14.14"><Run Language="en-US" Text="Rev " /></Reference><Reference IsLink="True" Reference="bible.87.14.10-87.14.14"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="14" /></Reference><Reference IsLink="True" Reference="bible.87.14.10-87.14.14"><Run Language="en-US" Text=":" /></Reference><Reference IsLink="True" Reference="bible.87.14.10-87.14.14"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="10" /></Reference><Reference IsLink="True" Reference="bible.87.14.10-87.14.14"><Run Language="en-US" Text="–" /></Reference><Reference IsLink="True" Reference="bible.87.14.10-87.14.14"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="14" /></Reference><Run Language="en-US" Text=" and " /><Reference IsLink="True" Reference="bible.87.20.10"><Run Language="en-US" Text="Rev " /></Reference><Reference IsLink="True" Reference="bible.87.20.10"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="20" /></Reference><Reference IsLink="True" Reference="bible.87.20.10"><Run Language="en-US" Text=":" /></Reference><Reference IsLink="True" Reference="bible.87.20.10"><Run Language="en-US" FontFamily="Cambria" FontSize="5" Text="10" /></Reference><Run Language="en-US" Text=" are the two biblical texts that come closest to affirming unending conscious torment, and they are the only two texts that do. Traditionalists frequently resort to those two passages whenever they encounter any of the scores of other Scriptures that seem directly to contradict their view. Although simplistic, it is almost fair to say that this whole debate rests finally on one question: should we interpret dozens of straightforward texts throughout the Bible to match the literal sense of two symbolic texts in the Apocalypse, or ought we to interpret the two apocalyptic texts symbolically to conform to the many others? It is highly unlikely that, on any other subject, any of our traditionalist brothers or sisters finally base an entire doctrine on two texts from Revelation." /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 144: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="day of the " /><Run FontCapitals="SmallCaps" Text="Lord" /><Run Text=" " /><Run FontItalic="True" Text="is" /><Run Text=" great and very terrible;" /></Span>
+
+---
+
+### 146: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="Multitudes, multitudes in the valley of decision!" /></Span>
+
+---
+
+### 147: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="all the nations to battle against Jerusalem" /></Span>
+
+---
+
+### 148: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="hearts of the children to their fathers" /></Span>
+
+---
+
+### 149: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="rise again in the resurrection at the last day" /></Span>
+
+---
+
+### 150: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="The sun shall be turned into darkness" /></Span>
+
+---
+
+### 151: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="who will also confirm you to the end" /></Span>
+
+---
+
+### 152: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="spirit may be saved in the day of the Lord Jesus." /></Span>
+
+---
+
+### 153: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="the day of the Lord Jesus" /></Span>
+
+---
+
+### 154: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 155: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="are not in darkness, so that this Day should overtake you as a thief" /></Span>
+
+---
+
+### 156: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="all who have loved His appearing" /></Span>
+
+---
+
+### 157: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="will come as a thief in the night" /></Span>
+
+---
+
+### 163: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Reference IsLink="True" Reference="bible+nkjv.1.6.13"><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text="Genesis 6:13" /></Reference><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text=" (NKJV) — 13" /><Run FontFamily="Helvetica" FontSize="9" Text=" And God said to Noah, “The end of all flesh has come before Me, for the earth is filled with violence through them; and behold, I will " /><Run FontFamily="Helvetica" FontSize="9" Text="*" /><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text="destroy" /><Run FontFamily="Helvetica" FontSize="9" Text="*" /><Run FontFamily="Helvetica" FontSize="9" Text=" them with the earth." /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 164: DoubleUnderline
+
+<Span><Run Text="violence"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="God hates violence, " /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="See the reasons for the flood" /></Paragraph>
+
+---
+
+### 166: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="the city … full of violence. " /></Span>
+
+---
+
+### 167: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="The city … filled with violence.  " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Reference IsLink="True" Reference="bible+nkjv.26.7.24-26.7.26"><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text="Ezekiel 7:24–26" /></Reference><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text=" (NKJV) — 24" /><Run FontFamily="Helvetica" FontSize="9" Text=" Therefore I will bring the worst of the Gentiles, And they will possess their houses; I will cause the pomp of the strong to cease, And their holy places shall be defiled. " /><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text="25" /><Run FontFamily="Helvetica" FontSize="9" Text=" Destruction comes; They will seek peace, but there shall be none. " /><Run FontFamily="Helvetica" FontSize="9" FontBold="True" Text="26" /><Run FontFamily="Helvetica" FontSize="9" Text=" Disaster will come upon disaster, And rumor will be upon rumor. Then they will seek a vision from a prophet; But the law will perish from the priest, And counsel from the elders." /></Paragraph><Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 169: DoubleUnderline
+
+<Span><Run Text="If I was an earthy king I would fight"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="But I do not fight on this earth!" /></Paragraph>
+
+---
+
+### 175: OrangeHighlighter
+
+<Span><Run Text="Jesus said to them,  “Most assuredly, I say to you, before Abraham was, I AM.”" /></Span>
+
+<Paragraph Language="en-US" FontSize="10" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Jesus is the I AM: He declares himself equal with God!" /></Paragraph>
+
+---
+
+### 176: None
+
+<Span><Run Text="Reasons why"/></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="So that the nations would know God" /></Paragraph>
+
+---
+
+### 182: OrangeHighlighter
+
+<Span><Run Text="So the people served the Lord all the days of Joshua, and all the days of the elders who outlived Joshua, who had seen all the great works of the Lord which He had done for Israel. " /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 183: OrangeHighlighter
+
+<Span><Run Text="When all that generation had ﻿5﻿been gathered to their fathers, another generation arose after them who ﻿o﻿did not know the Lord nor the work which He had done for Israel. " /></Span>
+
+---
+
+### 184: DoubleUnderline
+
+<Span><Run Text="did not know the Lord nor the work" /></Span>
+
+---
+
+### 185: OrangeHighlighter
+
+<Span><Run Text="when your children say to you, ‘What do you mean by this service?’ ﻿27﻿ that you shall say, ﻿j﻿‘It is the Passover sacrifice of the Lord" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 186: OrangeHighlighter
+
+<Span><Run Text="you shall ﻿l﻿tell your son in that day, saying, ‘This is done because of what the Lord did for me when I came up from Egypt.’" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 187: OrangeHighlighter
+
+<Span><Run Text="when your son asks you in time to come, saying, ‘What is this?’ that you shall say to him, ﻿u﻿‘By strength of hand the Lord brought us out of Egypt" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 188: OrangeHighlighter
+
+<Span><Run Text="teach them to your children and your grandchildren, ﻿10﻿ especially concerning ﻿j﻿the day you stood before the Lord your God" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 189: OrangeHighlighter
+
+<Span><Run Text="When your son asks you in time to come, saying, ‘What is the meaning of the testimonies, the statutes, and the judgments which the Lord our God has commanded you?’ ﻿21﻿ then you shall say to your son" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 190: OrangeHighlighter
+
+<Span><Run Text="You shall teach them to your children, speaking of them when you sit in your house, when you walk by the way, when you lie down, and when you rise up." /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 191: OrangeHighlighter
+
+<Span><Run Text="Set your hearts on all the words which I testify among you today, which you shall command your ﻿q﻿children to be careful to observe—all the words of this law" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 192: OrangeHighlighter
+
+<Span><Run Text="when your children ask in time to come, saying, ‘What do these stones mean to you?’ ﻿7﻿ Then you shall answer them" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 193: OrangeHighlighter
+
+<Span><Run Text="When your children ask their fathers in time to come, saying, ‘What are these stones?’ ﻿22﻿ then you shall let your children know" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 194: OrangeHighlighter
+
+<Span><Run Text="He established a testimony in Jacob,  " /></Span>
+
+<Paragraph><Run Text=" And appointed a law in Israel,  " /></Paragraph><Paragraph><Run Text=" Which He commanded our fathers,  " /></Paragraph><Paragraph><Run Text=" That ﻿f﻿they should make them known to their children;  " /></Paragraph><Paragraph><Run Text="6 ﻿g﻿That the generation to come might know them,  " /></Paragraph><Paragraph><Run Text=" The children who would be born,  " /></Paragraph><Paragraph><Run Text=" That they may arise and declare them to their children, " /></Paragraph><Paragraph Language="en-US" FontSize="10" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 195: OrangeHighlighter
+
+<Span><Run Text="fathers, do not provoke your children to wrath, but ﻿d﻿bring them up in the training and admonition of the Lord. " /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 196: OrangeHighlighter
+
+<Span><Run Text="I have known him, in order ﻿v﻿that he may command his children and his household after him, that they keep the way of the Lord, to do righteousness and justice" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 197: OrangeHighlighter
+
+<Span><Run Text="he would rise early in the morning ﻿e﻿and offer burnt offerings according to the number of them all. For Job said, “It may be that my sons have sinned and ﻿f﻿cursed ﻿4﻿God in their hearts.” Thus Job did regularly. " /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Intercede for children " /></Paragraph>
+
+---
+
+### 198: OrangeHighlighter
+
+<Span><Run Text="what ﻿m﻿son is there whom a father does not chasten? ﻿8﻿ But if you are without chastening, ﻿n﻿of which all have become partakers, then you are illegitimate and not sons. ﻿9﻿ Furthermore, we have had human fathers who corrected us" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 199: OrangeHighlighter
+
+<Span><Run Text="partiality" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="The fault of one who when called upon to judge prefers those who are rich or high born or powerful" /></Paragraph>
+
+---
+
+### 200: DoubleUnderline
+
+<Span><Run Text="partiality" /></Span>
+
+---
+
+### 201: DoubleUnderline
+
+<Span><Run Text="partiality" /></Span>
+
+---
+
+### 202: OrangeHighlighter
+
+<Span><Run Text="Has God not chosen the poor of this world " /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Realize their need for God" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="glorify God more clearly, as they cannot depend on their own Works" /></Paragraph>
+
+---
+
+### 203: OrangeHighlighter
+
+<Span><Run Text="convicted by the law" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Not just convicted by the conscience, which can be misleading" /></Paragraph>
+
+---
+
+### 204: OrangeHighlighter
+
+<Span><Run Text="" /></Span>
+
+---
+
+### 205: OrangeHighlighter
+
+<Span><Run Text="transgressors" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Characterized as a lawbreaker (hanitually)" /></Paragraph>
+
+---
+
+### 206: OrangeHighlighter
+
+<Span><Run Text="all" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Emphazied in gk" /></Paragraph>
+
+---
+
+### 207: OrangeHighlighter
+
+<Span><Run Text="have" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Perfect tense in gk" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="the state of becoming a transgressor continues" /></Paragraph>
+
+---
+
+### 209: YellowHighlighter
+
+<Span><Run Text="life was the light of men. The light shines in the darkness, and the darkness has not overcome it. "/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Light and Life" /></Paragraph>
+
+---
+
+### 211: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="And" /><Run Text=" " /><Run Text="when" /><Run Text=" " /><Run Text="He" /><Run Text=" " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="world" /><Run Text=" " /><Run Text="of" /><Run Text=" " /><Run Text="sin" /></Span></Span>
+
+<Paragraph Language="en-US" FontFamily="Athelas Logos" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="who does he convict?" /></Paragraph>
+
+---
+
+### 212: OrangeHighlighter
+
+<Span><Run Text="Children, ﻿a﻿obey your parents in the Lord, for this is right. ﻿2﻿ ﻿b﻿“Honor your father and mother,” which is the first commandment with promise: ﻿3﻿ “that it may be well with you and you may live long on the earth.” " /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children, the church is involved, too" /></Paragraph>
+
+---
+
+### 213: GreenHighlighter
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="παιδεία   paideia instruction" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="BDAG    upbringing, training, instruction,; discipline, correction; training" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="DBL Greek    instruction; discipline; punishment" /></Paragraph>
+
+---
+
+### 219: GreenHighlighter
+
+<Span><Run Text="these words which I command you today shall be in your heart. ﻿7﻿ ﻿k﻿You shall teach them diligently to your children, and shall talk of them when you sit in your house, when you walk by the way, when you lie down, and when you rise up." /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Teach children" /></Paragraph>
+
+---
+
+### 221: GreenHighlighter
+
+<Span><Run Text="The father was looking out for him daily"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Grace" /></Paragraph>
+
+---
+
+### 225: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="your" /><Run Text=" " /><ResourcePopupLink ResourceId="LLS:1.0.30" Position="NOTE.IS.1.14.S"><Run FontVariant="Superscript" Text="s" /></ResourcePopupLink><Run Text="appointed" /><Run Text=" " /><Run Text="feasts" /><Run Text=" " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="My" /><Run Text=" " /><Run Text="soul" /><Run Text=" " /><Run Text="hates" /></Span></Span>
+
+---
+
+### 226: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="I" /><Run Text=" " /><ResourcePopupLink ResourceId="LLS:1.0.30" Position="NOTE.AM.5.21.C"><Run FontVariant="Superscript" Text="c" /></ResourcePopupLink><Run Text="hate" /><Run Text=", " /><Run Text="I" /><Run Text=" " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="your" /><Run Text=" " /><Run Text="feast" /><Run Text=" " /><Run Text="days" /></Span></Span>
+
+---
+
+### 227: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="“" /><Run Text="Therefore" /><Run Text=" " /><Run Text="I" /><Run Text=" " /><Run Text="say" /><Run Text=" " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="fruits" /><Run Text=" " /><Run Text="of" /><Run Text=" " /><Run Text="it" /><Run Text=". " /></Span></Span>
+
+---
+
+### 242: YellowHighlighter
+
+<Span><Run Text="Bookmark - read up to here"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Bookmark - read up to here" /></Paragraph>
+
+---
+
+### 244: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="you shall see …until you say... the Lord!’ ” " /></Span>
+
+---
+
+### 245: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="And Jerusalem will …times of the Gentiles are fulfilled. " /></Span>
+
+---
+
+### 246: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="Jesus ... coming in a cloud… and great glory. " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="has not yet happened" /></Paragraph>
+
+---
+
+### 247: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="this generation will … all things take place." /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Jerusalem was destroyed within a generatio, but 'all things take place' has not yet happened:  especially Jesus coming back for all the world to see" /></Paragraph>
+
+---
+
+### 248: None
+
+<Paragraph FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Prepare by taking heed!" /></Paragraph>
+
+---
+
+### 249: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="blindness in part … " /><Run Text="until the fullness of the Gentiles has come in" /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="when Jesus comes back they will recognize him as Messiah" /></Paragraph>
+
+---
+
+### 250: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="After “the fullness of the Gentiles” (" /><Reference IsLink="True" Reference="bible.66.11.25"><Run Text="11:25" /></Reference><Run Text=", " /><Run FontCapitals="SmallCaps" Text="kjv" /><Run Text=") the partial hardening of Israel will be removed and " /><Run FontBold="True" Text="all Israel will be saved" /><Run Text=", that is, “delivered” (in the OT “saved” often means “delivered”) from the terrible Tribulation by the Messiah, " /><Run FontBold="True" Text="the Deliverer" /><Run Text=". " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><ResourceLink IsLink="True" ResourceId="LLS:29.1.1" Position="Article=n2800|ArticleLength=2549|Context=bornness.%0aAfter%20“the|Offset=1775|OffsetInContext=10|Resource=LLS:29.1.1|Version=2013-02-28T15:14:56Z"><Run Text="Witmer, J. A. (1985). " /></ResourceLink><ResourceLink IsLink="True" ResourceId="LLS:29.1.1" Position="Article=n2800|ArticleLength=2549|Context=bornness.%0aAfter%20“the|Offset=1775|OffsetInContext=10|Resource=LLS:29.1.1|Version=2013-02-28T15:14:56Z"><Run FontItalic="True" Text="Romans" /></ResourceLink><ResourceLink IsLink="True" ResourceId="LLS:29.1.1" Position="Article=n2800|ArticleLength=2549|Context=bornness.%0aAfter%20“the|Offset=1775|OffsetInContext=10|Resource=LLS:29.1.1|Version=2013-02-28T15:14:56Z"><Run Text=". (J. F. Walvoord &amp; R. B. Zuck, Eds.)" /></ResourceLink><ResourceLink IsLink="True" ResourceId="LLS:29.1.1" Position="Article=n2800|ArticleLength=2549|Context=bornness.%0aAfter%20“the|Offset=1775|OffsetInContext=10|Resource=LLS:29.1.1|Version=2013-02-28T15:14:56Z"><Run FontItalic="True" Text="The Bible Knowledge Commentary: An Exposition of the Scriptures" /></ResourceLink><ResourceLink IsLink="True" ResourceId="LLS:29.1.1" Position="Article=n2800|ArticleLength=2549|Context=bornness.%0aAfter%20“the|Offset=1775|OffsetInContext=10|Resource=LLS:29.1.1|Version=2013-02-28T15:14:56Z"><Run Text=" (Vol. 2, p. 486). Wheaton, IL: Victor Books." /></ResourceLink></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 251: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="The jews who pierced/crucified Him will see and recognize Jesus. They do not have to be in Palestine to be able to see him, because &quot;every eye will see Him&quot;" /></Paragraph>
+
+---
+
+### 252: YellowHighlighter
+
+<Span><Run Text="Not secretly, not like a thief for believers"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Only to unbelievers as a thief in the night" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="1 Thess. 5:2-4" /></Paragraph>
+
+---
+
+### 253: YellowHighlighter
+
+<Span><Run Text="For as the lightning comes from the east and flashes to the west, so also will the coming of the Son of Man be."/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Not in Secret, not really like a thief in the night for believers" /></Paragraph>
+
+---
+
+### 299: YellowHighlighter
+
+<Span><Run Text="For sin shall not have dominion over you, for you are not under law but under grace."/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Grace leads to actual righteousness worked out in obedience to Christs instructions.The law leads to disobedience and bondage to sin." /></Paragraph>
+
+---
+
+### 300: Blue
+
+<Span><Run Text="1st Saying"/></Span>
+
+---
+
+### 301: Blue
+
+<Span><Run Text="2nd Saying"/></Span>
+
+---
+
+### 302: Blue
+
+<Span><Run Text="3rd Saying"/></Span>
+
+---
+
+### 303: Blue
+
+<Span><Run Text="4th Saying"/></Span>
+
+---
+
+### 304: Blue
+
+<Span><Run Text="6th Saying"/></Span>
+
+---
+
+### 305: Blue
+
+<Span><Run Text="5th Saying"/></Span>
+
+---
+
+### 306: Blue
+
+<Span><Run Text="7th Saying"/></Span>
+
+---
+
+### 308: DoubleUnderline
+
+<Span><Run Text="putting off the body of the sins of the flesh, by the circumcision of Christ,"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Is this actually putting off the flesh?" /></Paragraph>
+
+---
+
+### 309: DoubleUnderline
+
+<Span><Run Text="Putting away the body of sin"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="See Col 2:11" /></Paragraph>
+
+---
+
+### 310: Yellow
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Jesus is the source of all spiritual life" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph>
+
+---
+
+### 311: YellowHighlighter
+
+<Span><Run Text="Is there not a cause?”"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Translations?" /></Paragraph>
+
+---
+
+### 351: YellowHighlighter
+
+<Span><Run Text="containing the prophecies against"/></Span>
+
+---
+
+### 368: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Calibri" FontSize="11" Text="a well written article on believers " /><Run Language="en-US" FontFamily="Calibri" FontSize="11" FontBold="True" Text="baptism" /></Paragraph><Paragraph TextAlignment="Left" /><Paragraph TextAlignment="Left" /><Paragraph TextAlignment="Left" />
+
+---
+
+### 369: YellowHighlighter
+
+<Span><Run Text="Newness of Life"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Identify with Jesus" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph>
+
+---
+
+### 370: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="Sodom: " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="smoke" /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="of a furnace" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="compare Jude 7" /></Paragraph>
+
+---
+
+### 371: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="As the cloud vanishes … down to " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="Sheol" /></Span>
+
+---
+
+### 372: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="hates me;  … He gnashes with teeth" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="gnash your teeth" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontFamily="Arial" FontItalic="True" Text="to show you are angry or annoyed about something bad that you cannot do anything to stop" /><Run FontFamily="Arial" Text=" " /><Run FontFamily="Arial" FontItalic="True" FontColor="FF0000F6" HasUnderline="True" Text="Cambridge Dictionary of American Idioms" /></Paragraph>
+
+---
+
+### 373: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="ungodly mockers … gnash with their teeth" /></Span>
+
+---
+
+### 374: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="wicked plots … gnashes with his teeth." /></Span>
+
+---
+
+### 375: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="the rich " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="perish" /></Span>
+
+---
+
+### 376: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="gnash" /><Run Text=" " /><Run Text="his" /><Run Text=" " /><Run Text="teeth" /><Run Text=" " /><Run Text="and" /><Run Text=" " /><Run Text="melt" /><Run Text=" " /><Run Text="away" /></Span></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="anger  then after that destruction of the wicked" /></Paragraph>
+
+---
+
+### 377: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="? dwell with " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="everlasting burnings" /></Span>
+
+---
+
+### 378: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="spirit of man " /></Span><Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="which goes upward" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Ecc 12:7" /></Paragraph>
+
+---
+
+### 379: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="smoke" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" …  shall ascend forever. " /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="not eternal torment, but end of existence. like the result of a nuclear bomb." /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="like Sodom's destrution. even though neverending ascending smoke, but the point is total and irreversible destruction" /></Paragraph>
+
+---
+
+### 380: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="fire not quenched" /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="abhorrance" /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="to all flesh" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Permanence and irreversability. Contempt of God or God's people for the slain will last beyond their death." /></Paragraph>
+
+---
+
+### 381: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="I will kindle a" /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text=" fire " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="not be quenched." /></Span>
+
+---
+
+### 382: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="consume" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" all the evil kingdoms" /></Span>
+
+---
+
+### 383: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="beast destroyed" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" … the burning flame. " /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="beast is an empire" /></Paragraph>
+
+---
+
+### 384: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="take away dominion… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destroy it forever" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="the beast, the horn, the king" /></Paragraph>
+
+---
+
+### 385: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="shame and " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="everlasting contempt" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run FontFamily="Arial" FontSize="12" Text="there is no indication here, that " /><Run FontBold="True" FontFamily="Arial" FontSize="12" Text="abhorrence" /><Run FontFamily="Arial" FontSize="12" Text=", contempt, i.e., the concept of loathing has anything to do with a person being tormented forever. Contempt" /></Paragraph>
+
+---
+
+### 386: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="broad is the road " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="leads to " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destruction" /></Span>
+
+---
+
+### 387: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="outer darkness. … gnashing of teeth" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="not fire, not hell, others are thrown out from the Kingdom" /></Paragraph>
+
+---
+
+### 388: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destroy both soul &amp; body in hell" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="complete and utter destruction" /></Paragraph>
+
+---
+
+### 389: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontItalic="True" Text="out of His Kingdom … who practice lawlessness" /></Paragraph>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="gather out of HIS Kingdom - they appear to be in His Kingdom" /></Paragraph>
+
+---
+
+### 390: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="furnace" /><Run Text=" " /><Run Text="of" /><Run Text=" " /><Run Text="fire" /><Run Text=". " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="gnashing" /><Run Text=" " /><Run Text="of" /><Run Text=" " /><Run Text="teeth" /></Span></Span>
+
+---
+
+### 391: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontItalic="True" Text="wicked cast into … furnace of fire." /></Paragraph>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 392: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="cast into the " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="eternal fire" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="only the fire is eternal, the destruction is quick and terminal" /></Paragraph>
+
+---
+
+### 393: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="outer darkness … gnashing of teeth." /></Span>
+
+---
+
+### 394: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="cut in pieces … gnashing of teeth" /></Span>
+
+---
+
+### 395: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="outer darkness. … gnashing of teeth." /></Span>
+
+---
+
+### 396: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="you cursed, into fire" /></Span><Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="and his angels" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="go to the same place as the devil - to be tortured or to be destroyed?" /></Paragraph>
+
+---
+
+### 397: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="go away into " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="eternal punishment" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="v. 41 eternal fire: not the duration of suffering, but the fire" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" Dan. 12:2" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontFamily="Arial" Text="is torment the only type of punishment? No, we cannot assume the content or nature of the punishment: execution, or " /><Run FontFamily="Arial" FontItalic="True" Text="eternal destruction" /><Run FontFamily="Arial" Text=" as in 2 Thes 1:9 - here the punishment is defined" /></Paragraph>
+
+---
+
+### 398: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontBold="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontBold="True" Text="Fire not quenched" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Irresistable fire that cannot be put out before it has done its job of destruction: see Eze 20:47-48" /></Paragraph>
+
+---
+
+### 399: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="worm not die " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="fire not quenched" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="In Isa 66 eternal torment is not in view, but people being consumed by maggots and fire. An abhorrent scene. Dead bodies that will remain for a while.  " /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Thus those who rebell will be thrown into Gehenna. Must be guided by the view of Isa 66." /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="endless supply of food and fuel? - absurdity of this image  Not a fire that will never run out of fuel, but a fire that will never be quenched. Burns until it has done its job. Ezekiel 20:47 blazing fire that will not be stopped." /></Paragraph>
+
+---
+
+### 400: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="weeping" /><Run Text=" " /><Run Text="and" /><Run Text=" " /><Run Text="gnashing" /><Run Text=" " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="yourselves" /><Run Text=" " /><Run Text="thrust" /><Run Text=" " /><Run Text="out" /></Span></Span>
+
+---
+
+### 401: None
+
+<Span FontItalic="True"><Span Language="en-US"><ReferenceMilestoneStart Name="bible+nkjv" References="bible+nkjv.63.16.19" /><Run Text="Parable of the " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="Man and Lazarus" /></Span></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="1) its a parable, not a map of the afterlife - not necessarily a true story. possibly a story that was popular among the people. It was not about the afterlife. Compare to a story from the Palestinian Talmud. wealth was not an evidence of Gods favor. 'Lazurus' means God helps." /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="2) no final judgment depicted, and no eternal punishment mentioned. depicts the intermediate state. Hades is Sheol, the grave not Gehenna (hell)." /></Paragraph>
+
+---
+
+### 402: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontBold="True" Text="Perish" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" Text=" vs Eternal Life" /></Span>
+
+---
+
+### 403: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="cut to the heart … gnashed teeth" /></Span>
+
+---
+
+### 404: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontBold="True" Text="Death" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" Text=" or the Gift of Eternal Life" /></Span>
+
+---
+
+### 405: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="defiles the temple " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… God " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="will " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destroy him" /></Span>
+
+---
+
+### 406: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" last enemy " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destroyed is death." /></Span>
+
+---
+
+### 407: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" flesh will " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="..." /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" reap " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="corruption" /></Span>
+
+---
+
+### 408: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="enemies of the " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="end is " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destruction" /></Span>
+
+---
+
+### 409: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="Eternal " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontBold="True" Text="Destruction" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="1) the act annihilation is punctual, but cannot be eternal, but the resulting destruction can be eternal" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="results last forever: cp. eternal sin Mk 3:29, eternal salvation Heb 5:9, 6:2" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="2) removed &quot;from from the presence of the Lord&quot; by being destroyed (NIV has it wrong) exclusion by means of destruction" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left" />
+
+---
+
+### 410: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destruction" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" and perdition" /></Span>
+
+---
+
+### 411: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="denying the Lord " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="themselves swift " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destruction" /></Span>
+
+---
+
+### 412: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="Sodom and Gomorrah " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="them to " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="extinction" /></Span>
+
+---
+
+### 413: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="the day of judgment … " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="destruction" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" of ungodly men" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontFamily="Arial" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Gk apoleia in verse 6 denotes destruction by the flood, so it must mean the same in verse 7" /></Paragraph>
+
+---
+
+### 414: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="example … punishment" /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" of " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="eternal fire" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="example - see 2 Pet 2:6 a realistic sample of what eternal fire is like. Gen 19:24-28 all was devastatedt, nothing left except smoke. No picture of torment forever." /></Paragraph>
+
+---
+
+### 415: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="tormented" /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text=" with fire" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" … in the PRESENCE of the Lamb" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="tomented with fire and brimstone: it does not say for how long. the expected end result is destruction, as it was in Isa 34, and not eternal torment." /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="how can death be eternal SEPARATION from God when the torment is in HIS PRESENCE?" /></Paragraph>
+
+---
+
+### 416: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="the smoke of … " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="torment" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" ascends forever" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="it depicts an angel warning about a punishment on the followers of the beast, which will be seen later in verses 14 to 20: winepress, destruction with blood flowing" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="smoke forever - unsaved burn forever? see Isa 34:8-10 the smoke rises up as a reminder of the destruction forever. A permanent memorial. the destruction involved torment: compare with Revelation 18:10 where the torment is part of the destruction" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="- but what about &quot;they have no rest day or night, who worship the beast and his image, and whoever receives the mark of his name&quot; ?" /></Paragraph>
+
+---
+
+### 417: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="Her " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="smoke rises " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="… " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="forever " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="and ever" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="obviously the smoke will not literally be seen rising up for all eternity, as further up we see a new heaven and a new earth" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Babylon destroyed - cp Rev 14:11, Isa 34:8-10" /></Paragraph>
+
+---
+
+### 418: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="cast alive into " /></Span><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="lake of fire" /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text="… burning with brimstone" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="the beast is not a person, but a kingdom or an empire, a corporate entity" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="the false prophet is probably a world religious system" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="the devil could be the dragon seen before possibly representing the whole rebellious angelic kingdom of darkness: &quot;" /><Run FontFamily="Helvetica" Text="into the everlasting fire prepared for the devil and his angels&quot; Mt 25:41" /></Paragraph>
+
+---
+
+### 419: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True"><Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="The devil tormented " /></Span><Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="forever and ever !?" /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontFamily="Arial" FontItalic="True" FontBold="True" Text="This seems to contradict the Bible teaching of:" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="1) Immortality is a gift - not bestowed upon the wicked" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="2) Vision of eternity - future absence of evil" /></Paragraph><Paragraph Language="en-US" FontFamily="Arial" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="3) Destruction of the lost - Mt 10:28, Mt 7:13, Mt 13:51, Rom 3:23, 2Th 1:9, 2 Pet 2:6" /></Paragraph>
+
+---
+
+### 420: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="Death" /><Run Text=" " /><Run Text="and" /><Run Text=" " /><Run Text="Hades" /><Run Text=" " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="lake" /><Run Text=" " /><Run Text="of" /><Run Text=" " /><Run Text="fire" /></Span></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="death swallowed up: death cannot be tortured forever" /></Paragraph>
+
+---
+
+### 421: None
+
+<Span Language="en-US"><Span Language="en-US"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="Lake of Fire - the " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontBold="True" Text="2nd death" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="Death and hades cease to exist. The wicked also cease to exist." /></Paragraph>
+
+---
+
+### 422: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True"><Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="fire which " /></Span><Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="… " /></Span><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" FontBold="True" Text="inflicts a torment" /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="the verses do not support this view" /></Paragraph>
+
+---
+
+### 423: None
+
+<Span Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True"><Run Language="en-US" FontFamily="Arial" FontSize="12" FontItalic="True" Text=" lack any support from the Bible." /></Span>
+
+<Paragraph Language="en-US" FontFamily="Arial" FontSize="12" TextAlignment="Left"><Run Language="en-US" FontFamily="Arial" FontSize="12" Text="not true - Matt. 25:46 the type of punishment is not specified as everlasting torment here" /></Paragraph>
+
+---
+
+### 424: None
+
+<Paragraph TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="11" Text="separation of body and soul" /></Paragraph>
+
+---
+
+### 428: YellowHighlighter
+
+<Span><Run Text="spoke concerning the resurrection of the Christ, that His soul was not left in Hades, nor did His flesh see corruption. This Jesus God has raised up,"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Bipartite " /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Soul -- not stay in -- Hades" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Flesh/Body -- not Degeneration -- of Body" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph>
+
+---
+
+### 431: YellowHighlighter
+
+<Span><Run Text="Eternal redemption"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Parallels eternal punishment, not 'punishing'" /></Paragraph>
+
+---
+
+### 448: YellowHighlighter
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Sheol only the abode of the unrighteous?" /></Paragraph>
+
+---
+
+### 449: YellowHighlighter
+
+<Span><Run Text="Pharisees take advantage of afterlife"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="By promising rewards and punishments to eternally living souls" /></Paragraph>
+
+---
+
+### 451: DoubleUnderline
+
+<Span><Run Text="hell"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Gehenna - the city garbage incinerator" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Die Müllverbrennin granulate" /></Paragraph>
+
+---
+
+### 452: OrangeHighlighter
+
+<Span><Run Text="He who believes in the Son has everlasting life; and he who does not believe the Son shall not see life, but the wrath of God abides on him.”"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Abides - means for how long?" /></Paragraph>
+
+---
+
+### 455: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="keep you from stumbling" /></Paragraph>
+
+---
+
+### 456: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Repent, and believe in the gospel - change mind and attitude and keep on repenting and keep on believing" /></Paragraph>
+
+---
+
+### 457: GreenHighlighter
+
+<Span><Run Text="Receive, believe"/></Span>
+
+<Paragraph Language="en-US" FontSize="10" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="All who..." /></Paragraph>
+
+---
+
+### 459: GreenHighlighter
+
+<Span><Run Text="Truly, truly, I say to you, unless one is born of water and the Spirit, he cannot enter the kingdom of God."/></Span>
+
+<Paragraph Language="en-US" FontSize="10" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Enter the kingdom" /></Paragraph>
+
+---
+
+### 471: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="I have to have it. Its more important than anything. Joy getting the real King. Give up everything - everyone can afford it!" /></Paragraph>
+
+---
+
+### 472: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="gospel of the Kingdom … end will come." /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="not the gospel of instant salvation" /></Paragraph>
+
+---
+
+### 478: GreenHighlighter
+
+<Span><Run Text="Compare with 2 Pet. 1:1 "/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Same grammar: Lord and Saviour vs God and Saviour" /></Paragraph>
+
+---
+
+### 488: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 490: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontFamily="Calibri" Text="Missions by the power of the Holy Spirit" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 491: None
+
+<Span FontItalic="True"><Span Language="en-US"><Run Text="salvation" /><Run Text=" " /><Run Text="for" /><Run Text=" " /><Run Text="everyone" /><Run Text=" " /></Span><Run Text="… " /><Span Language="en-US"><Run Text="for" /><Run Text=" " /><Run Text="the" /><Run Text=" " /><Run Text="Greek" /></Span></Span>
+
+<Paragraph Language="en-US" FontFamily="Athelas Logos" FontSize="16" TextAlignment="Left"><Run Language="en-US" FontFamily="Athelas Logos" FontSize="16" Text="a Missions verse" /></Paragraph>
+
+---
+
+### 524: GreenHighlighter
+
+<Span><Run Text="A people movement"/></Span>
+
+---
+
+### 525: GreenHighlighter
+
+<Span><Run Text="His religion pleased God, but did not save him"/></Span>
+
+---
+
+### 531: OrangeHighlighter
+
+<Span><Run Text="fully pleasing Him, ﻿﻿being fruitful in every good work and increasing in the ﻿﻿knowledge of God; ﻿11﻿ ﻿﻿strengthened with all might, according to His glorious power, ﻿﻿for all patience and longsuffering ﻿﻿with joy; ﻿12﻿ ﻿﻿giving thanks to the Father who has qualified us to be partakers of ﻿﻿the inheritance of the saints in the light."/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Maturity" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="- walk in His will (not mysteries) know his will morally" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Walk in a manner worthy of The Lord " /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="- worthy: in accordance with Christs character : be holy" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Fully pleasing:" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="- 2 Cor 5:9" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Epi-gnosko" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Intensified form of knowledge" /></Paragraph>
+
+---
+
+### 532: GrayHighlighter
+
+<Span><Run Text="atonement for the dead, so that they might be delivered from their sin. "/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="RC base prayer and offering for the dead on this, like indulgences" /></Paragraph>
+
+---
+
+### 533: YellowHighlighter
+
+<Span><Run Text="Joyous life with Jesus presence"/></Span>
+
+---
+
+### 540: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="αἰών word study (age)" /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="forever and ever" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Language="el" FontFamily="Skolar Logos" FontSize="10" Text="εἰς" /><Run FontSize="10" FontVariant="Subscript" Text="7" /><Run Language="el" FontFamily="Skolar Logos" FontSize="10" Text=" τοὺς" /><Run FontSize="10" FontVariant="Subscript" Text="8" /><Run Language="el" FontFamily="Skolar Logos" FontSize="10" Text=" αἰῶνας" /><Run FontSize="10" FontVariant="Subscript" Text="9" /><Run Language="el" FontFamily="Skolar Logos" FontSize="10" Text=" τῶν" /><Run FontSize="10" FontVariant="Subscript" Text="10" /><Run Language="el" FontFamily="Skolar Logos" FontSize="10" Text=" αἰώνων" /><Run FontSize="10" FontVariant="Subscript" Text="11" /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="BDAG: " /><Run FontBold="True" Text="a long period of time, without ref. to beginning or end," /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><ResourceLink IsLink="True" ResourceId="LLS:46.30.18" Position="Article=R.234|ArticleLength=11156|Context=enses)%0a①%20%20a%20long%20per|Offset=84|OffsetInContext=10|Resource=LLS:46.30.18|Version=2014-10-10T21:55:08Z"><Run Text="Arndt, W., Danker, F. W., &amp; Bauer, W. (2000). " /></ResourceLink><ResourceLink IsLink="True" ResourceId="LLS:46.30.18" Position="Article=R.234|ArticleLength=11156|Context=enses)%0a①%20%20a%20long%20per|Offset=84|OffsetInContext=10|Resource=LLS:46.30.18|Version=2014-10-10T21:55:08Z"><Run FontItalic="True" Text="A Greek-English lexicon of the New Testament and other early Christian literature" /></ResourceLink><ResourceLink IsLink="True" ResourceId="LLS:46.30.18" Position="Article=R.234|ArticleLength=11156|Context=enses)%0a①%20%20a%20long%20per|Offset=84|OffsetInContext=10|Resource=LLS:46.30.18|Version=2014-10-10T21:55:08Z"><Run Text=" (3rd ed., p. 32). Chicago: University of Chicago Press." /></ResourceLink></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><List Kind="Disc"><ListItem><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="all" /><Run FontItalic="True" Text=" Forever and ever " /><Run Text="passages except one point to eternity rather than an " /><Run FontItalic="True" Text="age" /><Run Text=" or an indefinite period of time" /></Paragraph></ListItem></List><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 541: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontFamily="Helvetica" FontSize="9" FontItalic="True" Text="Him who sits on the throne, who lives forever and ever" /></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="here eternity is clearly meant" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="If God lives forever and ever, then we live forever and ever" /></Paragraph>
+
+---
+
+### 542: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run FontFamily="Helvetica" FontSize="9" Text="“" /><Run FontFamily="Helvetica" FontSize="9" FontItalic="True" Text="For true and righteous are His judgments, because He has" /><Run FontFamily="Helvetica" FontSize="9" FontItalic="True" FontBold="True" Text=" judged the great harlot " /><Run FontFamily="Helvetica" FontSize="9" FontItalic="True" Text="who corrupted the earth with her fornication; and He has avenged on her the blood of His servants shed by her.”" /><Run FontFamily="Helvetica" FontSize="9" Text="” (" /><Reference IsLink="True" Reference="bible+nkjv.87.19.2"><Run FontFamily="Helvetica" FontSize="9" Text="Revelation 19:2" /></Reference><Run FontFamily="Helvetica" FontSize="9" Text=", NKJV)" /></Paragraph>
+
+---
+
+### 545: BlueUnderline
+
+<Span><Run Text="The seven Spirits"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="The Holy Spirit, sevenfold" /></Paragraph>
+
+---
+
+### 546: BlueUnderline
+
+<Span><Run Text="The "/></Span>
+
+---
+
+### 572: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="the Spirit Himself makes intercession for us" /></Paragraph>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Praying in the Spirit - Tongues" /></Paragraph>
+
+---
+
+### 577: OrangeHighlighter
+
+<Span><Run Text="Guidance of the"/></Span>
+
+---
+
+### 578: OrangeHighlighter
+
+<Span><Run Text="Guidance by the Holy Spirit based on humility"/></Span>
+
+---
+
+### 579: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="disciples not proselytes" /></Paragraph>
+
+---
+
+### 580: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="ESV: whoever does not obey the Son shall not see life" /></Paragraph><Paragraph Language="en" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" /><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 581: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="Stories that lead to Salvation (saving faith)" /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="'you' unbelievers! - believe what? Jesus is the promised Messiah. - Jesus is Son of God. Result: eternal life!" /></Paragraph>
+
+---
+
+### 582: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="Stories that lead to Salvation (saving faith)" /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="'you' unbelievers! - believe what? Jesus is the promised Messiah. - Jesus is Son of God. Result: eternal life!" /></Paragraph>
+
+---
+
+### 583: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="repentance toward God …faith in Jesus Christ." /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="repentance usually is mentioned before faith (see mark 1:15)" /></Paragraph>
+
+---
+
+### 584: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" Text="the word of Christ … dwell in you" /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="we need to focus on the Words of Jesus, and his instructions, not the Torah, or the Old Testament" /></Paragraph>
+
+---
+
+### 585: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run Text="By faith Abraham obeyed" /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="true faith leads to obedience. Obedience proves, that the faith is real!" /></Paragraph>
+
+---
+
+### 586: None
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 587: YellowHighlighter
+
+<Span><Run Text="Paul supported himself"/></Span>
+
+---
+
+### 609: Box
+
+<Span><Run Text="idols"/></Span>
+
+---
+
+### 610: DoubleUnderline
+
+<Span><Run Text="two thousand drachmas of silver, and sent it to Jerusalem to provide for a sin offering."/></Span>
+
+---
+
+### 611: DoubleUnderline
+
+<Span><Run Text=" taking account of the resurrection."/></Span>
+
+---
+
+### 612: DoubleUnderline
+
+<Span><Run Text="it would have been superfluous and foolish to pray for the dead."/></Span>
+
+---
+
+### 613: DoubleUnderline
+
+<Span><Run Text="he made atonement for the dead, so that they might be delivered from their sin. "/></Span>
+
+---
+
+### 614: DoubleUnderline
+
+<Span><Run Text="be filled with the Spirit"/></Span>
+
+---
+
+### 631: None
+
+<Span Language="en-US" FontSize="12" FlowDirection="LeftToRight"><Run FontItalic="True" FontVariant="Superscript" Text="44 " /><Run FontItalic="True" Text="Slaves … another with rigor." /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Israel was to treat strangers well, but they were also allowed to take permanent slaves, but not from their own people." /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 634: None
+
+<Span><Run Text="hospitality"/></Span>
+
+---
+
+### 765: Blue
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 775: OrangeHighlighter
+
+<Span><Run Text="m﻿you shall be ﻿3﻿witnesses to Me in Jerusalem, and in all Judea and ﻿n﻿Samaria, and to the ﻿o﻿end of the earth.” " /></Span>
+
+---
+
+### 784: OrangeHighlighter
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0" />
+
+---
+
+### 792: BlueHighlighter
+
+<Span><Run Text="But you have followed what I teach, the way I live, my goal, faith, patience, and love. You know I never give up. 11 You know how I have been hurt and have suffered, as in Antioch, Iconium, and Lystra. I have suffered, but the Lord saved me from all those troubles. 12 Everyone who wants to live as God desires, in Christ Jesus, will be persecuted. " /></Span>
+
+---
+
+### 793: OrangeHighlighter
+
+<Span><Run Text="Let no one say when he is tempted, “I am tempted by God”; for God cannot be tempted by evil, nor does He Himself tempt anyone. ﻿14﻿ But each one is tempted when he is drawn away by his own desires and enticed." /></Span>
+
+<Paragraph Language="en-US" FontSize="10" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Temptations" /></Paragraph>
+
+---
+
+### 805: GreenHighlighter
+
+<Span><Run Text="2 “Enlarge ﻿﻿the place of your tent,  " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" And let them stretch out the curtains of your dwellings;  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" Do not spare;  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" Lengthen your cords,  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" And strengthen your stakes.  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="3 For you shall expand to the right and to the left,  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" And your descendants will inherit the nations,  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" And make the desolate cities inhabited. " /></Paragraph>
+
+---
+
+### 806: GreenHighlighter
+
+<Span><Run Text="13 All your children shall be ﻿﻿taught by the Lord,  " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" And great shall be the peace of your children.  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="14 In righteousness you shall be established;  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" You shall be far from oppression, for you shall not fear; " /></Paragraph>
+
+---
+
+### 807: GreenHighlighter
+
+<Span><Run Text="17 No weapon formed against you shall ﻿﻿prosper,  " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" And every tongue which rises against you in judgment  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" You shall condemn.  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" This is the heritage of the servants of the Lord,  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" And their righteousness is from Me,”  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" Says the Lord. " /></Paragraph>
+
+---
+
+### 808: GreenHighlighter
+
+<Span><Run Text="‘I have bought a piece of ground, and I must go and see it. I ask you to have me excused.’"/></Span>
+
+---
+
+### 809: GreenHighlighter
+
+<Span><Run Text="‘I have bought five yoke of oxen, and I am going to test them. I ask you to have me excused.’"/></Span>
+
+---
+
+### 810: GreenHighlighter
+
+<Span><Run Text="‘I have married a wife, and there"/></Span>
+
+---
+
+### 811: GreenHighlighter
+
+<Span><Run Text="therefore I cannot come.’"/></Span>
+
+---
+
+### 812: GreenHighlighter
+
+<Span><Run Text="‘Go out quickly into the streets and lanes of the city, and bring in here the poor and the ﻿﻿maimed and the lame and the blind.’"/></Span>
+
+---
+
+### 813: GreenHighlighter
+
+<Span><Run Text="‘Go out into the highways and hedges, and compel them to come in, that my house may be filled."/></Span>
+
+---
+
+### 815: GreenHighlighter
+
+<Span><Run Text="Make your tent bigger; " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="stretch it out and make it wider. " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Do not hold back. " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Make the ropes longer " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="and its stakes stronger, " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="3  because you will spread out to the right and to the left. " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Your children will take over other nations," /></Paragraph>
+
+---
+
+### 816: OrangeHighlighter
+
+<Span><Run Text="﻿Uphold my steps in Your paths,  " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" That my footsteps may not slip. " /></Paragraph>
+
+---
+
+### 817: OrangeHighlighter
+
+<Span><Run Text="Son of man, I have made you ﻿﻿a watchman for the house of Israel; therefore hear a word from My mouth, and give them ﻿﻿warning from Me: ﻿18﻿ When I say to the wicked, ‘You shall surely die,’ and you give him no warning, nor speak to warn the wicked from his wicked way, to save his life, that same wicked man ﻿﻿shall die in his iniquity; but his blood I will require at your hand. ﻿19﻿ Yet, if you warn the wicked, and he does not turn from his wickedness, nor from his wicked way, he shall die in his iniquity; ﻿﻿but you have delivered your soul. "/></Span>
+
+---
+
+### 818: OrangeHighlighter
+
+<Span><Run Text="“Again, when a ﻿﻿righteous man turns from his righteousness and commits iniquity, and I lay a stumbling block before him, he shall die; because you did not give him warning, he shall die in his sin, and his righteousness which he has done shall not be remembered; but his blood I will require at your hand. ﻿21﻿ Nevertheless if you warn the righteous man that the righteous should not sin, and he does not sin, he shall surely live because he took warning; also you will have delivered your soul.” "/></Span>
+
+---
+
+### 822: OrangeHighlighter
+
+<Span><Run Text="Also with moisture He saturates the thick clouds;  " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" He scatters His bright clouds.  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="12 And they swirl about, being turned by His guidance,  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" That they may do whatever He commands them  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text=" On the face of the whole earth. " /></Paragraph>
+
+---
+
+### 823: OrangeHighlighter
+
+<Span><Run Text="casting all your care upon Him, for He cares for you. "/></Span>
+
+---
+
+### 824: OrangeHighlighter
+
+<Span><Run Text="Therefore I say to you, ﻿﻿do not worry about your life, what you will eat or what you will drink; nor about your body, what you will put on. Is not life more than food and the body more than clothing? ﻿26﻿ ﻿﻿Look at the birds of the air, for they neither sow nor reap nor gather into barns; yet your heavenly Father feeds them. Are you not of more value than they? ﻿27﻿ Which of you by worrying can add one ﻿﻿cubit to his ﻿﻿stature?  " /></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="28 “So why do you worry about clothing? Consider the lilies of the field, how they grow: they neither toil nor spin; 29 and yet I say to you that even Solomon in all his glory was not arrayed like one of these. 30 Now if God so clothes the grass of the field, which today is, and tomorrow is thrown into the oven, will He not much more clothe you, O you of little faith?  " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="31 “Therefore do not worry, saying, ‘What shall we eat?’ or ‘What shall we drink?’ or ‘What shall we wear?’ 32 For after all these things the Gentiles seek. For your heavenly Father knows that you need all these things. 33 But seek first the kingdom of God and His righteousness, and all these things shall be added to you. 34 Therefore do not worry about tomorrow, for tomorrow will worry about its own things. Sufficient for the day is its own trouble. " /></Paragraph>
+
+---
+
+### 825: OrangeHighlighter
+
+<Span><Run Text="I am the Alpha and the Omega,” says the Lord God, “who is and who was and who is to come, the Almighty.” "/></Span>
+
+---
+
+### 836: GrayHighlighter
+
+<Span><Run Text="On the next day, as had now become necessary, Judas and his men went to take up the bodies of the fallen and to bring them back to lie with their kindred in the sepulchres of their ancestors. 40 Then under the tunic of each one of the dead they found sacred tokens of the idols of Jamnia, which the law forbids the Jews to wear. And it became clear to all that this was the reason these men had fallen. 41 So they all blessed the ways of the Lord, the righteous judge, who reveals the things that are hidden; 42 and they turned to supplication, praying that the sin that had been committed might be wholly blotted out. The noble Judas exhorted the people to keep themselves free from sin, for they had seen with their own eyes what had happened as the result of the sin of those who had fallen. 43 He also took up a collection, man by man, to the amount of two thousand drachmas of silver, and sent it to Jerusalem to provide for a sin offering. In doing this he acted very well and honorably, taking account of the resurrection. 44 For if he were not expecting that those who had fallen would rise again, it would have been superfluous and foolish to pray for the dead. 45 But if he was looking to the splendid reward that is laid up for those who fall asleep in godliness, it was a holy and pious thought. Therefore he made atonement for the dead, so that they might be delivered from their sin. "/></Span>
+
+---
+
+### 838: OrangeHighlighter
+
+<Span><Run Text="“The just shall live by faith.”"/></Span>
+
+---
+
+### 839: OrangeHighlighter
+
+<Span><Run Text="17 ﻿Therefore do not be unwise, but ﻿understand ﻿what the will of the Lord is. 18 And ﻿do not be drunk with wine, in which is dissipation; but be filled with the Spirit, 19 speaking to one another ﻿in psalms and hymns and spiritual songs, singing and making ﻿melody in your heart to the Lord, 20 ﻿giving thanks always for all things to God the Father ﻿in the name of our Lord Jesus Christ, 21 ﻿submitting to one another in the fear of ﻿God."/></Span>
+
+---
+
+### 840: OrangeHighlighter
+
+<Span><Run Text="For ﻿all nations shall come and worship before You,"/></Span>
+
+---
+
+### 841: OrangeHighlighter
+
+<Span><Run Text="Jesus answered and said to them, “You are ﻿mistaken, ﻿not knowing the Scriptures nor the power of God."/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Word and Power" /></Paragraph>
+
+---
+
+### 906: BlueHighlighter
+
+<Span><Run Text="Truly, truly, I say to you, you will see heaven opened, and the angels of God ascending and descending on the Son of Man.” "/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="When is this fulfilled?" /></Paragraph>
+
+---
+
+### 910: OrangeHighlighter
+
+<Span><Run Text="anyone’s will is to do God’s will, he will know whether the teaching is from God or whether I am speaking on my own authority."/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Willing to do Gods will" /></Paragraph><Paragraph FlowDirection="LeftToRight" FontSize="10" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="Will be able to discern true teaching" /></Paragraph>
+
+---
+
+### 1006: YellowHighlighter
+
+<Span><Run Text="During trials we need wisdom"/></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="As described in James 1:1-2 we experience many trials which produce endurance, if we overcome them by faith. " /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="In order to overcome these trials and temptations, we need God's wisdom during the difficult situations which we face and we should fully expect by faith to receive an answer from God, which will help us overcome." /></Paragraph><Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="The condition for receiving God's wisdom is, that we ask in faith without being doubleminded." /></Paragraph>
+
+---
+
+### 1013: BlueUnderline
+
+<Span><Run Text="souls of men."/></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Slaves and deceptive religion" /></Paragraph>
+
+---
+
+### 1014: BlueUnderline
+
+<Span><Run Text="horses and chariots"/></Span>
+
+<Paragraph Language="en-US" FontSize="12" FlowDirection="LeftToRight" TextAlignment="Left" Margin="0,0,0,0"><Run Text="Weapons trade" /></Paragraph>
+
+---
+
+### 1032: BlueUnderline
+
+<Span><Run Text="under the earth"/></Span>
+
+<Paragraph FlowDirection="LeftToRight" FontSize="12" xml:lang="en-us" Margin="0,0,0,0" TextAlignment="Left"><Run Text="WHO is under the earth?" /></Paragraph>
+
+---
+
