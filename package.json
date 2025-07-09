@@ -1,24 +1,55 @@
 {
-  "dependencies": {
-    "fast-xml-parser": "^5.2.5"
-  },
-  "name": "logos-notes-export",
-  "module": "index.ts",
+  "name": "logos-notes-exporter",
+  "version": "1.0.0",
+  "description": "A TypeScript CLI tool to export Logos Bible Software notes to Markdown files with YAML frontmatter",
   "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
+  "main": "src/index.ts",
   "scripts": {
-    "export": "bun run index.ts export",
-    "process": "bun run index.ts process",
-    "markdown": "bun run index.ts markdown",
-    "stats": "bun run index.ts stats",
-    "help": "bun run index.ts --help",
-    "export:range": "bun run index.ts export --from-id",
-    "dev": "bun run src/cli.ts"
-  }
+    "dev": "bun run src/cli.ts",
+    "build": "bun build src/cli.ts --outdir dist --target bun",
+    "start": "bun run dist/cli.js",
+    "test": "bun test",
+    "lint": "tsc --noEmit",
+    "export": "bun run src/cli.ts"
+  },
+  "bin": {
+    "logos-export": "src/cli.ts"
+  },
+  "keywords": [
+    "logos",
+    "bible",
+    "notes",
+    "markdown",
+    "export",
+    "converter",
+    "cli",
+    "typescript",
+    "bun"
+  ],
+  "author": "Logos Notes Exporter",
+  "license": "MIT",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "dependencies": {
+    "bun": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "src/**/*",
+    "dist/**/*",
+    "docs/**/*",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/logos-notes-exporter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/logos-notes-exporter/issues"
+  },
+  "homepage": "https://github.com/your-username/logos-notes-exporter#readme"
 }
