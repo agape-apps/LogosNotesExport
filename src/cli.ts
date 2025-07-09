@@ -7,10 +7,15 @@ import { FileOrganizer, DEFAULT_FILE_OPTIONS } from './file-organizer.js';
 import { MarkdownConverter, DEFAULT_MARKDOWN_OPTIONS } from './markdown-converter.js';
 import type { FileStructureOptions, MarkdownOptions } from './types.js';
 import { ExportValidator } from './validator.js';
+import { NotesToolDatabase } from './notestool-database.js';
 
 interface CLIOptions {
   /** Database file path */
   database?: string;
+  /** List available database locations */
+  listDatabases?: boolean;
+  /** Show database search instructions */
+  showInstructions?: boolean;
   /** Output directory */
   output?: string;
   /** Organization options */
@@ -39,7 +44,9 @@ USAGE:
   bun run cli.ts [OPTIONS]
 
 OPTIONS:
-  --database, -d        Path to NotesTool database file
+  --database, -d        Path to NotesTool database file (auto-detected if not specified)
+  --list-databases      List all available database locations and exit
+  --show-instructions   Show manual database location instructions and exit
   --output, -o          Output directory (default: ./exported-notes)
   
   ORGANIZATION:
@@ -63,11 +70,17 @@ OPTIONS:
   --version            Show version
 
 EXAMPLES:
-  # Basic export
-  bun run cli.ts --database ./NotesTool/notestool.db
+  # Basic export (auto-finds database)
+  bun run cli.ts
+  
+  # List available database locations
+  bun run cli.ts --list-databases
+  
+  # Export with custom database
+  bun run cli.ts --database ./path/to/notestool.db
   
   # Custom output with date folders
-  bun run cli.ts -d ./notes.db -o ./my-notes --date-folders
+  bun run cli.ts -o ./my-notes --date-folders
   
   # Dry run to see what would be exported
   bun run cli.ts --dry-run --verbose
@@ -76,12 +89,17 @@ EXAMPLES:
   bun run cli.ts --no-frontmatter --metadata
 
 NOTES:
-  - Default database location: LogosDocuments/NotesToolManager/notestool.db
+  - Database is auto-detected in standard Logos installation locations
+  - Windows: %LOCALAPPDATA%\\Logos4\\Documents\\{random-id}\\NotesToolManager\\notestool.db
+  - macOS: ~/Library/Application Support/Logos4/Documents/{random-id}/NotesToolManager/notestool.db
+  - Use --list-databases to see all available locations
+  - All database operations are READ-ONLY for safety
   - Output files will be organized by notebooks unless --no-organize-notebooks
   - Existing files will be overwritten
 `;
 
 class LogosNotesExporter {
+  private database: NotesToolDatabase;
   private organizer: NotebookOrganizer;
   private fileOrganizer: FileOrganizer;
   private markdownConverter: MarkdownConverter;
@@ -91,9 +109,20 @@ class LogosNotesExporter {
   constructor(options: CLIOptions) {
     this.options = options;
     
-    // Initialize components with options
-    const dbPath = options.database || 'LogosDocuments/NotesToolManager/notestool.db';
-    this.organizer = new NotebookOrganizer(dbPath);
+    // Initialize database with automatic location detection
+    this.database = new NotesToolDatabase(options.database);
+    this.organizer = new NotebookOrganizer(this.database);
+    
+    // Show database info in verbose mode
+    if (options.verbose) {
+      const dbInfo = this.database.getDatabaseInfo();
+      console.log(`📁 Using database: ${dbInfo.description}`);
+      console.log(`   Path: ${dbInfo.path}`);
+      if (dbInfo.size) {
+        console.log(`   Size: ${(dbInfo.size / 1024 / 1024).toFixed(1)} MB`);
+      }
+      console.log('');
+    }
     
     // Configure file organizer
     const fileOptions: Partial<FileStructureOptions> = {
@@ -345,6 +374,8 @@ function parseCommandLine(): CLIOptions {
     options: {
       // Database options
       database: { type: 'string', short: 'd' },
+      'list-databases': { type: 'boolean' },
+      'show-instructions': { type: 'boolean' },
       output: { type: 'string', short: 'o' },
       
       // Organization options
@@ -372,6 +403,8 @@ function parseCommandLine(): CLIOptions {
 
   const options: CLIOptions = {
     database: parsed.values.database,
+    listDatabases: parsed.values['list-databases'],
+    showInstructions: parsed.values['show-instructions'],
     output: parsed.values.output,
     organizeByNotebooks: parsed.values['organize-notebooks'],
     includeDateFolders: parsed.values['date-folders'],
@@ -427,6 +460,19 @@ async function main(): Promise<void> {
     process.exit(0);
   }
 
+  // Handle database discovery commands
+  if (options.listDatabases) {
+    const locations = NotesToolDatabase.displayAvailableLocations();
+    console.log(locations.join('\n'));
+    process.exit(0);
+  }
+
+  if (options.showInstructions) {
+    const instructions = NotesToolDatabase.getSearchInstructions();
+    console.log(instructions.join('\n'));
+    process.exit(0);
+  }
+
   // Validate options
   validateOptions(options);
 
@@ -443,4 +489,4 @@ if (import.meta.main) {
   });
 }
 
-export { LogosNotesExporter, parseCommandLine, validateOptions }; 
+export { LogosNotesExporter, parseCommandLine, validateOptions, main }; 

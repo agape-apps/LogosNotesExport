@@ -29,8 +29,8 @@ export class NotebookOrganizer {
   private database: NotesToolDatabase;
   private referenceDecoder: BibleReferenceDecoder;
 
-  constructor(databasePath?: string) {
-    this.database = new NotesToolDatabase(databasePath);
+  constructor(database: NotesToolDatabase) {
+    this.database = database;
     this.referenceDecoder = new BibleReferenceDecoder();
   }
 
@@ -54,7 +54,10 @@ export class NotebookOrganizer {
         if (!referencesMap.has(ref.noteId)) {
           referencesMap.set(ref.noteId, []);
         }
-        referencesMap.get(ref.noteId)!.push(decoded);
+        const noteReferences = referencesMap.get(ref.noteId);
+        if (noteReferences) {
+          noteReferences.push(decoded);
+        }
       }
     });
 

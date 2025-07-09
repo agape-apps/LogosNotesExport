@@ -26,7 +26,7 @@ This tool extracts notes from Logos Bible Software's NotesTool database and conv
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/) runtime (v1.0.0 or higher)
+- [Bun - install from here](https://bun.sh/) runtime (v1.0.0 or higher)
 - Access to Logos Bible Software NotesTool database file
 
 ### Setup
@@ -36,7 +36,8 @@ This tool extracts notes from Logos Bible Software's NotesTool database and conv
 git clone https://github.com/your-username/logos-notes-exporter.git
 cd logos-notes-exporter
 
-# Install dependencies
+# Check Bun installation and Install dependencies
+bun --version
 bun install
 
 # Make CLI executable
@@ -165,16 +166,24 @@ God created the heavens and the earth...
 
 ## 🗄 Database Locations
 
+- Database is always opened read-only
+
+For Development:
+
+```
+LogosDocuments/NotesToolManager/notestool.db
+```
+
 The tool looks for the NotesTool database in these common locations:
 
 ### Windows
 ```
-%APPDATA%\Logos\Data\[Version]\NotesToolManager\notestool.db
+%LOCALAPPDATA%\Logos4\Documents\<RANDOM_ID>\NotesToolManager\notestool.db
 ```
 
 ### macOS
 ```
-~/Library/Application Support/Logos/Data/[Version]/NotesToolManager/notestool.db
+~/Library/Application Support/Logos4/Documents/<RANDOM_ID>/NotesToolManager/notestool.db
 ```
 
 ### Custom Location

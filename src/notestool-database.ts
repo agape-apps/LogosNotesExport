@@ -1,5 +1,6 @@
 import { Database } from 'bun:sqlite';
 import { existsSync } from 'fs';
+import { DatabaseLocator, type DatabaseLocation } from './database-locator.js';
 
 export interface NotesToolNote {
   id: number;
@@ -50,12 +51,72 @@ export interface DataType {
 
 export class NotesToolDatabase {
   private db: Database;
+  private dbLocation: DatabaseLocation;
 
-  constructor(dbPath = 'LogosDocuments/NotesToolManager/notestool.db') {
-    if (!existsSync(dbPath)) {
-      throw new Error(`NotesTool database not found: ${dbPath}`);
+  constructor(dbPath?: string) {
+    this.dbLocation = this.findDatabase(dbPath);
+    
+    // Validate the database before opening
+    const validation = DatabaseLocator.validateDatabase(this.dbLocation.path);
+    if (!validation.valid) {
+      throw new Error(`Invalid database: ${validation.error}`);
     }
-    this.db = new Database(dbPath, { readonly: true });
+
+    // Open database in READ-ONLY mode for safety
+    this.db = new Database(this.dbLocation.path, { readonly: true });
+  }
+
+  /**
+   * Find the best database location
+   */
+  private findDatabase(customPath?: string): DatabaseLocation {
+    // 1. If custom path provided, use it
+    if (customPath) {
+      const customLocation = DatabaseLocator.checkCustomPath(customPath);
+      if (!customLocation) {
+        throw new Error(`Invalid custom database path: ${customPath}`);
+      }
+      if (!customLocation.exists) {
+        throw new Error(`Database file not found at custom path: ${customPath}`);
+      }
+      return customLocation;
+    }
+
+    // 2. Search for database in standard locations
+    const bestLocation = DatabaseLocator.getBestDatabase();
+    if (!bestLocation) {
+      const locations = DatabaseLocator.displayLocations();
+      const instructions = DatabaseLocator.getSearchInstructions();
+      
+      throw new Error(
+        `No Logos NotesTool database found in standard locations.\n\n` +
+        locations.join('\n') + '\n\n' +
+        instructions.join('\n')
+      );
+    }
+
+    return bestLocation;
+  }
+
+  /**
+   * Get information about the database being used
+   */
+  getDatabaseInfo(): DatabaseLocation {
+    return { ...this.dbLocation };
+  }
+
+  /**
+   * Display all available database locations
+   */
+  static displayAvailableLocations(): string[] {
+    return DatabaseLocator.displayLocations();
+  }
+
+  /**
+   * Get manual search instructions for finding the database
+   */
+  static getSearchInstructions(): string[] {
+    return DatabaseLocator.getSearchInstructions();
   }
 
   /**

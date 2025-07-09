@@ -4,6 +4,7 @@ screenshots/
 data/notes*
 data/debug*
 exported-notes/
+test-export/
 
 node_modules/
 .DS_Store
