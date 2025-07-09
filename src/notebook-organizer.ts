@@ -258,7 +258,6 @@ export class NotebookOrganizer {
       .replace(/\\s+/g, '-') // Replace spaces with dashes
       .replace(/-+/g, '-') // Collapse multiple dashes
       .replace(/^-|-$/g, '') // Remove leading/trailing dashes
-      .toLowerCase()
       .substring(0, 100) // Limit length
       || 'untitled';
   }

@@ -145,7 +145,7 @@ export class ExportValidator {
     // Check notebook directories exist
     for (const group of notebookGroups) {
       const notebookName = group.notebook?.title || 'Orphaned Notes';
-      const notebookDir = join(exportDir, this.sanitizeFilename(notebookName));
+      const notebookDir = join(exportDir, group.sanitizedFolderName);
       
       if (!existsSync(notebookDir)) {
         issues.push({
