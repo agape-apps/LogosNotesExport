@@ -1,8 +1,8 @@
 LogosDocuments/
 __pycache__/
 screenshots/
-data/notes*
-data/debug*
+data/notes/
+data/debug/
 exported-notes/
 test-export/
 bin/
