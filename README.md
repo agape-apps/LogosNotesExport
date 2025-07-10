@@ -110,6 +110,7 @@ OPTIONS:
   --date-format         Date format: iso, locale, short (default: iso)
   
   PROCESSING:
+  --skip-highlights    Skip highlight notes, export only text and annotation notes
   --verbose, -v         Verbose output
   --dry-run            Show what would be done without writing files
   --help, -h           Show help

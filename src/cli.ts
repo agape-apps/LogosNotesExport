@@ -31,6 +31,7 @@ interface CLIOptions {
   includeId?: boolean;
   dateFormat?: 'iso' | 'locale' | 'short';
   /** Processing options */
+  skipHighlights?: boolean;
   verbose?: boolean;
   dryRun?: boolean;
   help?: boolean;
@@ -64,6 +65,7 @@ OPTIONS:
   --date-format         Date format: iso, locale, short (default: iso)
   
   PROCESSING:
+  --skip-highlights    Skip highlight notes, export only text and annotation notes
   --verbose, -v         Verbose output
   --dry-run            Show what would be done without writing files
   --help, -h           Show this help
@@ -111,7 +113,7 @@ class LogosNotesExporter {
     
     // Initialize database with automatic location detection
     this.database = new NotesToolDatabase(options.database);
-    this.organizer = new NotebookOrganizer(this.database);
+    this.organizer = new NotebookOrganizer(this.database, { skipHighlights: options.skipHighlights || false });
     
     // Show database info in verbose mode
     if (options.verbose) {
@@ -393,6 +395,7 @@ function parseCommandLine(): CLIOptions {
       'date-format': { type: 'string' },
       
       // Processing options
+      'skip-highlights': { type: 'boolean' },
       verbose: { type: 'boolean', short: 'v' },
       'dry-run': { type: 'boolean' },
       help: { type: 'boolean', short: 'h' },
@@ -416,6 +419,7 @@ function parseCommandLine(): CLIOptions {
     includeNotebook: parsed.values['notebook-info'],
     includeId: parsed.values['include-id'],
     dateFormat: parsed.values['date-format'] as 'iso' | 'locale' | 'short' | undefined,
+    skipHighlights: parsed.values['skip-highlights'],
     verbose: parsed.values.verbose,
     dryRun: parsed.values['dry-run'],
     help: parsed.values.help,

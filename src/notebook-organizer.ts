@@ -3,6 +3,10 @@ import type { NotesToolNote, Notebook } from './notestool-database.js';
 import { BibleReferenceDecoder } from './reference-decoder.js';
 import type { DecodedReference } from './reference-decoder.js';
 
+export interface NotebookOrganizerOptions {
+  skipHighlights?: boolean;
+}
+
 export interface OrganizedNote extends NotesToolNote {
   references: DecodedReference[];
   notebook: Notebook | null;
@@ -28,17 +32,25 @@ export interface OrganizationStats {
 export class NotebookOrganizer {
   private database: NotesToolDatabase;
   private referenceDecoder: BibleReferenceDecoder;
+  private options: NotebookOrganizerOptions;
 
-  constructor(database: NotesToolDatabase) {
+  constructor(database: NotesToolDatabase, options: NotebookOrganizerOptions = {}) {
     this.database = database;
     this.referenceDecoder = new BibleReferenceDecoder();
+    this.options = options;
   }
 
   /**
    * Organize all active notes by notebooks with references
    */
   public async organizeNotes(): Promise<NotebookGroup[]> {
-    const notes = this.database.getActiveNotes();
+    let notes = this.database.getActiveNotes();
+    
+    // Filter out highlights if requested
+    if (this.options.skipHighlights) {
+      notes = notes.filter((note: NotesToolNote) => note.kind !== 1); // 1 = highlight
+    }
+    
     const notebooks = this.database.getActiveNotebooks();
     const allReferences = this.database.getBibleReferences();
 
@@ -138,7 +150,12 @@ export class NotebookOrganizer {
    */
   public getNotesByNotebook(notebookExternalId: string): OrganizedNote[] {
     const allNotes = this.database.getActiveNotes();
-    const notes = allNotes.filter((n: any) => n.notebookExternalId === notebookExternalId);
+    let notes = allNotes.filter((n: any) => n.notebookExternalId === notebookExternalId);
+    
+    // Filter out highlights if requested
+    if (this.options.skipHighlights) {
+      notes = notes.filter((note: any) => note.kind !== 1); // 1 = highlight
+    }
     const notebooks = this.database.getActiveNotebooks();
     const allReferences = this.database.getBibleReferences();
 
