@@ -35,7 +35,8 @@
     "bun": ">=1.0.0"
   },
   "dependencies": {
-    "bun": "^1.0.0"
+    "bun": "^1.0.0",
+    "yaml": "^2.8.0"
   },
   "devDependencies": {
     "@types/bun": "latest",

@@ -181,7 +181,7 @@ class LogosNotesExporter {
 
       for (const group of notebookGroups) {
         const notebookName = group.notebook?.title || 'Orphaned Notes';
-        this.log(`\nProcessing: ${notebookName} (${group.notes.length} notes)`);
+        this.log(`Processing: ${notebookName} (${group.notes.length} notes)`);
 
         // Resolve filename conflicts
         const fileMap = this.fileOrganizer.resolveFilenameConflicts(group.notes, group);

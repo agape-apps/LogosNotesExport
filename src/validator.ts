@@ -1,5 +1,6 @@
 import { existsSync, statSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { parseDocument } from 'yaml';
 import type { OrganizedNote, NotebookGroup, FilePathInfo } from './types.js';
 
 export interface ValidationOptions {
@@ -283,6 +284,7 @@ export class ExportValidator {
     }
 
     // Check for markdown content
+    // TODO: this may not be needed.
     const markdownPatterns = [
       /^#+ /m,  // Headers
       /\*\*[^*]+\*\*/, // Bold
@@ -306,6 +308,39 @@ export class ExportValidator {
   }
 
   /**
+   * Lint YAML content for syntax validity
+   */
+  private lintYaml(yamlContent: string): { valid: boolean; error?: string; data?: any; warnings?: string[] } {
+    try {
+      const doc = parseDocument(yamlContent);
+      
+      // Check for errors
+      if (doc.errors.length > 0) {
+        return {
+          valid: false,
+          error: doc.errors.map(e => e.message).join('; ')
+        };
+      }
+      
+      // Check for warnings (optional)
+      const warnings = doc.warnings.length > 0 
+        ? doc.warnings.map(w => w.message) 
+        : undefined;
+      
+      return { 
+        valid: true, 
+        data: doc.toJS(),
+        warnings
+      };
+    } catch (error) {
+      return { 
+        valid: false, 
+        error: error instanceof Error ? error.message : 'Unknown YAML error'
+      };
+    }
+  }
+
+  /**
    * Validate YAML frontmatter format
    */
   private validateFrontmatter(filePath: string, content: string, issues: ValidationIssue[]): void {
@@ -322,7 +357,7 @@ export class ExportValidator {
     const frontmatterEnd = content.indexOf('\n---\n', 4);
     if (frontmatterEnd === -1) {
       issues.push({
-        severity: 'error',
+        severity: 'warning',
         type: 'format',
         message: 'Malformed YAML frontmatter (missing end marker)',
         filePath
@@ -332,8 +367,30 @@ export class ExportValidator {
 
     const frontmatter = content.substring(4, frontmatterEnd);
     
-    // Check for required fields
-    const requiredFields = ['title', 'created', 'type'];
+    // Validate YAML syntax using yaml package
+    const yamlResult = this.lintYaml(frontmatter);
+    if (!yamlResult.valid) {
+      issues.push({
+        severity: 'warning',
+        type: 'format',
+        message: `Invalid YAML syntax: ${yamlResult.error}`,
+        filePath
+      });
+      return; // Don't continue with field validation if YAML is invalid
+    }
+
+    // Add warnings for YAML parser warnings
+    if (yamlResult.warnings && yamlResult.warnings.length > 0) {
+      issues.push({
+        severity: 'warning',
+        type: 'format',
+        message: `YAML warnings: ${yamlResult.warnings.join('; ')}`,
+        filePath
+      });
+    }
+
+    // Check for required fields (only if YAML is valid)
+    const requiredFields = ['title', 'created', 'noteType'];
     for (const field of requiredFields) {
       if (!frontmatter.includes(`${field}:`)) {
         issues.push({
