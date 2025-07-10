@@ -143,7 +143,7 @@ class LogosNotesExporter {
       includeId: options.includeId || false,
       dateFormat: options.dateFormat || 'iso',
     };
-    this.markdownConverter = new MarkdownConverter(markdownOptions);
+    this.markdownConverter = new MarkdownConverter(markdownOptions, this.database);
     this.validator = new ExportValidator();
   }
 

@@ -1,7 +1,21 @@
 import { mkdir, writeFile } from 'fs/promises';
 import { join, dirname } from 'path';
 import { existsSync } from 'fs';
-import type { NotebookGroup, OrganizedNote } from './notebook-organizer.js';
+import type { OrganizedNote, NotebookGroup } from './types.js';
+import { BibleReferenceDecoder } from './reference-decoder.js';
+
+export interface FilePathInfo {
+  /** Full file path */
+  fullPath: string;
+  /** Directory path */
+  directory: string;
+  /** Filename without extension */
+  filename: string;
+  /** Relative path from base directory */
+  relativePath: string;
+  /** Whether file already exists */
+  exists: boolean;
+}
 
 export interface FileStructureOptions {
   /** Base output directory */
@@ -18,19 +32,6 @@ export interface FileStructureOptions {
   fileExtension: string;
   /** Whether to create index files */
   createIndexFiles: boolean;
-}
-
-export interface FilePathInfo {
-  /** Full file path */
-  fullPath: string;
-  /** Directory path */
-  directory: string;
-  /** Filename without extension */
-  filename: string;
-  /** Relative path from base directory */
-  relativePath: string;
-  /** Whether file already exists */
-  exists: boolean;
 }
 
 export interface DirectoryStructure {
@@ -57,6 +58,7 @@ export const DEFAULT_FILE_OPTIONS: FileStructureOptions = {
 export class FileOrganizer {
   private options: FileStructureOptions;
   private createdDirs = new Set<string>();
+  private bibleDecoder = new BibleReferenceDecoder();
 
   constructor(options: Partial<FileStructureOptions> = {}) {
     this.options = { ...DEFAULT_FILE_OPTIONS, ...options };
@@ -262,6 +264,34 @@ export class FileOrganizer {
    * Generate a safe filename for a note
    */
   private generateSafeFilename(note: OrganizedNote, index: number): string {
+    // Check if this is a Bible reference note
+    if (note.references.length > 0 && note.references[0]) {
+      const firstRef = note.references[0];
+      
+      // Try to generate Bible filename format for Bible references
+      if (firstRef.anchorBookId && firstRef.chapter) {
+        try {
+          let filename = this.bibleDecoder.generateBibleFilename(
+            firstRef.anchorBookId, 
+            firstRef.chapter, 
+            firstRef.verse
+          );
+          
+          // Add index if greater than 1
+          if (index > 1) {
+            // Insert index before .md extension
+            filename = filename.replace('.md', `-${index}.md`);
+          }
+          
+          return filename;
+        } catch (error) {
+          // Fall back to regular filename if Bible format fails
+          console.warn(`Failed to generate Bible filename for note ${note.id}:`, error);
+        }
+      }
+    }
+
+    // Fallback to traditional filename generation
     let filename = '';
 
     // Use formatted title or generate from references

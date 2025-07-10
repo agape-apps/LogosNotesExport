@@ -1,6 +1,8 @@
 import type { OrganizedNote, NotebookGroup, FilePathInfo } from './types.js';
 import { XamlToMarkdownConverter } from './xaml-converter.js';
 import { cleanXamlText } from './unicode-cleaner.js';
+import { MetadataProcessor, type MetadataLookups, type MetadataOptions } from './metadata-processor.js';
+import type { NotesToolDatabase } from './notestool-database.js';
 
 export interface MarkdownOptions {
   /** Include YAML frontmatter */
@@ -51,10 +53,37 @@ export const DEFAULT_MARKDOWN_OPTIONS: MarkdownOptions = {
 export class MarkdownConverter {
   private options: MarkdownOptions;
   private xamlConverter: XamlToMarkdownConverter;
+  private metadataProcessor?: MetadataProcessor;
 
-  constructor(options: Partial<MarkdownOptions> = {}) {
+  constructor(options: Partial<MarkdownOptions> = {}, database?: NotesToolDatabase) {
     this.options = { ...DEFAULT_MARKDOWN_OPTIONS, ...options };
     this.xamlConverter = new XamlToMarkdownConverter();
+    
+    // Initialize enhanced metadata processor if database is provided
+    if (database) {
+      try {
+        const lookups: MetadataLookups = {
+          styles: new Map(database.getNoteStyles().map(s => [s.noteStyleId, s])),
+          colors: new Map(database.getNoteColors().map(c => [c.noteColorId, c])),
+          indicators: new Map(database.getNoteIndicators().map(i => [i.noteIndicatorId, i])),
+          dataTypes: new Map(database.getDataTypes().map(d => [d.dataTypeId, d])),
+          resourceIds: new Map(database.getResourceIds().map(r => [r.resourceIdId, r]))
+        };
+        
+        const metadataOptions: Partial<MetadataOptions> = {
+          includeDates: this.options.includeDates,
+          includeNotebook: this.options.includeNotebook,
+          includeReferences: this.options.includeReferences,
+          includeEnhancedMetadata: true,
+          includeTags: true,
+          dateFormat: this.options.dateFormat === 'iso' ? 'iso' : 'readable'
+        };
+        
+        this.metadataProcessor = new MetadataProcessor(metadataOptions, lookups);
+      } catch (error) {
+        console.warn('Failed to initialize enhanced metadata processor:', error);
+      }
+    }
   }
 
   /**
@@ -84,6 +113,30 @@ export class MarkdownConverter {
    * Generate YAML frontmatter for a note
    */
   private generateFrontmatter(note: OrganizedNote, group: NotebookGroup, fileInfo: FilePathInfo): Record<string, any> {
+    if (this.metadataProcessor) {
+      // Use enhanced metadata processor
+      const metadata = this.metadataProcessor.generateMetadata(note);
+      const frontmatter: Record<string, any> = { ...metadata };
+      
+      // Add file information
+      if (fileInfo.filename) {
+        frontmatter.filename = fileInfo.filename;
+      }
+      
+      // Add custom fields
+      Object.assign(frontmatter, this.options.customFields);
+      
+      return frontmatter;
+    } else {
+      // Fallback to basic frontmatter generation
+      return this.generateBasicFrontmatter(note, group, fileInfo);
+    }
+  }
+
+  /**
+   * Generate basic frontmatter when enhanced metadata processor is not available
+   */
+  private generateBasicFrontmatter(note: OrganizedNote, group: NotebookGroup, fileInfo: FilePathInfo): Record<string, any> {
     const frontmatter: Record<string, any> = {};
 
     // Title
@@ -99,45 +152,34 @@ export class MarkdownConverter {
 
     // Note kind/type
     if (this.options.includeKind) {
-      frontmatter.type = this.getNoteTypeName(note.kind);
+      frontmatter.noteType = this.getNoteTypeName(note.kind);
     }
 
     // Note ID
     if (this.options.includeId) {
-      frontmatter.id = note.id;
+      frontmatter.noteId = note.id;
     }
 
     // Notebook information
     if (this.options.includeNotebook && group.notebook) {
-      frontmatter.notebook = {
-        title: group.notebook.title,
-        id: group.notebook.externalId,
-        created: this.formatDate(group.notebook.createdDate)
-      };
+      frontmatter.notebook = group.notebook.title;
     }
 
     // References
     if (this.options.includeReferences && note.references.length > 0) {
-      frontmatter.references = note.references.map(ref => ({
-        text: ref.formatted,
-        book: ref.bookName,
-        chapter: ref.chapter,
-        verse: ref.verse
-      }));
+      frontmatter.references = note.references.map(ref => ref.formatted);
     }
 
-    // Note characteristics
-    frontmatter.hasContent = !!(note.contentRichText && note.contentRichText.trim());
-
-    // Tags (if any exist in the future)
+    // Tags
     const tags = this.extractTags(note);
     if (tags.length > 0) {
       frontmatter.tags = tags;
     }
 
     // File information
-    frontmatter.filename = fileInfo.filename;
-    frontmatter.path = fileInfo.relativePath;
+    if (fileInfo.filename) {
+      frontmatter.filename = fileInfo.filename;
+    }
 
     // Custom fields
     Object.assign(frontmatter, this.options.customFields);
@@ -340,7 +382,8 @@ export class MarkdownConverter {
       case 'locale':
         return date.toLocaleDateString();
       case 'short':
-        return date.toISOString().split('T')[0]; // YYYY-MM-DD
+        const isoString = date.toISOString();
+        return isoString.split('T')[0]; // YYYY-MM-DD
       case 'iso':
       default:
         return date.toISOString();
@@ -403,7 +446,7 @@ export class MarkdownConverter {
       tags.push('scripture');
       
       // Add book tags for unique books
-      const books = [...new Set(note.references.map(ref => ref.bookName))];
+      const books = [...new Set(note.references.map(ref => ref.bookName).filter(Boolean))];
       for (const book of books.slice(0, 3)) { // Limit to 3 book tags
         if (book) {
           tags.push(book.toLowerCase().replace(/\s+/g, '-'));

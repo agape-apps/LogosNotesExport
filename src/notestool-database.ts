@@ -13,6 +13,9 @@ export interface NotesToolNote {
   notebookExternalId: string;
   noteStyleId?: number;
   noteColorId?: number;
+  noteIndicatorId?: number;
+  anchorDataTypeId?: number;
+  anchorResourceIdId?: number;
   isDeleted: boolean;
   isTrashed: boolean;
 }
@@ -47,6 +50,16 @@ export interface NoteColor {
 export interface DataType {
   dataTypeId: number;
   name: string; // e.g., "bible+nkjv"
+}
+
+export interface NoteIndicator {
+  noteIndicatorId: number;
+  name: string;
+}
+
+export interface ResourceId {
+  resourceIdId: number;
+  resourceId: string; // e.g., "LLS:GRMNBBLSCHL2000"
 }
 
 export class NotesToolDatabase {
@@ -135,6 +148,9 @@ export class NotesToolDatabase {
         NotebookExternalId as notebookExternalId,
         NoteStyleId as noteStyleId,
         NoteColorId as noteColorId,
+        NoteIndicatorId as noteIndicatorId,
+        AnchorDataTypeId as anchorDataTypeId,
+        AnchorResourceIdId as anchorResourceIdId,
         IsDeleted as isDeleted,
         IsTrashed as isTrashed
       FROM Notes
@@ -254,13 +270,46 @@ export class NotesToolDatabase {
   }
 
   /**
+   * Get all note indicators
+   */
+  getNoteIndicators(): NoteIndicator[] {
+    const query = `
+      SELECT 
+        NoteIndicatorId as noteIndicatorId,
+        Name as name
+      FROM NoteIndicators
+      ORDER BY NoteIndicatorId
+    `;
+
+    return this.db.query(query).all() as NoteIndicator[];
+  }
+
+  /**
+   * Get all resource IDs
+   */
+  getResourceIds(): ResourceId[] {
+    const query = `
+      SELECT 
+        ResourceIdId as resourceIdId,
+        ResourceId as resourceId
+      FROM ResourceIds
+      ORDER BY ResourceIdId
+    `;
+
+    return this.db.query(query).all() as ResourceId[];
+  }
+
+  /**
    * Get complete note data with references and metadata
    */
   getNotesWithReferences(): Array<NotesToolNote & { 
     references: BibleReference[], 
     notebook?: Notebook,
     style?: NoteStyle,
-    color?: NoteColor 
+    color?: NoteColor,
+    indicator?: NoteIndicator,
+    dataType?: DataType,
+    resourceId?: ResourceId
   }> {
     const notes = this.getActiveNotes();
     const noteIds = notes.map(n => n.id);
@@ -268,11 +317,17 @@ export class NotesToolDatabase {
     const notebooks = this.getActiveNotebooks();
     const styles = this.getNoteStyles();
     const colors = this.getNoteColors();
+    const indicators = this.getNoteIndicators();
+    const dataTypes = this.getDataTypes();
+    const resourceIds = this.getResourceIds();
 
     // Create lookup maps
     const notebookMap = new Map(notebooks.map(nb => [nb.externalId, nb]));
     const styleMap = new Map(styles.map(s => [s.noteStyleId, s]));
     const colorMap = new Map(colors.map(c => [c.noteColorId, c]));
+    const indicatorMap = new Map(indicators.map(i => [i.noteIndicatorId, i]));
+    const dataTypeMap = new Map(dataTypes.map(dt => [dt.dataTypeId, dt]));
+    const resourceIdMap = new Map(resourceIds.map(r => [r.resourceIdId, r]));
     const referencesMap = new Map<number, BibleReference[]>();
     
     // Group references by note ID
@@ -290,6 +345,9 @@ export class NotesToolDatabase {
       notebook: notebookMap.get(note.notebookExternalId),
       style: note.noteStyleId ? styleMap.get(note.noteStyleId) : undefined,
       color: note.noteColorId ? colorMap.get(note.noteColorId) : undefined,
+      indicator: note.noteIndicatorId ? indicatorMap.get(note.noteIndicatorId) : undefined,
+      dataType: note.anchorDataTypeId ? dataTypeMap.get(note.anchorDataTypeId) : undefined,
+      resourceId: note.anchorResourceIdId ? resourceIdMap.get(note.anchorResourceIdId) : undefined,
     }));
   }
 

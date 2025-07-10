@@ -1,5 +1,7 @@
 import type { OrganizedNote } from './notebook-organizer.js';
 import type { DecodedReference } from './reference-decoder.js';
+import type { NoteStyle, NoteColor, NoteIndicator, DataType, ResourceId } from './notestool-database.js';
+import { BibleReferenceDecoder } from './reference-decoder.js';
 
 export interface NoteMetadata {
   title: string;
@@ -9,12 +11,26 @@ export interface NoteMetadata {
   noteType: 'text' | 'highlight' | 'annotation';
   references: string[];
   notebook?: string;
-  notebookId?: string;
   logosBibleBook?: number;
   noteId: number;
   style?: string;
   color?: string;
+  noteStyle?: string;
+  noteColor?: string;
+  noteIndicator?: string;
+  dataType?: string;
+  resourceId?: string;
+  bibleVersion?: string;
+  filename?: string;
   [key: string]: any; // Allow custom metadata
+}
+
+export interface MetadataLookups {
+  styles: Map<number, NoteStyle>;
+  colors: Map<number, NoteColor>;
+  indicators: Map<number, NoteIndicator>;
+  dataTypes: Map<number, DataType>;
+  resourceIds: Map<number, ResourceId>;
 }
 
 export interface MetadataOptions {
@@ -24,6 +40,8 @@ export interface MetadataOptions {
   includeNotebook: boolean;
   /** Include style and color information */
   includeStyle: boolean;
+  /** Include enhanced metadata (note style, color, indicator, etc.) */
+  includeEnhancedMetadata: boolean;
   /** Include all Bible references */
   includeReferences: boolean;
   /** Include tags derived from note content */
@@ -42,6 +60,7 @@ export const DEFAULT_METADATA_OPTIONS: MetadataOptions = {
   includeDates: true,
   includeNotebook: true,
   includeStyle: false,
+  includeEnhancedMetadata: true,
   includeReferences: true,
   includeTags: true,
   includeLogosData: false,
@@ -51,9 +70,12 @@ export const DEFAULT_METADATA_OPTIONS: MetadataOptions = {
 
 export class MetadataProcessor {
   private options: MetadataOptions;
+  private lookups?: MetadataLookups;
+  private bibleDecoder = new BibleReferenceDecoder();
 
-  constructor(options: Partial<MetadataOptions> = {}) {
+  constructor(options: Partial<MetadataOptions> = {}, lookups?: MetadataLookups) {
     this.options = { ...DEFAULT_METADATA_OPTIONS, ...options };
+    this.lookups = lookups;
   }
 
   /**
@@ -77,7 +99,6 @@ export class MetadataProcessor {
     // Add notebook information
     if (this.options.includeNotebook && note.notebook) {
       metadata.notebook = note.notebook.title || 'Untitled Notebook';
-      metadata.notebookId = note.notebook.externalId;
     }
 
     // Add Bible references
@@ -87,6 +108,12 @@ export class MetadataProcessor {
       if (note.references[0]) {
         metadata.logosBibleBook = note.references[0].anchorBookId;
       }
+      
+      // Extract Bible version from first reference
+      const bibleVersion = this.extractBibleVersionFromReferences(note.references);
+      if (bibleVersion) {
+        metadata.bibleVersion = bibleVersion;
+      }
     }
 
     // Add anchor Bible book from note
@@ -94,13 +121,37 @@ export class MetadataProcessor {
       metadata.logosBibleBook = note.anchorBibleBook;
     }
 
-    // Add style and color information
+    // Add style and color information (legacy format)
     if (this.options.includeStyle) {
       if (note.noteStyleId) {
         metadata.style = `style-${note.noteStyleId}`;
       }
       if (note.noteColorId) {
         metadata.color = `color-${note.noteColorId}`;
+      }
+    }
+
+    // Add enhanced metadata with meaningful names
+    if (this.options.includeEnhancedMetadata && this.lookups) {
+      if (note.noteStyleId) {
+        const style = this.lookups.styles.get(note.noteStyleId);
+        metadata.noteStyle = style ? this.cleanStyleName(style.name) : `style-${note.noteStyleId}`;
+      }
+      if (note.noteColorId) {
+        const color = this.lookups.colors.get(note.noteColorId);
+        metadata.noteColor = color ? color.name : `color-${note.noteColorId}`;
+      }
+      if (note.noteIndicatorId) {
+        const indicator = this.lookups.indicators.get(note.noteIndicatorId);
+        metadata.noteIndicator = indicator ? indicator.name : `indicator-${note.noteIndicatorId}`;
+      }
+      if (note.anchorDataTypeId) {
+        const dataType = this.lookups.dataTypes.get(note.anchorDataTypeId);
+        metadata.dataType = dataType ? dataType.name : `datatype-${note.anchorDataTypeId}`;
+      }
+      if (note.anchorResourceIdId) {
+        const resourceId = this.lookups.resourceIds.get(note.anchorResourceIdId);
+        metadata.resourceId = resourceId ? resourceId.resourceId : `resource-${note.anchorResourceIdId}`;
       }
     }
 
@@ -114,6 +165,19 @@ export class MetadataProcessor {
       metadata.logosExternalId = note.externalId;
       if (note.noteStyleId) metadata.logosStyleId = note.noteStyleId;
       if (note.noteColorId) metadata.logosColorId = note.noteColorId;
+    }
+
+    // Generate simple filename for frontmatter
+    // TODO: this may not be needed.
+    if (note.references.length > 0 && note.references[0]) {
+      const firstRef = note.references[0];
+      if (firstRef.anchorBookId && firstRef.bookName && firstRef.chapter) {
+        metadata.filename = this.bibleDecoder.generateSimpleFilename(
+          firstRef.bookName, 
+          firstRef.chapter, 
+          firstRef.verse
+        );
+      }
     }
 
     // Apply custom extractors
@@ -169,13 +233,39 @@ export class MetadataProcessor {
       yamlLines.push(`logosBibleBook: ${metadata.logosBibleBook}`);
     }
 
+    // Enhanced metadata fields
+    if (metadata.noteStyle) {
+      yamlLines.push(`noteStyle: ${this.escapeYamlValue(metadata.noteStyle)}`);
+    }
+    if (metadata.noteColor) {
+      yamlLines.push(`noteColor: ${this.escapeYamlValue(metadata.noteColor)}`);
+    }
+    if (metadata.noteIndicator) {
+      yamlLines.push(`noteIndicator: ${this.escapeYamlValue(metadata.noteIndicator)}`);
+    }
+    if (metadata.dataType) {
+      yamlLines.push(`dataType: ${this.escapeYamlValue(metadata.dataType)}`);
+    }
+    if (metadata.resourceId) {
+      yamlLines.push(`resourceId: ${this.escapeYamlValue(metadata.resourceId)}`);
+    }
+    if (metadata.bibleVersion) {
+      yamlLines.push(`bibleVersion: ${this.escapeYamlValue(metadata.bibleVersion)}`);
+    }
+
+    // Filename
+    if (metadata.filename) {
+      yamlLines.push(`filename: ${this.escapeYamlValue(metadata.filename)}`);
+    }
+
     // Note ID
     yamlLines.push(`noteId: ${metadata.noteId}`);
 
     // Additional metadata (excluding standard fields)
     const standardFields = new Set([
-      'title', 'created', 'modified', 'noteType', 'notebook', 'notebookId',
-      'references', 'tags', 'logosBibleBook', 'noteId'
+      'title', 'created', 'modified', 'noteType', 'notebook',
+      'references', 'tags', 'logosBibleBook', 'noteStyle', 'noteColor', 
+      'noteIndicator', 'dataType', 'resourceId', 'bibleVersion', 'filename', 'noteId'
     ]);
 
     for (const [key, value] of Object.entries(metadata)) {
@@ -344,5 +434,36 @@ export class MetadataProcessor {
    */
   public addCustomExtractor(extractor: MetadataExtractor): void {
     this.options.customExtractors.push(extractor);
+  }
+
+  /**
+   * Clean up style name to be more readable
+   * TODO: where did "cu-tom:" come from? Consider removing this.
+   */
+  private cleanStyleName(name: string): string {
+    return name
+      .replace(/^(custom:|cu-tom:)/i, '') // Remove "custom:" or "cu-tom:" prefixes
+      .replace(/^[\\s]+/g, '') // Remove leading spaces
+      .replace(/[\\s]+$/g, '') // Remove trailing spaces
+      .replace(/[\\s]+/g, '-') // Replace internal spaces with hyphens
+      .replace(/-+/g, '-') // Collapse multiple hyphens
+      .replace(/^-|-$/g, '') // Remove leading/trailing hyphens
+      .substring(0, 30); // Limit length
+  }
+
+  /**
+   * Extract Bible version from references
+   * Looks for patterns like "bible+esv.19.86.9" and extracts "ESV"
+   */
+  private extractBibleVersionFromReferences(references: DecodedReference[]): string | undefined {
+    for (const ref of references) {
+      // Look for "bible+version." pattern in the original reference
+      const versionMatch = ref.reference.match(/^bible\+([^.]+)\./);
+      if (versionMatch && versionMatch[1]) {
+        // Capitalize the version (esv -> ESV, nkjv -> NKJV)
+        return versionMatch[1].toUpperCase();
+      }
+    }
+    return undefined;
   }
 } 
