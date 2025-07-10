@@ -96,9 +96,9 @@ OPTIONS:
   --output, -o          Output directory (default: ./exported-notes)
   
   ORGANIZATION:
-  --organize-notebooks  Organize notes by notebooks (default: true)
-  --date-folders        Create date-based subdirectories
-  --index-files         Create README.md index files (default: true)
+  --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
+  --date-folders           Create date-based subdirectories
+  --index-files            Create README.md index files (default: true)
   
   MARKDOWN:
   --frontmatter         Include YAML frontmatter (default: true)

@@ -50,9 +50,9 @@ OPTIONS:
   --output, -o          Output directory (default: ./exported-notes)
   
   ORGANIZATION:
-  --organize-notebooks  Organize notes by notebooks (default: true)
-  --date-folders        Create date-based subdirectories
-  --index-files         Create README.md index files (default: true)
+  --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
+  --date-folders           Create date-based subdirectories
+  --index-files            Create README.md index files (default: true)
   
   MARKDOWN:
   --frontmatter         Include YAML frontmatter (default: true)
@@ -379,7 +379,7 @@ function parseCommandLine(): CLIOptions {
       output: { type: 'string', short: 'o' },
       
       // Organization options
-      'organize-notebooks': { type: 'boolean' },
+      'no-organize-notebooks': { type: 'boolean' },
       'date-folders': { type: 'boolean' },
       'index-files': { type: 'boolean' },
       
@@ -406,7 +406,7 @@ function parseCommandLine(): CLIOptions {
     listDatabases: parsed.values['list-databases'],
     showInstructions: parsed.values['show-instructions'],
     output: parsed.values.output,
-    organizeByNotebooks: parsed.values['organize-notebooks'],
+    organizeByNotebooks: !parsed.values['no-organize-notebooks'],
     includeDateFolders: parsed.values['date-folders'],
     createIndexFiles: parsed.values['index-files'],
     includeFrontmatter: parsed.values.frontmatter,

@@ -372,10 +372,14 @@ export class FileOrganizer {
     }
 
     for (const group of notebookGroups) {
-      totalDirectories++; // Notebook directory
+      // Only count notebook directories if organizing by notebooks
+      if (this.options.organizeByNotebooks) {
+        totalDirectories++; // Notebook directory
+      }
       totalFiles += group.notes.length;
       
-      if (this.options.createIndexFiles) {
+      // Only count notebook indexes if organizing by notebooks
+      if (this.options.createIndexFiles && this.options.organizeByNotebooks) {
         totalIndexFiles++;
       }
 
