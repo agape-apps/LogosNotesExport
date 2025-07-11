@@ -89,6 +89,12 @@ jobs:
           cp ./artifacts/LogosNotesExporter-windows-x64.exe/LogosNotesExporter.exe ./release-files/LogosNotesExporter-windows-x64.exe
           # Make macOS binaries executable
           chmod +x ./release-files/LogosNotesExporter-macos-*
+          # Generate SHA256 checksums
+          cd ./release-files
+          sha256sum LogosNotesExporter-macos-x64 > LogosNotesExporter-macos-x64.sha256
+          sha256sum LogosNotesExporter-macos-arm64 > LogosNotesExporter-macos-arm64.sha256
+          sha256sum LogosNotesExporter-windows-x64.exe > LogosNotesExporter-windows-x64.exe.sha256
+          cd ..
           echo "=== Final release files ==="
           ls -la ./release-files/
 
@@ -106,7 +112,7 @@ jobs:
             - **🍎 macOS (Intel)**: `LogosNotesExporter-macos-x64`
             - **🍎 macOS (Apple Silicon)**: `LogosNotesExporter-macos-arm64`  
             - **🪟 Windows**: `LogosNotesExporter-windows-x64.exe`
-            
+          
             ### 🚀 Quick Start - use a Terminal
 
             **macOS:**
@@ -124,10 +130,28 @@ jobs:
             ### 🔧 What's New
             See [CHANGES.md](https://github.com/agape-apps/LogosNotesExport/blob/main/CHANGES.md) for details.
 
+            ### 🔐 Verify Integrity (Recommended)
+
+            **Verify your download using SHA256 checksums:**
+
+            **macOS/Linux**
+            ```bash
+            sha256sum -c LogosNotesExporter-*.sha256
+            ```
+            
+            **Windows (PowerShell)**
+            ```powershell
+            Get-FileHash LogosNotesExporter-windows-x64.exe -Algorithm SHA256
+            ```
+            - Compare with content of LogosNotesExporter-windows-x64.exe.sha256
+            ```
           files: |
             ./release-files/LogosNotesExporter-macos-x64
+            ./release-files/LogosNotesExporter-macos-x64.sha256
             ./release-files/LogosNotesExporter-macos-arm64
+            ./release-files/LogosNotesExporter-macos-arm64.sha256
             ./release-files/LogosNotesExporter-windows-x64.exe
+            ./release-files/LogosNotesExporter-windows-x64.exe.sha256
           draft: false
           prerelease: false
         env:
