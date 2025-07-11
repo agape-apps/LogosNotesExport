@@ -62,6 +62,16 @@ export interface ResourceId {
   resourceId: string; // e.g., "LLS:GRMNBBLSCHL2000"
 }
 
+export interface NoteAnchorTextRange {
+  noteId: number;
+  anchorIndex: number;
+  resourceIdId: number;
+  resourceVersionId: number;
+  offset: number;
+  pastEnd: number;
+  wordNumberCount: number;
+}
+
 export class NotesToolDatabase {
   private db: Database;
   private dbLocation: DatabaseLocation;
@@ -297,6 +307,32 @@ export class NotesToolDatabase {
     `;
 
     return this.db.query(query).all() as ResourceId[];
+  }
+
+  /**
+   * Get all note anchor text ranges for offset data
+   */
+  getNoteAnchorTextRanges(noteIds?: number[]): NoteAnchorTextRange[] {
+    let query = `
+      SELECT 
+        NoteId as noteId,
+        AnchorIndex as anchorIndex,
+        ResourceIdId as resourceIdId,
+        ResourceVersionId as resourceVersionId,
+        Offset as offset,
+        PastEnd as pastEnd,
+        WordNumberCount as wordNumberCount
+      FROM NoteAnchorTextRanges
+    `;
+
+    if (noteIds && noteIds.length > 0) {
+      const placeholders = noteIds.map(() => '?').join(',');
+      query += ` WHERE NoteId IN (${placeholders})`;
+      return this.db.query(query).all(...noteIds) as NoteAnchorTextRange[];
+    }
+
+    query += ` ORDER BY NoteId, AnchorIndex`;
+    return this.db.query(query).all() as NoteAnchorTextRange[];
   }
 
   /**

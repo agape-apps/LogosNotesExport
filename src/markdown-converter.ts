@@ -415,7 +415,7 @@ export class MarkdownConverter {
     const fieldOrder = [
       'title', 'created', 'modified', 'tags', 'noteType', 'references', 
       'noteId', 'notebook', 'logosBibleBook', 'bibleVersion', 'noteStyle', 
-      'noteColor', 'noteIndicator', 'dataType', 'resourceId', 'filename'
+      'noteColor', 'noteIndicator', 'dataType', 'resourceId', 'anchorLink', 'filename'
     ];
     
     // Add fields in the preferred order first

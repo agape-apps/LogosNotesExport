@@ -1,4 +1,5 @@
 LogosDocuments/
+LogosDocuments.bak/
 __pycache__/
 screenshots/
 data/notes/
@@ -7,8 +8,8 @@ data/from-notes.db/notes/
 exported-notes*/
 test-export/
 Logos-Exported-Notes/
-bin/
 
+bin/
 node_modules/
 .DS_Store
 .vscode/

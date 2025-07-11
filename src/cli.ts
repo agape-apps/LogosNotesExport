@@ -183,7 +183,7 @@ class LogosNotesExporter {
       let totalProcessed = 0;
 
       for (const group of notebookGroups) {
-        const notebookName = group.notebook?.title || 'Orphaned Notes';
+        const notebookName = group.notebook?.title || 'No Notebook';
         this.log(`Processing: ${notebookName} (${group.notes.length} notes)`);
 
         // Resolve filename conflicts
@@ -292,7 +292,7 @@ class LogosNotesExporter {
     this.log(`  Notes with Content: ${stats.notesWithContent}`);
     this.log(`  Notes with References: ${stats.notesWithReferences}`);
     this.log(`  Notebooks: ${stats.notebooks}`);
-    this.log(`  Orphaned Notes: ${stats.orphanedNotes}`);
+    this.log(`  Notes with No Notebook: ${stats.orphanedNotes}`);
   }
 
   /**
@@ -310,7 +310,7 @@ class LogosNotesExporter {
    */
   private logDryRunSummary(notebookGroups: any[]): void {
     for (const group of notebookGroups) {
-      const notebookName = group.notebook?.title || 'Orphaned Notes';
+      const notebookName = group.notebook?.title || 'No Notebook';
       this.log(`\n📚 ${notebookName}:`);
       this.log(`  📄 ${group.notes.length} notes would be exported`);
       

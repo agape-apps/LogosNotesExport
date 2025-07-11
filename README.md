@@ -211,7 +211,7 @@ bun run binary:windows   # Build for Windows x64
 
 - Update version in package.json and publish new binary release
 
-```
+```sh
 scripts/create-release.sh
 ```
 
@@ -219,7 +219,7 @@ scripts/create-release.sh
 
 during development run
 
-```
+```sh
 bun run export [options]
 ```
 

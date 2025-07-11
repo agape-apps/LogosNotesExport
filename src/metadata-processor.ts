@@ -21,6 +21,7 @@ export interface NoteMetadata {
   dataType?: string;
   resourceId?: string;
   bibleVersion?: string;
+  anchorLink?: string;
   filename?: string;
   [key: string]: any; // Allow custom metadata
 }
@@ -154,6 +155,9 @@ export class MetadataProcessor {
       }
     }
 
+    // Generate anchor link URL
+    metadata.anchorLink = this.generateAnchorLink(note, metadata.resourceId);
+
     // Add tags
     if (this.options.includeTags) {
       metadata.tags = this.extractTags(note);
@@ -250,6 +254,9 @@ export class MetadataProcessor {
     if (metadata.resourceId) {
       yamlLines.push(`resourceId: ${this.escapeYamlValue(metadata.resourceId)}`);
     }
+    if (metadata.anchorLink) {
+      yamlLines.push(`anchorLink: ${this.escapeYamlValue(metadata.anchorLink)}`);
+    }
     if (metadata.bibleVersion) {
       yamlLines.push(`bibleVersion: ${this.escapeYamlValue(metadata.bibleVersion)}`);
     }
@@ -266,7 +273,7 @@ export class MetadataProcessor {
     const standardFields = new Set([
       'title', 'created', 'modified', 'noteType', 'notebook',
       'references', 'tags', 'logosBibleBook', 'noteStyle', 'noteColor', 
-      'noteIndicator', 'dataType', 'resourceId', 'bibleVersion', 'filename', 'noteId'
+      'noteIndicator', 'dataType', 'resourceId', 'anchorLink', 'bibleVersion', 'filename', 'noteId'
     ]);
 
     for (const [key, value] of Object.entries(metadata)) {
@@ -465,6 +472,31 @@ export class MetadataProcessor {
         return versionMatch[1].toUpperCase();
       }
     }
+    return undefined;
+  }
+
+  /**
+   * Generate anchor link URL for Logos app
+   */
+  private generateAnchorLink(note: OrganizedNote, resourceId?: string): string | undefined {
+    if (!resourceId) return undefined;
+
+    // URL encode the resourceId (replace : with %3A)
+    const encodedResourceId = resourceId.replace(':', '%3A');
+
+    // For Bible references, use references format
+    if (note.references.length > 0) {
+      const firstRef = note.references[0];
+      if (firstRef && firstRef.reference) {
+        return `https://app.logos.com/books/${encodedResourceId}/references/${firstRef.reference}`;
+      }
+    }
+
+    // For resource notes with offset data, use offsets format
+    if (note.anchorTextRange?.offset !== undefined) {
+      return `https://app.logos.com/books/${encodedResourceId}/offsets/${note.anchorTextRange.offset}`;
+    }
+
     return undefined;
   }
 } 

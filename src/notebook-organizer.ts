@@ -1,5 +1,5 @@
 import { NotesToolDatabase } from './notestool-database.js';
-import type { NotesToolNote, Notebook } from './notestool-database.js';
+import type { NotesToolNote, Notebook, NoteAnchorTextRange } from './notestool-database.js';
 import { BibleReferenceDecoder } from './reference-decoder.js';
 import type { DecodedReference } from './reference-decoder.js';
 
@@ -12,6 +12,7 @@ export interface OrganizedNote extends NotesToolNote {
   notebook: Notebook | null;
   formattedTitle: string;
   sanitizedFilename: string;
+  anchorTextRange?: NoteAnchorTextRange;
 }
 
 export interface NotebookGroup {
@@ -53,6 +54,7 @@ export class NotebookOrganizer {
     
     const notebooks = this.database.getActiveNotebooks();
     const allReferences = this.database.getBibleReferences();
+    const allTextRanges = this.database.getNoteAnchorTextRanges();
 
     // Create a map for quick notebook lookup
     const notebookMap = new Map<string, Notebook>();
@@ -73,17 +75,25 @@ export class NotebookOrganizer {
       }
     });
 
+    // Create a map for quick text range lookup (using first range for each note)
+    const textRangesMap = new Map<number, NoteAnchorTextRange>();
+    allTextRanges.forEach((range: NoteAnchorTextRange) => {
+      if (!textRangesMap.has(range.noteId)) {
+        textRangesMap.set(range.noteId, range);
+      }
+    });
+
     // Process notes and organize by notebook
     const notebookGroups = new Map<string, NotebookGroup>();
     const orphanedGroup: NotebookGroup = {
       notebook: null,
       notes: [],
       totalNotes: 0,
-      sanitizedFolderName: 'orphaned-notes'
+      sanitizedFolderName: 'No Notebook'
     };
 
     for (const note of notes) {
-      const organizedNote = this.processNote(note, notebookMap, referencesMap);
+      const organizedNote = this.processNote(note, notebookMap, referencesMap, textRangesMap);
       
       if (organizedNote.notebook) {
         const notebookId = organizedNote.notebook.externalId;
@@ -110,7 +120,7 @@ export class NotebookOrganizer {
     const result = Array.from(notebookGroups.values())
       .sort((a, b) => (a.notebook?.title || '').localeCompare(b.notebook?.title || ''));
 
-    // Add orphaned notes if any exist
+    // Add orphaned notes (Notes with No Notebook) if any exist
     if (orphanedGroup.totalNotes > 0) {
       result.push(orphanedGroup);
     }
@@ -158,6 +168,7 @@ export class NotebookOrganizer {
     }
     const notebooks = this.database.getActiveNotebooks();
     const allReferences = this.database.getBibleReferences();
+    const allTextRanges = this.database.getNoteAnchorTextRanges();
 
     const notebookMap = new Map<string, Notebook>();
     notebooks.forEach((nb: any) => notebookMap.set(nb.externalId, nb));
@@ -173,7 +184,14 @@ export class NotebookOrganizer {
       }
     });
 
-    return notes.map((note: any) => this.processNote(note, notebookMap, referencesMap));
+    const textRangesMap = new Map<number, NoteAnchorTextRange>();
+    allTextRanges.forEach((range: NoteAnchorTextRange) => {
+      if (!textRangesMap.has(range.noteId)) {
+        textRangesMap.set(range.noteId, range);
+      }
+    });
+
+    return notes.map((note: any) => this.processNote(note, notebookMap, referencesMap, textRangesMap));
   }
 
   /**
@@ -205,10 +223,12 @@ export class NotebookOrganizer {
   private processNote(
     note: NotesToolNote, 
     notebookMap: Map<string, Notebook>,
-    referencesMap: Map<number, DecodedReference[]>
+    referencesMap: Map<number, DecodedReference[]>,
+    textRangesMap: Map<number, NoteAnchorTextRange>
   ): OrganizedNote {
     const notebook = notebookMap.get(note.notebookExternalId) || null;
     const references = referencesMap.get(note.id) || [];
+    const anchorTextRange = textRangesMap.get(note.id);
     
     // Generate formatted title
     const formattedTitle = this.generateNoteTitle(note, references);
@@ -221,7 +241,8 @@ export class NotebookOrganizer {
       notebook,
       references,
       formattedTitle,
-      sanitizedFilename
+      sanitizedFilename,
+      anchorTextRange
     };
   }
 

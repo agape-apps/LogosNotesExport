@@ -8,28 +8,31 @@ A simple node based CLI exporter that converts Logos Notes to Markdown files
 
 The command takes one or more database files as input
 - with options for database file locations
-- with options for the type of output file
-- with options to read all notes or notes from ID to ID
+- with various options for the user to customize the output
 
 It outputs the following:
-- an intermediate JSON file
-- an intermediate text file with the Blobs decoded into XAML
-- a directory of properly formatted Markdown files - one file per not with YAML metadata front matter
+- a directory of properly formatted Markdown files
 
 ## Architecture
 
-- Programming environment: TypeScript on Bun (not Node)
+- Programming environment: 
+  - TypeScript with strict typing
+  - on bun (not using Node) 
+  - using bun's sqlite features
+  - fast-xml-parser for initial parsing of XAML
+  - yaml for validating Markdown front matter
 - modular
-- all script files must be modularized so that they can be used for a CLI, Electron or Web application
-- only one main file will have all the CLI command functionality
+- only one main file (src/cli.ts) will have all the CLI command functionality
+- all other TypeScript files must be modularized in such a way that they can be used for a CLI, Electron or Web application
 
 ## Tasks
-1. Analyze and document the relevant undocumented sqlite databases
-2. Analyze and document the relevant undocumented data formats
-   - Bible Reference Format
-   - Notes encoded or compressed Blob format
-3. Convert decoded XAML blobs to Markdown
-4. Add References and Metadata to Markdown Notes
+1. Analyze and document the relevant sqlite databases
+2. Analyze and document the relevant data formats
+   - Bible Reference format
+   - Book Reference format
+   - Notes in XAML Rich Text format
+3. Convert XAML Rich Text to Markdown
+4. Add References and Metadata (front matter) to Markdown Notes 
 
 ## Note:
 - Indexed Tina and NextJS documents are not used for this project
