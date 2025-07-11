@@ -66,13 +66,13 @@ export class XamlToMarkdownConverter {
         return '';
       }
 
-      // Clean and prepare XAML content
+      // Clean and prepare Rich Text (XAML) content
       const cleanedXaml = this.cleanXamlContent(xamlContent);
       if (!cleanedXaml.trim()) {
         return '';
       }
 
-      // Parse XAML content
+      // Parse Rich Text (XAML) content
       const parsed = this.parser.parse(cleanedXaml);
       
       // Convert to markdown
@@ -85,7 +85,7 @@ export class XamlToMarkdownConverter {
         // Fallback to text extraction
         return this.extractPlainText(xamlContent);
       }
-      throw new Error(`XAML conversion failed: ${error}`);
+      throw new Error(`Rich Text (XAML) conversion failed: ${error}`);
     }
   }
 

@@ -4,7 +4,7 @@ import { existsSync } from 'fs';
 import { join, basename } from 'path';
 import { NotebookOrganizer } from './notebook-organizer.js';
 import { FileOrganizer, DEFAULT_FILE_OPTIONS } from './file-organizer.js';
-import { MarkdownConverter, DEFAULT_MARKDOWN_OPTIONS } from './markdown-converter.js';
+import { MarkdownConverter, DEFAULT_MARKDOWN_OPTIONS, type XamlConversionFailure } from './markdown-converter.js';
 import type { FileStructureOptions, MarkdownOptions } from './types.js';
 import { ExportValidator } from './validator.js';
 import { NotesToolDatabase } from './notestool-database.js';
@@ -47,7 +47,7 @@ OPTIONS:
   --database, -d        Path to NotesTool database file (auto-detected if not specified)
   --list-databases      List all available database locations and exit
   --show-instructions   Show manual database location instructions and exit
-  --output, -o          Output directory (default: ./exported-notes)
+  --output, -o          Output directory (default: ./Logos-Exported-Notes)
   
   ORGANIZATION:
   --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
@@ -127,7 +127,7 @@ class LogosNotesExporter {
     
     // Configure file organizer
     const fileOptions: Partial<FileStructureOptions> = {
-      baseDir: options.output || './exported-notes',
+      baseDir: options.output || './Logos-Exported-Notes',
       organizeByNotebooks: options.organizeByNotebooks !== false,
       includeDateFolders: options.includeDateFolders || false,
       createIndexFiles: options.createIndexFiles !== false,
@@ -146,7 +146,7 @@ class LogosNotesExporter {
       includeId: options.includeId || false,
       dateFormat: options.dateFormat || 'iso',
     };
-    this.markdownConverter = new MarkdownConverter(markdownOptions, this.database);
+    this.markdownConverter = new MarkdownConverter(markdownOptions, this.database, options.verbose || false);
     this.validator = new ExportValidator();
   }
 
@@ -234,10 +234,15 @@ class LogosNotesExporter {
         }, mainIndexContent);
       }
 
-      // Step 7: Display XAML conversion statistics
-      this.log('\n📊 XAML Conversion Statistics:');
+      // Step 7: Display Rich Text (XAML) conversion statistics
+      this.log('\n📊 Rich Text (XAML) Conversion Statistics:');
       const xamlStats = this.markdownConverter.getXamlConversionStats();
       this.displayXamlStats(xamlStats);
+
+      // Show detailed XAML conversion failures in verbose mode
+      if (this.options.verbose && xamlStats.xamlConversionsFailed > 0) {
+        this.displayXamlFailures();
+      }
 
       // Step 8: Validate export (if enabled)
       if (!this.options.dryRun) {
@@ -321,23 +326,51 @@ class LogosNotesExporter {
   }
 
   /**
-   * Display XAML conversion statistics
+   * Display Rich Text (XAML) conversion statistics
    */
   private displayXamlStats(stats: any): void {
     this.log(`  Total notes processed: ${stats.totalNotes}`);
-    this.log(`  Notes with XAML content: ${stats.notesWithXaml}`);
-    this.log(`  XAML conversions succeeded: ${stats.xamlConversionsSucceeded}`);
-    this.log(`  XAML conversions failed: ${stats.xamlConversionsFailed}`);
+    this.log(`  Notes with Rich Text (XAML) content: ${stats.notesWithXaml}`);
+    this.log(`  Rich Text (XAML) conversions succeeded: ${stats.xamlConversionsSucceeded}`);
+    this.log(`  Rich Text (XAML) conversions failed: ${stats.xamlConversionsFailed}`);
     this.log(`  Plain text notes: ${stats.plainTextNotes}`);
     this.log(`  Empty notes: ${stats.emptyNotes}`);
     
     if (stats.notesWithXaml > 0) {
-      const successRate = Math.round((stats.xamlConversionsSucceeded / stats.notesWithXaml) * 100);
-      if (successRate < 100) {
-        this.log(`\n⚠️  XAML Conversion Issues: ${stats.xamlConversionsFailed}/${stats.notesWithXaml} XAML notes failed conversion (${100 - successRate}% failure rate)`);
+      if (stats.xamlConversionsFailed > 0) {
+        const failureRate = ((stats.xamlConversionsFailed / stats.notesWithXaml) * 100).toFixed(1);
+        this.log(`\n⚠️  Rich Text (XAML) Conversion Issues: ${stats.xamlConversionsFailed}/${stats.notesWithXaml} Rich Text (XAML) failed conversion (${failureRate}% failure rate)`);
       } else {
-        this.log(`\n✅ XAML Conversion: All ${stats.notesWithXaml} XAML notes converted successfully`);
+        this.log(`\n✅ Rich Text (XAML) Conversion: All ${stats.notesWithXaml} Rich Text (XAML) converted successfully`);
       }
+    }
+  }
+
+  /**
+   * Display detailed Rich Text (XAML) conversion failures in verbose mode
+   */
+  private displayXamlFailures(): void {
+    const failures = this.markdownConverter.getXamlConversionFailures();
+    
+    if (failures.length === 0) {
+      return;
+    }
+
+    this.log('\n🔍 Detailed Rich Text (XAML) Conversion Failures:');
+    
+    for (const failure of failures) {
+      this.log(`\n❌ Note ID ${failure.noteId}: ${failure.noteTitle}`);
+      
+      if (failure.failureType === 'empty_content') {
+        this.log(`   Issue: Rich Text (XAML) conversion succeeded but produced empty content`);
+      } else {
+        this.log(`   Issue: Exception during Rich Text (XAML) conversion`);
+        if (failure.errorMessage) {
+          this.log(`   Error: ${failure.errorMessage}`);
+        }
+      }
+      
+      this.log(`   Rich Text (XAML) preview: ${failure.xamlContentPreview}${failure.xamlContentPreview.length >= 150 ? '...' : ''}`);
     }
   }
 
@@ -375,7 +408,7 @@ class LogosNotesExporter {
       }
     }
 
-    // Note: XAML conversion statistics are now displayed separately using the accurate tracking
+    // Note: Rich Text (XAML) conversion statistics are now displayed separately using the accurate tracking
   }
 
   /**

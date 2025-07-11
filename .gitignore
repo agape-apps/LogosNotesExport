@@ -4,8 +4,9 @@ screenshots/
 data/notes/
 data/debug/
 data/from-notes.db/notes/
-exported-notes/
+exported-notes*/
 test-export/
+Logos-Exported-Notes/
 bin/
 
 node_modules/

@@ -26,16 +26,24 @@ export interface MarkdownOptions {
 export interface XamlConversionStats {
   /** Total notes processed */
   totalNotes: number;
-  /** Notes that contained XAML content */
+  /** Notes that contained Rich Text (XAML) content */
   notesWithXaml: number;
-  /** XAML notes successfully converted */
+  /** Rich Text (XAML) notes successfully converted */
   xamlConversionsSucceeded: number;
-  /** XAML notes that failed conversion */
+  /** Rich Text (XAML) notes that failed conversion */
   xamlConversionsFailed: number;
   /** Notes with plain text only */
   plainTextNotes: number;
   /** Notes with empty content */
   emptyNotes: number;
+}
+
+export interface XamlConversionFailure {
+  noteId: number;
+  noteTitle: string;
+  failureType: 'empty_content' | 'exception';
+  errorMessage?: string;
+  xamlContentPreview: string;
 }
 
 export interface MarkdownResult {
@@ -67,10 +75,14 @@ export class MarkdownConverter {
   private xamlConverter: XamlToMarkdownConverter;
   private metadataProcessor?: MetadataProcessor;
   private xamlStats: XamlConversionStats;
+  private verbose: boolean;
+  private xamlFailures: XamlConversionFailure[];
 
-  constructor(options: Partial<MarkdownOptions> = {}, database?: NotesToolDatabase) {
+  constructor(options: Partial<MarkdownOptions> = {}, database?: NotesToolDatabase, verbose: boolean = false) {
     this.options = { ...DEFAULT_MARKDOWN_OPTIONS, ...options };
+    this.verbose = verbose;
     this.xamlConverter = new XamlToMarkdownConverter();
+    this.xamlFailures = [];
     this.xamlStats = {
       totalNotes: 0,
       notesWithXaml: 0,
@@ -107,7 +119,7 @@ export class MarkdownConverter {
   }
 
   /**
-   * Check if content contains XAML patterns
+   * Check if content contains Rich Text (XAML) patterns
    */
   private containsXamlContent(content: string): boolean {
     if (!content || !content.trim()) return false;
@@ -124,14 +136,21 @@ export class MarkdownConverter {
   }
 
   /**
-   * Get XAML conversion statistics
+   * Get Rich Text (XAML) conversion statistics
    */
   public getXamlConversionStats(): XamlConversionStats {
     return { ...this.xamlStats };
   }
 
   /**
-   * Reset XAML conversion statistics
+   * Get Rich Text (XAML) conversion failures for verbose reporting
+   */
+  public getXamlConversionFailures(): XamlConversionFailure[] {
+    return [...this.xamlFailures];
+  }
+
+  /**
+   * Reset Rich Text (XAML) conversion statistics
    */
   public resetXamlStats(): void {
     this.xamlStats = {
@@ -142,6 +161,7 @@ export class MarkdownConverter {
       plainTextNotes: 0,
       emptyNotes: 0
     };
+    this.xamlFailures = [];
   }
 
   /**
@@ -251,7 +271,7 @@ export class MarkdownConverter {
   private generateBody(note: OrganizedNote, group: NotebookGroup): string {
     const sections: string[] = [];
 
-    // Track this note in XAML conversion statistics
+    // Track this note in Rich Text (XAML) conversion statistics
     this.xamlStats.totalNotes++;
 
     // Add title as H1 if not including frontmatter
@@ -270,7 +290,7 @@ export class MarkdownConverter {
       sections.push(this.generateReferencesSection(note));
     }
 
-    // Add main content with XAML-to-Markdown conversion and tracking
+    // Add main content with Rich Text (XAML)-to-Markdown conversion and tracking
     if (note.contentRichText && note.contentRichText.trim()) {
       const hasXaml = this.containsXamlContent(note.contentRichText);
       
@@ -284,11 +304,28 @@ export class MarkdownConverter {
             sections.push(convertedContent.trim());
           } else {
             this.xamlStats.xamlConversionsFailed++;
+            if (this.verbose) {
+              this.xamlFailures.push({
+                noteId: note.id,
+                noteTitle: note.formattedTitle || 'Untitled',
+                failureType: 'empty_content',
+                xamlContentPreview: note.contentRichText.substring(0, 150)
+              });
+            }
             sections.push('*[This note contains formatting that could not be converted.]*');
           }
         } catch (error) {
           this.xamlStats.xamlConversionsFailed++;
-          // If XAML conversion fails, extract plain text as fallback
+          if (this.verbose) {
+            this.xamlFailures.push({
+              noteId: note.id,
+              noteTitle: note.formattedTitle || 'Untitled',
+              failureType: 'exception',
+              errorMessage: error instanceof Error ? error.message : String(error),
+              xamlContentPreview: note.contentRichText.substring(0, 150)
+            });
+          }
+          // If Rich Text (XAML) conversion fails, extract plain text as fallback
           const plainText = this.extractPlainTextFromXaml(note.contentRichText);
           if (plainText.trim()) {
             sections.push(plainText.trim());
@@ -297,7 +334,7 @@ export class MarkdownConverter {
           }
         }
       } else {
-        // Plain text content, no XAML
+        // Plain text content, no Rich Text (XAML)
         this.xamlStats.plainTextNotes++;
         sections.push(note.contentRichText.trim());
       }
@@ -511,7 +548,7 @@ export class MarkdownConverter {
   }
 
   /**
-   * Extract plain text from XAML as fallback
+   * Extract plain text from Rich Text (XAML) as fallback
    */
   private extractPlainTextFromXaml(xaml: string): string {
     if (!xaml) return '';

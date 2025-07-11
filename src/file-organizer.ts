@@ -47,7 +47,7 @@ export interface DirectoryStructure {
 }
 
 export const DEFAULT_FILE_OPTIONS: FileStructureOptions = {
-  baseDir: './exported-notes',
+  baseDir: './Logos-Exported-Notes',
   organizeByNotebooks: true,
   includeDateFolders: false,
   flattenSingleNotebook: false,

@@ -249,7 +249,7 @@ export class NotebookOrganizer {
    * Extract title from rich text content (first meaningful line)
    */
   private extractTitleFromContent(content: string): string | null {
-    // Remove XAML tags and extract first meaningful text
+    // Remove Rich Text (XAML) tags and extract first meaningful text
     const cleanText = content
       .replace(/<[^>]+>/g, ' ') // Remove XML/XAML tags
       .replace(/\s+/g, ' ') // Normalize whitespace

@@ -181,7 +181,7 @@ export class UnicodeCleaner {
   }
 
   /**
-   * Specifically clean XAML text content
+   * Specifically clean Rich Text (XAML) text content
    */
   public cleanXamlText(xamlText: string): string {
     if (!xamlText) return xamlText;
@@ -202,7 +202,7 @@ export class UnicodeCleaner {
   }
 
   /**
-   * Clean text extracted from Text attributes in XAML
+   * Clean text extracted from Text attributes in Rich Text (XAML)
    */
   public cleanExtractedText(texts: string[]): string[] {
     return texts
@@ -220,7 +220,7 @@ export function cleanUnicodeText(text: string): string {
 }
 
 /**
- * Convenience function for cleaning XAML text content
+ * Convenience function for cleaning Rich Text (XAML) text content
  */
 export function cleanXamlText(xamlText: string): string {
   const cleaner = new UnicodeCleaner();
