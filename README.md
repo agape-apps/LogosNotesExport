@@ -78,8 +78,8 @@ bun run export --dry-run --verbose
 # Export with date-based folders
 bun run export --date-folders
 
-# Export without YAML frontmatter
-bun run export --no-frontmatter
+# Export without YAML frontmatter and show metadata in content
+bun run export --no-frontmatter --show-metadata
 
 # Include note IDs in metadata
 bun run export --include-id
@@ -98,14 +98,13 @@ OPTIONS:
   ORGANIZATION:
   --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
   --date-folders           Create date-based subdirectories
-  --index-files            Create README.md index files (default: true)
+  --no-index-files         Do not create README.md index files (default: create them)
   
   MARKDOWN:
-  --frontmatter         Include YAML frontmatter (default: true)
-  --metadata            Include metadata in content (default: true)
-  --dates               Include creation/modification dates (default: true)
-  --references          Include Bible references (default: true)
-  --notebook-info       Include notebook information (default: true)
+  --no-frontmatter      Exclude YAML frontmatter (default: include)
+  --show-metadata       Include metadata in markdown content (default: only shown in frontmatter)
+  --no-dates            Exclude creation/modification dates (default: include)
+  --no-notebook-info    Exclude notebook information (default: include)
   --include-id          Include note IDs
   --date-format         Date format: iso, locale, short (default: iso)
   
@@ -178,6 +177,7 @@ God created the heavens and the earth...
 ## 🗄 Database Locations
 
 - Database is always opened read-only
+- Bible references are always included when available
 
 For Development:
 

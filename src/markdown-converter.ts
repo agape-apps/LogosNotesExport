@@ -11,8 +11,6 @@ export interface MarkdownOptions {
   includeMetadata: boolean;
   /** Include creation/modification dates */
   includeDates: boolean;
-  /** Include references section */
-  includeReferences: boolean;
   /** Include note kind/type */
   includeKind: boolean;
   /** Include notebook information */
@@ -57,7 +55,6 @@ export const DEFAULT_MARKDOWN_OPTIONS: MarkdownOptions = {
   includeFrontmatter: true,
   includeMetadata: true,
   includeDates: true,
-  includeReferences: true,
   includeKind: true,
   includeNotebook: true,
   customFields: {},
@@ -97,7 +94,6 @@ export class MarkdownConverter {
         const metadataOptions: Partial<MetadataOptions> = {
           includeDates: this.options.includeDates,
           includeNotebook: this.options.includeNotebook,
-          includeReferences: this.options.includeReferences,
           includeEnhancedMetadata: true,
           includeTags: true,
           dateFormat: this.options.dateFormat === 'iso' ? 'iso' : 'readable'
@@ -227,8 +223,8 @@ export class MarkdownConverter {
       frontmatter.notebook = group.notebook.title;
     }
 
-    // References
-    if (this.options.includeReferences && note.references.length > 0) {
+    // References - always include when available
+    if (note.references.length > 0) {
       frontmatter.references = note.references.map(ref => ref.formatted);
     }
 
@@ -269,8 +265,8 @@ export class MarkdownConverter {
       sections.push(this.generateMetadataSection(note, group));
     }
 
-    // Add references section if enabled and not in frontmatter
-    if (this.options.includeReferences && note.references.length > 0 && !this.options.includeFrontmatter) {
+    // Add references section if not in frontmatter - always include when available
+    if (note.references.length > 0 && !this.options.includeFrontmatter) {
       sections.push(this.generateReferencesSection(note));
     }
 
@@ -378,8 +374,23 @@ export class MarkdownConverter {
   private serializeFrontmatter(frontmatter: Record<string, any>): string {
     const lines = ['---'];
     
+    // Define the preferred field order for better readability
+    const fieldOrder = [
+      'title', 'created', 'modified', 'tags', 'noteType', 'references', 
+      'noteId', 'notebook', 'logosBibleBook', 'bibleVersion', 'noteStyle', 
+      'noteColor', 'noteIndicator', 'dataType', 'resourceId', 'filename'
+    ];
+    
+    // Add fields in the preferred order first
+    for (const key of fieldOrder) {
+      if (frontmatter[key] !== null && frontmatter[key] !== undefined) {
+        lines.push(this.serializeYamlValue(key, frontmatter[key], 0));
+      }
+    }
+    
+    // Add any remaining fields that weren't in the preferred order
     for (const [key, value] of Object.entries(frontmatter)) {
-      if (value === null || value === undefined) {
+      if (value === null || value === undefined || fieldOrder.includes(key)) {
         continue;
       }
       
@@ -478,7 +489,7 @@ export class MarkdownConverter {
         return date.toLocaleDateString();
       case 'short':
         const isoString = date.toISOString();
-        return isoString.split('T')[0]; // YYYY-MM-DD
+        return isoString.split('T')[0] || isoString; // YYYY-MM-DD
       case 'iso':
       default:
         return date.toISOString();

@@ -26,7 +26,6 @@ interface CLIOptions {
   includeFrontmatter?: boolean;
   includeMetadata?: boolean;
   includeDates?: boolean;
-  includeReferences?: boolean;
   includeNotebook?: boolean;
   includeId?: boolean;
   dateFormat?: 'iso' | 'locale' | 'short';
@@ -53,14 +52,13 @@ OPTIONS:
   ORGANIZATION:
   --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
   --date-folders           Create date-based subdirectories
-  --index-files            Create README.md index files (default: true)
+  --no-index-files         Do not create README.md index files (default: create them)
   
   MARKDOWN:
-  --frontmatter         Include YAML frontmatter (default: true)
-  --metadata            Include metadata in content (default: true)
-  --dates               Include creation/modification dates (default: true)
-  --references          Include Bible references (default: true)
-  --notebook-info       Include notebook information (default: true)
+  --no-frontmatter      Exclude YAML frontmatter (default: include)
+  --show-metadata       Include metadata in markdown content (default: only shown in frontmatter)
+  --no-dates            Exclude creation/modification dates (default: include)
+  --no-notebook-info    Exclude notebook information (default: include)
   --include-id          Include note IDs
   --date-format         Date format: iso, locale, short (default: iso)
   
@@ -87,8 +85,8 @@ EXAMPLES:
   # Dry run to see what would be exported
   bun run cli.ts --dry-run --verbose
   
-  # Export without frontmatter
-  bun run cli.ts --no-frontmatter --metadata
+  # Export without frontmatter and show metadata in content
+  bun run cli.ts --no-frontmatter --show-metadata
 
 NOTES:
   - Database is auto-detected in standard Logos installation locations
@@ -98,6 +96,7 @@ NOTES:
   - All database operations are READ-ONLY for safety
   - Output files will be organized by notebooks unless --no-organize-notebooks
   - Existing files will be overwritten
+  - Bible references are always included when available
 `;
 
 class LogosNotesExporter {
@@ -141,9 +140,8 @@ class LogosNotesExporter {
     // Configure markdown converter
     const markdownOptions: Partial<MarkdownOptions> = {
       includeFrontmatter: options.includeFrontmatter !== false,
-      includeMetadata: options.includeMetadata !== false,
+      includeMetadata: options.includeMetadata || false,
       includeDates: options.includeDates !== false,
-      includeReferences: options.includeReferences !== false,
       includeNotebook: options.includeNotebook !== false,
       includeId: options.includeId || false,
       dateFormat: options.dateFormat || 'iso',
@@ -406,14 +404,13 @@ function parseCommandLine(): CLIOptions {
       // Organization options
       'no-organize-notebooks': { type: 'boolean' },
       'date-folders': { type: 'boolean' },
-      'index-files': { type: 'boolean' },
+      'no-index-files': { type: 'boolean' },
       
       // Markdown options
-      frontmatter: { type: 'boolean' },
-      metadata: { type: 'boolean' },
-      dates: { type: 'boolean' },
-      references: { type: 'boolean' },
-      'notebook-info': { type: 'boolean' },
+      'no-frontmatter': { type: 'boolean' },
+      'show-metadata': { type: 'boolean' },
+      'no-dates': { type: 'boolean' },
+      'no-notebook-info': { type: 'boolean' },
       'include-id': { type: 'boolean' },
       'date-format': { type: 'string' },
       
@@ -434,12 +431,11 @@ function parseCommandLine(): CLIOptions {
     output: parsed.values.output,
     organizeByNotebooks: !parsed.values['no-organize-notebooks'],
     includeDateFolders: parsed.values['date-folders'],
-    createIndexFiles: parsed.values['index-files'],
-    includeFrontmatter: parsed.values.frontmatter,
-    includeMetadata: parsed.values.metadata,
-    includeDates: parsed.values.dates,
-    includeReferences: parsed.values.references,
-    includeNotebook: parsed.values['notebook-info'],
+    createIndexFiles: !parsed.values['no-index-files'],
+    includeFrontmatter: !parsed.values['no-frontmatter'],
+    includeMetadata: parsed.values['show-metadata'],
+    includeDates: !parsed.values['no-dates'],
+    includeNotebook: !parsed.values['no-notebook-info'],
     includeId: parsed.values['include-id'],
     dateFormat: parsed.values['date-format'] as 'iso' | 'locale' | 'short' | undefined,
     skipHighlights: parsed.values['skip-highlights'],

@@ -5,7 +5,7 @@ import { BibleReferenceDecoder } from './reference-decoder.js';
 
 export interface NoteMetadata {
   title: string;
-  created: string;
+  created?: string;
   modified?: string;
   tags: string[];
   noteType: 'text' | 'highlight' | 'annotation';
@@ -42,8 +42,6 @@ export interface MetadataOptions {
   includeStyle: boolean;
   /** Include enhanced metadata (note style, color, indicator, etc.) */
   includeEnhancedMetadata: boolean;
-  /** Include all Bible references */
-  includeReferences: boolean;
   /** Include tags derived from note content */
   includeTags: boolean;
   /** Include Logos-specific metadata */
@@ -61,7 +59,6 @@ export const DEFAULT_METADATA_OPTIONS: MetadataOptions = {
   includeNotebook: true,
   includeStyle: false,
   includeEnhancedMetadata: true,
-  includeReferences: true,
   includeTags: true,
   includeLogosData: false,
   customExtractors: [],
@@ -84,16 +81,18 @@ export class MetadataProcessor {
   public generateMetadata(note: OrganizedNote): NoteMetadata {
     const metadata: NoteMetadata = {
       title: note.formattedTitle,
-      created: this.formatDate(note.createdDate),
       tags: [],
       noteType: this.getNoteType(note.kind),
       references: [],
       noteId: note.id
     };
 
-    // Add modification date
-    if (this.options.includeDates && note.modifiedDate) {
-      metadata.modified = this.formatDate(note.modifiedDate);
+    // Add creation and modification dates
+    if (this.options.includeDates) {
+      metadata.created = this.formatDate(note.createdDate);
+      if (note.modifiedDate) {
+        metadata.modified = this.formatDate(note.modifiedDate);
+      }
     }
 
     // Add notebook information
@@ -101,8 +100,8 @@ export class MetadataProcessor {
       metadata.notebook = note.notebook.title || 'Untitled Notebook';
     }
 
-    // Add Bible references
-    if (this.options.includeReferences && note.references.length > 0) {
+    // Add Bible references - always include when available
+    if (note.references.length > 0) {
       metadata.references = note.references.map(ref => ref.formatted);
       // Set primary Bible book if available
       if (note.references[0]) {
@@ -199,7 +198,9 @@ export class MetadataProcessor {
     yamlLines.push(`title: ${this.escapeYamlValue(metadata.title)}`);
 
     // Dates
-    yamlLines.push(`created: ${metadata.created}`);
+    if (metadata.created) {
+      yamlLines.push(`created: ${metadata.created}`);
+    }
     if (metadata.modified) {
       yamlLines.push(`modified: ${metadata.modified}`);
     }
