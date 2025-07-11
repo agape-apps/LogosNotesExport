@@ -84,7 +84,7 @@ export class DatabaseLocator {
     const localAppData = process.env.LOCALAPPDATA;
     if (!localAppData) return locations;
 
-    const logosPath = join(localAppData, 'Logos4', 'Documents');
+    const logosPath = join(localAppData, 'Logos', 'Documents');
     return this.searchRandomIdDirectories(logosPath, 'windows', 'Windows Logos installation');
   }
 
@@ -251,12 +251,12 @@ export class DatabaseLocator {
     if (platform === 'win32') {
       lines.push('Windows:');
       lines.push('1. Open File Explorer');
-      lines.push('2. Navigate to: %LOCALAPPDATA%\\Logos4\\Documents');
+      lines.push('2. Navigate to: %LOCALAPPDATA%\\Logos\\Documents');
       lines.push('3. Look for a directory with a random ID (e.g., "abc123def456...")');
       lines.push('4. Inside that directory, look for: NotesToolManager\\notestool.db');
       lines.push('');
       lines.push('Example path:');
-      lines.push('C:\\Users\\YourName\\AppData\\Local\\Logos4\\Documents\\{random-id}\\NotesToolManager\\notestool.db');
+      lines.push('C:\\Users\\YourName\\AppData\\Local\\Logos\\Documents\\{random-id}\\NotesToolManager\\notestool.db');
     } else if (platform === 'darwin') {
       lines.push('macOS:');
       lines.push('1. Open Finder');

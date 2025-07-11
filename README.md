@@ -4,6 +4,8 @@ A TypeScript CLI tool that converts Logos Bible Software notes to Markdown files
 
 ## 🔍 Overview
 
+**Note: this is Beta Software which has only received limited testing.**
+
 This tool extracts notes from Logos Bible Software's NotesTool database and converts them into well-organized Markdown files. It preserves:
 
 - **Note content** (rich text converted to Markdown)
@@ -37,9 +39,9 @@ from https://github.com/agape-apps/LogosNotesExport/releases
 
 Choose the binary for your platform:
 
-- **🍎 macOS (Intel)**: `LogosNotesExporter-macos-x64`
+- **🍎 macOS (Intel)**: `LogosNotesExporter-macos-x64` (tested and working)
 - **🍎 macOS (Apple Silicon)**: `LogosNotesExporter-macos-arm64` (untested)
-- **🪟 Windows**: `LogosNotesExporter-windows-x64.exe` (untested)
+- **🪟 Windows**: `LogosNotesExporter-windows-x64.exe` (works, limited testing)
 
 ## 📖 Usage (in a Terminal)
 
