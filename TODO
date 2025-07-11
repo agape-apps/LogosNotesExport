@@ -5,3 +5,25 @@
 - highlight range from books is impossible
 - highlight range for verses could just output the whole verse highlighted 
 - add highlight color to metadata
+
+
+## Main Use Cases
+
+
+### Backup
+- backup of all notes
+- backup of all highlights
+- prevent vendor lock-in of data
+- reuqires max amount of meta-data
+
+### Use in other Apps like Obsidian
+- use in Obsidian 
+- folder structure by Notebook
+- Named in easy to sort manner
+- focus on meta data that is useful in Obsidian
+
+### Similar to Export/Print
+- use in Word, Libreoffice, elsewhere 
+- needs the scripture references, possibly book reference
+- list of Notes from one Notebook
+- only minimal metadata

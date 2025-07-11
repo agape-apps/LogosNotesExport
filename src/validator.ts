@@ -6,8 +6,6 @@ import type { OrganizedNote, NotebookGroup, FilePathInfo } from './types.js';
 export interface ValidationOptions {
   /** Check that all notes were exported */
   checkNoteCount: boolean;
-  /** Verify XAML was converted to Markdown */
-  checkXamlConversion: boolean;
   /** Check file structure integrity */
   checkFileStructure: boolean;
   /** Verify frontmatter format */
@@ -51,17 +49,12 @@ export interface ValidationStats {
   totalIssues: number;
   /** Issues by severity */
   issuesBySeverity: Record<string, number>;
-  /** Files with XAML content */
-  filesWithXaml: number;
-  /** Files with converted content */
-  filesWithConvertedContent: number;
   /** Average file size */
   averageFileSize: number;
 }
 
 const DEFAULT_VALIDATION_OPTIONS: ValidationOptions = {
   checkNoteCount: true,
-  checkXamlConversion: true,
   checkFileStructure: true,
   checkFrontmatter: true,
   checkReferences: true,
@@ -89,8 +82,6 @@ export class ExportValidator {
       filesWithIssues: 0,
       totalIssues: 0,
       issuesBySeverity: { error: 0, warning: 0, info: 0 },
-      filesWithXaml: 0,
-      filesWithConvertedContent: 0,
       averageFileSize: 0
     };
 
@@ -116,7 +107,7 @@ export class ExportValidator {
     }
 
     // Validate content quality
-    if (this.options.checkXamlConversion || this.options.checkFrontmatter || this.options.checkReferences) {
+    if (this.options.checkFrontmatter || this.options.checkReferences) {
       await this.validateContent(exportDir, originalNotes, issues, stats);
     }
 
@@ -219,11 +210,6 @@ export class ExportValidator {
         const fileSize = statSync(filePath).size;
         totalSize += fileSize;
 
-        // Check for XAML content (should be converted)
-        if (this.options.checkXamlConversion) {
-          this.validateXamlConversion(filePath, content, issues, stats);
-        }
-
         // Check frontmatter format
         if (this.options.checkFrontmatter) {
           this.validateFrontmatter(filePath, content, issues);
@@ -247,64 +233,6 @@ export class ExportValidator {
          stats.averageFileSize = sampleFiles.length > 0 ? Math.round(totalSize / sampleFiles.length) : 0;
      stats.issuesBySeverity.error = (stats.issuesBySeverity.error || 0) + issues.filter(i => i.severity === 'error').length;
      stats.issuesBySeverity.warning = (stats.issuesBySeverity.warning || 0) + issues.filter(i => i.severity === 'warning').length;
-  }
-
-  /**
-   * Validate XAML to Markdown conversion
-   */
-  private validateXamlConversion(filePath: string, content: string, issues: ValidationIssue[], stats: ValidationStats): void {
-    // Check for XAML content that wasn't converted
-    const xamlPatterns = [
-      /<Paragraph[^>]*>/i,
-      /<Run[^>]*>/i,
-      /<Span[^>]*>/i,
-      /Text="[^"]*"/i,
-      /FontSize="[^"]*"/i
-    ];
-
-    let hasXaml = false;
-    for (const pattern of xamlPatterns) {
-      if (pattern.test(content)) {
-        hasXaml = true;
-        break;
-      }
-    }
-
-    if (hasXaml) {
-      stats.filesWithXaml++;
-      issues.push({
-        severity: 'error',
-        type: 'content',
-        message: 'File contains unconverted XAML content',
-        filePath,
-        details: 'XAML-to-Markdown conversion may have failed'
-      });
-    } else {
-      stats.filesWithConvertedContent++;
-    }
-
-    // Check for markdown content
-    // TODO: this may not be needed.
-    const markdownPatterns = [
-      /^#+ /m,  // Headers
-      /\*\*[^*]+\*\*/, // Bold
-      /\*[^*]+\*/, // Italic
-      /\[.+\]\(.+\)/, // Links
-      /^- /m, // Lists
-      /^> /m  // Quotes
-    ];
-
-    const hasMarkdown = markdownPatterns.some(pattern => pattern.test(content));
-    
-    if (!hasXaml && !hasMarkdown && content.length > 100) {
-      issues.push({
-        severity: 'warning',
-        type: 'content',
-        message: 'File lacks typical markdown formatting',
-        filePath,
-        details: 'Content may be plain text only'
-      });
-    }
   }
 
   /**
@@ -498,10 +426,6 @@ export class ExportValidator {
     }
     if (infoCount > 0) {
       summary += `, ${infoCount} info`;
-    }
-
-    if (this.options.checkXamlConversion) {
-      summary += ` - XAML conversion: ${stats.filesWithConvertedContent}/${stats.filesChecked} files converted successfully`;
     }
 
     return {

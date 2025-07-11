@@ -233,7 +233,12 @@ class LogosNotesExporter {
         }, mainIndexContent);
       }
 
-      // Step 7: Validate export (if enabled)
+      // Step 7: Display XAML conversion statistics
+      this.log('\n📊 XAML Conversion Statistics:');
+      const xamlStats = this.markdownConverter.getXamlConversionStats();
+      this.displayXamlStats(xamlStats);
+
+      // Step 8: Validate export (if enabled)
       if (!this.options.dryRun) {
         this.log('\n🔍 Validating export...');
         const allNotes = notebookGroups.flatMap(group => group.notes);
@@ -315,6 +320,27 @@ class LogosNotesExporter {
   }
 
   /**
+   * Display XAML conversion statistics
+   */
+  private displayXamlStats(stats: any): void {
+    this.log(`  Total notes processed: ${stats.totalNotes}`);
+    this.log(`  Notes with XAML content: ${stats.notesWithXaml}`);
+    this.log(`  XAML conversions succeeded: ${stats.xamlConversionsSucceeded}`);
+    this.log(`  XAML conversions failed: ${stats.xamlConversionsFailed}`);
+    this.log(`  Plain text notes: ${stats.plainTextNotes}`);
+    this.log(`  Empty notes: ${stats.emptyNotes}`);
+    
+    if (stats.notesWithXaml > 0) {
+      const successRate = Math.round((stats.xamlConversionsSucceeded / stats.notesWithXaml) * 100);
+      if (successRate < 100) {
+        this.log(`\n⚠️  XAML Conversion Issues: ${stats.xamlConversionsFailed}/${stats.notesWithXaml} XAML notes failed conversion (${100 - successRate}% failure rate)`);
+      } else {
+        this.log(`\n✅ XAML Conversion: All ${stats.notesWithXaml} XAML notes converted successfully`);
+      }
+    }
+  }
+
+  /**
    * Display validation results to the user
    */
   private displayValidationResults(result: any): void {
@@ -348,13 +374,7 @@ class LogosNotesExporter {
       }
     }
 
-    // Show XAML conversion results
-    if (result.stats.filesWithXaml > 0) {
-      this.log(`\n🔴 XAML Conversion Issue: ${result.stats.filesWithXaml} files still contain XAML content`);
-      this.log('   This indicates the XAML-to-Markdown conversion may not be working properly.');
-    } else if (result.stats.filesWithConvertedContent > 0) {
-      this.log(`\n✅ XAML Conversion: ${result.stats.filesWithConvertedContent} files successfully converted`);
-    }
+    // Note: XAML conversion statistics are now displayed separately using the accurate tracking
   }
 
   /**
