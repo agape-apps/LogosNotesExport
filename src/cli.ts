@@ -41,7 +41,7 @@ const HELP_TEXT = `
 Logos Notes Exporter - Convert Logos notes to Markdown
 
 USAGE:
-  bun run cli.ts [OPTIONS]
+  LogosNotesExporter [OPTIONS]
 
 OPTIONS:
   --database, -d        Path to NotesTool database file (auto-detected if not specified)
@@ -52,6 +52,7 @@ OPTIONS:
   ORGANIZATION:
   --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
   --date-folders           Create date-based subdirectories
+  --skip-highlights        Skip highlight notes, export only text and annotation notes
   --no-index-files         Do not create README.md index files (default: create them)
   
   MARKDOWN:
@@ -63,7 +64,6 @@ OPTIONS:
   --date-format         Date format: iso, locale, short (default: iso)
   
   PROCESSING:
-  --skip-highlights    Skip highlight notes, export only text and annotation notes
   --verbose, -v         Verbose output
   --dry-run            Show what would be done without writing files
   --help, -h           Show this help
@@ -71,22 +71,22 @@ OPTIONS:
 
 EXAMPLES:
   # Basic export (auto-finds database)
-  bun run cli.ts
+  LogosNotesExporter
   
   # List available database locations
-  bun run cli.ts --list-databases
+  LogosNotesExporter --list-databases
   
   # Export with custom database
-  bun run cli.ts --database ./path/to/notestool.db
+  LogosNotesExporter --database ./path/to/notestool.db
   
   # Custom output with date folders
-  bun run cli.ts -o ./my-notes --date-folders
+  LogosNotesExporter -o ./my-notes --date-folders
   
   # Dry run to see what would be exported
-  bun run cli.ts --dry-run --verbose
+  LogosNotesExporter --dry-run --verbose
   
   # Export without frontmatter and show metadata in content
-  bun run cli.ts --no-frontmatter --show-metadata
+  LogosNotesExporter --no-frontmatter --show-metadata
 
 NOTES:
   - Database is auto-detected in standard Logos installation locations
