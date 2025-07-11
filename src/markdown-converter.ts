@@ -306,14 +306,31 @@ export class MarkdownConverter {
         sections.push(note.contentRichText.trim());
       }
     } else {
-      // If no content, add a note about it
-      this.xamlStats.emptyNotes++;
-      sections.push('*[This note appears to be empty.]*');
+      // If no content, add a note about it (unless it's a highlight - they get special treatment)
+      if (note.kind !== 1) {
+        this.xamlStats.emptyNotes++;
+        sections.push('*[This note appears to be empty.]*');
+      } else {
+        this.xamlStats.emptyNotes++;
+      }
     }
 
     // Add highlight information if present
     if (note.kind === 1) {
-      sections.push('\n---\n\n*This is a highlighted passage.*');
+      // Extract reference for highlighted passage - only use actual Bible references
+      let reference = '';
+      if (note.references.length > 0 && note.references[0]) {
+        const formattedRef = note.references[0].formatted;
+        if (typeof formattedRef === 'string' && formattedRef.trim()) {
+          reference = formattedRef.trim();
+        }
+      }
+      
+      if (reference) {
+        sections.push(`Highlighted passage: ${reference}`);
+      } else {
+        sections.push('This is a highlighted passage');
+      }
     }
 
     return sections.join('\n\n');
