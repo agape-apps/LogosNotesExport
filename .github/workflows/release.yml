@@ -1,0 +1,126 @@
+name: Build and Release Binaries
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers on version tags like v1.0.1, v2.1.0, etc.
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      release_id: ${{ steps.create_release.outputs.id }}
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          body: |
+            ## Logos Notes Exporter ${{ github.ref_name }}
+            
+            ### 📦 Binaries
+            - **macOS (Intel)**: LogosNotesExporter-macos-x64
+            - **macOS (Apple Silicon)**: LogosNotesExporter-macos-arm64  
+            - **Windows**: LogosNotesExporter-windows-x64.exe
+            
+            ### 🚀 Installation
+            1. Download the appropriate binary for your platform
+            2. Make it executable (macOS/Linux): `chmod +x LogosNotesExporter-*`
+            3. Run: `./LogosNotesExporter-* --help`
+            
+            ### 📖 Documentation
+            See [README.md](https://github.com/agape-apps/LogosNotesExport/blob/main/README.md) for usage instructions.
+          draft: false
+          prerelease: false
+
+  build-macos-x64:
+    needs: create-release
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build macOS x64 binary
+        run: bun run binary:macx64
+
+      - name: Upload macOS x64 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: ./bin/macos-x64/LogosNotesExporter
+          asset_name: LogosNotesExporter-macos-x64
+          asset_content_type: application/octet-stream
+
+  build-macos-arm64:
+    needs: create-release
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build macOS ARM64 binary
+        run: bun run binary:macarm
+
+      - name: Upload macOS ARM64 binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: ./bin/macos-arm64/LogosNotesExporter
+          asset_name: LogosNotesExporter-macos-arm64
+          asset_content_type: application/octet-stream
+
+  build-windows:
+    needs: create-release
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build Windows binary
+        run: bun run binary:windows
+
+      - name: Upload Windows binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: ./bin/windows-x64/LogosNotesExporter.exe
+          asset_name: LogosNotesExporter-windows-x64.exe
+          asset_content_type: application/octet-stream 
