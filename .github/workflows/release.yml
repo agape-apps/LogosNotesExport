@@ -100,27 +100,30 @@ jobs:
           body: |
             ## 🎉 Logos Notes Exporter ${{ github.ref_name }}
             
-            ### 📦 Download Binaries
-            Choose the binary for your platform:
-            
+            ### 📦 Download
+
+            **Download** the appropriate binary for your platform:
             - **🍎 macOS (Intel)**: `LogosNotesExporter-macos-x64`
             - **🍎 macOS (Apple Silicon)**: `LogosNotesExporter-macos-arm64`  
             - **🪟 Windows**: `LogosNotesExporter-windows-x64.exe`
             
             ### 🚀 Quick Start - use a Terminal
-            1. **Download** the appropriate binary for your platform
-            2. **Install** (macOS): `chmod +x LogosNotesExporter-* && mv -v LogosNotesExporter-* /usr/local/bin/LogosNotesExporter`
-            2. **Install & Run** (Windows): run `LogosNotesExporter-windows-x64.exe` 
-            3. **Run**: `LogosNotesExporter --help`
-            4. **Export your notes**: `LogosNotesExporter`
+
+            **macOS:**
+            1. **Install**: `chmod +x LogosNotesExporter-* && mv -v LogosNotesExporter-* /usr/local/bin/LogosNotesExporter`
+            2. **Run**: `LogosNotesExporter --help`
+            3. **Export your notes**: `LogosNotesExporter`
+
+            **Windows:**
+            1. **Run**: `LogosNotesExporter-windows-x64.exe --help`
+            2. **Export your notes**: `LogosNotesExporter-windows-x64.exe`
             
             ### 📖 Full Documentation
             See [README.md](https://github.com/agape-apps/LogosNotesExport/blob/main/README.md) for complete usage instructions and examples.
             
             ### 🔧 What's New
-            - Updated binary builds for all platforms
-            - Improved compatibility and performance
-            - Bug fixes and enhancements
+            See [CHANGES.md](https://github.com/agape-apps/LogosNotesExport/blob/main/CHANGES.md) for details.
+
           files: |
             ./release-files/LogosNotesExporter-macos-x64
             ./release-files/LogosNotesExporter-macos-arm64
