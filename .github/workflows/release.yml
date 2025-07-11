@@ -50,6 +50,12 @@ jobs:
       - name: Build binary
         run: bun run ${{ matrix.script }}
 
+      - name: Verify built binary exists
+        run: |
+          echo "Checking for binary at: ${{ matrix.artifact }}"
+          ls -la ${{ matrix.artifact }}
+        shell: bash
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -69,7 +75,22 @@ jobs:
           path: ./artifacts
 
       - name: Display structure of downloaded files
-        run: ls -la ./artifacts/
+        run: |
+          echo "=== Artifacts directory structure ==="
+          find ./artifacts -type f -ls
+          echo "=== Preparing files for release ==="
+
+      - name: Prepare release files
+        run: |
+          mkdir -p ./release-files
+          # Copy and rename files with correct names
+          cp ./artifacts/LogosNotesExporter-macos-x64/LogosNotesExporter ./release-files/LogosNotesExporter-macos-x64
+          cp ./artifacts/LogosNotesExporter-macos-arm64/LogosNotesExporter ./release-files/LogosNotesExporter-macos-arm64
+          cp ./artifacts/LogosNotesExporter-windows-x64.exe/LogosNotesExporter.exe ./release-files/LogosNotesExporter-windows-x64.exe
+          # Make macOS binaries executable
+          chmod +x ./release-files/LogosNotesExporter-macos-*
+          echo "=== Final release files ==="
+          ls -la ./release-files/
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -100,9 +121,9 @@ jobs:
             - Improved compatibility and performance
             - Bug fixes and enhancements
           files: |
-            ./artifacts/LogosNotesExporter-macos-x64/LogosNotesExporter
-            ./artifacts/LogosNotesExporter-macos-arm64/LogosNotesExporter  
-            ./artifacts/LogosNotesExporter-windows-x64.exe/LogosNotesExporter.exe
+            ./release-files/LogosNotesExporter-macos-x64
+            ./release-files/LogosNotesExporter-macos-arm64
+            ./release-files/LogosNotesExporter-windows-x64.exe
           draft: false
           prerelease: false
         env:
