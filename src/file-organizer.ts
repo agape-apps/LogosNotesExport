@@ -3,6 +3,7 @@ import { join, dirname } from 'path';
 import { existsSync } from 'fs';
 import type { OrganizedNote, NotebookGroup } from './types.js';
 import { BibleReferenceDecoder } from './reference-decoder.js';
+import type { ResourceId } from './notestool-database.js';
 
 export interface FilePathInfo {
   /** Full file path */
@@ -59,9 +60,15 @@ export class FileOrganizer {
   private options: FileStructureOptions;
   private createdDirs = new Set<string>();
   private bibleDecoder = new BibleReferenceDecoder();
+  private resourceIdMap?: Map<number, ResourceId>;
 
-  constructor(options: Partial<FileStructureOptions> = {}) {
+  constructor(options: Partial<FileStructureOptions> = {}, resourceIds?: ResourceId[]) {
     this.options = { ...DEFAULT_FILE_OPTIONS, ...options };
+    
+    // Create resourceId lookup map if provided
+    if (resourceIds) {
+      this.resourceIdMap = new Map(resourceIds.map(r => [r.resourceIdId, r]));
+    }
   }
 
   /**
@@ -291,17 +298,37 @@ export class FileOrganizer {
       }
     }
 
+    // Check if this note has a resourceId but no Bible references
+    if (note.anchorResourceIdId && note.references.length === 0) {
+      try {
+        // We need to access the database to get the actual resourceId string
+        // For now, we'll use a placeholder and implement this properly
+        const resourceIdString = this.getResourceIdString(note.anchorResourceIdId);
+        
+        if (resourceIdString) {
+          const filename = this.generateResourceIdFilename(resourceIdString, note.id, index);
+          return filename;
+        }
+      } catch (error) {
+        console.warn(`Failed to generate resourceId filename for note ${note.id}:`, error);
+      }
+    }
+
     // Fallback to traditional filename generation
     let filename = '';
 
+    // Check if formattedTitle is just a generic "Note XXX" pattern
+    const isGenericNoteTitle = note.formattedTitle && /^(Note|Highlight|Annotation)\s+\d+$/.test(note.formattedTitle.trim());
+
     // Use formatted title or generate from references
-    if (note.formattedTitle && note.formattedTitle.trim()) {
+    if (note.formattedTitle && note.formattedTitle.trim() && !isGenericNoteTitle) {
       filename = note.formattedTitle;
     } else if (note.references.length > 0 && note.references[0]) {
       filename = note.references[0].formatted;
     } else {
-      const noteType = note.kind === 0 ? 'note' : note.kind === 1 ? 'highlight' : 'annotation';
-      filename = `${noteType}-${note.id}`;
+      const noteType = note.kind === 0 ? 'Note' : note.kind === 1 ? 'Highlight' : 'Annotation';
+      const paddedNoteId = note.id.toString().padStart(4, '0');
+      filename = `${noteType}-${paddedNoteId}`;
     }
 
     // Add index if greater than 1
@@ -317,6 +344,51 @@ export class FileOrganizer {
   }
 
   /**
+   * Generate filename from resourceId for notes without Bible references
+   * Pattern: resourceIdPart1-resourceIdPart2-noteId
+   * For UUIDs in PBB resources, use only last 4 characters
+   */
+  private generateResourceIdFilename(resourceIdString: string, noteId: number, index: number): string {
+    const parts = resourceIdString.split(':');
+    if (parts.length !== 2 || !parts[1]) {
+      throw new Error(`Invalid resourceId format: ${resourceIdString}`);
+    }
+
+    const part1 = parts[0];
+    const part2 = parts[1];
+    let processedPart2 = part2;
+
+    // Check if part2 looks like a UUID (32 hex chars)
+    if (part2.length === 32 && /^[0-9a-f]{32}$/i.test(part2)) {
+      // Use last 4 characters for UUID
+      processedPart2 = part2.slice(-4);
+    }
+
+    // Build filename with 4-digit padded noteId
+    const paddedNoteId = noteId.toString().padStart(4, '0');
+    let filename = `${part1}-${processedPart2}-${paddedNoteId}`;
+
+    // Add index if greater than 1
+    if (index > 1) {
+      filename += `-${index}`;
+    }
+
+    return filename + this.options.fileExtension;
+  }
+
+  /**
+   * Get resourceId string by resourceIdId
+   */
+  private getResourceIdString(resourceIdId: number): string | null {
+    if (!this.resourceIdMap) {
+      return null;
+    }
+    
+    const resourceId = this.resourceIdMap.get(resourceIdId);
+    return resourceId ? resourceId.resourceId : null;
+  }
+
+  /**
    * Sanitize filename for filesystem
    */
   private sanitizeFilename(name: string): string {
@@ -326,7 +398,6 @@ export class FileOrganizer {
       .replace(/-+/g, '-') // Collapse multiple hyphens
       .replace(/^-|-$/g, '') // Remove leading/trailing hyphens
       .substring(0, this.options.maxFilenameLength) // Limit length
-      .toLowerCase()
       || 'untitled';
   }
 

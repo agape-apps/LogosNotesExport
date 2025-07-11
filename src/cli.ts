@@ -133,7 +133,10 @@ class LogosNotesExporter {
       includeDateFolders: options.includeDateFolders || false,
       createIndexFiles: options.createIndexFiles !== false,
     };
-    this.fileOrganizer = new FileOrganizer(fileOptions);
+    
+    // Get resourceIds for filename generation
+    const resourceIds = this.database.getResourceIds();
+    this.fileOrganizer = new FileOrganizer(fileOptions, resourceIds);
     
     // Configure markdown converter
     const markdownOptions: Partial<MarkdownOptions> = {

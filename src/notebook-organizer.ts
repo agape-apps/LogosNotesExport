@@ -188,7 +188,7 @@ export class NotebookOrganizer {
     } else if (note.references.length > 0) {
       filename = note.references[0].formatted;
     } else {
-      filename = `note-${note.id}`;
+      filename = `Note-${note.id}`;
     }
 
     // Add index if needed to ensure uniqueness
