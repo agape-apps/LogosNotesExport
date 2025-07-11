@@ -8,7 +8,7 @@ This tool extracts notes from Logos Bible Software's NotesTool database and conv
 
 - **Note content** (rich text converted to Markdown)
 - **Bible references** (decoded and formatted)
-- **Notebook organization** (maintains Logos folder structure)
+- **Notebook organization** (maintains Logos Notebook folder structure)
 - **Metadata** (creation dates, note types, etc.)
 - **YAML frontmatter** (for compatibility with note-taking apps)
 
@@ -21,71 +21,73 @@ This tool extracts notes from Logos Bible Software's NotesTool database and conv
 - **📁 Flexible Output**: Customizable directory structure and file organization
 - **🔍 Dry Run Mode**: Preview what will be exported before writing files
 - **📊 Statistics**: Detailed export statistics and progress reporting
-- **✨ Unicode Cleaning**: Automatically removes footnote markers and problematic Unicode characters that appear as question marks
-- **🧹 Text Sanitization**: Cleans XAML content and removes zero-width characters, control characters, and footnote artifacts
+- **✨ Unicode Cleaning**: Automatically removes problematic Unicode characters
+- **🧹 Text Sanitization**: Cleans Rich Text (XAML) content and removes zero-width characters, control characters, and footnote artifacts
+
+## Intended Use Cases
+
+- use Notebook folders in Obsidian, Typora or other front-matter compatible Markdown software
+- use as vendor independent backup of your personal notes
 
 ## 🛠 Installation
 
-### Prerequisites
+### 📦 Download Binaries
 
-- [Bun - install from here](https://bun.sh/) runtime (v1.0.0 or higher)
-- Access to Logos Bible Software NotesTool database file
+from https://github.com/agape-apps/LogosNotesExport/releases
 
-### Setup
+Choose the binary for your platform:
 
-```bash
-# Clone the repository
-git clone https://github.com/your-username/logos-notes-exporter.git
-cd logos-notes-exporter
+- **🍎 macOS (Intel)**: `LogosNotesExporter-macos-x64`
+- **🍎 macOS (Apple Silicon)**: `LogosNotesExporter-macos-arm64` (untested)
+- **🪟 Windows**: `LogosNotesExporter-windows-x64.exe` (untested)
 
-# Check Bun installation and Install dependencies
-bun --version
-bun install
+## 📖 Usage (in a Terminal)
 
-# Make CLI executable
-chmod +x src/cli.ts
+on macOS:
+- make executable, move & rename, run
+
+```
+chmod +x LogosNotesExporter-*
+mv -v LogosNotesExporter-* /usr/local/bin/LogosNotesExporter
+LogosNotesExporter --help
 ```
 
-## Build Binaries for macOS and Windows
+on Windows run:
 
-```sh
-bun run binary:macx64    # Build for macOS Intel
-bun run binary:macarm    # Build for macOS Apple Silicon  
-bun run binary:windows   # Build for Windows x64
 ```
-
-## 📖 Usage
+LogosNotesExporter-windows-x64.exe
+```
 
 ### Basic Export
 
 ```bash
-# Export all notes with default settings
-bun run export
+# Export all notes with default settings into Notebook folders
+LogosNotesExporter
 
 # Specify custom database location
-bun run export --database /path/to/notestool.db
+LogosNotesExporter --database /path/to/notestool.db
 
 # Export to custom directory
-bun run export --output ./my-exported-notes
+LogosNotesExporter --output ./my-exported-notes
 ```
 
 ### Advanced Options
 
 ```bash
 # Dry run to see what would be exported
-bun run export --dry-run --verbose
+LogosNotesExporter --dry-run --verbose
 
 # Export with date-based folders
-bun run export --date-folders
+LogosNotesExporter --date-folders --no-organize-notebooks
 
 # Export without YAML frontmatter and show metadata in content
-bun run export --no-frontmatter --show-metadata
+LogosNotesExporter --no-frontmatter --show-metadata
 
 # Include note IDs in metadata
-bun run export --include-id
+LogosNotesExporter --include-id
 
 # Custom date format
-bun run export --date-format short
+LogosNotesExporter --date-format short
 ```
 
 ### Command Line Options
@@ -98,6 +100,7 @@ OPTIONS:
   ORGANIZATION:
   --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
   --date-folders           Create date-based subdirectories
+  --skip-highlights        Skip highlight notes, export only text and annotation notes
   --no-index-files         Do not create README.md index files (default: create them)
   
   MARKDOWN:
@@ -109,7 +112,6 @@ OPTIONS:
   --date-format         Date format: iso, locale, short (default: iso)
   
   PROCESSING:
-  --skip-highlights    Skip highlight notes, export only text and annotation notes
   --verbose, -v         Verbose output
   --dry-run            Show what would be done without writing files
   --help, -h           Show help
@@ -143,35 +145,80 @@ Each exported note includes comprehensive YAML frontmatter:
 
 ```yaml
 ---
-title: "Genesis 1:1-3 - Creation"
-created: "2024-01-15T10:30:00.000Z"
-modified: "2024-01-20T14:45:00.000Z"
-type: "note"
-notebook:
-  title: "Bible Study Notes"
-  id: "bible-study-notebook-id"
-  created: "2024-01-01T00:00:00.000Z"
-references:
-  - text: "Genesis 1:1-3"
-    book: "Genesis"
-    chapter: 1
-    verse: 1
-hasContent: true
+title: "Matthew 24:6-8"
+created: "2013-01-22T23:49:35.000Z"
+modified: "2013-01-22T23:52:42.000Z"
 tags:
-  - "note"
-  - "genesis"
-  - "creation"
-filename: "genesis-1-1-3"
-path: "bible-study-notebook/genesis-1-1-3.md"
+  - "disasters"
+  - "matthew"
+  - "text"
+noteType: "text"
+references:
+  - "Matthew 24:6-8"
+noteId: 583
+notebook: "Disasters"
+logosBibleBook: 61
+bibleVersion: "NKJV"
+noteStyle: "highlight"
+noteColor: "yellow"
+noteIndicator: "exclamation"
+dataType: "bible"
+resourceId: "LLS:1.0.30"
+filename: "NT61_Matt-24.06"
 ---
 
-# In the Beginning
+And you will hear of wars and rumors of wars. See that you are not troubled; for all these things must come to pass, but the end is not yet. For nation will rise against nation, ...
 
-God created the heavens and the earth...
+Do not be troubled
+These things must come to pass
+```
 
-## References
+## Development
 
-- Genesis 1:1-3
+### Prerequisites
+
+- [Bun - install from here](https://bun.sh/) runtime (v1.0.0 or higher)
+- Access to Logos Bible Software NotesTool database file
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/logos-notes-exporter.git
+cd logos-notes-exporter
+
+# Check Bun installation and Install dependencies
+bun --version
+bun install
+
+# Make CLI executable
+chmod +x src/cli.ts
+```
+
+## Build Binaries for macOS and Windows
+
+```sh
+bun run binary:macx64    # Build for macOS Intel
+bun run binary:macarm    # Build for macOS Apple Silicon  
+bun run binary:windows   # Build for Windows x64
+```
+
+- LogosNotesExporter binary files will be in bin/...
+
+## Publish release
+
+- Update version in package.json and publish new binary release
+
+```
+scripts/create-release.sh
+```
+
+## 📖 Usage
+
+during development run
+
+```
+bun run export [options]
 ```
 
 ## 🗄 Database Locations
@@ -214,13 +261,11 @@ The project follows a modular architecture:
 - **`validator.ts`**: Export quality assurance and validation
 - **`cli.ts`**: Command-line interface
 
-## 🧪 Development
-
 ### Project Structure
 
 ```
 src/
-├── cli.ts                 # Main CLI entry point
+├── cli.ts                # Main CLI entry point
 ├── types.ts              # Shared type definitions
 ├── notestool-database.ts # Database interface
 ├── reference-decoder.ts  # Bible reference decoder
@@ -265,8 +310,9 @@ The tool supports Logos Bible reference formats:
 
 - **Read-only**: Only reads from Logos databases, does not modify them
 - **SQLite dependency**: Requires access to the NotesTool SQLite database
-- **Rich text**: Complex formatting may not convert perfectly to Markdown
+- **Rich text**: Complex formatting may not convert fully to Markdown
 - **Version compatibility**: Tested with recent Logos versions
+- **Highlights**: the verse range is shown for Bibles, highlights in books lack a reference
 
 ## 🤝 Contributing
 
@@ -288,8 +334,7 @@ This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 -
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/logos-notes-exporter/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/logos-notes-exporter/discussions)
+- **Issues & Requests**: [GitHub Issues](https://github.com/agape-apps/LogosNotesExport/issues)
 - **Documentation**: See the `/docs` folder for detailed documentation
 
 ---

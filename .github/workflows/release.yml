@@ -107,11 +107,12 @@ jobs:
             - **🍎 macOS (Apple Silicon)**: `LogosNotesExporter-macos-arm64`  
             - **🪟 Windows**: `LogosNotesExporter-windows-x64.exe`
             
-            ### 🚀 Quick Start
+            ### 🚀 Quick Start - use a Terminal
             1. **Download** the appropriate binary for your platform
-            2. **Make executable** (macOS/Linux): `chmod +x LogosNotesExporter-*`
-            3. **Run**: `./LogosNotesExporter-* --help`
-            4. **Export your notes**: `./LogosNotesExporter-* export`
+            2. **Install** (macOS): `chmod +x LogosNotesExporter-* && mv -v LogosNotesExporter-* /usr/local/bin/LogosNotesExporter`
+            2. **Install & Run** (Windows): run `LogosNotesExporter-windows-x64.exe` 
+            3. **Run**: `LogosNotesExporter --help`
+            4. **Export your notes**: `LogosNotesExporter`
             
             ### 📖 Full Documentation
             See [README.md](https://github.com/agape-apps/LogosNotesExport/blob/main/README.md) for complete usage instructions and examples.
