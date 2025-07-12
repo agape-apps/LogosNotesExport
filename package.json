@@ -1,6 +1,6 @@
 {
   "name": "logos-notes-exporter",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A TypeScript CLI tool to export Logos Bible Software notes to Markdown files with YAML frontmatter",
   "type": "module",
   "main": "src/index.ts",

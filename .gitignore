@@ -6,7 +6,7 @@ data/notes/
 data/debug/
 data/from-notes.db/notes/
 exported-notes*/
-test-export/
+test-export*
 Logos-Exported-Notes/
 
 bin/

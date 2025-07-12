@@ -2,7 +2,7 @@ import { XMLParser } from 'fast-xml-parser';
 import { cleanXamlText, UnicodeCleaner } from './unicode-cleaner.js';
 
 export interface XamlConverterOptions {
-  /** Font sizes that correspond to heading levels [H1, H2, H3, H4, H5, H6, H7] */
+  /** Font sizes that correspond to heading levels [H1, H2, H3, H4, H5, H6] */
   headingSizes: number[];
   /** Font family name used to identify code elements */
   monospaceFontName: string;
@@ -14,8 +14,9 @@ export interface XamlConverterOptions {
   ignoreUnknownElements: boolean;
 }
 
+// TODO: Add support for other monospace Font Names
 export const DEFAULT_OPTIONS: XamlConverterOptions = {
-  headingSizes: [22, 20, 18, 16, 14, 13],
+  headingSizes: [24, 22, 20, 18, 16, 14],
   monospaceFontName: 'Courier New',
   blockQuoteLineThickness: 3,
   horizontalLineThickness: 3,
@@ -34,6 +35,7 @@ interface XamlElement {
   '@_Tag'?: string;
   '@_NavigateUri'?: string;
   '@_MarkerStyle'?: string;
+  '@_Kind'?: string; // Added for list Kind
   '#text'?: string;
 }
 
@@ -52,6 +54,7 @@ export class XamlToMarkdownConverter {
       parseAttributeValue: false,
       trimValues: false,  // Changed to false to preserve spaces in Run Text
       processEntities: true,
+      preserveOrder: true,  // Added to preserve element order
     });
     this.unicodeCleaner = new UnicodeCleaner();
   }
@@ -72,8 +75,11 @@ export class XamlToMarkdownConverter {
         return '';
       }
 
+      // Wrap in Root to handle multiple roots
+      const wrappedXaml = `<Root>${cleanedXaml}</Root>`;
+
       // Parse Rich Text (XAML) content
-      const parsed = this.parser.parse(cleanedXaml);
+      const parsed = this.parser.parse(wrappedXaml);
       
       // Convert to markdown
       const markdown = this.processElement(parsed);
@@ -112,40 +118,57 @@ export class XamlToMarkdownConverter {
       return element;
     }
 
+    // Handle preserveOrder format - element is an array of objects
+    if (Array.isArray(element)) {
+      let result = '';
+      for (const item of element) {
+        result += this.processElement(item);
+      }
+      return result;
+    }
+
+    // Handle preserveOrder object format - each object has tagName as key and :@ for attributes
     let result = '';
 
     for (const [tagName, content] of Object.entries(element)) {
-      if (tagName.startsWith('@_') || tagName === '#text') {
+      if (tagName === ':@') {
+        // Skip attributes - they're handled by individual processors
         continue;
       }
 
       switch (tagName.toLowerCase()) {
+        case 'root':
+          // Handle the Root wrapper - process its content
+          result += this.processElement(content);
+          break;
         case 'section':
-          result += this.processSection(content as any);
+          result += this.processSection(element);
           break;
         case 'paragraph':
-          result += this.processParagraph(content as any);
+          result += this.processParagraph(element);
           break;
         case 'run':
-          result += this.processRun(content as any);
+          result += this.processRun(element);
           break;
         case 'span':
-          result += this.processSpan(content as any);
+          result += this.processSpan(element);
           break;
         case 'list':
-          result += this.processList(content as any);
+          result += this.processList(element);
           break;
         case 'table':
-          result += this.processTable(content as any);
+          result += this.processTable(element);
           break;
         case 'hyperlink':
-          result += this.processHyperlink(content as any);
+          result += this.processHyperlink(element);
+          break;
+        case 'urilink':
+          result += this.processHyperlink(element);
           break;
         default:
           if (Array.isArray(content)) {
-            for (const item of content) {
-              result += this.processElement({ [tagName]: item });
-            }
+            // Process array of child elements
+            result += this.processElement(content);
           } else {
             result += this.processElement(content);
           }
@@ -203,7 +226,16 @@ export class XamlToMarkdownConverter {
     for (const para of paragraphs) {
       if (!para) continue;
 
-      const content = this.extractElementContent(para);
+      // Handle preserveOrder structure - get Paragraph content array
+      const paragraphContent = para.Paragraph || para.paragraph || [];
+      
+      // Process paragraph content (array of child elements)
+      let content = '';
+      if (Array.isArray(paragraphContent)) {
+        content = this.processElement(paragraphContent);
+      } else {
+        content = this.extractElementContent(para);
+      }
 
       if (!content.trim()) {
         result += '\n';
@@ -229,7 +261,17 @@ export class XamlToMarkdownConverter {
     for (const r of runs) {
       if (!r) continue;
 
-      let text = r['@_Text'] || r['#text'] || '';
+      // Get attributes from the Run element
+      const attrs = this.getAttributes(r);
+      
+      // Get text from attributes
+      let text = attrs['@_Text'] || '';
+      
+      // Fallback to direct text content
+      if (!text) {
+        text = r['#text'] || '';
+      }
+      
       if (!text) continue;
 
       // Apply inline formatting
@@ -262,8 +304,10 @@ export class XamlToMarkdownConverter {
     for (const l of lists) {
       if (!l) continue;
 
-      const markerStyle = l['@_MarkerStyle'] || 'Disc';
-      const isOrdered = markerStyle.toLowerCase().includes('decimal');
+      // Handle preserveOrder attribute structure
+      const attrs = l[':@'] || l;
+      const markerStyle = attrs['@_Kind'] || attrs['@_MarkerStyle'] || 'Disc';
+      const isOrdered = markerStyle.toLowerCase() === 'decimal';
       
       result += this.processListItems(l, isOrdered) + '\n';
     }
@@ -342,14 +386,27 @@ export class XamlToMarkdownConverter {
     return result;
   }
 
+  private getAttributes(element: XamlElement): any {
+    // Handle preserveOrder attribute structure
+    if (element[':@']) {
+      return element[':@'];
+    }
+    
+    // Fallback to old structure for backward compatibility
+    return element;
+  }
+
   private applyInlineFormatting(text: string, element: XamlElement): string {
     if (!text) return '';
 
     // Clean Unicode issues first
     let formatted = this.unicodeCleaner.cleanXamlText(text);
 
+    // Get attributes using helper method
+    const attrs = this.getAttributes(element);
+
     // Check for inline code (monospace font)
-    const fontFamily = element['@_FontFamily'] || '';
+    const fontFamily = attrs['@_FontFamily'] || '';
     if (this.isMonospaceFont(fontFamily)) {
       formatted = '`' + formatted + '`';
       return formatted; // Code formatting takes precedence
@@ -365,37 +422,37 @@ export class XamlToMarkdownConverter {
     let needsSuperscript = false;
 
     // Check for bold
-    const fontBold = element['@_FontBold'] || '';
+    const fontBold = attrs['@_FontBold'] || '';
     if (fontBold.toLowerCase() === 'true') {
       needsBold = true;
     }
 
     // Check for italic
-    const fontItalic = element['@_FontItalic'] || '';
+    const fontItalic = attrs['@_FontItalic'] || '';
     if (fontItalic.toLowerCase() === 'true') {
       needsItalic = true;
     }
 
     // Check for underline
-    const hasUnderline = element['@_HasUnderline'] || '';
+    const hasUnderline = attrs['@_HasUnderline'] || '';
     if (hasUnderline.toLowerCase() === 'true') {
       needsUnderline = true;
     }
 
     // Check for strikethrough
-    const hasStrikethrough = element['@_HasStrikethrough'] || '';
+    const hasStrikethrough = attrs['@_HasStrikethrough'] || '';
     if (hasStrikethrough.toLowerCase() === 'true') {
       needsStrikethrough = true;
     }
 
     // Check for small caps
-    const fontCapitals = element['@_FontCapitals'] || '';
+    const fontCapitals = attrs['@_FontCapitals'] || '';
     if (fontCapitals.toLowerCase() === 'smallcaps') {
       needsSmallCaps = true;
     }
 
     // Check for subscript/superscript
-    const fontVariant = element['@_FontVariant'] || '';
+    const fontVariant = attrs['@_FontVariant'] || '';
     if (fontVariant.toLowerCase() === 'subscript') {
       needsSubscript = true;
     } else if (fontVariant.toLowerCase() === 'superscript') {
@@ -435,6 +492,14 @@ export class XamlToMarkdownConverter {
   private extractElementContent(element: XamlElement): string {
     if (!element) return '';
 
+    if (Array.isArray(element)) {  // Added explicit array handling
+      let content = '';
+      for (const item of element) {
+        content += this.extractElementContent(item as any);
+      }
+      return content;
+    }
+
     let content = '';
 
     // Direct text - clean Unicode issues
@@ -461,6 +526,12 @@ export class XamlToMarkdownConverter {
         case 'hyperlink':
           content += this.processHyperlink(value as any);
           break;
+        case 'list':  // Added to properly format lists
+          content += this.processList(value as any);
+          break;
+        case 'table':  // Added to properly format tables
+          content += this.processTable(value as any);
+          break;
         default:
           if (typeof value === 'object' && value) {
             content += this.extractElementContent(value as any);
@@ -485,7 +556,8 @@ export class XamlToMarkdownConverter {
 
     // Get all font sizes from runs
     const fontSizes = runs.map(run => {
-      const fontSize = run['@_FontSize'] ? parseFloat(run['@_FontSize']) : null;
+      const attrs = this.getAttributes(run);
+      const fontSize = attrs['@_FontSize'] ? parseFloat(attrs['@_FontSize']) : null;
       return fontSize;
     }).filter(size => size !== null);
 
@@ -506,6 +578,21 @@ export class XamlToMarkdownConverter {
   private extractRunsFromParagraph(paragraph: XamlElement): XamlElement[] {
     const runs: XamlElement[] = [];
 
+    // Handle preserveOrder structure - paragraph content is an array
+    const paragraphContent = paragraph.Paragraph || paragraph.paragraph || [];
+    
+    if (Array.isArray(paragraphContent)) {
+      for (const item of paragraphContent) {
+        if (item && typeof item === 'object') {
+          // Check if this item is a Run element
+          if (item.Run || item.run) {
+            runs.push(item);
+          }
+        }
+      }
+    }
+
+    // Fallback to old structure
     for (const [key, value] of Object.entries(paragraph)) {
       if (key.toLowerCase() === 'run') {
         if (Array.isArray(value)) {
@@ -549,12 +636,38 @@ export class XamlToMarkdownConverter {
   private extractListItems(list: XamlElement): XamlElement[] {
     const items: XamlElement[] = [];
 
-    for (const [key, value] of Object.entries(list)) {
-      if (key.toLowerCase() === 'listitem') {
-        if (Array.isArray(value)) {
-          items.push(...value);
-        } else {
-          items.push(value);
+    // Handle reconstructed structure from preserveOrder
+    if (list.List && Array.isArray(list.List)) {
+      for (const item of list.List) {
+        if (item.ListItem) {
+          if (Array.isArray(item.ListItem)) {
+            items.push(...item.ListItem);
+          } else {
+            items.push(item.ListItem);
+          }
+        }
+      }
+    }
+    // Handle preserveOrder structure - list content is an array
+    else if (Array.isArray(list)) {
+      for (const item of list) {
+        if (item.ListItem) {
+          if (Array.isArray(item.ListItem)) {
+            items.push(...item.ListItem);
+          } else {
+            items.push(item.ListItem);
+          }
+        }
+      }
+    } else {
+      // Handle old structure
+      for (const [key, value] of Object.entries(list)) {
+        if (key.toLowerCase() === 'listitem') {
+          if (Array.isArray(value)) {
+            items.push(...value);
+          } else {
+            items.push(value);
+          }
         }
       }
     }

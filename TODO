@@ -5,6 +5,12 @@
 - test on Apple Silicon
 - check error handling, especially for databases
 
+BUGS
+- fix src/xaml-converter.ts 
+    - missing double space for new line (for some Markdown readers)
+    - missing blank lines
+    - Links not converting
+
 FEATURES
 - try to implement this as an Electron app
 

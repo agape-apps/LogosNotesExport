@@ -125,20 +125,20 @@ OPTIONS:
 The tool creates a well-organized directory structure:
 
 ```
-exported-notes/
-├── README.md                          # Main index with statistics
-├── bible-study-notebook/               # Notebook folder
-│   ├── README.md                      # Notebook index
-│   ├── genesis-1-1-3.md              # Individual notes
-│   ├── john-3-16.md
-│   └── romans-8-28-30.md
-├── sermon-notes/
+Logos-Exported-Notes/
+├── README.md                       # Main index with statistics
+├── Topical Notebook Folder/        
+│   ├── README.md                   # Notebook index
+│   ├── NT66_Rom-08.02.md           # Individual notes
+│   ├── NT70_Eph-06.17.md
+│   └── NT72_Col-02.11.md
+├── Another Notebook Folder/
 │   ├── README.md
-│   ├── easter-sermon-2024.md
-│   └── christmas-message-2023.md
-└── orphaned-notes/                    # Notes without notebooks
+│   ├── NT61_Matt-04.04.md
+│   └── NT64_John-06.63.md
+└── No Notebook/                    # Notes without notebooks
     ├── README.md
-    └── miscellaneous-note.md
+    └── NT81_1Pet-03.15.md
 ```
 
 ## 📄 Markdown Format
@@ -166,13 +166,15 @@ noteColor: "yellow"
 noteIndicator: "exclamation"
 dataType: "bible"
 resourceId: "LLS:1.0.30"
+resourceTitle: "The New King James Version"
+anchorLink: "https://app.logos.com/books/LLS%3A1.0.30/references/bible+nkjv.61.24.6-61.24.8"
 filename: "NT61_Matt-24.06"
 ---
 
-And you will hear of wars and rumors of wars. See that you are not troubled; for all these things must come to pass, but the end is not yet. For nation will rise against nation, ...
+And you will hear of wars and rumors of wars. See that you are not troubled; for all these things must come to pass, but the end is not yet.  For nation will rise against nation, and kingdom against ...
 
-Do not be troubled
-These things must come to pass
+- Do not be troubled
+- These things must come to pass
 ```
 
 ## Development
@@ -336,7 +338,7 @@ This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 -
 ## 🙏 Acknowledgments
 
 - Logos Bible Software for creating an excellent study platform
-- The TypeScript and Bun communities for excellent tooling
+- The Bun community for the excellent JavaScript runtime
 - Contributors who help improve this tool
 
 ## 📞 Support
