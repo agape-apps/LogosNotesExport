@@ -15,7 +15,7 @@ export interface XamlConverterOptions {
 }
 
 export const DEFAULT_OPTIONS: XamlConverterOptions = {
-  headingSizes: [24, 20, 18, 16, 15, 14, 13],
+  headingSizes: [22, 20, 18, 16, 14, 13],
   monospaceFontName: 'Courier New',
   blockQuoteLineThickness: 3,
   horizontalLineThickness: 3,
@@ -203,7 +203,6 @@ export class XamlToMarkdownConverter {
     for (const para of paragraphs) {
       if (!para) continue;
 
-      const fontSize = para['@_FontSize'] ? parseFloat(para['@_FontSize']) : null;
       const content = this.extractElementContent(para);
 
       if (!content.trim()) {
@@ -211,8 +210,8 @@ export class XamlToMarkdownConverter {
         continue;
       }
 
-      // Check for heading
-      const headingLevel = this.getHeadingLevel(fontSize);
+      // Check if this paragraph should be a heading based on its Run elements
+      const headingLevel = this.getHeadingLevelFromParagraph(para);
       if (headingLevel > 0) {
         result += '#'.repeat(headingLevel) + ' ' + content.trim() + '\n\n';
       } else {
@@ -353,18 +352,81 @@ export class XamlToMarkdownConverter {
     const fontFamily = element['@_FontFamily'] || '';
     if (this.isMonospaceFont(fontFamily)) {
       formatted = '`' + formatted + '`';
-    } else {
-      // Check for bold
-      const fontWeight = element['@_FontWeight'] || '';
-      if (fontWeight.toLowerCase().includes('bold')) {
-        formatted = '**' + formatted + '**';
-      }
+      return formatted; // Code formatting takes precedence
+    }
 
-      // Check for italic
-      const fontStyle = element['@_FontStyle'] || '';
-      if (fontStyle.toLowerCase().includes('italic')) {
-        formatted = '*' + formatted + '*';
-      }
+    // Apply text formatting in order: bold, italic, underline, strikethrough, small caps, sub/superscript
+    let needsBold = false;
+    let needsItalic = false;
+    let needsUnderline = false;
+    let needsStrikethrough = false;
+    let needsSmallCaps = false;
+    let needsSubscript = false;
+    let needsSuperscript = false;
+
+    // Check for bold
+    const fontBold = element['@_FontBold'] || '';
+    if (fontBold.toLowerCase() === 'true') {
+      needsBold = true;
+    }
+
+    // Check for italic
+    const fontItalic = element['@_FontItalic'] || '';
+    if (fontItalic.toLowerCase() === 'true') {
+      needsItalic = true;
+    }
+
+    // Check for underline
+    const hasUnderline = element['@_HasUnderline'] || '';
+    if (hasUnderline.toLowerCase() === 'true') {
+      needsUnderline = true;
+    }
+
+    // Check for strikethrough
+    const hasStrikethrough = element['@_HasStrikethrough'] || '';
+    if (hasStrikethrough.toLowerCase() === 'true') {
+      needsStrikethrough = true;
+    }
+
+    // Check for small caps
+    const fontCapitals = element['@_FontCapitals'] || '';
+    if (fontCapitals.toLowerCase() === 'smallcaps') {
+      needsSmallCaps = true;
+    }
+
+    // Check for subscript/superscript
+    const fontVariant = element['@_FontVariant'] || '';
+    if (fontVariant.toLowerCase() === 'subscript') {
+      needsSubscript = true;
+    } else if (fontVariant.toLowerCase() === 'superscript') {
+      needsSuperscript = true;
+    }
+
+    // Apply formatting in the correct order (innermost to outermost)
+    if (needsSubscript) {
+      formatted = '<sub>' + formatted + '</sub>';
+    } else if (needsSuperscript) {
+      formatted = '<sup>' + formatted + '</sup>';
+    }
+
+    if (needsSmallCaps) {
+      formatted = '<small>' + formatted.toUpperCase() + '</small>';
+    }
+
+    if (needsStrikethrough) {
+      formatted = '~~' + formatted + '~~';
+    }
+
+    if (needsUnderline) {
+      formatted = '<u>' + formatted + '</u>';
+    }
+
+    if (needsItalic) {
+      formatted = '*' + formatted + '*';
+    }
+
+    if (needsBold) {
+      formatted = '**' + formatted + '**';
     }
 
     return formatted;
@@ -414,6 +476,47 @@ export class XamlToMarkdownConverter {
     if (fontSize === null) return 0;
     const index = this.options.headingSizes.indexOf(fontSize);
     return index >= 0 ? index + 1 : 0;
+  }
+
+  private getHeadingLevelFromParagraph(paragraph: XamlElement): number {
+    // Check if this paragraph contains only Run elements with heading-level font sizes
+    const runs = this.extractRunsFromParagraph(paragraph);
+    if (runs.length === 0) return 0;
+
+    // Get all font sizes from runs
+    const fontSizes = runs.map(run => {
+      const fontSize = run['@_FontSize'] ? parseFloat(run['@_FontSize']) : null;
+      return fontSize;
+    }).filter(size => size !== null);
+
+    // If no font sizes found, not a heading
+    if (fontSizes.length === 0) return 0;
+
+    // Check if all font sizes are the same and correspond to a heading level
+    const firstFontSize = fontSizes[0];
+    const allSameSize = fontSizes.every(size => size === firstFontSize);
+    
+    if (allSameSize && firstFontSize !== undefined) {
+      return this.getHeadingLevel(firstFontSize);
+    }
+
+    return 0;
+  }
+
+  private extractRunsFromParagraph(paragraph: XamlElement): XamlElement[] {
+    const runs: XamlElement[] = [];
+
+    for (const [key, value] of Object.entries(paragraph)) {
+      if (key.toLowerCase() === 'run') {
+        if (Array.isArray(value)) {
+          runs.push(...value.filter(v => v && typeof v === 'object'));
+        } else if (value && typeof value === 'object') {
+          runs.push(value as XamlElement);
+        }
+      }
+    }
+
+    return runs;
   }
 
   private isHorizontalRule(borderThickness: string, content: string): boolean {
@@ -497,8 +600,7 @@ export class XamlToMarkdownConverter {
       if (key.toLowerCase() === 'tablecell') {
         const cellArray = Array.isArray(value) ? value : [value];
         for (const cell of cellArray) {
-          if (this.isXamlElement(cell)) {
-            // TypeScript workaround: cell is confirmed to be XamlElement by type guard
+          if (cell && typeof cell === 'object') {
             const content = this.extractElementContent(cell as any).trim();
             cells.push(content || '');
           }

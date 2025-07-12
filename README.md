@@ -1,6 +1,6 @@
 # Logos Notes Exporter
 
-A command line tool that converts Logos Bible Software notes to Markdown files with YAML frontmatter, organized by notebooks.
+A command line tool that converts Logos Bible Notes to Markdown files with YAML front-matter, organized by notebooks.
 
 ## 🔍 Overview
 
