@@ -50,7 +50,7 @@ export class XamlToMarkdownConverter {
       textNodeName: '#text',
       removeNSPrefix: true,
       parseAttributeValue: false,
-      trimValues: true,
+      trimValues: false,  // Changed to false to preserve spaces in Run Text
       processEntities: true,
     });
     this.unicodeCleaner = new UnicodeCleaner();
@@ -573,9 +573,9 @@ export class XamlToMarkdownConverter {
             for (const [rKey, rValue] of Object.entries(rowGroup)) {
               if (rKey.toLowerCase() === 'tablerow') {
                 if (Array.isArray(rValue)) {
-                  rows.push(...rValue);
+                  rows.push(...rValue as XamlElement[]);
                 } else {
-                  rows.push(rValue);
+                  rows.push(rValue as XamlElement);
                 }
               }
             }
@@ -583,9 +583,9 @@ export class XamlToMarkdownConverter {
         }
       } else if (key.toLowerCase() === 'tablerow') {
         if (Array.isArray(value)) {
-          rows.push(...value);
+          rows.push(...value as XamlElement[]);
         } else {
-          rows.push(value);
+          rows.push(value as XamlElement);
         }
       }
     }

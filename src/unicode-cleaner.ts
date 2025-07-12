@@ -49,15 +49,17 @@ export class UnicodeCleaner {
       cleaned = this.removeControlCharacters(cleaned);
     }
 
+    // TODO: Disabled for now as it also removed (trimmed) required spaces.
+
     // Step 3: Remove footnote markers and cross-reference artifacts
-    if (this.options.removeFootnoteMarkers) {
-      cleaned = this.removeFootnoteMarkers(cleaned);
-    }
+    // if (this.options.removeFootnoteMarkers) {
+    //   cleaned = this.removeFootnoteMarkers(cleaned);
+    // }
 
     // Step 4: Apply advanced cleaning patterns
-    if (this.options.enableAdvancedCleaning) {
-      cleaned = this.applyAdvancedCleaning(cleaned);
-    }
+    // if (this.options.enableAdvancedCleaning) {
+    //   cleaned = this.applyAdvancedCleaning(cleaned);
+    // }
 
     return cleaned;
   }
