@@ -1,6 +1,6 @@
 # Logos Notes Exporter
 
-A TypeScript CLI tool that converts Logos Bible Software notes to Markdown files with YAML frontmatter, organized by notebooks.
+A command line tool that converts Logos Bible Software notes to Markdown files with YAML frontmatter, organized by notebooks.
 
 ## 🔍 Overview
 
@@ -23,8 +23,8 @@ This tool extracts notes from Logos Bible Software's NotesTool database and conv
 - **📁 Flexible Output**: Customizable directory structure and file organization
 - **🔍 Dry Run Mode**: Preview what will be exported before writing files
 - **📊 Statistics**: Detailed export statistics and progress reporting
-- **✨ Unicode Cleaning**: Automatically removes problematic Unicode characters
-- **🧹 Text Sanitization**: Cleans Rich Text (XAML) content and removes zero-width characters, control characters, and footnote artifacts
+- **🧹 Text Sanitization**: Cleans Rich Text (XAML) content and removes problematic Unicode characters
+- **🔒 Read-only**: Safely opens Logos user databases in read-only mode, does not modify them
 
 ## Intended Use Cases
 
@@ -210,6 +210,7 @@ bun run binary:windows   # Build for Windows x64
 ## Publish release
 
 - Update version in package.json and publish new binary release
+- this will trigger new Release builds via Github actions
 
 ```sh
 scripts/create-release.sh
@@ -310,11 +311,15 @@ The tool supports Logos Bible reference formats:
 
 ## 🚨 Limitations
 
-- **Read-only**: Only reads from Logos databases, does not modify them
 - **SQLite dependency**: Requires access to the NotesTool SQLite database
 - **Rich text**: Complex formatting may not convert fully to Markdown
-- **Version compatibility**: Tested with recent Logos versions
+- **Version compatibility**: Tested with recent Logos 10 desktop versions
 - **Highlights**: the verse range is shown for Bibles, highlights in books lack a reference
+
+## OS & Software Versions
+- Logos 10 (Logos Bible Study 43.0.377)
+- macOS Sequoia 15.5
+- Windows 10 version 22H2
 
 ## 🤝 Contributing
 
