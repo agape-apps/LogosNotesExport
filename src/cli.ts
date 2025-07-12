@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 import { parseArgs } from 'util';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { join, basename } from 'path';
 import { NotebookOrganizer } from './notebook-organizer.js';
 import { FileOrganizer, DEFAULT_FILE_OPTIONS } from './file-organizer.js';
@@ -9,6 +9,20 @@ import type { FileStructureOptions, MarkdownOptions } from './types.js';
 import { ExportValidator } from './validator.js';
 import { NotesToolDatabase } from './notestool-database.js';
 import { CatalogDatabase } from './catalog-database.js';
+
+/**
+ * Read version from package.json
+ */
+function getPackageVersion(): string {
+  try {
+    const packagePath = join(process.cwd(), 'package.json');
+    const packageContent = readFileSync(packagePath, 'utf8');
+    const packageJson = JSON.parse(packageContent);
+    return packageJson.version || 'unknown';
+  } catch (error) {
+    return 'unknown';
+  }
+}
 
 interface CLIOptions {
   /** Database file path */
@@ -545,8 +559,8 @@ async function main(): Promise<void> {
   }
 
   if (options.version) {
-    // Would read from package.json in a real implementation
-    console.log('Logos Notes Exporter v1.0.0');
+    const version = getPackageVersion();
+    console.log(`Logos Notes Exporter v${version}`);
     process.exit(0);
   }
 
