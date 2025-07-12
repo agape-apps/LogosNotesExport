@@ -2,6 +2,7 @@ import type { OrganizedNote } from './notebook-organizer.js';
 import type { DecodedReference } from './reference-decoder.js';
 import type { NoteStyle, NoteColor, NoteIndicator, DataType, ResourceId } from './notestool-database.js';
 import { BibleReferenceDecoder } from './reference-decoder.js';
+import type { CatalogDatabase } from './catalog-database.js';
 
 export interface NoteMetadata {
   title: string;
@@ -20,6 +21,7 @@ export interface NoteMetadata {
   noteIndicator?: string;
   dataType?: string;
   resourceId?: string;
+  resourceTitle?: string;
   bibleVersion?: string;
   anchorLink?: string;
   filename?: string;
@@ -70,10 +72,12 @@ export class MetadataProcessor {
   private options: MetadataOptions;
   private lookups?: MetadataLookups;
   private bibleDecoder = new BibleReferenceDecoder();
+  private catalogDb?: CatalogDatabase;
 
-  constructor(options: Partial<MetadataOptions> = {}, lookups?: MetadataLookups) {
+  constructor(options: Partial<MetadataOptions> = {}, lookups?: MetadataLookups, catalogDb?: CatalogDatabase) {
     this.options = { ...DEFAULT_METADATA_OPTIONS, ...options };
     this.lookups = lookups;
+    this.catalogDb = catalogDb;
   }
 
   /**
@@ -152,6 +156,14 @@ export class MetadataProcessor {
       if (note.anchorResourceIdId) {
         const resourceId = this.lookups.resourceIds.get(note.anchorResourceIdId);
         metadata.resourceId = resourceId ? resourceId.resourceId : `resource-${note.anchorResourceIdId}`;
+        
+        // Get resource title from catalog database
+        if (metadata.resourceId && this.catalogDb) {
+          const title = this.catalogDb.getTitleByResourceId(metadata.resourceId);
+          if (title) {
+            metadata.resourceTitle = title;
+          }
+        }
       }
     }
 
@@ -254,6 +266,9 @@ export class MetadataProcessor {
     if (metadata.resourceId) {
       yamlLines.push(`resourceId: ${this.escapeYamlValue(metadata.resourceId)}`);
     }
+    if (metadata.resourceTitle) {
+      yamlLines.push(`resourceTitle: ${this.escapeYamlValue(metadata.resourceTitle)}`);
+    }
     if (metadata.anchorLink) {
       yamlLines.push(`anchorLink: ${this.escapeYamlValue(metadata.anchorLink)}`);
     }
@@ -270,10 +285,12 @@ export class MetadataProcessor {
     yamlLines.push(`noteId: ${metadata.noteId}`);
 
     // Additional metadata (excluding standard fields)
+    // Field order is determined in markdown-converter.ts in fieldOrder (not here)
+    // TODO: consider combining the code both here and in markdown-converter.ts
     const standardFields = new Set([
       'title', 'created', 'modified', 'noteType', 'notebook',
       'references', 'tags', 'logosBibleBook', 'noteStyle', 'noteColor', 
-      'noteIndicator', 'dataType', 'resourceId', 'anchorLink', 'bibleVersion', 'filename', 'noteId'
+      'noteIndicator', 'dataType', 'resourceId', 'resourceTitle', 'anchorLink', 'bibleVersion', 'filename', 'noteId'
     ]);
 
     for (const [key, value] of Object.entries(metadata)) {

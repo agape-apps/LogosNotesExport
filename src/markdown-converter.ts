@@ -3,6 +3,7 @@ import { XamlToMarkdownConverter } from './xaml-converter.js';
 import { cleanXamlText } from './unicode-cleaner.js';
 import { MetadataProcessor, type MetadataLookups, type MetadataOptions } from './metadata-processor.js';
 import type { NotesToolDatabase } from './notestool-database.js';
+import type { CatalogDatabase } from './catalog-database.js';
 
 export interface MarkdownOptions {
   /** Include YAML frontmatter */
@@ -78,7 +79,7 @@ export class MarkdownConverter {
   private verbose: boolean;
   private xamlFailures: XamlConversionFailure[];
 
-  constructor(options: Partial<MarkdownOptions> = {}, database?: NotesToolDatabase, verbose: boolean = false) {
+  constructor(options: Partial<MarkdownOptions> = {}, database?: NotesToolDatabase, verbose: boolean = false, catalogDb?: CatalogDatabase) {
     this.options = { ...DEFAULT_MARKDOWN_OPTIONS, ...options };
     this.verbose = verbose;
     this.xamlConverter = new XamlToMarkdownConverter();
@@ -111,7 +112,7 @@ export class MarkdownConverter {
           dateFormat: this.options.dateFormat === 'iso' ? 'iso' : 'readable'
         };
         
-        this.metadataProcessor = new MetadataProcessor(metadataOptions, lookups);
+        this.metadataProcessor = new MetadataProcessor(metadataOptions, lookups, catalogDb);
       } catch (error) {
         console.warn('Failed to initialize enhanced metadata processor:', error);
       }
@@ -415,7 +416,7 @@ export class MarkdownConverter {
     const fieldOrder = [
       'title', 'created', 'modified', 'tags', 'noteType', 'references', 
       'noteId', 'notebook', 'logosBibleBook', 'bibleVersion', 'noteStyle', 
-      'noteColor', 'noteIndicator', 'dataType', 'resourceId', 'anchorLink', 'filename'
+      'noteColor', 'noteIndicator', 'dataType', 'resourceId', 'resourceTitle', 'anchorLink', 'filename'
     ];
     
     // Add fields in the preferred order first

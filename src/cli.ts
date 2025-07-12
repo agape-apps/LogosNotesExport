@@ -8,6 +8,7 @@ import { MarkdownConverter, DEFAULT_MARKDOWN_OPTIONS, type XamlConversionFailure
 import type { FileStructureOptions, MarkdownOptions } from './types.js';
 import { ExportValidator } from './validator.js';
 import { NotesToolDatabase } from './notestool-database.js';
+import { CatalogDatabase } from './catalog-database.js';
 
 interface CLIOptions {
   /** Database file path */
@@ -101,6 +102,7 @@ NOTES:
 
 class LogosNotesExporter {
   private database: NotesToolDatabase;
+  private catalogDb?: CatalogDatabase;
   private organizer: NotebookOrganizer;
   private fileOrganizer: FileOrganizer;
   private markdownConverter: MarkdownConverter;
@@ -112,6 +114,24 @@ class LogosNotesExporter {
     
     // Initialize database with automatic location detection
     this.database = new NotesToolDatabase(options.database);
+    
+    // Initialize catalog database for resource titles
+    try {
+      this.catalogDb = new CatalogDatabase(this.database.getDatabaseInfo().path);
+      if (options.verbose) {
+        const catalogInfo = this.catalogDb.getCatalogInfo();
+        console.log(`📖 Using catalog database: ${catalogInfo.path}`);
+        if (catalogInfo.size) {
+          console.log(`   Size: ${(catalogInfo.size / 1024 / 1024).toFixed(1)} MB`);
+        }
+      }
+    } catch (error) {
+      if (options.verbose) {
+        console.warn('⚠️  Catalog database not found or accessible. Resource titles will not be included.');
+        console.warn('   Error:', error);
+      }
+    }
+    
     this.organizer = new NotebookOrganizer(this.database, { skipHighlights: options.skipHighlights || false });
     
     // Show database info in verbose mode
@@ -146,7 +166,7 @@ class LogosNotesExporter {
       includeId: options.includeId || false,
       dateFormat: options.dateFormat || 'iso',
     };
-    this.markdownConverter = new MarkdownConverter(markdownOptions, this.database, options.verbose || false);
+    this.markdownConverter = new MarkdownConverter(markdownOptions, this.database, options.verbose || false, this.catalogDb);
     this.validator = new ExportValidator();
   }
 
@@ -273,6 +293,9 @@ class LogosNotesExporter {
       process.exit(1);
     } finally {
       this.organizer.close();
+      if (this.catalogDb) {
+        this.catalogDb.close();
+      }
     }
   }
 
@@ -330,16 +353,16 @@ class LogosNotesExporter {
    */
   private displayXamlStats(stats: any): void {
     this.log(`  Total notes processed: ${stats.totalNotes}`);
-    this.log(`  Notes with Rich Text (XAML) content: ${stats.notesWithXaml}`);
-    this.log(`  Rich Text (XAML) conversions succeeded: ${stats.xamlConversionsSucceeded}`);
-    this.log(`  Rich Text (XAML) conversions failed: ${stats.xamlConversionsFailed}`);
+    this.log(`  Notes with Rich Text content: ${stats.notesWithXaml}`);
+    this.log(`  Conversions succeeded: ${stats.xamlConversionsSucceeded}`);
+    this.log(`  Conversion issues: ${stats.xamlConversionsFailed}`);
     this.log(`  Plain text notes: ${stats.plainTextNotes}`);
     this.log(`  Empty notes: ${stats.emptyNotes}`);
     
     if (stats.notesWithXaml > 0) {
       if (stats.xamlConversionsFailed > 0) {
         const failureRate = ((stats.xamlConversionsFailed / stats.notesWithXaml) * 100).toFixed(1);
-        this.log(`\n⚠️  Rich Text (XAML) Conversion Issues: ${stats.xamlConversionsFailed}/${stats.notesWithXaml} Rich Text (XAML) failed conversion (${failureRate}% failure rate)`);
+        this.log(`\n⚠️  Rich Text (XAML) Conversion Issues:\n   ${stats.xamlConversionsFailed} out of ${stats.notesWithXaml} conversions had issues`);
       } else {
         this.log(`\n✅ Rich Text (XAML) Conversion: All ${stats.notesWithXaml} Rich Text (XAML) converted successfully`);
       }
@@ -356,7 +379,7 @@ class LogosNotesExporter {
       return;
     }
 
-    this.log('\n🔍 Detailed Rich Text (XAML) Conversion Failures:');
+    this.log('\n🔍 Detailed Rich Text (XAML) Conversion Issues:');
     
     for (const failure of failures) {
       this.log(`\n❌ Note ID ${failure.noteId}: ${failure.noteTitle}`);
@@ -370,7 +393,7 @@ class LogosNotesExporter {
         }
       }
       
-      this.log(`   Rich Text (XAML) preview: ${failure.xamlContentPreview}${failure.xamlContentPreview.length >= 150 ? '...' : ''}`);
+      this.log(`   XAML preview: ${failure.xamlContentPreview}${failure.xamlContentPreview.length >= 150 ? '...' : ''}`);
     }
   }
 
@@ -383,6 +406,7 @@ class LogosNotesExporter {
     if (result.issues.length > 0) {
       const errors = result.issues.filter((i: any) => i.severity === 'error');
       const warnings = result.issues.filter((i: any) => i.severity === 'warning');
+      const info = result.issues.filter((i: any) => i.severity === 'info');
       
       if (errors.length > 0) {
         this.log('\n❌ Errors found:');
@@ -406,9 +430,19 @@ class LogosNotesExporter {
           this.log(`  ... and ${warnings.length - 3} more warnings`);
         }
       }
+      
+      if (info.length > 0 && this.options.verbose) {
+        this.log('\n💡 Info:');
+        for (const infoItem of info.slice(0, 3)) { // Show first 3 info items
+          this.log(`  • ${infoItem.message}`);
+        }
+        if (info.length > 3) {
+          this.log(`  ... and ${info.length - 3} more info items`);
+        }
+      }
     }
 
-    // Note: Rich Text (XAML) conversion statistics are now displayed separately using the accurate tracking
+    // Note: Rich Text (XAML) conversion statistics are displayed separately
   }
 
   /**

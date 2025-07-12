@@ -17,9 +17,22 @@ export interface DatabaseLocation {
   lastModified?: Date;
 }
 
+export interface CatalogLocation {
+  /** Full path to the catalog database file */
+  path: string;
+  /** Whether the file exists */
+  exists: boolean;
+  /** File size if it exists */
+  size?: number;
+  /** Last modified date if it exists */
+  lastModified?: Date;
+}
+
 export class DatabaseLocator {
   private static readonly DATABASE_FILENAME = 'notestool.db';
   private static readonly SUBDIRECTORY = 'NotesToolManager';
+  private static readonly CATALOG_FILENAME = 'catalog.db';
+  private static readonly CATALOG_SUBDIRECTORY = 'LibraryCatalog';
 
   /**
    * Find all possible Logos NotesTool database locations
@@ -278,5 +291,55 @@ export class DatabaseLocator {
     lines.push('   bun run export --database "/path/to/your/notestool.db"');
 
     return lines;
+  }
+
+  /**
+   * Get the catalog database location based on the notestool database path
+   */
+  public static getCatalogLocation(notestoolPath: string): CatalogLocation | null {
+    try {
+      // Convert Documents path to Data path
+      // e.g., /Users/user/Library/Application Support/Logos4/Documents/random/NotesToolManager/notestool.db
+      // to   /Users/user/Library/Application Support/Logos4/Data/random/LibraryCatalog/catalog.db
+      
+      let catalogPath = notestoolPath;
+      
+      // Replace Documents with Data
+      catalogPath = catalogPath.replace('/Documents/', '/Data/');
+      
+      // Replace NotesToolManager with LibraryCatalog
+      catalogPath = catalogPath.replace('/NotesToolManager/', '/LibraryCatalog/');
+      
+      // Replace notestool.db with catalog.db
+      catalogPath = catalogPath.replace('/notestool.db', '/catalog.db');
+      
+      // For Windows paths
+      catalogPath = catalogPath.replace('\\Documents\\', '\\Data\\');
+      catalogPath = catalogPath.replace('\\NotesToolManager\\', '\\LibraryCatalog\\');
+      catalogPath = catalogPath.replace('\\notestool.db', '\\catalog.db');
+      
+      const exists = existsSync(catalogPath);
+      let size: number | undefined;
+      let lastModified: Date | undefined;
+      
+      if (exists) {
+        try {
+          const stats = statSync(catalogPath);
+          size = stats.size;
+          lastModified = stats.mtime;
+        } catch (error) {
+          // Ignore stat errors
+        }
+      }
+
+      return {
+        path: catalogPath,
+        exists,
+        size,
+        lastModified
+      };
+    } catch (error) {
+      return null;
+    }
   }
 } 
