@@ -507,7 +507,17 @@ export class XamlToMarkdownConverter {
     if (!text) return '';
 
     // Clean Unicode issues first
-    let formatted = this.unicodeCleaner.cleanXamlText(text);
+    const cleanedText = this.unicodeCleaner.cleanXamlText(text);
+
+    // Handle whitespace around formatting
+    const leadingSpace = cleanedText.match(/^\s*/)?.[0] || '';
+    const trailingSpace = cleanedText.match(/\s*$/)?.[0] || '';
+    let formatted = cleanedText.trim();
+
+    // If the text is only whitespace, return it as is.
+    if (formatted === '') {
+      return cleanedText;
+    }
 
     // Get attributes using helper method
     const attrs = this.getAttributes(element);
@@ -516,7 +526,7 @@ export class XamlToMarkdownConverter {
     const fontFamily = attrs['@_FontFamily'] || '';
     if (this.isMonospaceFont(fontFamily)) {
       formatted = '`' + formatted + '`';
-      return formatted; // Code formatting takes precedence
+      return leadingSpace + formatted + trailingSpace; // Code formatting takes precedence
     }
 
     // Apply text formatting in order: bold, italic, underline, strikethrough, small caps, sub/superscript, highlight
@@ -604,7 +614,7 @@ export class XamlToMarkdownConverter {
       formatted = '==' + formatted + '==';
     }
 
-    return formatted;
+    return leadingSpace + formatted + trailingSpace;
   }
 
   private extractElementContent(element: XamlElement): string {
