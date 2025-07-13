@@ -414,9 +414,26 @@ export class XamlToMarkdownConverter {
     for (const link of hyperlinks) {
       if (!link) continue;
 
-      const text = this.extractElementContent(link);
-      const url = link['@_NavigateUri'] || '';
-      
+      // Get attributes - handle preserveOrder structure
+      const attrs = link[':@'] || link;
+      const url = attrs['@_Uri'] || attrs['@_NavigateUri'] || '';
+
+      // Extract content - process children
+      let text = '';
+      if (Array.isArray(link)) {
+        text = this.processElement(link);
+      } else {
+        // For object structure, process non-attribute keys
+        for (const [childKey, childValue] of Object.entries(link)) {
+          if (childKey !== ':@') {
+            text += this.processElement(childValue);
+          }
+        }
+      }
+
+      text = text.trim();
+      if (!text) continue;
+
       if (url) {
         result += `[${text}](${url})`;
       } else {
@@ -578,10 +595,13 @@ export class XamlToMarkdownConverter {
         case 'hyperlink':
           content += this.processHyperlink(value as any);
           break;
-        case 'list':  // Added to properly format lists
+        case 'urilink':  // Add this case
+          content += this.processHyperlink(value as any);
+          break;
+        case 'list':
           content += this.processList(value as any);
           break;
-        case 'table':  // Added to properly format tables
+        case 'table':
           content += this.processTable(value as any);
           break;
         default:
