@@ -511,7 +511,12 @@ export class MetadataProcessor {
 
     // For resource notes with offset data, use offsets format
     if (note.anchorTextRange?.offset !== undefined) {
-      return `https://app.logos.com/books/${encodedResourceId}/offsets/${note.anchorTextRange.offset}`;
+      // A valid offset must be a positive integer.
+      if (note.anchorTextRange.offset >= 0) {
+        return `https://app.logos.com/books/${encodedResourceId}/offsets/${note.anchorTextRange.offset}`;
+      }
+      // For invalid offsets like -1, link to the book without offset
+      return `https://app.logos.com/books/${encodedResourceId}`;
     }
 
     return undefined;

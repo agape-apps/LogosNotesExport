@@ -8,8 +8,12 @@
 BUGS
 - fix src/xaml-converter.ts 
     - still too many blank lines in some cases, but mostly looking good
-- Spacing issue in Conditional Immortality/AP40_Tob-14.07.md 
-- an offset of -1 causes an error Highlight/LLS-1.0.20-0736.md (create no links for that)
+- invalid offsets (-1) have been fixed but the book link is not that useful - check other options: 
+  - anchorLink: "https://app.logos.com/books/LLS%3A1.0.20"
+  - in Logos-Exported-Notes/Conditional Immortality/LLS-1.0.20-0736.md
+  - add a tag or note?
+- indentation (spaces at the beginning of a line) should be preserved! (lists for example)
+
 
 FEATURES
 - try to implement this as an Electron app
