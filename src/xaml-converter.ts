@@ -114,16 +114,37 @@ export class XamlToMarkdownConverter {
       return element;
     }
 
-    // Handle preserveOrder format - element is an array of objects
     if (Array.isArray(element)) {
       let result = '';
-      for (const item of element) {
-        result += this.processElement(item);
+      let i = 0;
+      while (i < element.length) {
+        let current = element[i];
+        let codeLines: string[] = [];
+        while (i < element.length && this.isParagraph(current) && this.isCodeParagraph(current)) {
+          const content = this.processParagraph(current, true);
+          if (content.trim()) {
+            codeLines.push(content.trim());
+          }
+          i++;
+          if (i < element.length) {
+            current = element[i];
+          }
+        }
+        if (codeLines.length > 0) {
+          if (codeLines.length === 1) {
+            result += '`' + codeLines[0] + '`  \n';
+          } else {
+            result += '```\n' + codeLines.join('\n') + '\n```\n\n';
+          }
+        } else {
+          result += this.processElement(current);
+          i++;
+        }
       }
       return result;
     }
 
-    // Handle preserveOrder object format - each object has tagName as key and :@ for attributes
+    // Handle preserveOrder format - element is an array of objects
     let result = '';
 
     for (const [tagName, content] of Object.entries(element)) {
@@ -221,7 +242,7 @@ export class XamlToMarkdownConverter {
     return result;
   }
 
-  private processParagraph(paragraph: XamlElement | XamlElement[]): string {
+  private processParagraph(paragraph: XamlElement | XamlElement[], skipNewline = false): string {
     const paragraphs = Array.isArray(paragraph) ? paragraph : [paragraph];
     let result = '';
 
@@ -239,18 +260,20 @@ export class XamlToMarkdownConverter {
         content = this.extractElementContent(para);
       }
 
-      if (!content.trim()) {
-        result += '\n';
-        continue;
-      }
-
-      // Check if this paragraph should be a heading based on its Run elements
-      const headingLevel = this.getHeadingLevelFromParagraph(para);
-      if (headingLevel > 0) {
-        result += '#'.repeat(headingLevel) + ' ' + content.trim() + '\n\n';
+      if (skipNewline) {
+        result += content;
       } else {
-        // Add double trailing spaces for Markdown line breaks on regular paragraphs
-        result += content.trim() + '  \n';
+        if (!content.trim()) {
+          result += '\n\n';
+          continue;
+        }
+
+        const headingLevel = this.getHeadingLevelFromParagraph(para);
+        if (headingLevel > 0) {
+          result += '#'.repeat(headingLevel) + ' ' + content.trim() + '\n';
+        } else {
+          result += content.trim() + '  \n';
+        }
       }
     }
 
@@ -774,10 +797,24 @@ export class XamlToMarkdownConverter {
 
   private normalizeMarkdown(markdown: string): string {
     return markdown
-      .replace(/  \n/g, '  \n')
       .replace(/\n{3,}/g, '\n\n')
       .replace(/^\s+|\s+$/g, '')
       .replace(/[ \t]{3,}$/gm, '  ')
       .replace(/[ \t]+$/gm, (match) => match === '  ' ? '  ' : '');
+  }
+
+  private isParagraph(item: any): boolean {
+    return !!item && !!item.Paragraph;
+  }
+
+  private isCodeParagraph(paragraph: any): boolean {
+    const runs = this.extractRunsFromParagraph(paragraph);
+    if (runs.length === 0) return false;
+
+    return runs.every(run => {
+      const attrs = this.getAttributes(run);
+      const font = attrs['@_FontFamily'] || '';
+      return this.isMonospaceFont(font);
+    });
   }
 } 
