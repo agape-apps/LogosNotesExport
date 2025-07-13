@@ -255,27 +255,34 @@ Specify with the `--database` option.
 
 The project follows a modular architecture:
 
-- **`notestool-database.ts`**: SQLite database interface
+- order of files follows a logical processing flow from CLI to output
+
+- **`cli.ts`**: Command-line interface and main application entry point
+- **`notestool-database.ts`**: SQLite database interface for notes data
+- **`catalog-database.ts`**: Interface for Logos catalog database to resolve resource titles
+- **`database-locator.ts`**: Cross-platform database discovery and validation
 - **`reference-decoder.ts`**: Bible reference parsing and formatting
-- **`notebook-organizer.ts`**: Note organization by notebooks
+- **`notebook-organizer.ts`**: Note organization by notebooks and folders
 - **`file-organizer.ts`**: File structure and path management
-- **`markdown-converter.ts`**: Markdown generation with YAML frontmatter
+- **`metadata-processor.ts`**: YAML frontmatter generation and metadata extraction
+- **`markdown-converter.ts`**: Markdown generation with YAML frontmatter integration
 - **`xaml-converter.ts`**: XAML-to-Markdown conversion with formatting preservation
 - **`unicode-cleaner.ts`**: Unicode text cleaning and footnote marker removal
 - **`validator.ts`**: Export quality assurance and validation
-- **`cli.ts`**: Command-line interface
+- **`types.ts`**: Centralized TypeScript type definitions
 
 ### Project Structure
 
 ```
-src/
-├── cli.ts                # Main CLI entry point
-├── types.ts              # Shared type definitions
-├── notestool-database.ts # Database interface
-├── reference-decoder.ts  # Bible reference decoder
-├── notebook-organizer.ts # Note organization logic
-├── file-organizer.ts     # File structure management
-└── markdown-converter.ts # Markdown generation
+bin/       # executable binary files for multiple platforms
+data/      # database and XAML data
+docs/      # documentation of databases and XAML
+scripts/   # create binary release script, triggers Github Action
+src/       # TypeScript source code files
+
+Logos-Exported-Notes/  # exported Markdown notes  
+LogosDocuments/         # copy of Logos Databases
+
 ```
 
 ### Running Tests
