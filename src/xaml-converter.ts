@@ -272,7 +272,7 @@ export class XamlToMarkdownConverter {
         if (headingLevel > 0) {
           result += '#'.repeat(headingLevel) + ' ' + content.trim() + '\n';
         } else {
-          result += content.trim() + '  \n';
+          result += content.trimEnd() + '  \n';
         }
       }
     }
@@ -482,9 +482,11 @@ export class XamlToMarkdownConverter {
         // Preserve code context
         result += text;
       } else if (url) {
-        // For UriLink elements, just return the URL text without additional formatting
-        // This allows the surrounding markdown syntax to work properly
-        result += text;
+        if (this.hasMarkdownLinkSyntax(text)) {
+          result += text;
+        } else {
+          result += `[${text}](${url})`;
+        }
       } else {
         result += text;
       }
