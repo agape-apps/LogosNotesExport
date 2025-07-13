@@ -28,8 +28,8 @@ This tool extracts notes from Logos Bible Software's NotesTool database and conv
 
 ## Intended Use Cases
 
-- use Notebook folders in Obsidian, Typora or other front-matter compatible Markdown software
-- use as vendor independent backup of your personal notes
+- use Notebook folders in Obsidian, Typora or in other front-matter compatible Markdown applications
+- use as a vendor independent backup of your personal notes and highlights
 
 ## 🛠 Installation
 
@@ -43,7 +43,7 @@ Choose the binary for your platform:
 - **🍎 macOS (Apple Silicon)**: `LogosNotesExporter-macos-arm64` (untested)
 - **🪟 Windows**: `LogosNotesExporter-windows-x64.exe` (works, limited testing)
 
-## 📖 Usage (in a Terminal)
+## 📖 Getting Started (in a Terminal)
 
 on macOS:
 - make executable, move & rename, run
@@ -55,9 +55,8 @@ LogosNotesExporter --help
 ```
 
 on Windows run:
-
 ```
-LogosNotesExporter-windows-x64.exe
+LogosNotesExporter-windows-x64.exe --help
 ```
 
 ### Basic Export
@@ -79,10 +78,10 @@ LogosNotesExporter --output ./my-exported-notes
 # Dry run to see what would be exported
 LogosNotesExporter --dry-run --verbose
 
-# Export with date-based folders
+# Export with date-based folders (instead of Notebook folders)
 LogosNotesExporter --date-folders --no-organize-notebooks
 
-# Export without YAML frontmatter and show metadata in content
+# Export without YAML frontmatter and show some metadata in content
 LogosNotesExporter --no-frontmatter --show-metadata
 
 # Include note IDs in metadata
@@ -143,7 +142,7 @@ Logos-Exported-Notes/
 
 ## 📄 Markdown Format
 
-Each exported note includes comprehensive YAML frontmatter:
+Each exported note includes comprehensive YAML front-matter:
 
 ```yaml
 ---
@@ -231,7 +230,7 @@ bun run export [options]
 - Database is always opened read-only
 - Bible references are always included when available
 
-For Development:
+For Development (use copy of database):
 
 ```
 LogosDocuments/NotesToolManager/notestool.db
@@ -262,7 +261,7 @@ The project follows a modular architecture:
 - **`file-organizer.ts`**: File structure and path management
 - **`markdown-converter.ts`**: Markdown generation with YAML frontmatter
 - **`xaml-converter.ts`**: XAML-to-Markdown conversion with formatting preservation
-- **`unicode-cleaner.ts`**: Advanced Unicode text cleaning and footnote marker removal
+- **`unicode-cleaner.ts`**: Unicode text cleaning and footnote marker removal
 - **`validator.ts`**: Export quality assurance and validation
 - **`cli.ts`**: Command-line interface
 
@@ -343,8 +342,11 @@ This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 -
 
 ## 📞 Support
 
-- **Issues & Requests**: [GitHub Issues](https://github.com/agape-apps/LogosNotesExport/issues)
+- **Issues & Feature Requests**: [GitHub Issues](https://github.com/agape-apps/LogosNotesExport/issues)
 - **Documentation**: See the `/docs` folder for detailed documentation
+
+## Notice: Independent Software
+This application is developed independently and has no affiliation with Faithlife Corporation or their Logos Bible Software product. This software is not officially supported or endorsed by Faithlife.
 
 ---
 

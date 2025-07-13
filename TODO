@@ -1,9 +1,9 @@
 # TODO
 
 - testing with jest unit tests
-- more testing test on Windows
+- more testing on Windows
 - test on Apple Silicon
-- check error handling, especially for databases
+- improve error handling, for databases, for conversion issues
 
 BUGS
 - fix src/xaml-converter.ts 
@@ -12,16 +12,19 @@ BUGS
   - anchorLink: "https://app.logos.com/books/LLS%3A1.0.20"
   - in Logos-Exported-Notes/Conditional Immortality/LLS-1.0.20-0736.md
   - add a tag or note?
-- indentation (spaces at the beginning of a line) should be preserved! (lists for example)
+- is it ok for list items to have a double space at the line ending?
 
+CODE DUPLICATION
+- Multiple "Get human-readable note type name" includes annotation as 2 or unknown (inconsistently)
+- only note (text) and highlights are actual note types, annotation should be the same as unknown
 
 FEATURES
-- try to implement this as an Electron app
-- add empty note Tag to notes like Heavenly Citizens - Phil. Ch. 3/NT71_Phil-03.20.md (remove notice text)
+- investigate how to implement this as a simple Electron app
+- possibly add empty note Tag to notes like Heavenly Citizens - Phil. Ch. 3/NT71_Phil-03.20.md (remove notice text)
 
 CANNOT FIX
-- to get the text which corresponds to the highlight range from books is impossible, as we do not have access to the content of book resources
-- highlight range for verses can only output the whole verse highlighted 
+- to get the highlighted text which corresponds to the highlight range from books is impossible, as we do not have access to the content of book resources
+- highlight range for verses can only output the whole verse highlighted (not word by word range)
 - this could only be implemented by Logos with their own exporter from within the app
 
 GENERAL
@@ -34,9 +37,9 @@ OPTIONS
 
 ### Backup (working)
 - backup of all notes
-- backup of all highlights (by Bible verse OK, but from books)
+- backup of all highlights (by Bible verse OK, but not from books)
 - prevent vendor lock-in of data
-- requires max amount of meta-data
+- show max amount of meta-data
 
 ### Use in other Apps like Obsidian (working)
 - folder structure by Notebook
@@ -48,3 +51,4 @@ OPTIONS
 - needs the scripture references, possibly book reference
 - list of Notes from one Notebook
 - only minimal metadata
+- could be added to the index file

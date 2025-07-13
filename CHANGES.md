@@ -6,3 +6,4 @@
 - Release v1.0.6: implement catalog database integration to show resource titles
 - Release v1.0.7: fix XAML to Markdown conversion for text formatting and headings
 - Release v1.0.8: fix XAML to Markdown conversion for lists
+- Release v1.0.9: various improvements to the XAML to Markdown conversion

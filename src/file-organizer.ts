@@ -213,7 +213,6 @@ export class FileOrganizer {
 
     if (group.notebook) {
       lines.push(`**Created:** ${new Date(group.notebook.createdDate).toLocaleDateString()}  `);
-      lines.push(`**Notebook ID:** ${group.notebook.externalId}  `);
       lines.push('');
     }
 
