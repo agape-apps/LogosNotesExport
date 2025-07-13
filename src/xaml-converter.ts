@@ -52,9 +52,10 @@ export class XamlToMarkdownConverter {
       textNodeName: '#text',
       removeNSPrefix: true,
       parseAttributeValue: false,
-      trimValues: false,  // Changed to false to preserve spaces in Run Text
+      trimValues: false,
       processEntities: true,
-      preserveOrder: true,  // Added to preserve element order
+      preserveOrder: true,
+      allowBooleanAttributes: true,
     });
     this.unicodeCleaner = new UnicodeCleaner();
   }
@@ -87,9 +88,12 @@ export class XamlToMarkdownConverter {
       // Clean up and normalize
       return this.normalizeMarkdown(markdown);
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.warn(`XAML parsing failed: ${errorMessage}`);
       if (this.options.ignoreUnknownElements) {
-        // Fallback to text extraction
-        return this.extractPlainText(xamlContent);
+        const fallbackResult = this.extractPlainText(xamlContent);
+        console.warn(`Falling back to plain text extraction. Result length: ${fallbackResult.length} chars`);
+        return '*[Warning: Some formatting lost due to complex content]*\n\n' + fallbackResult;
       }
       throw new Error(`Rich Text (XAML) conversion failed: ${error}`);
     }
@@ -99,15 +103,7 @@ export class XamlToMarkdownConverter {
     // Remove XML declarations and namespaces
     let cleaned = xaml.replace(/<\?xml[^>]*\?>/gi, '');
     cleaned = cleaned.replace(/xmlns[^=]*="[^"]*"/gi, '');
-    
-    // Decode HTML entities
-    cleaned = cleaned
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&amp;/g, '&')
-      .replace(/&quot;/g, '"')
-      .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(parseInt(code)));
-
+   
     return cleaned.trim();
   }
 
@@ -281,12 +277,25 @@ export class XamlToMarkdownConverter {
       
       if (!text) continue;
 
+      // Decode entities after parsing
+      text = this.decodeEntities(text);
+
       // Apply inline formatting
       text = this.applyInlineFormatting(text, r);
       result += text;
     }
 
     return result;
+  }
+
+  // New helper method to decode entities
+  private decodeEntities(text: string): string {
+    return text
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(parseInt(code)));
   }
 
   private processSpan(span: XamlElement | XamlElement[]): string {
@@ -296,7 +305,9 @@ export class XamlToMarkdownConverter {
     for (const s of spans) {
       if (!s) continue;
 
-      const content = this.extractElementContent(s);
+      let content = this.extractElementContent(s);
+      // Decode entities after parsing
+      content = this.decodeEntities(content);
       const formatted = this.applyInlineFormatting(content, s);
       result += formatted;
     }
@@ -743,27 +754,30 @@ export class XamlToMarkdownConverter {
   }
 
   private extractPlainText(xamlContent: string): string {
-    // Fallback text extraction using regex
     const textMatches = xamlContent.match(/Text="([^"]*?)"/g) || [];
-    const plainTexts = textMatches.map(match => 
-      this.unicodeCleaner.cleanXamlText(match.replace(/Text="([^"]*?)"/, '$1'))
-    );
+    const plainTexts = textMatches.map(match => {
+      let text = match.replace(/Text="([^"]*?)"/, '$1');
+      text = this.decodeEntities(text);
+      return this.unicodeCleaner.cleanXamlText(text);
+    });
 
-    // Extract content between tags
-    const contentMatches = xamlContent.match(/>([^<]+)</g) || [];
-    const contents = contentMatches.map(match => 
-      this.unicodeCleaner.cleanXamlText(match.replace(/^>([^<]+)<$/, '$1').trim())
-    ).filter(text => text && !text.startsWith('<?') && !text.startsWith('<!--'));
+    let result = plainTexts.join('\n').trim();
 
-    return [...plainTexts, ...contents].join(' ').trim();
+    // Detect and format simple structures
+    result = result.replace(/### (.+)/g, '\n\n### $1\n\n');
+    result = result.replace(/\b[0-9]+\. /g, '\n$0');
+    result = result.replace(/\b\* /g, '\n$0');
+    result = result.replace(/\b- /g, '\n$0');
+
+    return result;
   }
 
   private normalizeMarkdown(markdown: string): string {
     return markdown
-      .replace(/  \n/g, '  \n\n') // Convert single newlines with double trailing spaces to double newlines for paragraph separation
-      .replace(/\n{3,}/g, '\n\n') // Max 2 consecutive newlines
-      .replace(/^\s+|\s+$/g, '') // Trim start/end
-      .replace(/[ \t]{3,}$/gm, '  ') // Trim excessive trailing spaces but preserve double spaces for line breaks
-      .replace(/[ \t]+$/gm, (match) => match === '  ' ? '  ' : ''); // Preserve exactly 2 trailing spaces, remove others
+      .replace(/  \n/g, '  \n')
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/^\s+|\s+$/g, '')
+      .replace(/[ \t]{3,}$/gm, '  ')
+      .replace(/[ \t]+$/gm, (match) => match === '  ' ? '  ' : '');
   }
 } 
