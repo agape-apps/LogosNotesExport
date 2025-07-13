@@ -378,7 +378,7 @@ class LogosNotesExporter {
         const failureRate = ((stats.xamlConversionsFailed / stats.notesWithXaml) * 100).toFixed(1);
         this.log(`\n⚠️  Rich Text (XAML) Conversion Issues:\n   ${stats.xamlConversionsFailed} out of ${stats.notesWithXaml} conversions had issues`);
       } else {
-        this.log(`\n✅ Rich Text (XAML) Conversion: All ${stats.notesWithXaml} Rich Text (XAML) converted successfully`);
+        this.log(`\n✅ Rich Text (XAML) Conversion: All ${stats.notesWithXaml} Rich Text Notes converted successfully`);
       }
     }
   }

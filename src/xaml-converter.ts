@@ -138,8 +138,14 @@ export class XamlToMarkdownConverter {
 
       switch (tagName.toLowerCase()) {
         case 'root':
-          // Handle the Root wrapper - process its content
-          result += this.processElement(content);
+          // Handle the Root wrapper - process its content array
+          if (Array.isArray(content)) {
+            for (const childElement of content) {
+              result += this.processElement(childElement);
+            }
+          } else {
+            result += this.processElement(content);
+          }
           break;
         case 'section':
           result += this.processSection(element);
@@ -247,7 +253,8 @@ export class XamlToMarkdownConverter {
       if (headingLevel > 0) {
         result += '#'.repeat(headingLevel) + ' ' + content.trim() + '\n\n';
       } else {
-        result += content.trim() + '\n\n';
+        // Add double trailing spaces for Markdown line breaks on regular paragraphs
+        result += content.trim() + '  \n';
       }
     }
 
@@ -753,8 +760,10 @@ export class XamlToMarkdownConverter {
 
   private normalizeMarkdown(markdown: string): string {
     return markdown
+      .replace(/  \n/g, '  \n\n') // Convert single newlines with double trailing spaces to double newlines for paragraph separation
       .replace(/\n{3,}/g, '\n\n') // Max 2 consecutive newlines
       .replace(/^\s+|\s+$/g, '') // Trim start/end
-      .replace(/\s+$/gm, ''); // Trim line endings
+      .replace(/[ \t]{3,}$/gm, '  ') // Trim excessive trailing spaces but preserve double spaces for line breaks
+      .replace(/[ \t]+$/gm, (match) => match === '  ' ? '  ' : ''); // Preserve exactly 2 trailing spaces, remove others
   }
 } 
