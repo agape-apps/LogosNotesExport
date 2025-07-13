@@ -303,7 +303,21 @@ export class XamlToMarkdownConverter {
       // Decode entities after parsing
       text = this.decodeEntities(text);
 
-      // Apply inline formatting
+      // Check if this is monospace font (code) - preserve as-is without link conversion
+      const fontFamily = attrs['@_FontFamily'] || '';
+      if (this.isMonospaceFont(fontFamily)) {
+        // For code context, preserve existing markdown syntax
+        result += '`' + text + '`';
+        continue;
+      }
+
+      // Check if text already contains markdown syntax - preserve it
+      if (this.hasMarkdownLinkSyntax(text)) {
+        result += text;
+        continue;
+      }
+
+      // Apply inline formatting for non-code, non-markdown content
       text = this.applyInlineFormatting(text, r);
       result += text;
     }
@@ -407,6 +421,35 @@ export class XamlToMarkdownConverter {
     return result;
   }
 
+  // New helper methods to detect existing markdown syntax
+  private hasMarkdownLinkSyntax(text: string): boolean {
+    // Check for markdown link patterns: [text](url) or [text][ref] or ![alt](url)
+    const linkPatterns = [
+      /\[([^\]]*)\]\(([^)]+)\)/,  // [text](url)
+      /\[([^\]]*)\]\[([^\]]*)\]/,  // [text][ref]
+      /!\[([^\]]*)\]\(([^)]+)\)/,  // ![alt](url)
+      /!\[([^\]]*)\]\[([^\]]*)\]/   // ![alt][ref]
+    ];
+    
+    return linkPatterns.some(pattern => pattern.test(text));
+  }
+
+  private hasMarkdownImageSyntax(text: string): boolean {
+    // Check for markdown image patterns: ![alt](url) or ![alt][ref]
+    const imagePatterns = [
+      /!\[([^\]]*)\]\(([^)]+)\)/,  // ![alt](url)
+      /!\[([^\]]*)\]\[([^\]]*)\]/   // ![alt][ref]
+    ];
+    
+    return imagePatterns.some(pattern => pattern.test(text));
+  }
+
+  private isInCodeContext(element: XamlElement): boolean {
+    const attrs = this.getAttributes(element);
+    const fontFamily = attrs['@_FontFamily'] || '';
+    return this.isMonospaceFont(fontFamily);
+  }
+
   private processHyperlink(hyperlink: XamlElement | XamlElement[]): string {
     const hyperlinks = Array.isArray(hyperlink) ? hyperlink : [hyperlink];
     let result = '';
@@ -434,8 +477,14 @@ export class XamlToMarkdownConverter {
       text = text.trim();
       if (!text) continue;
 
-      if (url) {
-        result += `[${text}](${url})`;
+      // Check if this is in code context
+      if (this.isInCodeContext(link)) {
+        // Preserve code context
+        result += text;
+      } else if (url) {
+        // For UriLink elements, just return the URL text without additional formatting
+        // This allows the surrounding markdown syntax to work properly
+        result += text;
       } else {
         result += text;
       }

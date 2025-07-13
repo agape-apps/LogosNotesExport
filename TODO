@@ -7,8 +7,7 @@
 
 BUGS
 - fix src/xaml-converter.ts 
-    - still too many blank lines in some cases
-    - Markdown links in notes should not be changed
+    - still too many blank lines in some cases, but mostly looking good
 - Spacing issue in Conditional Immortality/AP40_Tob-14.07.md 
 - an offset of -1 causes an error Highlight/LLS-1.0.20-0736.md (create no links for that)
 
