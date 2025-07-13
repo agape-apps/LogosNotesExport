@@ -10,9 +10,12 @@ BUGS
     - missing double space for new line (for some Markdown readers)
     - missing blank lines
     - Links not converting
+- Spacing issue in Conditional Immortality/AP40_Tob-14.07.md 
+- an offset of -1 causes an error Highlight/LLS-1.0.20-0736.md (create no links for that)
 
 FEATURES
 - try to implement this as an Electron app
+- add empty note Tag to notes like Heavenly Citizens - Phil. Ch. 3/NT71_Phil-03.20.md (remove notice text)
 
 CANNOT FIX
 - to get the text which corresponds to the highlight range from books is impossible, as we do not have access to the content of book resources

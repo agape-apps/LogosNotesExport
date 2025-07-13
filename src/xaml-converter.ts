@@ -412,7 +412,7 @@ export class XamlToMarkdownConverter {
       return formatted; // Code formatting takes precedence
     }
 
-    // Apply text formatting in order: bold, italic, underline, strikethrough, small caps, sub/superscript
+    // Apply text formatting in order: bold, italic, underline, strikethrough, small caps, sub/superscript, highlight
     let needsBold = false;
     let needsItalic = false;
     let needsUnderline = false;
@@ -420,6 +420,7 @@ export class XamlToMarkdownConverter {
     let needsSmallCaps = false;
     let needsSubscript = false;
     let needsSuperscript = false;
+    let needsHighlight = false;
 
     // Check for bold
     const fontBold = attrs['@_FontBold'] || '';
@@ -459,6 +460,12 @@ export class XamlToMarkdownConverter {
       needsSuperscript = true;
     }
 
+    // Check for background color highlight
+    const backgroundColor = attrs['@_BackgroundColor'] || '';
+    if (backgroundColor.trim() !== '') {
+      needsHighlight = true;
+    }
+
     // Apply formatting in the correct order (innermost to outermost)
     if (needsSubscript) {
       formatted = '<sub>' + formatted + '</sub>';
@@ -484,6 +491,10 @@ export class XamlToMarkdownConverter {
 
     if (needsBold) {
       formatted = '**' + formatted + '**';
+    }
+
+    if (needsHighlight) {
+      formatted = '==' + formatted + '==';
     }
 
     return formatted;
