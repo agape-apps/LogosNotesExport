@@ -2,13 +2,19 @@
 import { parseArgs } from 'util';
 import { existsSync, readFileSync } from 'fs';
 import { join, basename } from 'path';
-import { NotebookOrganizer } from './notebook-organizer.js';
-import { FileOrganizer, DEFAULT_FILE_OPTIONS } from './file-organizer.js';
-import { MarkdownConverter, DEFAULT_MARKDOWN_OPTIONS, type XamlConversionFailure } from './markdown-converter.js';
-import type { FileStructureOptions, MarkdownOptions } from './types.js';
-import { ExportValidator } from './validator.js';
-import { NotesToolDatabase } from './notestool-database.js';
-import { CatalogDatabase } from './catalog-database.js';
+import { 
+  NotebookOrganizer, 
+  FileOrganizer, 
+  MarkdownConverter, 
+  ExportValidator, 
+  NotesToolDatabase, 
+  CatalogDatabase,
+  DEFAULT_FILE_OPTIONS,
+  DEFAULT_MARKDOWN_OPTIONS,
+  type FileStructureOptions,
+  type MarkdownOptions,
+  type XamlConversionFailure
+} from '@logos-notes-exporter/core';
 
 /**
  * Read version from package.json

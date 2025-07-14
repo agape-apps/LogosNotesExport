@@ -1,22 +1,23 @@
 {
-  "name": "logos-notes-exporter",
+  "name": "logos-notes-exporter-monorepo",
   "version": "1.0.9",
-  "description": "A TypeScript CLI tool to export Logos Bible Software notes to Markdown files with YAML frontmatter",
+  "description": "Logos Notes Exporter - CLI and Electron applications with shared core",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "type": "module",
-  "main": "src/index.ts",
   "scripts": {
-    "dev": "bun run src/cli.ts",
-    "build": "bun build src/cli.ts --outdir dist --target bun",
-    "start": "bun run dist/cli.js",
-    "test": "bun test",
-    "lint": "tsc --noEmit",
-    "export": "bun run src/cli.ts",
-    "binary:macx64": "bun build --compile --target=bun-macos-x64 ./index.ts --outfile bin/macos-x64/LogosNotesExporter",
-    "binary:macarm": "bun build --compile --target=bun-macos-arm64 ./index.ts --outfile bin/macos-arm64/LogosNotesExporter",
-    "binary:windows": "bun build --compile --target=bun-windows-x64 ./index.ts --outfile bin/windows-x64/LogosNotesExporter.exe"
-  },
-  "bin": {
-    "logos-export": "src/cli.ts"
+    "build": "npm run build:core && npm run build:cli && npm run build:electron",
+    "build:core": "npm run build --workspace=@logos-notes-exporter/core",
+    "build:cli": "npm run build --workspace=@logos-notes-exporter/cli",
+    "build:electron": "npm run build --workspace=logos-notes-exporter-electron",
+    "dev:cli": "npm run dev --workspace=@logos-notes-exporter/cli",
+    "dev:electron": "npm run start --workspace=logos-notes-exporter-electron",
+    "start": "npm run dev:electron",
+    "test:electron": "npm run start --workspace=logos-notes-exporter-electron",
+    "test:cli": "npm run dev --workspace=@logos-notes-exporter/cli",
+    "clean": "npm run clean --workspaces --if-present"
   },
   "keywords": [
     "logos",
@@ -26,29 +27,18 @@
     "export",
     "converter",
     "cli",
+    "electron",
     "typescript",
     "bun"
   ],
   "author": "Logos Notes Exporter",
   "license": "MIT",
-  "engines": {
-    "bun": ">=1.0.0"
-  },
-  "dependencies": {
-    "bun": "^1.0.0",
-    "fast-xml-parser": "^5.2.5",
-    "yaml": "^2.8.0"
-  },
   "devDependencies": {
-    "@types/bun": "latest",
     "typescript": "^5.0.0"
   },
-  "files": [
-    "src/**/*",
-    "dist/**/*",
-    "docs/**/*",
-    "README.md"
-  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/agape-apps/logos-notes-exporter.git"
@@ -56,5 +46,6 @@
   "bugs": {
     "url": "https://github.com/agape-apps/logos-notes-exporter/issues"
   },
-  "homepage": "https://github.com/agape-apps/logos-notes-exporter#readme"
+  "homepage": "https://github.com/agape-apps/logos-notes-exporter#readme",
+  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
 }
