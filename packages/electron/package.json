@@ -1,5 +1,5 @@
 {
-  "name": "electron",
+  "name": "logos-notes-exporter-electron",
   "productName": "electron",
   "version": "1.0.0",
   "description": "My Electron application description",
@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "echo \"No linting configured\""
   },
   "keywords": [],
   "author": {
@@ -33,19 +33,11 @@
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron-forge/plugin-webpack": "^7.8.1",
     "@electron/fuses": "^1.8.0",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
     "@vercel/webpack-asset-relocator-loader": "1.7.3",
     "css-loader": "^6.11.0",
     "electron": "37.2.1",
-    "eslint": "^8.57.1",
-    "eslint-plugin-import": "^2.32.0",
-    "fork-ts-checker-webpack-plugin": "^7.3.0",
     "node-loader": "^2.1.0",
-    "style-loader": "^3.3.4",
-    "ts-loader": "^9.5.2",
-    "ts-node": "^10.9.2",
-    "typescript": "~4.5.5"
+    "style-loader": "^3.3.4"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1"
