@@ -9,13 +9,14 @@
     "noImplicitAny": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "outDir": "dist",
+    "outDir": "dist", 
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "lib": ["ES6", "DOM", "DOM.Iterable"],
     "paths": {
-      "*": ["node_modules/*"]
+      "@/*": ["./src/renderer/*"],
+      "@/lib/utils": ["./src/renderer/lib/utils.ts"]
     }
   },
   "include": ["src/**/*"],
