@@ -1,4 +1,6 @@
-module.exports = [
+import type { ModuleOptions } from 'webpack';
+
+export const rules: Required<ModuleOptions>['rules'] = [
   // Add support for native node modules
   {
     // We're specifying native_modules in the test because the asset relocator loader generates a
@@ -16,15 +18,14 @@ module.exports = [
       },
     },
   },
-  // TypeScript support
   {
     test: /\.tsx?$/,
     exclude: /(node_modules|\.webpack)/,
     use: {
       loader: 'ts-loader',
       options: {
-        transpileOnly: true
-      }
-    }
-  }
+        transpileOnly: true,
+      },
+    },
+  },
 ];
