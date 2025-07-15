@@ -3,3 +3,4 @@ export type { MarkdownOptions, MarkdownResult, XamlConversionFailure } from './m
 export type { OrganizedNote, NotebookGroup, OrganizationStats } from './notebook-organizer.js';
 export type { NotesToolNote, BibleReference, Notebook } from './notestool-database.js';
 export type { DecodedReference, BibleBookMapping } from './reference-decoder.js';
+export type { DatabaseLocation } from './database-locator.js';

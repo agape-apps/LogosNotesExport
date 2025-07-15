@@ -9,5 +9,13 @@ export { MetadataProcessor } from './metadata-processor.js';
 export { UnicodeCleaner } from './unicode-cleaner.js';
 export { ExportValidator } from './validator.js';
 export { DatabaseLocator } from './database-locator.js';
+export { 
+  LogosNotesExporter, 
+  type CoreExportOptions, 
+  type ExportCallbacks, 
+  type ExportResult, 
+  type ProgressCallback, 
+  type LogCallback 
+} from './exporter.js';
 
 export type * from './types.js'; 

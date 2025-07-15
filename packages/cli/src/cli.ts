@@ -3,17 +3,10 @@ import { parseArgs } from 'util';
 import { existsSync, readFileSync } from 'fs';
 import { join, basename } from 'path';
 import { 
-  NotebookOrganizer, 
-  FileOrganizer, 
-  MarkdownConverter, 
-  ExportValidator, 
-  NotesToolDatabase, 
-  CatalogDatabase,
-  DEFAULT_FILE_OPTIONS,
-  DEFAULT_MARKDOWN_OPTIONS,
-  type FileStructureOptions,
-  type MarkdownOptions,
-  type XamlConversionFailure
+  LogosNotesExporter,
+  type CoreExportOptions,
+  type ExportCallbacks,
+  NotesToolDatabase
 } from '@logos-notes-exporter/core';
 
 /**
@@ -119,359 +112,6 @@ NOTES:
   - Existing files will be overwritten
   - Bible references are always included when available
 `;
-
-class LogosNotesExporter {
-  private database: NotesToolDatabase;
-  private catalogDb?: CatalogDatabase;
-  private organizer: NotebookOrganizer;
-  private fileOrganizer: FileOrganizer;
-  private markdownConverter: MarkdownConverter;
-  private validator: ExportValidator;
-  private options: CLIOptions;
-
-  constructor(options: CLIOptions) {
-    this.options = options;
-    
-    // Initialize database with automatic location detection
-    this.database = new NotesToolDatabase(options.database);
-    
-    // Initialize catalog database for resource titles
-    try {
-      this.catalogDb = new CatalogDatabase(this.database.getDatabaseInfo().path);
-      if (options.verbose) {
-        const catalogInfo = this.catalogDb.getCatalogInfo();
-        console.log(`📖 Using catalog database: ${catalogInfo.path}`);
-        if (catalogInfo.size) {
-          console.log(`   Size: ${(catalogInfo.size / 1024 / 1024).toFixed(1)} MB`);
-        }
-      }
-    } catch (error) {
-      if (options.verbose) {
-        console.warn('⚠️  Catalog database not found or accessible. Resource titles will not be included.');
-        console.warn('   Error:', error);
-      }
-    }
-    
-    this.organizer = new NotebookOrganizer(this.database, { skipHighlights: options.skipHighlights || false });
-    
-    // Show database info in verbose mode
-    if (options.verbose) {
-      const dbInfo = this.database.getDatabaseInfo();
-      console.log(`📁 Using database: ${dbInfo.description}`);
-      console.log(`   Path: ${dbInfo.path}`);
-      if (dbInfo.size) {
-        console.log(`   Size: ${(dbInfo.size / 1024 / 1024).toFixed(1)} MB`);
-      }
-      console.log('');
-    }
-    
-    // Configure file organizer
-    const fileOptions: Partial<FileStructureOptions> = {
-      baseDir: options.output || './Logos-Exported-Notes',
-      organizeByNotebooks: options.organizeByNotebooks !== false,
-      includeDateFolders: options.includeDateFolders || false,
-      createIndexFiles: options.createIndexFiles !== false,
-    };
-    
-    // Get resourceIds for filename generation
-    const resourceIds = this.database.getResourceIds();
-    this.fileOrganizer = new FileOrganizer(fileOptions, resourceIds);
-    
-    // Configure markdown converter
-    const markdownOptions: Partial<MarkdownOptions> = {
-      includeFrontmatter: options.includeFrontmatter !== false,
-      includeMetadata: options.includeMetadata || false,
-      includeDates: options.includeDates !== false,
-      includeNotebook: options.includeNotebook !== false,
-      includeId: options.includeId || false,
-      dateFormat: options.dateFormat || 'iso',
-    };
-    this.markdownConverter = new MarkdownConverter(markdownOptions, this.database, options.verbose || false, this.catalogDb);
-    this.validator = new ExportValidator();
-  }
-
-  /**
-   * Main export process
-   */
-  public async export(): Promise<void> {
-    try {
-      this.log('Starting Logos Notes export...\n');
-
-      // Step 1: Organize notes by notebooks
-      this.log('📚 Organizing notes by notebooks...');
-      const notebookGroups = await this.organizer.organizeNotes();
-      this.log(`Found ${notebookGroups.length} notebook groups`);
-
-      // Step 2: Get organization stats
-      const stats = this.organizer.getOrganizationStats();
-      this.logStats(stats);
-
-      // Step 3: Plan file structure
-      this.log('\n📁 Planning file structure...');
-      const structure = await this.fileOrganizer.planDirectoryStructure(notebookGroups);
-      const summary = this.fileOrganizer.getFileOperationSummary(notebookGroups);
-      this.logFileSummary(summary);
-
-      if (this.options.dryRun) {
-        this.log('\n🔍 DRY RUN - No files will be written');
-        this.logDryRunSummary(notebookGroups);
-        return;
-      }
-
-      // Step 4: Process each notebook group
-      this.log('\n📝 Converting notes to markdown...');
-      let totalProcessed = 0;
-
-      for (const group of notebookGroups) {
-        const notebookName = group.notebook?.title || 'No Notebook';
-        this.log(`Processing: ${notebookName} (${group.notes.length} notes)`);
-
-        // Resolve filename conflicts
-        const fileMap = this.fileOrganizer.resolveFilenameConflicts(group.notes, group);
-        
-        // Convert notes to markdown
-        const markdownResults = this.markdownConverter.convertNotebook(group, fileMap);
-
-        // Write notes to files
-        for (const [note, result] of markdownResults) {
-          const fileInfo = fileMap.get(note);
-          if (fileInfo) {
-            await this.fileOrganizer.writeFile(fileInfo, result.content);
-            totalProcessed++;
-            
-            if (this.options.verbose) {
-              this.log(`  ✓ ${fileInfo.filename}`);
-            }
-          }
-        }
-
-        // Create notebook index
-        if (this.fileOrganizer.getOptions().createIndexFiles) {
-          const indexContent = this.fileOrganizer.generateNotebookIndex(group);
-          const indexPath = join(this.fileOrganizer.getNotebookDirectory(group), 'README.md');
-          await this.fileOrganizer.ensureDirectory(this.fileOrganizer.getNotebookDirectory(group));
-          await this.fileOrganizer.writeFile({
-            fullPath: indexPath,
-            directory: this.fileOrganizer.getNotebookDirectory(group),
-            filename: 'README',
-            relativePath: indexPath.replace(this.fileOrganizer.getOptions().baseDir + '/', ''),
-            exists: false
-          }, indexContent);
-        }
-      }
-
-      // Step 5: Create main index
-      if (this.fileOrganizer.getOptions().createIndexFiles) {
-        this.log('\n📋 Creating main index...');
-        const mainIndexContent = this.fileOrganizer.generateMainIndex(notebookGroups, stats);
-        const mainIndexPath = join(this.fileOrganizer.getOptions().baseDir, 'README.md');
-        await this.fileOrganizer.writeFile({
-          fullPath: mainIndexPath,
-          directory: this.fileOrganizer.getOptions().baseDir,
-          filename: 'README',
-          relativePath: 'README.md',
-          exists: false
-        }, mainIndexContent);
-      }
-
-      // Step 7: Display Rich Text (XAML) conversion statistics
-      this.log('\n📊 Rich Text (XAML) Conversion Statistics:');
-      const xamlStats = this.markdownConverter.getXamlConversionStats();
-      this.displayXamlStats(xamlStats);
-
-      // Show detailed XAML conversion failures in verbose mode
-      if (this.options.verbose && xamlStats.xamlConversionsFailed > 0) {
-        this.displayXamlFailures();
-      }
-
-      // Step 8: Validate export (if enabled)
-      if (!this.options.dryRun) {
-        this.log('\n🔍 Validating export...');
-        const allNotes = notebookGroups.flatMap(group => group.notes);
-        const validationResult = await this.validator.validateExport(
-          this.fileOrganizer.getOptions().baseDir,
-          allNotes,
-          notebookGroups
-        );
-
-        // Display validation results
-        this.displayValidationResults(validationResult);
-        
-        if (!validationResult.isValid) {
-          this.log('\n⚠️  Export completed with validation issues. See details above.');
-        }
-      }
-
-      // Step 8: Show completion summary
-      this.log('\n✅ Export completed successfully!');
-      this.log(`📁 Output directory: ${this.fileOrganizer.getOptions().baseDir}`);
-      this.log(`📄 Total files created: ${totalProcessed}`);
-      this.log(`📚 Notebooks processed: ${notebookGroups.length}`);
-      
-    } catch (error) {
-      console.error('\n❌ Export failed:', error);
-      process.exit(1);
-    } finally {
-      this.organizer.close();
-      if (this.catalogDb) {
-        this.catalogDb.close();
-      }
-    }
-  }
-
-  /**
-   * Log message if not in quiet mode
-   */
-  private log(message: string): void {
-    console.log(message);
-  }
-
-  /**
-   * Log organization statistics
-   */
-  private logStats(stats: any): void {
-    this.log(`\n📊 Statistics:`);
-    this.log(`  Total Notes: ${stats.totalNotes}`);
-    this.log(`  Notes with Content: ${stats.notesWithContent}`);
-    this.log(`  Notes with References: ${stats.notesWithReferences}`);
-    this.log(`  Notebooks: ${stats.notebooks}`);
-    this.log(`  Notes with No Notebook: ${stats.orphanedNotes}`);
-  }
-
-  /**
-   * Log file operation summary
-   */
-  private logFileSummary(summary: any): void {
-    this.log(`  Directories to create: ${summary.totalDirectories}`);
-    this.log(`  Notes to export: ${summary.totalFiles}`);
-    this.log(`  Index files to create: ${summary.totalIndexFiles}`);
-    this.log(`  Estimated size: ${summary.estimatedSize}`);
-  }
-
-  /**
-   * Log dry run summary
-   */
-  private logDryRunSummary(notebookGroups: any[]): void {
-    for (const group of notebookGroups) {
-      const notebookName = group.notebook?.title || 'No Notebook';
-      this.log(`\n📚 ${notebookName}:`);
-      this.log(`  📄 ${group.notes.length} notes would be exported`);
-      
-      if (this.options.verbose) {
-        for (const note of group.notes.slice(0, 5)) {
-          this.log(`    - ${note.formattedTitle || 'Untitled'}`);
-        }
-        if (group.notes.length > 5) {
-          this.log(`    ... and ${group.notes.length - 5} more`);
-        }
-      }
-    }
-  }
-
-  /**
-   * Display Rich Text (XAML) conversion statistics
-   */
-  private displayXamlStats(stats: any): void {
-    this.log(`  Total notes processed: ${stats.totalNotes}`);
-    this.log(`  Notes with Rich Text content: ${stats.notesWithXaml}`);
-    this.log(`  Conversions succeeded: ${stats.xamlConversionsSucceeded}`);
-    this.log(`  Conversion issues: ${stats.xamlConversionsFailed}`);
-    this.log(`  Plain text notes: ${stats.plainTextNotes}`);
-    this.log(`  Empty notes: ${stats.emptyNotes}`);
-    
-    if (stats.notesWithXaml > 0) {
-      if (stats.xamlConversionsFailed > 0) {
-        const failureRate = ((stats.xamlConversionsFailed / stats.notesWithXaml) * 100).toFixed(1);
-        this.log(`\n⚠️  Rich Text (XAML) Conversion Issues:\n   ${stats.xamlConversionsFailed} out of ${stats.notesWithXaml} conversions had issues`);
-      } else {
-        this.log(`\n✅ Rich Text (XAML) Conversion: All ${stats.notesWithXaml} Rich Text Notes converted successfully`);
-      }
-    }
-  }
-
-  /**
-   * Display detailed Rich Text (XAML) conversion failures in verbose mode
-   */
-  private displayXamlFailures(): void {
-    const failures = this.markdownConverter.getXamlConversionFailures();
-    
-    if (failures.length === 0) {
-      return;
-    }
-
-    this.log('\n🔍 Detailed Rich Text (XAML) Conversion Issues:');
-    
-    for (const failure of failures) {
-      this.log(`\n❌ Note ID ${failure.noteId}: ${failure.noteTitle}`);
-      
-      if (failure.failureType === 'empty_content') {
-        this.log(`   Issue: Rich Text (XAML) conversion succeeded but produced empty content`);
-      } else {
-        this.log(`   Issue: Exception during Rich Text (XAML) conversion`);
-        if (failure.errorMessage) {
-          this.log(`   Error: ${failure.errorMessage}`);
-        }
-      }
-      
-      this.log(`   XAML preview: ${failure.xamlContentPreview}${failure.xamlContentPreview.length >= 150 ? '...' : ''}`);
-    }
-  }
-
-  /**
-   * Display validation results to the user
-   */
-  private displayValidationResults(result: any): void {
-    this.log(`\n📋 ${result.summary}`);
-    
-    if (result.issues.length > 0) {
-      const errors = result.issues.filter((i: any) => i.severity === 'error');
-      const warnings = result.issues.filter((i: any) => i.severity === 'warning');
-      const info = result.issues.filter((i: any) => i.severity === 'info');
-      
-      if (errors.length > 0) {
-        this.log('\n❌ Errors found:');
-        for (const error of errors.slice(0, 5)) { // Show first 5 errors
-          this.log(`  • ${error.message}`);
-          if (error.filePath && this.options.verbose) {
-            this.log(`    File: ${error.filePath}`);
-          }
-        }
-        if (errors.length > 5) {
-          this.log(`  ... and ${errors.length - 5} more errors`);
-        }
-      }
-      
-      if (warnings.length > 0 && this.options.verbose) {
-        this.log('\n⚠️  Warnings found:');
-        for (const warning of warnings.slice(0, 3)) { // Show first 3 warnings
-          this.log(`  • ${warning.message}`);
-        }
-        if (warnings.length > 3) {
-          this.log(`  ... and ${warnings.length - 3} more warnings`);
-        }
-      }
-      
-      if (info.length > 0 && this.options.verbose) {
-        this.log('\n💡 Info:');
-        for (const infoItem of info.slice(0, 3)) { // Show first 3 info items
-          this.log(`  • ${infoItem.message}`);
-        }
-        if (info.length > 3) {
-          this.log(`  ... and ${info.length - 3} more info items`);
-        }
-      }
-    }
-
-    // Note: Rich Text (XAML) conversion statistics are displayed separately
-  }
-
-  /**
-   * Get file organizer options for external access
-   */
-  public getFileOrganizerOptions() {
-    return this.fileOrganizer.getOptions();
-  }
-}
 
 /**
  * Parse command line arguments
@@ -586,9 +226,37 @@ async function main(): Promise<void> {
   // Validate options
   validateOptions(options);
 
+  // Convert CLI options to core options
+  const coreOptions: CoreExportOptions = {
+    database: options.database,
+    output: options.output,
+    organizeByNotebooks: options.organizeByNotebooks,
+    includeDateFolders: options.includeDateFolders,
+    createIndexFiles: options.createIndexFiles,
+    includeFrontmatter: options.includeFrontmatter,
+    includeMetadata: options.includeMetadata,
+    includeDates: options.includeDates,
+    includeNotebook: options.includeNotebook,
+    includeId: options.includeId,
+    dateFormat: options.dateFormat,
+    skipHighlights: options.skipHighlights,
+    verbose: options.verbose,
+    dryRun: options.dryRun,
+  };
+
+  // Create callbacks for CLI output
+  const callbacks: ExportCallbacks = {
+    onLog: (message: string) => console.log(message),
+    // Progress callback not needed for CLI
+  };
+
   // Create and run exporter
-  const exporter = new LogosNotesExporter(options);
-  await exporter.export();
+  const exporter = new LogosNotesExporter(coreOptions, callbacks);
+  const result = await exporter.export();
+
+  if (!result.success) {
+    process.exit(1);
+  }
 }
 
 // Run CLI if this file is executed directly
@@ -599,4 +267,4 @@ if (import.meta.main) {
   });
 }
 
-export { LogosNotesExporter, parseCommandLine, validateOptions, main }; 
+export { parseCommandLine, validateOptions, main }; 

@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import type { ExportSettings, ExportProgress, ExportResult, AppMode } from '../renderer/types';
 import { loadSettings, saveSettings, resetSettings } from './settings';
-import { executeExport } from './export-handler';
+import { executeExport, detectDatabaseLocations, getDefaultDatabasePath, getDatabaseSearchInstructions } from './export-handler';
 
 let exportInProgress = false;
 let exportProcess: any = null; // Will be used when we integrate with core
@@ -47,28 +47,6 @@ export function setupIpcHandlers(): void {
   });
 
   // File system operations
-  ipcMain.handle('select-database', async () => {
-    try {
-      const result = await dialog.showOpenDialog({
-        title: 'Select Logos Database File',
-        filters: [
-          { name: 'Database Files', extensions: ['db', 'sqlite', 'sqlite3'] },
-          { name: 'All Files', extensions: ['*'] }
-        ],
-        properties: ['openFile']
-      });
-
-      if (result.canceled || result.filePaths.length === 0) {
-        return null;
-      }
-
-      return result.filePaths[0];
-    } catch (error) {
-      console.error('Error selecting database:', error);
-      return null;
-    }
-  });
-
   ipcMain.handle('select-output-directory', async () => {
     try {
       const result = await dialog.showOpenDialog({
@@ -103,24 +81,52 @@ export function setupIpcHandlers(): void {
   // Database operations
   ipcMain.handle('detect-database', async () => {
     try {
-      const detectedPath = await detectLogosDatabase();
-      
-      const mainWindow = BrowserWindow.getFocusedWindow();
-      if (mainWindow && detectedPath) {
-        mainWindow.webContents.send('database-detected', detectedPath);
-        mainWindow.webContents.send('output-log', `✅ Database detected: ${detectedPath}`);
-      } else if (mainWindow) {
-        mainWindow.webContents.send('output-log', '⚠️ No Logos database found. Please select manually.');
+      const defaultPath = getDefaultDatabasePath();
+      if (defaultPath) {
+        const mainWindow = BrowserWindow.getFocusedWindow();
+        if (mainWindow) {
+          mainWindow.webContents.send('database-detected', defaultPath);
+        }
       }
-      
-      return detectedPath;
+      return defaultPath;
     } catch (error) {
       console.error('Error detecting database:', error);
-      const mainWindow = BrowserWindow.getFocusedWindow();
-      if (mainWindow) {
-        mainWindow.webContents.send('output-log', `❌ Error detecting database: ${error.message}`);
-      }
       return null;
+    }
+  });
+
+  // File selection operations
+  ipcMain.handle('select-database', async () => {
+    try {
+      const result = await dialog.showOpenDialog({
+        title: 'Select Logos Database File',
+        filters: [
+          { name: 'SQLite Database', extensions: ['db'] },
+          { name: 'All Files', extensions: ['*'] }
+        ],
+        properties: ['openFile']
+      });
+
+      if (!result.canceled && result.filePaths.length > 0) {
+        const selectedPath = result.filePaths[0];
+        
+        // Validate that this is likely a notestool database
+        if (path.basename(selectedPath) === 'notestool.db') {
+          return selectedPath;
+        } else {
+          // Show warning but allow selection
+          const mainWindow = BrowserWindow.getFocusedWindow();
+          if (mainWindow) {
+            mainWindow.webContents.send('output-log', '⚠️ Selected file may not be a Logos NotesTool database');
+          }
+          return selectedPath;
+        }
+      }
+      
+      return null;
+    } catch (error) {
+      console.error('Error selecting database:', error);
+      throw error;
     }
   });
 

@@ -9,3 +9,4 @@ export { MetadataProcessor } from './metadata-processor.js';
 export { UnicodeCleaner } from './unicode-cleaner.js';
 export { ExportValidator } from './validator.js';
 export { DatabaseLocator } from './database-locator.js';
+export { LogosNotesExporter } from './exporter.js';
