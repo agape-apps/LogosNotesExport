@@ -49,6 +49,8 @@ It outputs the following:
   - a file selector for custom database location
   - a Defaults button for default settings will restore defaults
   - a Basic Mode button to hide (but not reset) advanced settings
+- Use TailwindCSS version 4 (not version 3) which is the current version
+In Tailwind CSS 4, the way you import Tailwind has changed compared to previous versions. Instead of using the @tailwind directives, you now use a regular CSS @import statement to import Tailwind. This means that the @tailwind base;, @tailwind components;, and @tailwind utilities; directives are no longer used in the same way as they were in version 3.4.
 
 ## Core Tasks
 
