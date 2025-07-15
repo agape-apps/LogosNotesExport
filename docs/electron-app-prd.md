@@ -22,7 +22,7 @@ The Electron version of Logos Notes Exporter provides a user-friendly desktop GU
 
 ### Framework Stack
 
-- **Frontend**: React 19 with TypeScript
+- **Frontend**: React 19 (VERSION 19 !!!) with TypeScript
 - **UI Components**: ShadcnUI component library
 - **Styling**: Tailwind CSS (included with ShadcnUI)
 - **State Management**: Zusatnd for settings state

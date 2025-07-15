@@ -27,13 +27,20 @@
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron-forge/plugin-webpack": "^7.8.1",
     "@electron/fuses": "^1.8.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@vercel/webpack-asset-relocator-loader": "1.7.3",
     "css-loader": "^6.11.0",
     "electron": "37.2.1",
     "node-loader": "^2.1.0",
-    "style-loader": "^3.3.4"
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
