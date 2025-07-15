@@ -3,7 +3,6 @@
   "version": "1.0.9",
   "description": "Logos Notes Exporter - CLI and Electron applications with shared core",
   "private": true,
-
   "type": "module",
   "scripts": {
     "build": "pnpm run build:core && pnpm run build:cli && pnpm run build:electron",
