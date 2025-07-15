@@ -13,7 +13,8 @@ import {
  * Validates export settings before starting export
  */
 function validateExportSettings(settings: ExportSettings): { valid: boolean; error?: string } {
-  if (!settings.databasePath) {
+  // Check if databasePath exists and is valid
+  if (!settings.databasePath || typeof settings.databasePath !== 'string') {
     return { valid: false, error: 'Database path is required' };
   }
 
@@ -21,12 +22,16 @@ function validateExportSettings(settings: ExportSettings): { valid: boolean; err
     return { valid: false, error: `Database file not found: ${settings.databasePath}` };
   }
 
-  if (!settings.outputDirectory) {
+  // Check if outputDirectory exists and is a valid string
+  if (!settings.outputDirectory || typeof settings.outputDirectory !== 'string' || settings.outputDirectory.trim() === '') {
     return { valid: false, error: 'Output directory is required' };
   }
 
   try {
-    const outputPath = path.resolve(settings.outputDirectory.replace(/^~/, process.env.HOME || ''));
+    // Safely handle the tilde expansion
+    const expandedPath = settings.outputDirectory.replace(/^~/, process.env.HOME || '');
+    const outputPath = path.resolve(expandedPath);
+    
     // Try to create output directory if it doesn't exist
     if (!fs.existsSync(outputPath)) {
       fs.mkdirSync(outputPath, { recursive: true });
@@ -85,29 +90,60 @@ export async function executeExport(
   settings: ExportSettings,
   mainWindow: BrowserWindow | null
 ): Promise<ExportResult> {
+  // Add debugging to see what we're receiving
+  console.log('Export settings received:', {
+    databasePath: settings.databasePath,
+    outputDirectory: settings.outputDirectory,
+    autoDetectDatabase: settings.autoDetectDatabase
+  });
+
+  // If no database path provided, try auto-detection
+  let finalDatabasePath = settings.databasePath;
+  if (!finalDatabasePath) {
+    console.log('No database path provided, attempting auto-detection...');
+    finalDatabasePath = getDefaultDatabasePath();
+    if (finalDatabasePath) {
+      console.log('Auto-detected database:', finalDatabasePath);
+      if (mainWindow) {
+        mainWindow.webContents.send('output-log', `🔍 Auto-detected database: ${finalDatabasePath}`);
+      }
+    }
+  }
+
+  // Update settings with the final database path
+  const updatedSettings = {
+    ...settings,
+    databasePath: finalDatabasePath
+  };
+
   // Validate settings
-  const validation = validateExportSettings(settings);
+  const validation = validateExportSettings(updatedSettings);
   if (!validation.valid) {
     throw new Error(validation.error);
   }
 
   // Convert Electron ExportSettings to Core ExportOptions
   const coreOptions: CoreExportOptions = {
-    database: settings.databasePath,
-    output: settings.outputDirectory,
-    organizeByNotebooks: settings.organizeByNotebooks,
-    includeDateFolders: settings.includeDateFolders,
-    createIndexFiles: settings.createIndexFiles,
-    includeFrontmatter: settings.includeFrontmatter,
-    includeMetadata: settings.includeMetadata,
-    includeDates: settings.includeDates,
-    includeNotebook: settings.includeNotebook,
-    includeId: settings.includeId,
-    dateFormat: settings.dateFormat,
-    skipHighlights: settings.skipHighlights,
+    database: updatedSettings.databasePath,
+    output: updatedSettings.outputDirectory,
+    organizeByNotebooks: updatedSettings.organizeByNotebooks,
+    includeDateFolders: updatedSettings.includeDateFolders,
+    createIndexFiles: updatedSettings.createIndexFiles,
+    includeFrontmatter: updatedSettings.includeFrontmatter,
+    includeMetadata: updatedSettings.includeMetadata,
+    includeDates: updatedSettings.includeDates,
+    includeNotebook: updatedSettings.includeNotebook,
+    includeId: updatedSettings.includeId,
+    dateFormat: updatedSettings.dateFormat,
+    skipHighlights: updatedSettings.skipHighlights,
     verbose: false, // Not verbose by default for Electron
-    dryRun: settings.dryRun,
+    dryRun: updatedSettings.dryRun,
   };
+
+  console.log('Core options being passed:', {
+    database: coreOptions.database,
+    output: coreOptions.output
+  });
 
   // Create callbacks for Electron IPC communication
   const callbacks: ExportCallbacks = {

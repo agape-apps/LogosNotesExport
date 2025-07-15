@@ -59,19 +59,19 @@ function createDefaultSettingsFile(settings: ExportSettings, mode: AppMode = 'ba
 function settingsFileToExportSettings(settingsFile: SettingsFile): ExportSettings {
   return {
     databasePath: settingsFile.database.customPath,
-    autoDetectDatabase: settingsFile.database.autoDetect,
-    outputDirectory: settingsFile.output.directory,
-    organizeByNotebooks: settingsFile.output.organizeByNotebooks,
-    includeDateFolders: settingsFile.output.includeDateFolders,
-    createIndexFiles: settingsFile.output.createIndexFiles,
-    skipHighlights: settingsFile.output.skipHighlights,
-    includeFrontmatter: settingsFile.markdown.includeFrontmatter,
-    includeMetadata: settingsFile.markdown.includeMetadata,
-    includeDates: settingsFile.markdown.includeDates,
-    includeNotebook: settingsFile.markdown.includeNotebook,
-    includeId: settingsFile.markdown.includeId,
-    dateFormat: settingsFile.markdown.dateFormat,
-    dryRun: settingsFile.processing.dryRun,
+    autoDetectDatabase: settingsFile.database.autoDetect ?? true,
+    outputDirectory: settingsFile.output.directory || getDefaultOutputDirectory(),
+    organizeByNotebooks: settingsFile.output.organizeByNotebooks ?? true,
+    includeDateFolders: settingsFile.output.includeDateFolders ?? false,
+    createIndexFiles: settingsFile.output.createIndexFiles ?? true,
+    skipHighlights: settingsFile.output.skipHighlights ?? true,
+    includeFrontmatter: settingsFile.markdown.includeFrontmatter ?? true,
+    includeMetadata: settingsFile.markdown.includeMetadata ?? false,
+    includeDates: settingsFile.markdown.includeDates ?? true,
+    includeNotebook: settingsFile.markdown.includeNotebook ?? true,
+    includeId: settingsFile.markdown.includeId ?? false,
+    dateFormat: settingsFile.markdown.dateFormat || 'iso',
+    dryRun: settingsFile.processing.dryRun ?? false,
   };
 }
 

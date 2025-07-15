@@ -26,5 +26,9 @@ export const mainConfig: Configuration = {
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
   },
+  // Mark better-sqlite3 as external to prevent webpack bundling
+  externals: {
+    'better-sqlite3': 'commonjs better-sqlite3',
+  },
   target: 'electron-main',
 };

@@ -1,0 +1,1038 @@
+---
+description: PRD
+alwaysApply: false
+---
+# Logos Notes Exporter - Electron App PRD
+
+**Version:** 1.0  
+**Date:** December 2024  
+**Framework:** React + TypeScript  
+**UI Library:** ShadcnUI  
+**Platform:** Electron
+
+## 📋 Overview
+
+The Electron version of Logos Notes Exporter provides a user-friendly desktop GUI for converting Logos Bible Software notes to Markdown files. It wraps the core functionality from `@logos-notes-exporter/core` in an intuitive interface with two modes: Basic (simple operation) and Advanced (full configuration control).
+
+## 🎯 Goals
+
+- **Simplicity First**: Basic mode should work with zero configuration for most users
+- **Power User Ready**: Advanced mode exposes all CLI functionality through GUI
+- **Persistent Settings**: User preferences saved between sessions
+- **Real-time Feedback**: Live output display matching CLI regular mode
+- **Cross-platform**: Works on macOS and Windows
+
+## 🏗️ Technical Architecture
+
+### Framework Stack
+
+- **Frontend**: React 19 (VERSION 19 !!!) with TypeScript
+- **UI Components**: ShadcnUI component library
+- **Styling**: Tailwind CSS (included with ShadcnUI)
+- **State Management**: Zusatnd for settings state
+- **IPC**: Electron IPC for main/renderer communication
+- **Settings Storage**: YAML configuration file via Electron's userData directory
+
+### Project Structure
+
+```
+packages/electron/
+├── src/
+│   ├── main/                 # Main process
+│   │   ├── main.ts           # Main entry point
+│   │   ├── settings.ts       # Settings persistence
+│   │   └── export-handler.ts # Core export logic
+│   ├── renderer/             # Renderer process
+│   │   ├── App.tsx           # Root component
+│   │   ├── components/       # React components
+│   │   │   ├── ui/           # ShadcnUI components
+│   │   │   ├── BasicMode.tsx
+│   │   │   ├── AdvancedMode.tsx
+│   │   │   ├── ExportProgress.tsx
+│   │   │   └── SettingsPanel.tsx
+│   │   ├── hooks/            # Custom React hooks
+│   │   ├── lib/              # Utilities
+│   │   └── types/            # TypeScript definitions
+│   └── preload/              # Preload scripts
+│       └── preload.ts
+```
+
+### Core Dependencies
+
+- `@logos-notes-exporter/core` - Business logic
+- React ecosystem (React, React DOM)
+- ShadcnUI + Radix UI components
+- Tailwind CSS
+- yaml (^2.8.0) for settings persistence
+
+## 🖥️ User Interface Requirements
+
+### Single Window Design
+
+- **Minimum Size**: 900px width × 600px height
+- **Resizable**: Yes, with sensible minimum constraints
+- **Layout**: Vertical stack with header, main content, and footer areas (one main column, second column for Output Log Area)
+
+### Header Section
+
+- **App Title**: "Logos Notes Exporter"
+- **Mode Toggle**: Basic ↔ Advanced toggle button (top-right)
+- **Version Display**: Small version number in corner
+
+### Main Content Area
+
+#### Basic Mode Layout
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    Title: "Export Your Logos Notes"                        │
+├─────────────────────────────────────┬───────────────────────────────────────┤
+│ Left Column (40%)                   │ Right Column (60%)                    │
+│                                     │                                       │
+│ Minimal explanatory text:           │ ┌─ Output Log ──────────────────────┐ │
+│ "Convert your Logos notes to        │ │                                   │ │
+│  Markdown files for use in other    │ │ (readonly textarea)               │ │
+│  applications."                     │ │                                   │ │
+│                                     │ │ "Ready to export..."              │ │
+│                                     │ │                                   │ │
+│                                     │ │                                   │ │
+│ ┌─────────────────────────────────┐ │ │                                   │ │
+│ │ [📤 Export Notes] (primary btn) │ │ │                                   │ │
+│ └─────────────────────────────────┘ │ │                                   │ │
+│                                     │ │                                   │ │
+│                                     │ │                                   │ │
+│ ┌─────────────────────────────────┐ │ │                                   │ │
+│ │ [📁 Open Notes Folder]          │ │ │                                   │ │
+│ │ (disabled until successful)     │ │ │                                   │ │
+│ └─────────────────────────────────┘ │ └───────────────────────────────────┘ │
+│                                     │                                       │
+└─────────────────────────────────────┴───────────────────────────────────────┘
+```
+
+#### Advanced Mode Layout
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         Advanced Mode Settings                             │
+├─────────────────────────────────────┬───────────────────────────────────────┤
+│ Left Column (40%)                   │ Right Column (60%)                    │
+│                                     │                                       │
+│ ┌─ Database Settings ─────────────┐ │ ┌─ Output Log ──────────────────────┐ │
+│ │ • Auto-detect ○ Custom path     │ │ │                                   │ │
+│ │ [Select Database File...]       │ │ │ (readonly textarea)               │ │
+│ └─────────────────────────────────┘ │ │                                   │ │
+│                                     │ │ "Ready to export..."              │ │
+│ ┌─ Output Settings ───────────────┐ │ │                                   │ │
+│ │ Output Directory: [Browse...]   │ │ │                                   │ │
+│ │ ☑ Organize by notebooks        │ │ │                                   │ │
+│ │ ☐ Include date folders          │ │ │                                   │ │
+│ │ ☐ Skip highlights              │ │ │                                   │ │
+│ │ ☑ Create index files           │ │ │                                   │ │
+│ └─────────────────────────────────┘ │ │                                   │ │
+│                                     │ │                                   │ │
+│ ┌─ Markdown Settings ─────────────┐ │ │                                   │ │
+│ │ ☑ Include frontmatter          │ │ │                                   │ │
+│ │ ☐ Show metadata in content     │ │ │                                   │ │
+│ │ ☑ Include dates                │ │ │                                   │ │
+│ │ ☑ Include notebook info        │ │ │                                   │ │
+│ │ Date format: [ISO ▼]           │ │ │                                   │ │
+│ └─────────────────────────────────┘ │ │                                   │ │
+│                                     │ │                                   │ │
+│ [🔄 Restore Defaults] [📤 Export]  │ └───────────────────────────────────┘ │
+│                                     │                                       │
+│ [📁 Open Notes Folder] [🔙 Basic]  │                                       │
+│                                     │                                       │
+└─────────────────────────────────────┴───────────────────────────────────────┘
+```
+
+### Footer Section
+
+- **Status Bar**: Current operation status
+- **Progress Indicator**: When export is running
+- **Settings Persistence**: "Settings saved" indicator
+
+## ⚙️ Functional Requirements
+
+### Core Features
+
+#### 1. Database Detection & Selection
+
+- **Auto-detection**: Automatically find Logos database on launch
+- **Manual Selection**: File picker for custom database location
+- **Database Validation**: Verify database file exists and is readable
+- **Multiple Databases**: Support for selecting different database files
+
+#### 2. Export Configuration
+
+All CLI options must be available in Advanced mode:
+
+**Database Options**:
+
+- Custom database file path (use OS provided file selector)
+- List available database locations (in Output Log)
+- Show manual location instructions (in Output Log)
+
+**Output Options**:
+
+- Custom output directory selection
+- Default to `~/Documents/Logos-Exported-Notes` (equivalent on Windows and macOS)
+
+**Organization Options**:
+
+- Organize by notebooks (default: true)
+- Include date folders (default: false)
+- Create index files (default: true)
+- Skip highlights (default: true)
+
+**Markdown Options**:
+
+- Include frontmatter (default: true)
+- Show metadata in content (default: false)
+- Include dates (default: true)
+- Include notebook info (default: true)
+- Include note IDs (default: false)
+- Date format: ISO, Locale, Short (default: ISO)
+
+**Processing Options**:
+
+- Verbose (regular output by default, not verbose)
+- Dry run mode (for testing)
+
+#### 3. Export Process Management
+
+- **Progress Tracking**: Real-time progress updates
+- **Cancellation**: Ability to cancel running export
+- **Error Handling**: Graceful error display in Output Log and recovery
+- **Success Actions**: Enable "Open Folder" button on export completion
+
+#### 4. Settings Persistence
+
+- **Configuration File**: `settings.yaml` in Electron userData directory
+- **Auto-save**: Settings saved immediately on change
+- **Restore Defaults**: Reset all settings to default values
+- **Migration**: Handle settings format changes gracefully
+- **Window Size**: Save on exit, restore on launch
+
+#### 5. Output Display
+
+- **Live Logging**: Real-time output matching CLI regular mode
+- **Scrolling**: Auto-scroll to bottom, with manual scroll override available
+- **Formatting**: Preserve CLI formatting, emojies and colors where possible
+- **Copy Support**: Allow copying log contents
+
+### User Interactions
+
+#### Tooltips (Required)
+
+Every interactive element must have helpful tooltips:
+
+- **Export Notes**: "Convert your Logos notes to Markdown files"
+- **Open Notes Folder**: "Open the folder containing exported notes"
+- **Database Selection**: "Choose a different Logos database file"
+- **Output Directory**: "Choose where to save the exported files"
+- **Organize by Notebooks**: "Group notes by their notebook organization"
+- **Include Date Folders**: "Create subfolders organized by note creation dates"
+- **Skip Highlights**: "Export only text notes, not highlights"
+- **Include Frontmatter**: "Add YAML metadata to the top of each file"
+- **Dry Run**: "Preview what would be exported without creating files"
+- **Restore Defaults**: "Reset all settings to their default values"
+
+#### Keyboard Shortcuts
+
+- **Ctrl/Cmd + E**: Start export
+- **Ctrl/Cmd + O**: Open output folder
+- **Ctrl/Cmd + ,**: Toggle Advanced mode
+- **Escape**: Cancel export (if running)
+
+#### Drag & Drop (optional, implement later)
+
+- **Database Files**: Drop `.db` files to set custom database
+- **Folders**: Drop folders to set custom output directory
+
+## 🔧 Technical Implementation Details
+
+### State Management (use Zustand)
+
+```
+mode: "basic" | "advanced";
+
+ExportSettings
+
+  // Database
+  databasePath?: string;
+  autoDetectDatabase: boolean;
+
+  // Output
+  outputDirectory: string;
+  organizeByNotebooks: boolean;
+  includeDateFolders: boolean;
+  createIndexFiles: boolean;
+  skipHighlights: boolean;
+
+  // Markdown
+  includeFrontmatter: boolean;
+  includeMetadata: boolean;
+  includeDates: boolean;
+  includeNotebook: boolean;
+  includeId: boolean;
+  dateFormat: "iso" | "locale" | "short";
+
+  // Processing
+  dryRun: boolean;
+}
+```
+
+### IPC Communication
+
+```typescript
+// Main → Renderer
+interface MainToRenderer {
+  "export-progress": (progress: number, message: string) => void;
+  "export-complete": (success: boolean, outputPath?: string) => void;
+  "export-error": (error: string) => void;
+  "settings-loaded": (settings: ExportSettings) => void;
+  "database-detected": (path: string) => void;
+}
+
+// Renderer → Main
+interface RendererToMain {
+  "start-export": (settings: ExportSettings) => void;
+  "cancel-export": () => void;
+  "select-database": () => void;
+  "select-output-directory": () => void;
+  "open-output-folder": (path: string) => void;
+  "save-settings": (settings: ExportSettings) => void;
+  "load-settings": () => void;
+  "restore-defaults": () => void;
+}
+```
+
+### Settings Storage
+
+```yaml
+# ~/Library/Application Support/logos-notes-exporter/settings.yaml (macOS)
+# %APPDATA%/logos-notes-exporter/settings.yaml (Windows)
+
+version: "1.0"
+database:
+  autoDetect: true
+  customPath: null
+output:
+  directory: "~/Documents/Logos-Exported-Notes"
+  organizeByNotebooks: true
+  includeDateFolders: false
+  createIndexFiles: true
+  skipHighlights: true
+markdown:
+  includeFrontmatter: true
+  includeMetadata: false
+  includeDates: true
+  includeNotebook: true
+  includeId: false
+  dateFormat: "iso"
+processing:
+  dryRun: false
+ui:
+  mode: "basic"
+  windowSize:
+    width: 900
+    height: 700
+```
+
+## 🎨 ShadcnUI Components
+
+### Required Components
+
+- **Button**: Primary actions, secondary actions
+- **Card**: Settings group containers
+- **Input**: Text inputs for paths
+- **Checkbox**: Boolean settings
+- **Select**: Dropdown selections (date format)
+- **Textarea**: Output log display
+- **Switch**: Toggle settings
+- **Tooltip**: Help text for all controls
+- **Dialog**: Help dialogs, error dialogs
+- **Progress**: Export progress indication
+- **Alert**: Error notifications (not for warnings)
+- **Toast**: Success notification
+
+### Custom Components
+
+```typescript
+// ExportButton.tsx - Primary export button with loading state
+// OutputLog.tsx - Formatted log display with auto-scroll
+// DatabaseSelector.tsx - Database file selection with validation
+// SettingsGroup.tsx - Settings sections
+// ModeToggle.tsx - Basic/Advanced mode switcher
+```
+
+## 🔐 Error Handling & Validation
+
+### Database Validation
+
+- most of the validation should be done in core or is already done in core
+- some validations could be moved from CLI to core, if they are reusable
+- do not duplicate validation code
+
+- Verify file exists and is readable
+- Check file is valid SQLite database
+- Validate database contains expected Logos tables
+- Handle permission errors gracefully
+
+### Output Path Validation
+
+- most of the validation should be done in core or is already done in core
+- some validations could be moved from CLI to core, if they are reusable
+- do not duplicate validation code
+
+- Ensure directory exists or can be created
+- Check write permissions
+- Validate path is not inside system directories
+- Handle space/special character issues
+
+### Export Process Errors
+
+- Database connection failures
+- File system permission errors
+- Insufficient disk space
+- XAML conversion failures (log errors, but continue)
+- Unexpected process termination
+
+### User Feedback
+
+- Provide clear error messages with suggested solutions
+- Non-blocking warnings for minor issues
+- Progress indication for long-running operations
+- Success confirmation with actionable next steps
+
+## 🔄 User Experience Flow
+
+### First Launch
+
+1. Auto-detect Logos database
+2. Show Basic mode with default settings
+3. Display ready state in output log
+4. If no database found, guide user to manual selection
+
+### Typical Export (Basic Mode)
+
+1. Click "Export Notes"
+2. Show progress with live log output
+3. Display success toast on completion
+4. Enable "Open Notes Folder" button
+5. Allow immediate re-export
+
+### Advanced Configuration
+
+1. Click "Advanced" toggle
+2. Modify desired settings (auto-saved)
+3. Option: Test with dry run (should be near the bottom)
+4. Click "Export" for full export
+5. User may return to Basic mode or stay in Advanced
+
+### Error Recovery
+
+1. Display clear error message
+2. Provide suggested solutions
+3. Allow retry without losing settings
+4. Offer help documentation links
+
+## 📋 Success Criteria
+
+### Performance
+
+- App launch time < 3 seconds
+- Settings load/save < 100ms
+- UI responsiveness during export (no freezing)
+- Export process efficiency matching CLI performance
+
+### Usability
+
+- Basic mode requires zero configuration for 90% of users
+- Advanced mode exposes 100% of CLI functionality
+- All interactive elements have helpful tooltips
+- Clear progress indication throughout export process
+
+### Reliability
+
+- Settings persist correctly between sessions
+- Export process handles errors gracefully
+- App recovery from unexpected crashes
+- Cross-platform consistency
+
+### Accessibility
+
+- Keyboard navigation support
+- Logical tab order throughout interface
+
+## 🚀 Implementation Phases
+
+### Phase 1: Core Infrastructure
+
+- Basic Electron setup with React + ShadcnUI
+- Settings persistence system
+- IPC communication layer
+- Core export integration
+
+### Phase 2: Basic Mode
+
+- Simple (Basic) UI implementation
+- Auto database detection
+- Basic export functionality
+- Output log display
+
+### Phase 3: Advanced Mode
+
+- All CLI options exposed
+- Advanced settings UI
+- Help dialogs and documentation
+- Dry run functionality
+
+### Phase 4: Polish & Testing
+
+- Comprehensive error handling
+- Accessibility improvements
+- Cross-platform testing
+- Performance optimization
+
+## 📝 Technical Notes
+
+### Core Integration
+
+- Use `@logos-notes-exporter/core` as-is without modifications
+- Main process handles all core library interactions
+- Renderer process focuses purely on UI concerns
+- IPC events mirror CLI progress output
+
+### Build Process
+
+- Webpack configuration for React + TypeScript
+- ShadcnUI component generation and customization
+- Electron Forge for packaging and distribution
+- TypeScript strict mode for type safety
+
+### Testing Strategy (implement tests later)
+
+- Unit tests for React components
+- Integration tests for IPC communication
+- E2E tests for complete export flows
+- Manual testing across all supported platforms
+
+This PRD provides a comprehensive blueprint for implementing the Electron version while ensuring consistency with the existing CLI functionality and adhering to the project's architectural principles.
+# Logos Notes Exporter - Electron App PRD
+
+**Version:** 1.0  
+**Date:** December 2024  
+**Framework:** React + TypeScript  
+**UI Library:** ShadcnUI  
+**Platform:** Electron
+
+## 📋 Overview
+
+The Electron version of Logos Notes Exporter provides a user-friendly desktop GUI for converting Logos Bible Software notes to Markdown files. It wraps the core functionality from `@logos-notes-exporter/core` in an intuitive interface with two modes: Basic (simple operation) and Advanced (full configuration control).
+
+## 🎯 Goals
+
+- **Simplicity First**: Basic mode should work with zero configuration for most users
+- **Power User Ready**: Advanced mode exposes all CLI functionality through GUI
+- **Persistent Settings**: User preferences saved between sessions
+- **Real-time Feedback**: Live output display matching CLI regular mode
+- **Cross-platform**: Works on macOS and Windows
+
+## 🏗️ Technical Architecture
+
+### Framework Stack
+
+- **Frontend**: React 19 (VERSION 19 !!!) with TypeScript
+- **UI Components**: ShadcnUI component library
+- **Styling**: Tailwind CSS (included with ShadcnUI)
+- **State Management**: Zusatnd for settings state
+- **IPC**: Electron IPC for main/renderer communication
+- **Settings Storage**: YAML configuration file via Electron's userData directory
+
+### Project Structure
+
+```
+packages/electron/
+├── src/
+│   ├── main/                 # Main process
+│   │   ├── main.ts           # Main entry point
+│   │   ├── settings.ts       # Settings persistence
+│   │   └── export-handler.ts # Core export logic
+│   ├── renderer/             # Renderer process
+│   │   ├── App.tsx           # Root component
+│   │   ├── components/       # React components
+│   │   │   ├── ui/           # ShadcnUI components
+│   │   │   ├── BasicMode.tsx
+│   │   │   ├── AdvancedMode.tsx
+│   │   │   ├── ExportProgress.tsx
+│   │   │   └── SettingsPanel.tsx
+│   │   ├── hooks/            # Custom React hooks
+│   │   ├── lib/              # Utilities
+│   │   └── types/            # TypeScript definitions
+│   └── preload/              # Preload scripts
+│       └── preload.ts
+```
+
+### Core Dependencies
+
+- `@logos-notes-exporter/core` - Business logic
+- React ecosystem (React, React DOM)
+- ShadcnUI + Radix UI components
+- Tailwind CSS
+- yaml (^2.8.0) for settings persistence
+
+## 🖥️ User Interface Requirements
+
+### Single Window Design
+
+- **Minimum Size**: 900px width × 600px height
+- **Resizable**: Yes, with sensible minimum constraints
+- **Layout**: Vertical stack with header, main content, and footer areas (one main column, second column for Output Log Area)
+
+### Header Section
+
+- **App Title**: "Logos Notes Exporter"
+- **Mode Toggle**: Basic ↔ Advanced toggle button (top-right)
+- **Version Display**: Small version number in corner
+
+### Main Content Area
+
+#### Basic Mode Layout
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    Title: "Export Your Logos Notes"                        │
+├─────────────────────────────────────┬───────────────────────────────────────┤
+│ Left Column (40%)                   │ Right Column (60%)                    │
+│                                     │                                       │
+│ Minimal explanatory text:           │ ┌─ Output Log ──────────────────────┐ │
+│ "Convert your Logos notes to        │ │                                   │ │
+│  Markdown files for use in other    │ │ (readonly textarea)               │ │
+│  applications."                     │ │                                   │ │
+│                                     │ │ "Ready to export..."              │ │
+│                                     │ │                                   │ │
+│                                     │ │                                   │ │
+│ ┌─────────────────────────────────┐ │ │                                   │ │
+│ │ [📤 Export Notes] (primary btn) │ │ │                                   │ │
+│ └─────────────────────────────────┘ │ │                                   │ │
+│                                     │ │                                   │ │
+│                                     │ │                                   │ │
+│ ┌─────────────────────────────────┐ │ │                                   │ │
+│ │ [📁 Open Notes Folder]          │ │ │                                   │ │
+│ │ (disabled until successful)     │ │ │                                   │ │
+│ └─────────────────────────────────┘ │ └───────────────────────────────────┘ │
+│                                     │                                       │
+└─────────────────────────────────────┴───────────────────────────────────────┘
+```
+
+#### Advanced Mode Layout
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         Advanced Mode Settings                             │
+├─────────────────────────────────────┬───────────────────────────────────────┤
+│ Left Column (40%)                   │ Right Column (60%)                    │
+│                                     │                                       │
+│ ┌─ Database Settings ─────────────┐ │ ┌─ Output Log ──────────────────────┐ │
+│ │ • Auto-detect ○ Custom path     │ │ │                                   │ │
+│ │ [Select Database File...]       │ │ │ (readonly textarea)               │ │
+│ └─────────────────────────────────┘ │ │                                   │ │
+│                                     │ │ "Ready to export..."              │ │
+│ ┌─ Output Settings ───────────────┐ │ │                                   │ │
+│ │ Output Directory: [Browse...]   │ │ │                                   │ │
+│ │ ☑ Organize by notebooks        │ │ │                                   │ │
+│ │ ☐ Include date folders          │ │ │                                   │ │
+│ │ ☐ Skip highlights              │ │ │                                   │ │
+│ │ ☑ Create index files           │ │ │                                   │ │
+│ └─────────────────────────────────┘ │ │                                   │ │
+│                                     │ │                                   │ │
+│ ┌─ Markdown Settings ─────────────┐ │ │                                   │ │
+│ │ ☑ Include frontmatter          │ │ │                                   │ │
+│ │ ☐ Show metadata in content     │ │ │                                   │ │
+│ │ ☑ Include dates                │ │ │                                   │ │
+│ │ ☑ Include notebook info        │ │ │                                   │ │
+│ │ Date format: [ISO ▼]           │ │ │                                   │ │
+│ └─────────────────────────────────┘ │ │                                   │ │
+│                                     │ │                                   │ │
+│ [🔄 Restore Defaults] [📤 Export]  │ └───────────────────────────────────┘ │
+│                                     │                                       │
+│ [📁 Open Notes Folder] [🔙 Basic]  │                                       │
+│                                     │                                       │
+└─────────────────────────────────────┴───────────────────────────────────────┘
+```
+
+### Footer Section
+
+- **Status Bar**: Current operation status
+- **Progress Indicator**: When export is running
+- **Settings Persistence**: "Settings saved" indicator
+
+## ⚙️ Functional Requirements
+
+### Core Features
+
+#### 1. Database Detection & Selection
+
+- **Auto-detection**: Automatically find Logos database on launch
+- **Manual Selection**: File picker for custom database location
+- **Database Validation**: Verify database file exists and is readable
+- **Multiple Databases**: Support for selecting different database files
+
+#### 2. Export Configuration
+
+All CLI options must be available in Advanced mode:
+
+**Database Options**:
+
+- Custom database file path (use OS provided file selector)
+- List available database locations (in Output Log)
+- Show manual location instructions (in Output Log)
+
+**Output Options**:
+
+- Custom output directory selection
+- Default to `~/Documents/Logos-Exported-Notes` (equivalent on Windows and macOS)
+
+**Organization Options**:
+
+- Organize by notebooks (default: true)
+- Include date folders (default: false)
+- Create index files (default: true)
+- Skip highlights (default: true)
+
+**Markdown Options**:
+
+- Include frontmatter (default: true)
+- Show metadata in content (default: false)
+- Include dates (default: true)
+- Include notebook info (default: true)
+- Include note IDs (default: false)
+- Date format: ISO, Locale, Short (default: ISO)
+
+**Processing Options**:
+
+- Verbose (regular output by default, not verbose)
+- Dry run mode (for testing)
+
+#### 3. Export Process Management
+
+- **Progress Tracking**: Real-time progress updates
+- **Cancellation**: Ability to cancel running export
+- **Error Handling**: Graceful error display in Output Log and recovery
+- **Success Actions**: Enable "Open Folder" button on export completion
+
+#### 4. Settings Persistence
+
+- **Configuration File**: `settings.yaml` in Electron userData directory
+- **Auto-save**: Settings saved immediately on change
+- **Restore Defaults**: Reset all settings to default values
+- **Migration**: Handle settings format changes gracefully
+- **Window Size**: Save on exit, restore on launch
+
+#### 5. Output Display
+
+- **Live Logging**: Real-time output matching CLI regular mode
+- **Scrolling**: Auto-scroll to bottom, with manual scroll override available
+- **Formatting**: Preserve CLI formatting, emojies and colors where possible
+- **Copy Support**: Allow copying log contents
+
+### User Interactions
+
+#### Tooltips (Required)
+
+Every interactive element must have helpful tooltips:
+
+- **Export Notes**: "Convert your Logos notes to Markdown files"
+- **Open Notes Folder**: "Open the folder containing exported notes"
+- **Database Selection**: "Choose a different Logos database file"
+- **Output Directory**: "Choose where to save the exported files"
+- **Organize by Notebooks**: "Group notes by their notebook organization"
+- **Include Date Folders**: "Create subfolders organized by note creation dates"
+- **Skip Highlights**: "Export only text notes, not highlights"
+- **Include Frontmatter**: "Add YAML metadata to the top of each file"
+- **Dry Run**: "Preview what would be exported without creating files"
+- **Restore Defaults**: "Reset all settings to their default values"
+
+#### Keyboard Shortcuts
+
+- **Ctrl/Cmd + E**: Start export
+- **Ctrl/Cmd + O**: Open output folder
+- **Ctrl/Cmd + ,**: Toggle Advanced mode
+- **Escape**: Cancel export (if running)
+
+#### Drag & Drop (optional, implement later)
+
+- **Database Files**: Drop `.db` files to set custom database
+- **Folders**: Drop folders to set custom output directory
+
+## 🔧 Technical Implementation Details
+
+### State Management (use Zustand)
+
+```
+mode: "basic" | "advanced";
+
+ExportSettings
+
+  // Database
+  databasePath?: string;
+  autoDetectDatabase: boolean;
+
+  // Output
+  outputDirectory: string;
+  organizeByNotebooks: boolean;
+  includeDateFolders: boolean;
+  createIndexFiles: boolean;
+  skipHighlights: boolean;
+
+  // Markdown
+  includeFrontmatter: boolean;
+  includeMetadata: boolean;
+  includeDates: boolean;
+  includeNotebook: boolean;
+  includeId: boolean;
+  dateFormat: "iso" | "locale" | "short";
+
+  // Processing
+  dryRun: boolean;
+}
+```
+
+### IPC Communication
+
+```typescript
+// Main → Renderer
+interface MainToRenderer {
+  "export-progress": (progress: number, message: string) => void;
+  "export-complete": (success: boolean, outputPath?: string) => void;
+  "export-error": (error: string) => void;
+  "settings-loaded": (settings: ExportSettings) => void;
+  "database-detected": (path: string) => void;
+}
+
+// Renderer → Main
+interface RendererToMain {
+  "start-export": (settings: ExportSettings) => void;
+  "cancel-export": () => void;
+  "select-database": () => void;
+  "select-output-directory": () => void;
+  "open-output-folder": (path: string) => void;
+  "save-settings": (settings: ExportSettings) => void;
+  "load-settings": () => void;
+  "restore-defaults": () => void;
+}
+```
+
+### Settings Storage
+
+```yaml
+# ~/Library/Application Support/logos-notes-exporter/settings.yaml (macOS)
+# %APPDATA%/logos-notes-exporter/settings.yaml (Windows)
+
+version: "1.0"
+database:
+  autoDetect: true
+  customPath: null
+output:
+  directory: "~/Documents/Logos-Exported-Notes"
+  organizeByNotebooks: true
+  includeDateFolders: false
+  createIndexFiles: true
+  skipHighlights: true
+markdown:
+  includeFrontmatter: true
+  includeMetadata: false
+  includeDates: true
+  includeNotebook: true
+  includeId: false
+  dateFormat: "iso"
+processing:
+  dryRun: false
+ui:
+  mode: "basic"
+  windowSize:
+    width: 900
+    height: 700
+```
+
+## 🎨 ShadcnUI Components
+
+### Required Components
+
+- **Button**: Primary actions, secondary actions
+- **Card**: Settings group containers
+- **Input**: Text inputs for paths
+- **Checkbox**: Boolean settings
+- **Select**: Dropdown selections (date format)
+- **Textarea**: Output log display
+- **Switch**: Toggle settings
+- **Tooltip**: Help text for all controls
+- **Dialog**: Help dialogs, error dialogs
+- **Progress**: Export progress indication
+- **Alert**: Error notifications (not for warnings)
+- **Toast**: Success notification
+
+### Custom Components
+
+```typescript
+// ExportButton.tsx - Primary export button with loading state
+// OutputLog.tsx - Formatted log display with auto-scroll
+// DatabaseSelector.tsx - Database file selection with validation
+// SettingsGroup.tsx - Settings sections
+// ModeToggle.tsx - Basic/Advanced mode switcher
+```
+
+## 🔐 Error Handling & Validation
+
+### Database Validation
+
+- most of the validation should be done in core or is already done in core
+- some validations could be moved from CLI to core, if they are reusable
+- do not duplicate validation code
+
+- Verify file exists and is readable
+- Check file is valid SQLite database
+- Validate database contains expected Logos tables
+- Handle permission errors gracefully
+
+### Output Path Validation
+
+- most of the validation should be done in core or is already done in core
+- some validations could be moved from CLI to core, if they are reusable
+- do not duplicate validation code
+
+- Ensure directory exists or can be created
+- Check write permissions
+- Validate path is not inside system directories
+- Handle space/special character issues
+
+### Export Process Errors
+
+- Database connection failures
+- File system permission errors
+- Insufficient disk space
+- XAML conversion failures (log errors, but continue)
+- Unexpected process termination
+
+### User Feedback
+
+- Provide clear error messages with suggested solutions
+- Non-blocking warnings for minor issues
+- Progress indication for long-running operations
+- Success confirmation with actionable next steps
+
+## 🔄 User Experience Flow
+
+### First Launch
+
+1. Auto-detect Logos database
+2. Show Basic mode with default settings
+3. Display ready state in output log
+4. If no database found, guide user to manual selection
+
+### Typical Export (Basic Mode)
+
+1. Click "Export Notes"
+2. Show progress with live log output
+3. Display success toast on completion
+4. Enable "Open Notes Folder" button
+5. Allow immediate re-export
+
+### Advanced Configuration
+
+1. Click "Advanced" toggle
+2. Modify desired settings (auto-saved)
+3. Option: Test with dry run (should be near the bottom)
+4. Click "Export" for full export
+5. User may return to Basic mode or stay in Advanced
+
+### Error Recovery
+
+1. Display clear error message
+2. Provide suggested solutions
+3. Allow retry without losing settings
+4. Offer help documentation links
+
+## 📋 Success Criteria
+
+### Performance
+
+- App launch time < 3 seconds
+- Settings load/save < 100ms
+- UI responsiveness during export (no freezing)
+- Export process efficiency matching CLI performance
+
+### Usability
+
+- Basic mode requires zero configuration for 90% of users
+- Advanced mode exposes 100% of CLI functionality
+- All interactive elements have helpful tooltips
+- Clear progress indication throughout export process
+
+### Reliability
+
+- Settings persist correctly between sessions
+- Export process handles errors gracefully
+- App recovery from unexpected crashes
+- Cross-platform consistency
+
+### Accessibility
+
+- Keyboard navigation support
+- Logical tab order throughout interface
+
+## 🚀 Implementation Phases
+
+### Phase 1: Core Infrastructure
+
+- Basic Electron setup with React + ShadcnUI
+- Settings persistence system
+- IPC communication layer
+- Core export integration
+
+### Phase 2: Basic Mode
+
+- Simple (Basic) UI implementation
+- Auto database detection
+- Basic export functionality
+- Output log display
+
+### Phase 3: Advanced Mode
+
+- All CLI options exposed
+- Advanced settings UI
+- Help dialogs and documentation
+- Dry run functionality
+
+### Phase 4: Polish & Testing
+
+- Comprehensive error handling
+- Accessibility improvements
+- Cross-platform testing
+- Performance optimization
+
+## 📝 Technical Notes
+
+### Core Integration
+
+- Use `@logos-notes-exporter/core` as-is without modifications
+- Main process handles all core library interactions
+- Renderer process focuses purely on UI concerns
+- IPC events mirror CLI progress output
+
+### Build Process
+
+- Webpack configuration for React + TypeScript
+- ShadcnUI component generation and customization
+- Electron Forge for packaging and distribution
+- TypeScript strict mode for type safety
+
+### Testing Strategy (implement tests later)
+
+- Unit tests for React components
+- Integration tests for IPC communication
+- E2E tests for complete export flows
+- Manual testing across all supported platforms
+
+This PRD provides a comprehensive blueprint for implementing the Electron version while ensuring consistency with the existing CLI functionality and adhering to the project's architectural principles.

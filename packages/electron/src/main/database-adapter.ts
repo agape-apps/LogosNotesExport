@@ -9,7 +9,24 @@ export class Database {
   private db: BetterSqlite3.Database;
 
   constructor(path: string, options?: { readonly?: boolean }) {
-    this.db = new BetterSqlite3(path, options);
+    // Validate that path is provided and is a string
+    if (!path || typeof path !== 'string') {
+      throw new Error(`Database path is required and must be a string. Received: ${typeof path} (${path})`);
+    }
+
+    // Validate that path is not empty
+    if (path.trim() === '') {
+      throw new Error('Database path cannot be empty');
+    }
+
+    console.log('Creating database connection to:', path);
+    
+    try {
+      this.db = new BetterSqlite3(path, options);
+    } catch (error) {
+      console.error('Failed to create database connection:', error);
+      throw new Error(`Failed to open database at "${path}": ${error.message}`);
+    }
   }
 
   query(sql: string) {
