@@ -157,9 +157,10 @@ export function setupIpcHandlers(): void {
       
     } catch (error) {
       const mainWindow = BrowserWindow.getFocusedWindow();
+      const errorMessage = error instanceof Error ? error.message : String(error);
       if (mainWindow) {
-        mainWindow.webContents.send('export-error', error.message);
-        mainWindow.webContents.send('output-log', `❌ Export failed: ${error.message}`);
+        mainWindow.webContents.send('export-error', errorMessage);
+        mainWindow.webContents.send('output-log', `❌ Export failed: ${errorMessage}`);
       }
       throw error;
     } finally {

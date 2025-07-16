@@ -54,15 +54,17 @@ const createWindow = (): void => {
       setTimeout(async () => {
         try {
           const detectedPath = getDefaultDatabasePath();
-          if (detectedPath) {
+          if (detectedPath && mainWindow) {
             mainWindow.webContents.send('database-detected', detectedPath);
             mainWindow.webContents.send('output-log', `✅ Database detected: ${detectedPath}`);
-          } else {
+          } else if (mainWindow) {
             mainWindow.webContents.send('output-log', '⚠️ No database auto-detected. Use "Select Database" to choose manually.');
           }
         } catch (error) {
           console.error('Database detection failed:', error);
-          mainWindow.webContents.send('output-log', '⚠️ Database detection failed. Use "Select Database" to choose manually.');
+          if (mainWindow) {
+            mainWindow.webContents.send('output-log', '⚠️ Database detection failed. Use "Select Database" to choose manually.');
+          }
         }
       }, 1000);
     }

@@ -37,7 +37,8 @@ function validateExportSettings(settings: ExportSettings): { valid: boolean; err
       fs.mkdirSync(outputPath, { recursive: true });
     }
   } catch (error) {
-    return { valid: false, error: `Cannot create output directory: ${error.message}` };
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return { valid: false, error: `Cannot create output directory: ${errorMessage}` };
   }
 
   return { valid: true };
@@ -101,7 +102,7 @@ export async function executeExport(
   let finalDatabasePath = settings.databasePath;
   if (!finalDatabasePath) {
     console.log('No database path provided, attempting auto-detection...');
-    finalDatabasePath = getDefaultDatabasePath();
+    finalDatabasePath = getDefaultDatabasePath() || undefined;
     if (finalDatabasePath) {
       console.log('Auto-detected database:', finalDatabasePath);
       if (mainWindow) {

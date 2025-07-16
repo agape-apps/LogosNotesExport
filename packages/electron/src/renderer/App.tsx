@@ -59,7 +59,8 @@ const App: React.FC = () => {
         setIsInitialized(true);
       } catch (error) {
         console.error('Failed to initialize app:', error);
-        addLogMessage(`❌ Initialization failed: ${error.message}`);
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        addLogMessage(`❌ Initialization failed: ${errorMessage}`);
         setIsInitialized(true);
       }
     };
@@ -125,8 +126,9 @@ const App: React.FC = () => {
       await window.electronAPI.startExport(exportSettings);
     } catch (error) {
       console.error('Export failed:', error);
-      addLogMessage(`❌ Export failed: ${error.message}`);
-      toast.error(`Export failed: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      addLogMessage(`❌ Export failed: ${errorMessage}`);
+      toast.error(`Export failed: ${errorMessage}`);
       setExporting(false);
     }
   };

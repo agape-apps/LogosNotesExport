@@ -25,7 +25,8 @@ export class Database {
       this.db = new BetterSqlite3(path, options);
     } catch (error) {
       console.error('Failed to create database connection:', error);
-      throw new Error(`Failed to open database at "${path}": ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      throw new Error(`Failed to open database at "${path}": ${errorMessage}`);
     }
   }
 
