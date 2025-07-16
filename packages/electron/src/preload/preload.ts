@@ -14,6 +14,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   // Settings operations
   saveSettings: (settings: ExportSettings) => ipcRenderer.invoke('save-settings', settings),
+  saveMode: (mode: string) => ipcRenderer.invoke('save-mode', mode),
   loadSettings: () => ipcRenderer.invoke('load-settings'),
   restoreDefaults: () => ipcRenderer.invoke('restore-defaults'),
   
@@ -67,6 +68,7 @@ declare global {
       
       // Settings operations
       saveSettings: (settings: ExportSettings) => Promise<void>;
+      saveMode: (mode: string) => Promise<void>;
       loadSettings: () => Promise<{ settings: ExportSettings; mode: string; windowSize: { width: number; height: number } }>;
       restoreDefaults: () => Promise<void>;
       

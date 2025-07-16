@@ -5,6 +5,9 @@
 - test on Apple Silicon
 - improve error handling, for databases, for conversion issues
 
+GUI
+- move Progress UI to right side above log and display in both modes
+
 BUGS
 - fix src/xaml-converter.ts 
     - still too many blank lines in some cases, but mostly looking good

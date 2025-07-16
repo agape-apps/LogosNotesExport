@@ -33,6 +33,17 @@ export function setupIpcHandlers(): void {
     }
   });
 
+  ipcMain.handle('save-mode', async (_, mode: AppMode) => {
+    try {
+      // Get current settings and window size, update mode
+      const currentSettings = loadSettings();
+      saveSettings(currentSettings.settings, mode, currentSettings.windowSize);
+    } catch (error) {
+      console.error('Error saving mode:', error);
+      throw error;
+    }
+  });
+
   ipcMain.handle('restore-defaults', async () => {
     try {
       resetSettings();

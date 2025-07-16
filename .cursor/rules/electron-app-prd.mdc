@@ -2,6 +2,7 @@
 description: PRD
 alwaysApply: false
 ---
+
 # Logos Notes Exporter - Electron App PRD
 
 **Version:** 1.0  
@@ -519,6 +520,7 @@ ui:
 - Manual testing across all supported platforms
 
 This PRD provides a comprehensive blueprint for implementing the Electron version while ensuring consistency with the existing CLI functionality and adhering to the project's architectural principles.
+
 # Logos Notes Exporter - Electron App PRD
 
 **Version:** 1.0  
@@ -546,7 +548,7 @@ The Electron version of Logos Notes Exporter provides a user-friendly desktop GU
 - **Frontend**: React 19 (VERSION 19 !!!) with TypeScript
 - **UI Components**: ShadcnUI component library
 - **Styling**: Tailwind CSS (included with ShadcnUI)
-- **State Management**: Zusatnd for settings state
+- **State Management**: Zustand for settings state
 - **IPC**: Electron IPC for main/renderer communication
 - **Settings Storage**: YAML configuration file via Electron's userData directory
 

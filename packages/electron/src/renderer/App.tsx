@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './components/ui/dialog';
 import { toast } from 'sonner';
 import { FolderIcon, FileIcon, SettingsIcon, InfoIcon, ArrowLeftIcon, HelpCircleIcon } from 'lucide-react';
-import type { ExportSettings } from './types';
+import type { ExportSettings, AppMode } from './types';
 
 /**
  * Main App component - Entry point for the Logos Notes Exporter Electron app
@@ -52,6 +52,8 @@ const App: React.FC = () => {
         const savedData = await window.electronAPI.loadSettings();
         if (savedData) {
           setSettings(savedData.settings);
+          // Restore the saved app mode
+          setMode(savedData.mode as AppMode);
         }
 
         // Auto-detect database
@@ -73,6 +75,41 @@ const App: React.FC = () => {
 
     initialize();
   }, []);
+
+  // Auto-save settings when they change
+  useEffect(() => {
+    if (!isInitialized) return; // Don't save during initial load
+    
+    // Debounce the save operation to avoid excessive writes
+    const saveTimeout = setTimeout(async () => {
+      try {
+        await window.electronAPI.saveSettings(settings);
+        console.log('Settings auto-saved');
+      } catch (error) {
+        console.error('Failed to auto-save settings:', error);
+      }
+    }, 500); // 500ms debounce
+
+    return () => clearTimeout(saveTimeout);
+  }, [settings, isInitialized]);
+
+  // Auto-save mode changes
+  useEffect(() => {
+    if (!isInitialized) return; // Don't save during initial load
+    
+    // Save mode changes immediately
+    const saveModeChange = async () => {
+      try {
+        // We need to create a special IPC call for saving mode
+        await window.electronAPI.saveMode(mode);
+        console.log('Mode auto-saved:', mode);
+      } catch (error) {
+        console.error('Failed to auto-save mode:', error);
+      }
+    };
+
+    saveModeChange();
+  }, [mode, isInitialized]);
 
   // Keyboard shortcuts
   useEffect(() => {

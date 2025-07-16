@@ -88,10 +88,39 @@ const createWindow = (): void => {
     mainWindow.webContents.openDevTools();
   }
 
+  // Save settings before closing
+  mainWindow.on('close', (event) => {
+    try {
+      // Get current window size and save all settings
+      if (mainWindow) {
+        const [width, height] = mainWindow.getSize();
+        const currentSettings = loadSettings();
+        saveSettings(currentSettings.settings, currentSettings.mode, { width, height });
+        console.log('Settings saved on window close');
+      }
+    } catch (error) {
+      console.error('Error saving settings on close:', error);
+    }
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 };
+
+// Save settings before quitting the app
+app.on('before-quit', () => {
+  try {
+    if (mainWindow) {
+      const [width, height] = mainWindow.getSize();
+      const currentSettings = loadSettings();
+      saveSettings(currentSettings.settings, currentSettings.mode, { width, height });
+      console.log('Settings saved on app quit');
+    }
+  } catch (error) {
+    console.error('Error saving settings on quit:', error);
+  }
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -101,13 +130,10 @@ app.on('ready', () => {
   createWindow();
 });
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
+// Quit when all windows are closed on all platforms
+// This app should quit when the main window is closed
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
 });
 
 app.on('activate', () => {
