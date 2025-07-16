@@ -8,11 +8,11 @@
     "build": "pnpm run build:core && pnpm run build:cli && pnpm run build:electron",
     "build:core": "pnpm --filter @logos-notes-exporter/core build",
     "build:cli": "pnpm --filter @logos-notes-exporter/cli build",
-    "build:electron": "pnpm --filter logos-notes-exporter-electron build",
+    "build:electron": "pnpm --filter @logos-notes-exporter/electron build",
     "dev:cli": "pnpm --filter @logos-notes-exporter/cli dev",
-    "dev:electron": "pnpm --filter logos-notes-exporter-electron start",
+    "dev:electron": "pnpm --filter @logos-notes-exporter/electron start",
     "start": "pnpm run dev:electron",
-    "test:electron": "pnpm --filter logos-notes-exporter-electron start",
+    "test:electron": "pnpm --filter @logos-notes-exporter/electron start",
     "test:cli": "pnpm --filter @logos-notes-exporter/cli dev",
     "clean": "rm -rf packages/*/dist packages/*/node_modules packages/*/.webpack"
   },
@@ -31,7 +31,7 @@
   "author": "Logos Notes Exporter",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=18.0.0"

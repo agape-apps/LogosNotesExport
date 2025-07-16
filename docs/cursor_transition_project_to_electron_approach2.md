@@ -17,6 +17,7 @@ Looking at your well-structured Logos Notes Exporter project, I can see it's alr
 ## 🎯 Current Architecture Strengths
 
 Your project already follows Electron-friendly patterns:
+
 - **Modular design** - Core logic separated from CLI interface
 - **Clear separation of concerns** - Database, conversion, validation, etc.
 - **Stateless processors** - Easy to use from different contexts
@@ -31,6 +32,7 @@ Based on this analysis, here's my comprehensive plan for adding Electron support
 This gives you more control and a cleaner setup:
 
 ### **Step 1: Create Monorepo Structure**
+
 ```bash
 mkdir logos-notes-exporter-monorepo
 cd logos-notes-exporter-monorepo
@@ -40,6 +42,7 @@ mkdir -p packages/core/src packages/cli/src packages/electron
 ```
 
 ### **Step 2: Setup Core Package**
+
 ```bash
 cd packages/core
 
@@ -64,7 +67,7 @@ cat > package.json << 'EOF'
     "yaml": "^2.8.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   }
 }
 EOF
@@ -74,7 +77,7 @@ cat > tsconfig.json << 'EOF'
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ESNext", 
+    "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
@@ -107,6 +110,7 @@ EOF
 ```
 
 ### **Step 3: Setup CLI Package**
+
 ```bash
 cd ../cli
 
@@ -121,6 +125,7 @@ sed -i 's|from '\''./|from '\''@logos-notes-exporter/core|g' src/cli.ts
 ```
 
 ### **Step 4: Setup Electron Package with Forge**
+
 ```bash
 cd ../electron
 
@@ -133,6 +138,7 @@ npm install -D tailwindcss daisyui @types/alpinejs
 ```
 
 ### **Step 5: Wire Everything Together**
+
 ```bash
 # Go back to root
 cd ../../
@@ -153,21 +159,19 @@ I'd recommend **Approach 2** (manual monorepo) because:
 ✅ **Cleaner structure** - Purpose-built for your needs  
 ✅ **Better understanding** - You know exactly what's where  
 ✅ **Easier maintenance** - No leftover Forge artifacts in wrong places  
-✅ **Full control** - Customize everything from the start  
+✅ **Full control** - Customize everything from the start
 
 ## 🎯 **Final Recommendation**
 
 **Go with Approach 2** (manual monorepo from scratch). It gives you:
 
-1. **Clean, purpose-built structure** 
+1. **Clean, purpose-built structure**
 2. **Full understanding** of every piece
 3. **Electron Forge benefits** where they matter (in the electron package)
 4. **Easy customization** and maintenance
 5. **No unnecessary complexity** from tools you don't need
 
 The manual setup takes about 30 minutes but gives you **complete control** and **crystal clear understanding** of your build pipeline! 🚀
-
-
 
 **Would you like me to provide a complete step-by-step script to automate this setup?**
 
@@ -203,20 +207,18 @@ cp /path/to/your/original/index.ts packages/cli/src/
   "name": "logos-notes-exporter-monorepo",
   "version": "1.0.8",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "scripts": {
     "build": "npm run build:core && npm run build:cli && npm run build:electron",
     "build:core": "npm run build --workspace=@logos-notes-exporter/core",
-    "build:cli": "npm run build --workspace=logos-notes-exporter-cli", 
+    "build:cli": "npm run build --workspace=logos-notes-exporter-cli",
     "build:electron": "npm run build --workspace=logos-notes-exporter-gui",
     "dev:cli": "npm run dev --workspace=logos-notes-exporter-cli",
     "dev:electron": "npm start --workspace=logos-notes-exporter-gui",
     "start": "npm run dev:electron"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   }
 }
 ```
@@ -234,11 +236,11 @@ cp /path/to/your/original/index.ts packages/cli/src/
   },
   "dependencies": {
     "bun": "^1.0.0",
-    "fast-xml-parser": "^5.2.5", 
+    "fast-xml-parser": "^5.2.5",
     "yaml": "^2.8.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   }
 }
 ```
@@ -262,7 +264,7 @@ cp /path/to/your/original/index.ts packages/cli/src/
     "bun": "^1.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   }
 }
 ```
@@ -270,7 +272,7 @@ cp /path/to/your/original/index.ts packages/cli/src/
 ```json
 {
   "name": "logos-notes-exporter-gui",
-  "version": "1.0.8", 
+  "version": "1.0.8",
   "main": "dist/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -283,12 +285,12 @@ cp /path/to/your/original/index.ts packages/cli/src/
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.0.0",
-    "@electron-forge/maker-dmg": "^7.0.0", 
+    "@electron-forge/maker-dmg": "^7.0.0",
     "@electron-forge/maker-squirrel": "^7.0.0",
     "@electron-forge/plugin-webpack": "^7.0.0",
     "tailwindcss": "^3.4.0",
     "daisyui": "^4.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   }
 }
 ```
@@ -325,7 +327,7 @@ cat > package.json << 'EOF'
     "yaml": "^2.8.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   }
 }
 EOF
@@ -335,7 +337,7 @@ cat > tsconfig.json << 'EOF'
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ESNext", 
+    "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
@@ -410,7 +412,7 @@ cd logos-notes-exporter
 
 # Add applications
 nx g @nx/node:app cli
-nx g @nx/electron:app gui  
+nx g @nx/electron:app gui
 
 # Add shared library
 nx g @nx/js:lib core

@@ -1,8 +1,8 @@
 {
-  "name": "electron-test",
-  "productName": "electron-test",
+  "name": "@logos-notes-exporter/electron",
+  "productName": "Logos Notes Exporter",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Electron desktop application for Logos Notes Exporter - Convert Logos notes to Markdown with GUI",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
@@ -49,10 +49,10 @@
     "tailwindcss": "^4.1.11",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
-    "typescript": "~5.8.3"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@logos-notes-exporter/core": "link:../core",
+    "@logos-notes-exporter/core": "workspace:*",
     "@radix-ui/react-checkbox": "1.0.4",
     "@radix-ui/react-dialog": "1.0.5",
     "@radix-ui/react-progress": "1.0.3",
