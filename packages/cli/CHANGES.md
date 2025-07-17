@@ -7,3 +7,4 @@
 - Release v1.0.7: fix XAML to Markdown conversion for text formatting and headings
 - Release v1.0.8: fix XAML to Markdown conversion for lists
 - Release v1.0.9: various improvements to the XAML to Markdown conversion
+- Release v1.0.10: migrate core package from bun:sqlite to better-sqlite3 for universal compatibility

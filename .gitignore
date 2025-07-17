@@ -8,6 +8,7 @@ data/from-notes.db/notes/
 exported-notes*/
 test-export*
 Logos-Exported-Notes/
+packages/core/dist/
 
 bin/
 node_modules/

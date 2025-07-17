@@ -1,4 +1,4 @@
-import { Database } from 'bun:sqlite';
+import Database from 'better-sqlite3';
 import { existsSync } from 'fs';
 import { DatabaseLocator, type DatabaseLocation } from './database-locator.js';
 
@@ -73,7 +73,7 @@ export interface NoteAnchorTextRange {
 }
 
 export class NotesToolDatabase {
-  private db: Database;
+  private db: Database.Database;
   private dbLocation: DatabaseLocation;
 
   constructor(dbPath?: string) {
@@ -168,7 +168,7 @@ export class NotesToolDatabase {
       ORDER BY CreatedDate, NoteId
     `;
 
-    return this.db.query(query).all() as NotesToolNote[];
+    return this.db.prepare(query).all() as NotesToolNote[];
   }
 
   /**
@@ -188,11 +188,11 @@ export class NotesToolDatabase {
     if (noteIds && noteIds.length > 0) {
       const placeholders = noteIds.map(() => '?').join(',');
       query += ` WHERE NoteId IN (${placeholders})`;
-      return this.db.query(query).all(...noteIds) as BibleReference[];
+      return this.db.prepare(query).all(...noteIds) as BibleReference[];
     }
 
     query += ` ORDER BY NoteId, AnchorIndex`;
-    return this.db.query(query).all() as BibleReference[];
+    return this.db.prepare(query).all() as BibleReference[];
   }
 
   /**
@@ -212,7 +212,7 @@ export class NotesToolDatabase {
       ORDER BY Title
     `;
 
-    return this.db.query(query).all() as Notebook[];
+    return this.db.prepare(query).all() as Notebook[];
   }
 
   /**
@@ -231,7 +231,7 @@ export class NotesToolDatabase {
       WHERE ExternalId = ? AND IsDeleted = 0 AND IsTrashed = 0
     `;
 
-    return this.db.query(query).get(externalId) as Notebook | null;
+    return this.db.prepare(query).get(externalId) as Notebook | null;
   }
 
   /**
@@ -246,7 +246,7 @@ export class NotesToolDatabase {
       ORDER BY NoteStyleId
     `;
 
-    return this.db.query(query).all() as NoteStyle[];
+    return this.db.prepare(query).all() as NoteStyle[];
   }
 
   /**
@@ -261,7 +261,7 @@ export class NotesToolDatabase {
       ORDER BY NoteColorId
     `;
 
-    return this.db.query(query).all() as NoteColor[];
+    return this.db.prepare(query).all() as NoteColor[];
   }
 
   /**
@@ -276,7 +276,7 @@ export class NotesToolDatabase {
       ORDER BY DataTypeId
     `;
 
-    return this.db.query(query).all() as DataType[];
+    return this.db.prepare(query).all() as DataType[];
   }
 
   /**
@@ -291,7 +291,7 @@ export class NotesToolDatabase {
       ORDER BY NoteIndicatorId
     `;
 
-    return this.db.query(query).all() as NoteIndicator[];
+    return this.db.prepare(query).all() as NoteIndicator[];
   }
 
   /**
@@ -306,7 +306,7 @@ export class NotesToolDatabase {
       ORDER BY ResourceIdId
     `;
 
-    return this.db.query(query).all() as ResourceId[];
+    return this.db.prepare(query).all() as ResourceId[];
   }
 
   /**
@@ -328,11 +328,11 @@ export class NotesToolDatabase {
     if (noteIds && noteIds.length > 0) {
       const placeholders = noteIds.map(() => '?').join(',');
       query += ` WHERE NoteId IN (${placeholders})`;
-      return this.db.query(query).all(...noteIds) as NoteAnchorTextRange[];
+      return this.db.prepare(query).all(...noteIds) as NoteAnchorTextRange[];
     }
 
     query += ` ORDER BY NoteId, AnchorIndex`;
-    return this.db.query(query).all() as NoteAnchorTextRange[];
+    return this.db.prepare(query).all() as NoteAnchorTextRange[];
   }
 
   /**
@@ -422,9 +422,9 @@ export class NotesToolDatabase {
       FROM Notebooks
     `;
 
-    const noteStats = this.db.query(statsQuery).get() as any;
-    const refStats = this.db.query(refStatsQuery).get() as any;
-    const notebookStats = this.db.query(notebookStatsQuery).get() as any;
+    const noteStats = this.db.prepare(statsQuery).get() as any;
+    const refStats = this.db.prepare(refStatsQuery).get() as any;
+    const notebookStats = this.db.prepare(notebookStatsQuery).get() as any;
 
     return {
       ...noteStats,

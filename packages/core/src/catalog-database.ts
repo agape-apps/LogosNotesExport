@@ -1,4 +1,4 @@
-import { Database } from 'bun:sqlite';
+import Database from 'better-sqlite3';
 import { existsSync } from 'fs';
 import { DatabaseLocator, type CatalogLocation } from './database-locator.js';
 
@@ -8,7 +8,7 @@ export interface CatalogRecord {
 }
 
 export class CatalogDatabase {
-  private db: Database;
+  private db: Database.Database;
   private catalogLocation: CatalogLocation;
 
   constructor(notestoolDbPath: string) {
@@ -49,7 +49,7 @@ export class CatalogDatabase {
       LIMIT 1
     `;
 
-    const result = this.db.query(query).get(resourceId) as { title: string } | null;
+    const result = this.db.prepare(query).get(resourceId) as { title: string } | null;
     return result?.title || null;
   }
 
@@ -68,7 +68,7 @@ export class CatalogDatabase {
       WHERE ResourceId IN (${placeholders})
     `;
 
-    const results = this.db.query(query).all(...resourceIds) as CatalogRecord[];
+    const results = this.db.prepare(query).all(...resourceIds) as CatalogRecord[];
     const titleMap = new Map<string, string>();
     
     for (const record of results) {
@@ -88,7 +88,7 @@ export class CatalogDatabase {
       ORDER BY ResourceId
     `;
 
-    return this.db.query(query).all() as CatalogRecord[];
+    return this.db.prepare(query).all() as CatalogRecord[];
   }
 
   /**

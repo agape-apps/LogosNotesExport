@@ -31,4 +31,14 @@
 - Verified successful Electron app launch with all core export functionality working
 - Exact LLM Model string: Claude 3.5 Sonnet (Anthropic, 2024) 
 
-2024-10-29: Fixed better-sqlite3 module version mismatch by rebuilding for Electron and resolving build dependencies. 
+2024-10-29: Fixed better-sqlite3 module version mismatch by rebuilding for Electron and resolving build dependencies.
+
+2025-07-17 refactor: Migrate core package from bun:sqlite to better-sqlite3 for universal compatibility and eliminate adapter layer
+- Updated packages/core/src/notestool-database.ts to use better-sqlite3 instead of bun:sqlite for universal Node.js/Bun compatibility
+- Replaced bun dependency with better-sqlite3 and @types/better-sqlite3 in core package.json
+- Removed database-adapter.ts from Electron package as it's no longer needed with unified SQLite implementation
+- Removed webpack NormalModuleReplacementPlugin configuration for bun:sqlite mapping
+- Removed better-sqlite3 and @types/better-sqlite3 dependencies from Electron package as they now come from core
+- Verified CLI functionality works correctly with Bun runtime using better-sqlite3 Node.js module
+- Simplified architecture eliminates 55-line adapter layer and reduces maintenance overhead
+- Exact LLM Model string: Claude Sonnet 4 (Anthropic, 2024) 

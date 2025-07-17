@@ -1,6 +1,4 @@
 import type { Configuration } from 'webpack';
-import path from 'path';
-import webpack from 'webpack';
 
 import { rules } from './webpack.rules';
 import { plugins } from './webpack.plugins';
@@ -17,11 +15,6 @@ export const mainConfig: Configuration = {
   },
   plugins: [
     ...plugins,
-    // Replace bun:sqlite with our database adapter
-    new webpack.NormalModuleReplacementPlugin(
-      /^bun:sqlite$/,
-      path.resolve(__dirname, 'src/main/database-adapter.ts')
-    ),
   ],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
