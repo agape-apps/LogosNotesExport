@@ -5,6 +5,122 @@
 - test on Apple Silicon
 - improve error handling, for databases, for conversion issues
 
+---
+
+### XAML Conversion - add/check
+- [ ] check list
+- [ ] check numbered list
+- [ ] check indent (especially with lists - multi level)
+- [ ] indent without list as block quote?
+- [ ] improve subscript/superscript options 
+  * Subscript~123~ Superscript^123^ for Typora (maybe Obsidian with plugin)
+- [ ] improve small caps CAPITAL<small> only small letters in small caps (optional)
+- [ ] add more flexible conversion options
+- [ ] explore Images
+- [ ] font sizes 24 and up is H1
+- [ ] font size 9 and below is <small>
+- [ ] Note to user: not everything converts nicely
+
+### Database
+- [ ] Note to user: Logos can be open safely, as sqlite is used read only - verify that this will not cause a lock on usage in Logos!
+
+### For LibreOffice
+- Paste Markdown from Typora and MarkText (same result)
+- Export to Word .docx from Typora
+### For Obsidian 
+- [x] view formatted notes one by one
+- [ ] view all notes from one notebook in one document, similar to the notes exporter
+  - [ ] Verse references
+  - [ ] Book references 
+  - [ ] Note text
+  - [ ] —- divider
+  - [ ] optionally exclude highlights
+  - [ ] Use README.md index files for that
+- [ ] Obsidian plugins could show verses on hover. Many recognize Bible references and can also link to a Bible for example
+- [ ] Note names are unique and could be linked to with Wikilinks from other notes in Obsidian 
+### Issues to check 
+- [ ] How about multiple Anchors?
+- [ ] How to manage highlight notes without text?
+  - [ ] add scripture from WEB (World English Bible)
+  - [ ] Just add the reference range in the Markdown
+- [ ] Why are there notes of type highlight which have text in them?
+
+### Bible Notes filenames for file system sorting 
+macOS and Windows 10/11
+
+### Current Format
+OT, AP or NT
+(logosBibleBook)
+(underscore) _
+(OSIS book abbr.)
+(minus) -
+(chapter 2 digits)
+(period) .
+(Verse 2 digits)
+
+**Examples:**
+- OT02_Exod-06.10.md
+- AP40_Tob-14.07.md
+- NT86_Jude-01.02.md
+- NT87_Rev-01.01.md
+
+### More readable Format
+OT02 Exodus 06.10 - 06.14.md
+NT26 Jude 01.02.md
+NT27 Revelation 01.01.md
+
+- OT, NT and AP for easy discovery in file system
+- Logos Book Numbers with double digits for sorting 
+  - Keeps it in mostly Biblical Order
+  - Use adjusted Book Numbers:
+  - OT01-39
+  - NT01-27 (subtract 60)
+  - AP01-20 (subtract 40)
+- Possibly include marked range
+- we need double digits for chapters and verses for sorting
+- adding a chapter number for 1-chapter Bible books (like Jude)
+- with space is more readable and still sorts well
+- `:` cannot be used in filenames?
+
+### Note Export Folders
+- Notes - Notebook - NT27 Revelation 01.01.md
+
+### Front Matter
+- Scripture: 
+- Version:
+- Date Created
+- Date Modified 
+- Highlight
+- Notebook:
+- Info: ID-Ver-
+
+### Main Content:
+- Optional Metadata
+- Scripture
+- Title
+- Note
+
+### Options
+- [x] Overwrite notes (default, inform users)
+- [x] Export all
+- [ ] Export just one Notebook (usefull for big collections)
+- [ ] Export by Tags (not tested tags yet)
+- [ ] Export a Notebook into one Markdown file (see above)
+- [ ] Include the scripture reference in notes text (see above)
+- [ ] Heading sizes based on available sizes in Logos (add in-between sizes as well)
+- [ ] Normal Font: 12, 11, 10 (and below)
+- [ ] Small font: 9 (and below) <small>
+- [ ] Simplify Options
+  * only Obsidian useful options for the default setting
+  * export highlights in advanced
+  * all Metadata for backup purposes
+  * all notes on one page (Notebook export) with only essential metadata for actual use (in Word or for printing)
+  * individual options in hiddden panel
+
+### German version?
+
+---
+
 GUI
 
 - move Progress UI to right side above log and display in both modes
