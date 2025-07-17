@@ -5,6 +5,10 @@
 - test on Apple Silicon
 - improve error handling, for databases, for conversion issues
 
+### Binary Builds
+
+- [ ] Electron: https://www.electronjs.org/docs/latest/tutorial/forge-overview
+
 ---
 
 ### XAML Conversion - add/check
