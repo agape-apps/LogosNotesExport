@@ -217,6 +217,13 @@ bun run binary:windows   # Build for Windows x64
 scripts/create-release.sh
 ```
 
+- remove a tag in case of build errors, for example
+
+```sh
+git tag -d v1.x.x
+git push origin --delete v1.x.x
+```
+
 ## 📖 Usage
 
 during development run
