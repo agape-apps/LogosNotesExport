@@ -43,13 +43,12 @@ git clone https://github.com/agape-apps/logos-notes-exporter.git
 cd logos-notes-exporter
 ```
 
-#### 2. Install PNPM (if not already installed)
+#### 2. Install PNPM and verify (if not already installed)
+
+https://pnpm.io/installation
 
 ```bash
-# Install PNPM globally
-npm install -g pnpm@10.12.1
-
-# Verify installation
+curl -fsSL https://get.pnpm.io/install.sh | sh -
 pnpm --version
 ```
 
