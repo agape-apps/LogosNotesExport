@@ -1,6 +1,6 @@
 {
   "name": "@logos-notes-exporter/cli",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "A TypeScript CLI tool to export Logos Bible Software notes to Markdown files with YAML frontmatter",
   "type": "module",
   "main": "dist/cli.js",
@@ -15,9 +15,7 @@
     "test": "bun test",
     "lint": "tsc --noEmit",
     "export": "bun run src/cli.ts",
-    "binary:macx64": "bun build --compile --target=bun-macos-x64 src/cli.ts --outfile ../../bin/macos-x64/LogosNotesExporter",
-    "binary:macarm": "bun build --compile --target=bun-macos-arm64 src/cli.ts --outfile ../../bin/macos-arm64/LogosNotesExporter",
-    "binary:windows": "bun build --compile --target=bun-windows-x64 src/cli.ts --outfile ../../bin/windows-x64/LogosNotesExporter.exe",
+
     "clean": "rm -rf dist"
   },
   "keywords": [

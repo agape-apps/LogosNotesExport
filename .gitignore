@@ -9,6 +9,7 @@ exported-notes*/
 test-export*
 Logos-Exported-Notes/
 packages/core/dist/
+packages/cli/dist
 
 bin/
 node_modules/

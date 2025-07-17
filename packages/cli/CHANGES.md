@@ -6,5 +6,6 @@
 - Release v1.0.6: implement catalog database integration to show resource titles
 - Release v1.0.7: fix XAML to Markdown conversion for text formatting and headings
 - Release v1.0.8: fix XAML to Markdown conversion for lists
-- Release v1.0.9: various improvements to the XAML to Markdown conversion
-- Release v1.0.10: migrate core package from bun:sqlite to better-sqlite3 for universal compatibility
+- Release v1.0.9: various improvements to the XAML to Markdown conversion (last CLI binary version)
+- Release v1.1.0: migrate core package from bun:sqlite to better-sqlite3 for universal compatibility
+                  (removed binary compilation due to better-sqlite3 incompatibility. Users must install `bun` to run CLI version)

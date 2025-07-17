@@ -31,64 +31,77 @@ This tool extracts notes from Logos Bible Software's NotesTool database and conv
 - use Notebook folders in Obsidian, Typora or in other front-matter compatible Markdown applications
 - use as a vendor independent backup of your personal notes and highlights
 
-## 🛠 Installation
+## 🛠 Installation of the CLI Version
 
-### 📦 Download Binaries
+### Prerequisites
 
-from https://github.com/agape-apps/LogosNotesExport/releases
+- First install [Bun](https://bun.sh/)  (v1.0.0 or higher) to run this CLI tool.
+- Logos Bible Software installed on macOS or Windows with access to the NotesTool database file
 
-Choose the binary for your platform:
+## Installation Requirements
 
-- **🍎 macOS (Intel)**: `LogosNotesExporter-macos-x64` (tested and working)
-- **🍎 macOS (Apple Silicon)**: `LogosNotesExporter-macos-arm64` (untested)
-- **🪟 Windows**: `LogosNotesExporter-windows-x64.exe` (works, limited testing)
+**Prerequisites**: 
 
-## 📖 Getting Started (in a Terminal)
+```sh
+# Install Bun (if not already installed)
+curl -fsSL https://bun.sh/install | bash
 
-on macOS:
-- make executable, move & rename, run
-
-```
-chmod +x LogosNotesExporter-*
-mv -v LogosNotesExporter-* /usr/local/bin/LogosNotesExporter
-LogosNotesExporter --help
+# Verify installation
+bun --version
 ```
 
-on Windows run:
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/agape-apps/LogosNotesExport.git
+cd LogosNotesExport
+
+# Check Bun installation and Install dependencies
+bun --version
+bun install
+
+# Make CLI executable
+chmod +x src/cli.ts
 ```
-LogosNotesExporter-windows-x64.exe --help
+
+#### Check if it works
+
+```sh
+# Run the exporter with help
+bun run export --help
 ```
 
 ### Basic Export
 
 ```bash
 # Export all notes with default settings into Notebook folders
-LogosNotesExporter
+bun run export
 
 # Specify custom database location
-LogosNotesExporter --database /path/to/notestool.db
+bun run export --database /path/to/notestool.db
 
 # Export to custom directory
-LogosNotesExporter --output ./my-exported-notes
+bun run export --output ./my-exported-notes
 ```
 
 ### Advanced Options
 
 ```bash
 # Dry run to see what would be exported
-LogosNotesExporter --dry-run --verbose
+bun run export --dry-run --verbose
 
 # Export with date-based folders (instead of Notebook folders)
-LogosNotesExporter --date-folders --no-organize-notebooks
+bun run export --date-folders --no-organize-notebooks
 
 # Export without YAML frontmatter and show some metadata in content
-LogosNotesExporter --no-frontmatter --show-metadata
+bun run export --no-frontmatter --show-metadata
 
 # Include note IDs in metadata
-LogosNotesExporter --include-id
+bun run export --include-id
 
 # Custom date format
-LogosNotesExporter --date-format short
+bun run export --date-format short
 ```
 
 ### Command Line Options
@@ -174,55 +187,6 @@ And you will hear of wars and rumors of wars. See that you are not troubled; for
 
 - Do not be troubled
 - These things must come to pass
-```
-
-## Development
-
-### Prerequisites
-
-- [Bun - install from here](https://bun.sh/) runtime (v1.0.0 or higher)
-- Access to Logos Bible Software NotesTool database file
-
-### Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/logos-notes-exporter.git
-cd logos-notes-exporter
-
-# Check Bun installation and Install dependencies
-bun --version
-bun install
-
-# Make CLI executable
-chmod +x src/cli.ts
-```
-
-## Build Binaries for macOS and Windows
-
-```sh
-bun run binary:macx64    # Build for macOS Intel
-bun run binary:macarm    # Build for macOS Apple Silicon  
-bun run binary:windows   # Build for Windows x64
-```
-
-- LogosNotesExporter binary files will be in bin/...
-
-## Publish release
-
-- Update version in package.json and publish new binary release
-- this will trigger new Release builds via Github actions
-
-```sh
-scripts/create-release.sh
-```
-
-## 📖 Usage
-
-during development run
-
-```sh
-bun run export [options]
 ```
 
 ## 🗄 Database Locations
