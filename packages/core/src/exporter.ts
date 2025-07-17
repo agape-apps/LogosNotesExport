@@ -1,36 +1,24 @@
-#!/usr/bin/env bun
-import { parseArgs } from 'util';
-import { existsSync, readFileSync } from 'fs';
-import { join, basename } from 'path';
-import { NotebookOrganizer } from './notebook-organizer.js';
-import { FileOrganizer, DEFAULT_FILE_OPTIONS } from './file-organizer.js';
-import { MarkdownConverter, DEFAULT_MARKDOWN_OPTIONS, type XamlConversionFailure } from './markdown-converter.js';
-import type { FileStructureOptions, MarkdownOptions } from './types.js';
-import { ExportValidator } from './validator.js';
-import { NotesToolDatabase } from './notestool-database.js';
-import { CatalogDatabase } from './catalog-database.js';
+import { join } from 'path';
+import { 
+  NotebookOrganizer, 
+  FileOrganizer, 
+  MarkdownConverter, 
+  ExportValidator, 
+  NotesToolDatabase, 
+  CatalogDatabase,
+  DEFAULT_FILE_OPTIONS,
+  DEFAULT_MARKDOWN_OPTIONS,
+  type FileStructureOptions,
+  type MarkdownOptions,
+  type XamlConversionFailure
+} from './index.js';
 
 /**
- * Read version from package.json
+ * Core export configuration options
  */
-function getPackageVersion(): string {
-  try {
-    const packagePath = join(process.cwd(), 'package.json');
-    const packageContent = readFileSync(packagePath, 'utf8');
-    const packageJson = JSON.parse(packageContent);
-    return packageJson.version || 'unknown';
-  } catch (error) {
-    return 'unknown';
-  }
-}
-
-interface CLIOptions {
+export interface CoreExportOptions {
   /** Database file path */
   database?: string;
-  /** List available database locations */
-  listDatabases?: boolean;
-  /** Show database search instructions */
-  showInstructions?: boolean;
   /** Output directory */
   output?: string;
   /** Organization options */
@@ -48,83 +36,61 @@ interface CLIOptions {
   skipHighlights?: boolean;
   verbose?: boolean;
   dryRun?: boolean;
-  help?: boolean;
-  version?: boolean;
 }
 
-const HELP_TEXT = `
-Logos Notes Exporter - Convert Logos notes to Markdown
+/**
+ * Export progress callback
+ */
+export type ProgressCallback = (progress: number, message: string) => void;
 
-USAGE:
-  LogosNotesExporter [OPTIONS]
+/**
+ * Logging callback
+ */
+export type LogCallback = (message: string) => void;
 
-OPTIONS:
-  --database, -d        Path to NotesTool database file (auto-detected if not specified)
-  --list-databases      List all available database locations and exit
-  --show-instructions   Show manual database location instructions and exit
-  --output, -o          Output directory (default: ./Logos-Exported-Notes)
-  
-  ORGANIZATION:
-  --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
-  --date-folders           Create date-based subdirectories
-  --skip-highlights        Skip highlight notes, export only text and annotation notes
-  --no-index-files         Do not create README.md index files (default: create them)
-  
-  MARKDOWN:
-  --no-frontmatter      Exclude YAML frontmatter (default: include)
-  --show-metadata       Include metadata in markdown content (default: only shown in frontmatter)
-  --no-dates            Exclude creation/modification dates (default: include)
-  --no-notebook-info    Exclude notebook information (default: include)
-  --include-id          Include note IDs
-  --date-format         Date format: iso, locale, short (default: iso)
-  
-  PROCESSING:
-  --verbose, -v         Verbose output
-  --dry-run            Show what would be done without writing files
-  --help, -h           Show this help
-  --version            Show version
+/**
+ * Export callbacks for UI integration
+ */
+export interface ExportCallbacks {
+  onProgress?: ProgressCallback;
+  onLog?: LogCallback;
+}
 
-EXAMPLES:
-  # Basic export (auto-finds database)
-  LogosNotesExporter
-  
-  # List available database locations
-  LogosNotesExporter --list-databases
-  
-  # Export with custom database
-  LogosNotesExporter --database ./path/to/notestool.db
-  
-  # Custom output with date folders
-  LogosNotesExporter -o ./my-notes --date-folders
-  
-  # Dry run to see what would be exported
-  LogosNotesExporter --dry-run --verbose
-  
-  # Export without frontmatter and show metadata in content
-  LogosNotesExporter --no-frontmatter --show-metadata
+/**
+ * Export result
+ */
+export interface ExportResult {
+  success: boolean;
+  outputPath?: string;
+  error?: string;
+  stats?: {
+    totalNotes: number;
+    notesWithContent: number;
+    notesWithReferences: number;
+    notebooks: number;
+    orphanedNotes: number;
+    filesCreated: number;
+    xamlStats: any;
+  };
+}
 
-NOTES:
-  - Database is auto-detected in standard Logos installation locations
-  - Windows: %LOCALAPPDATA%\\Logos4\\Documents\\{random-id}\\NotesToolManager\\notestool.db
-  - macOS: ~/Library/Application Support/Logos4/Documents/{random-id}/NotesToolManager/notestool.db
-  - Use --list-databases to see all available locations
-  - All database operations are READ-ONLY for safety
-  - Output files will be organized by notebooks unless --no-organize-notebooks
-  - Existing files will be overwritten
-  - Bible references are always included when available
-`;
-
-class LogosNotesExporter {
+/**
+ * Core Logos Notes Exporter
+ * Contains the main export logic that can be used by both CLI and Electron
+ */
+export class LogosNotesExporter {
   private database: NotesToolDatabase;
   private catalogDb?: CatalogDatabase;
   private organizer: NotebookOrganizer;
   private fileOrganizer: FileOrganizer;
   private markdownConverter: MarkdownConverter;
   private validator: ExportValidator;
-  private options: CLIOptions;
+  private options: CoreExportOptions;
+  private callbacks: ExportCallbacks;
 
-  constructor(options: CLIOptions) {
+  constructor(options: CoreExportOptions, callbacks: ExportCallbacks = {}) {
     this.options = options;
+    this.callbacks = callbacks;
     
     // Initialize database with automatic location detection
     this.database = new NotesToolDatabase(options.database);
@@ -134,15 +100,15 @@ class LogosNotesExporter {
       this.catalogDb = new CatalogDatabase(this.database.getDatabaseInfo().path);
       if (options.verbose) {
         const catalogInfo = this.catalogDb.getCatalogInfo();
-        console.log(`📖 Using catalog database: ${catalogInfo.path}`);
+        this.log(`📖 Using catalog database: ${catalogInfo.path}`);
         if (catalogInfo.size) {
-          console.log(`   Size: ${(catalogInfo.size / 1024 / 1024).toFixed(1)} MB`);
+          this.log(`   Size: ${(catalogInfo.size / 1024 / 1024).toFixed(1)} MB`);
         }
       }
     } catch (error) {
       if (options.verbose) {
-        console.warn('⚠️  Catalog database not found or accessible. Resource titles will not be included.');
-        console.warn('   Error:', error);
+        this.log('⚠️  Catalog database not found or accessible. Resource titles will not be included.');
+        this.log(`   Error: ${error instanceof Error ? error.message : String(error)}`);
       }
     }
     
@@ -151,12 +117,12 @@ class LogosNotesExporter {
     // Show database info in verbose mode
     if (options.verbose) {
       const dbInfo = this.database.getDatabaseInfo();
-      console.log(`📁 Using database: ${dbInfo.description}`);
-      console.log(`   Path: ${dbInfo.path}`);
+      this.log(`📁 Using database: ${dbInfo.description}`);
+      this.log(`   Path: ${dbInfo.path}`);
       if (dbInfo.size) {
-        console.log(`   Size: ${(dbInfo.size / 1024 / 1024).toFixed(1)} MB`);
+        this.log(`   Size: ${(dbInfo.size / 1024 / 1024).toFixed(1)} MB`);
       }
-      console.log('');
+      this.log('');
     }
     
     // Configure file organizer
@@ -187,12 +153,14 @@ class LogosNotesExporter {
   /**
    * Main export process
    */
-  public async export(): Promise<void> {
+  public async export(): Promise<ExportResult> {
     try {
       this.log('Starting Logos Notes export...\n');
+      this.progress(0, 'Initializing export...');
 
       // Step 1: Organize notes by notebooks
       this.log('📚 Organizing notes by notebooks...');
+      this.progress(10, 'Organizing notes by notebooks...');
       const notebookGroups = await this.organizer.organizeNotes();
       this.log(`Found ${notebookGroups.length} notebook groups`);
 
@@ -202,6 +170,7 @@ class LogosNotesExporter {
 
       // Step 3: Plan file structure
       this.log('\n📁 Planning file structure...');
+      this.progress(25, 'Planning file structure...');
       const structure = await this.fileOrganizer.planDirectoryStructure(notebookGroups);
       const summary = this.fileOrganizer.getFileOperationSummary(notebookGroups);
       this.logFileSummary(summary);
@@ -209,15 +178,33 @@ class LogosNotesExporter {
       if (this.options.dryRun) {
         this.log('\n🔍 DRY RUN - No files will be written');
         this.logDryRunSummary(notebookGroups);
-        return;
+        return {
+          success: true,
+          outputPath: this.fileOrganizer.getOptions().baseDir,
+          stats: {
+            totalNotes: stats.totalNotes,
+            notesWithContent: stats.notesWithContent,
+            notesWithReferences: stats.notesWithReferences,
+            notebooks: stats.notebooks,
+            orphanedNotes: stats.orphanedNotes,
+            filesCreated: 0,
+            xamlStats: this.markdownConverter.getXamlConversionStats()
+          }
+        };
       }
 
       // Step 4: Process each notebook group
       this.log('\n📝 Converting notes to markdown...');
+      this.progress(40, 'Converting notes to markdown...');
       let totalProcessed = 0;
+      const totalNotes = notebookGroups.reduce((sum, group) => sum + group.notes.length, 0);
 
-      for (const group of notebookGroups) {
+      for (let i = 0; i < notebookGroups.length; i++) {
+        const group = notebookGroups[i];
         const notebookName = group.notebook?.title || 'No Notebook';
+        const baseProgress = 40 + (i / notebookGroups.length) * 40;
+        
+        this.progress(baseProgress, `Processing: ${notebookName}...`);
         this.log(`Processing: ${notebookName} (${group.notes.length} notes)`);
 
         // Resolve filename conflicts
@@ -232,6 +219,9 @@ class LogosNotesExporter {
           if (fileInfo) {
             await this.fileOrganizer.writeFile(fileInfo, result.content);
             totalProcessed++;
+            
+            const progressPercent = 40 + (totalProcessed / totalNotes) * 40;
+            this.progress(progressPercent, `Processed ${totalProcessed}/${totalNotes} notes`);
             
             if (this.options.verbose) {
               this.log(`  ✓ ${fileInfo.filename}`);
@@ -257,6 +247,7 @@ class LogosNotesExporter {
       // Step 5: Create main index
       if (this.fileOrganizer.getOptions().createIndexFiles) {
         this.log('\n📋 Creating main index...');
+        this.progress(90, 'Creating index files...');
         const mainIndexContent = this.fileOrganizer.generateMainIndex(notebookGroups, stats);
         const mainIndexPath = join(this.fileOrganizer.getOptions().baseDir, 'README.md');
         await this.fileOrganizer.writeFile({
@@ -268,8 +259,9 @@ class LogosNotesExporter {
         }, mainIndexContent);
       }
 
-      // Step 7: Display Rich Text (XAML) conversion statistics
+      // Step 6: Display Rich Text (XAML) conversion statistics
       this.log('\n📊 Rich Text (XAML) Conversion Statistics:');
+      this.progress(95, 'Finalizing export...');
       const xamlStats = this.markdownConverter.getXamlConversionStats();
       this.displayXamlStats(xamlStats);
 
@@ -278,7 +270,7 @@ class LogosNotesExporter {
         this.displayXamlFailures();
       }
 
-      // Step 8: Validate export (if enabled)
+      // Step 7: Validate export (if enabled)
       if (!this.options.dryRun) {
         this.log('\n🔍 Validating export...');
         const allNotes = notebookGroups.flatMap(group => group.notes);
@@ -297,27 +289,66 @@ class LogosNotesExporter {
       }
 
       // Step 8: Show completion summary
+      this.progress(100, 'Export completed successfully!');
       this.log('\n✅ Export completed successfully!');
       this.log(`📁 Output directory: ${this.fileOrganizer.getOptions().baseDir}`);
       this.log(`📄 Total files created: ${totalProcessed}`);
       this.log(`📚 Notebooks processed: ${notebookGroups.length}`);
       
+      return {
+        success: true,
+        outputPath: this.fileOrganizer.getOptions().baseDir,
+        stats: {
+          totalNotes: stats.totalNotes,
+          notesWithContent: stats.notesWithContent,
+          notesWithReferences: stats.notesWithReferences,
+          notebooks: stats.notebooks,
+          orphanedNotes: stats.orphanedNotes,
+          filesCreated: totalProcessed,
+          xamlStats: xamlStats
+        }
+      };
+      
     } catch (error) {
-      console.error('\n❌ Export failed:', error);
-      process.exit(1);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      this.log(`\n❌ Export failed: ${errorMessage}`);
+      return {
+        success: false,
+        error: errorMessage
+      };
     } finally {
-      this.organizer.close();
-      if (this.catalogDb) {
-        this.catalogDb.close();
-      }
+      this.close();
     }
   }
 
   /**
-   * Log message if not in quiet mode
+   * Close database connections
+   */
+  public close(): void {
+    this.organizer.close();
+    if (this.catalogDb) {
+      this.catalogDb.close();
+    }
+  }
+
+  /**
+   * Log message using callback or console
    */
   private log(message: string): void {
-    console.log(message);
+    if (this.callbacks.onLog) {
+      this.callbacks.onLog(message);
+    } else {
+      console.log(message);
+    }
+  }
+
+  /**
+   * Report progress using callback
+   */
+  private progress(progress: number, message: string): void {
+    if (this.callbacks.onProgress) {
+      this.callbacks.onProgress(progress, message);
+    }
   }
 
   /**
@@ -455,142 +486,5 @@ class LogosNotesExporter {
         }
       }
     }
-
-    // Note: Rich Text (XAML) conversion statistics are displayed separately
   }
-
-  /**
-   * Get file organizer options for external access
-   */
-  public getFileOrganizerOptions() {
-    return this.fileOrganizer.getOptions();
-  }
-}
-
-/**
- * Parse command line arguments
- */
-function parseCommandLine(): CLIOptions {
-  const args = process.argv.slice(2);
-  
-  const parsed = parseArgs({
-    args,
-    options: {
-      // Database options
-      database: { type: 'string', short: 'd' },
-      'list-databases': { type: 'boolean' },
-      'show-instructions': { type: 'boolean' },
-      output: { type: 'string', short: 'o' },
-      
-      // Organization options
-      'no-organize-notebooks': { type: 'boolean' },
-      'date-folders': { type: 'boolean' },
-      'no-index-files': { type: 'boolean' },
-      
-      // Markdown options
-      'no-frontmatter': { type: 'boolean' },
-      'show-metadata': { type: 'boolean' },
-      'no-dates': { type: 'boolean' },
-      'no-notebook-info': { type: 'boolean' },
-      'include-id': { type: 'boolean' },
-      'date-format': { type: 'string' },
-      
-      // Processing options
-      'skip-highlights': { type: 'boolean' },
-      verbose: { type: 'boolean', short: 'v' },
-      'dry-run': { type: 'boolean' },
-      help: { type: 'boolean', short: 'h' },
-      version: { type: 'boolean' },
-    },
-    allowPositionals: false,
-  });
-
-  const options: CLIOptions = {
-    database: parsed.values.database,
-    listDatabases: parsed.values['list-databases'],
-    showInstructions: parsed.values['show-instructions'],
-    output: parsed.values.output,
-    organizeByNotebooks: !parsed.values['no-organize-notebooks'],
-    includeDateFolders: parsed.values['date-folders'],
-    createIndexFiles: !parsed.values['no-index-files'],
-    includeFrontmatter: !parsed.values['no-frontmatter'],
-    includeMetadata: parsed.values['show-metadata'],
-    includeDates: !parsed.values['no-dates'],
-    includeNotebook: !parsed.values['no-notebook-info'],
-    includeId: parsed.values['include-id'],
-    dateFormat: parsed.values['date-format'] as 'iso' | 'locale' | 'short' | undefined,
-    skipHighlights: parsed.values['skip-highlights'],
-    verbose: parsed.values.verbose,
-    dryRun: parsed.values['dry-run'],
-    help: parsed.values.help,
-    version: parsed.values.version,
-  };
-
-  return options;
-}
-
-/**
- * Validate CLI options
- */
-function validateOptions(options: CLIOptions): void {
-  // Check database exists if provided
-  if (options.database && !existsSync(options.database)) {
-    console.error(`❌ Database file not found: ${options.database}`);
-    process.exit(1);
-  }
-
-  // Validate date format
-  if (options.dateFormat && !['iso', 'locale', 'short'].includes(options.dateFormat)) {
-    console.error(`❌ Invalid date format: ${options.dateFormat}. Must be one of: iso, locale, short`);
-    process.exit(1);
-  }
-}
-
-/**
- * Main CLI entry point
- */
-async function main(): Promise<void> {
-  const options = parseCommandLine();
-
-  // Handle help and version
-  if (options.help) {
-    console.log(HELP_TEXT);
-    process.exit(0);
-  }
-
-  if (options.version) {
-    const version = getPackageVersion();
-    console.log(`Logos Notes Exporter v${version}`);
-    process.exit(0);
-  }
-
-  // Handle database discovery commands
-  if (options.listDatabases) {
-    const locations = NotesToolDatabase.displayAvailableLocations();
-    console.log(locations.join('\n'));
-    process.exit(0);
-  }
-
-  if (options.showInstructions) {
-    const instructions = NotesToolDatabase.getSearchInstructions();
-    console.log(instructions.join('\n'));
-    process.exit(0);
-  }
-
-  // Validate options
-  validateOptions(options);
-
-  // Create and run exporter
-  const exporter = new LogosNotesExporter(options);
-  await exporter.export();
-}
-
-// Run CLI if this file is executed directly
-if (import.meta.main) {
-  main().catch((error) => {
-    console.error('❌ Fatal error:', error);
-    process.exit(1);
-  });
-}
-
-export { LogosNotesExporter, parseCommandLine, validateOptions, main }; 
+} 

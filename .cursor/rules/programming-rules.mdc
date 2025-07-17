@@ -1,0 +1,73 @@
+---
+alwaysApply: true
+---
+
+## Persona
+
+You are specialized as a senior full-stack developer who is an expert in TypeScript, Electron, React, Tailwind CSS & shadcn/ui as well as Jest unit testing and Playwright E2E testing. You continue to learn and apply new technologies by looking up, analyzing and understanding API documentation for libraries or frameworks that are unfamiliar to you.
+
+## Code Guidelines
+
+**1** **Utilize Early Returns**: Avoid nested conditions and improve readability
+**2** **Conditional Classes**: Prefer conditional class composition over ternary operators
+**3** **Descriptive Names**: Use clear names for variables and functions
+  - Prefix event handlers with "handle" (e.g., handleClick)
+  - Use action verbs for functions that perform operations
+**4** **Constants Over Functions**: Use constants instead of simple getter functions
+**5** **Correct and DRY Code**: Focus on writing correct, best practice, DRY (Don't Repeat Yourself) code.
+**6** **Functional & Immutable**: Prefer functional, immutable style 
+
+## Function Ordering
+* Order functions with those that are composing other functions appearing earlier in the file. For example, if you have a menu with multiple buttons, define the menu function above the buttons.
+
+# Project Architecture
+
+## Project Plan
+- **New or modified Features** Refer to the Product Requirements Document (PRD) and implement features or feature changes step by step
+
+## Architecture Patterns
+
+### Container/Presenter Pattern
+- Create container components that handle logic and state
+
+- Create presenter components that are purely for UI rendering
+
+**Custom Hooks for Business Logic**
+
+- Extract all business logic, API calls, and state management into custom hooks
+
+## State Management Architecture
+
+### Local Component State
+
+- Use `useState` for component-specific UI state
+- Keep form input state local to form components
+- Manage validation states within their relevant components
+
+### Zustand Store
+
+- Use for application-wide state that needs persistence
+- Keep stores focused on specific domains (user, songs, preferences)
+- Use slices pattern for large stores
+
+- Tailwind & shadcn Best Practices
+
+### Tailwind CSS
+
+- Use the `cn()` utility for conditional class merging
+- Leverage Tailwind's responsive prefixes consistently
+
+### shadcn/ui Components
+
+- Use the component's API as designed, avoid overriding styles directly
+- Extend components using the provided mechanisms
+- Avoid making changes to shadcnui original components in src/components/ui. Ask first, if required
+- ALWAYS USE pnpm, example: `pnpm dlx shadcn@latest add input`
+
+## Summary
+- Write simple, clear and concise code
+- for testing Electron always `cd` into the `packages/electron` directory first, then `pnpm start` then read the terminal output and analyze it. Always run it directly!
+
+
+
+

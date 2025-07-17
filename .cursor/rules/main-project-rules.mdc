@@ -7,33 +7,61 @@ alwaysApply: true
 A simple node based CLI exporter that converts Logos Notes to Markdown files
 
 The command takes one or more database files as input
+
 - with options for database file locations
 - with various options for the user to customize the output
 
 It outputs the following:
+
 - a directory of properly formatted Markdown files
 
 ## Architecture
 
-- Programming environment: 
-  - TypeScript with strict typing
-  - on bun (not using Node) 
-  - using bun's sqlite features
-  - fast-xml-parser for initial parsing of XAML
-  - yaml for validating Markdown front matter
 - modular
-- only one main file (src/cli.ts) will have all the CLI command functionality
-- all other TypeScript files must be modularized in such a way that they can be used for a CLI, Electron or Web application
+- business logic in packages/core
+- CLI version in packages/cli (uses core)
+- Electron version in packages/electron (uses core)
+- all core TypeScript files must be modularized in such a way that they can be used for the CLI version, the Electron version or a Web application
 
-## Tasks
+**Configuration**
+
+- pnpm for package management in a monorepo
+- using TypeScript with strict typing
+
+**CLI version in packages/cli**
+
+- works with bun (not using Node), using bun's sqlite features
+- fast-xml-parser for initial parsing of XAML
+- yaml for validating Markdown front matter
+- only one main file (src/cli.ts) has all the CLI command functionality
+
+**Electron version in packages/electron**
+
+- only one screen is needed for the app with two modes (Basic/Advanced)
+- contains only GUI code and any state that is relevant to the chosen settings
+- Basic UI shows a Title, a short explanatory text, an Export Notes button, a plain text field, a open Notes Folder button which is active after a successful conversion
+- settings are saved between app restarts in a settings file (whatever is the recommened method: consider YAML)
+- most settings are hidden from ordinary users until an Advanced button is clicked
+- all Buttons show tooltip explanations on hover
+- all available settings follow the CLI options
+- CLI logging output is displayed in a palin text field using the same text as the CLI output
+- Advanced mode shows
+  - a file selector for custom database location
+  - a Defaults button for default settings will restore defaults
+  - a Basic Mode button to hide (but not reset) advanced settings
+- Use TailwindCSS version 4 (not version 3) which is the current version
+In Tailwind CSS 4, the way you import Tailwind has changed compared to previous versions. Instead of using the @tailwind directives, you now use a regular CSS @import statement to import Tailwind. This means that the @tailwind base;, @tailwind components;, and @tailwind utilities; directives are no longer used in the same way as they were in version 3.4.
+
+## Core Tasks
+
 1. Analyze and document the relevant sqlite databases
 2. Analyze and document the relevant data formats
    - Bible Reference format
    - Book Reference format
    - Notes in XAML Rich Text format
 3. Convert XAML Rich Text to Markdown
-4. Add References and Metadata (front matter) to Markdown Notes 
+4. Add References and Metadata (front matter) to Markdown Notes
 
 ## Note:
-- Indexed Tina and NextJS documents are not used for this project
 
+- Indexed Tina and NextJS documents are not used for this project

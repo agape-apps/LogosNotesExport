@@ -1,22 +1,21 @@
 {
-  "name": "logos-notes-exporter",
+  "name": "logos-notes-exporter-monorepo",
   "version": "1.0.9",
-  "description": "A TypeScript CLI tool to export Logos Bible Software notes to Markdown files with YAML frontmatter",
+  "description": "Logos Notes Exporter - CLI and Electron applications with shared core",
+  "private": true,
   "type": "module",
-  "main": "src/index.ts",
   "scripts": {
-    "dev": "bun run src/cli.ts",
-    "build": "bun build src/cli.ts --outdir dist --target bun",
-    "start": "bun run dist/cli.js",
-    "test": "bun test",
-    "lint": "tsc --noEmit",
-    "export": "bun run src/cli.ts",
-    "binary:macx64": "bun build --compile --target=bun-macos-x64 ./index.ts --outfile bin/macos-x64/LogosNotesExporter",
-    "binary:macarm": "bun build --compile --target=bun-macos-arm64 ./index.ts --outfile bin/macos-arm64/LogosNotesExporter",
-    "binary:windows": "bun build --compile --target=bun-windows-x64 ./index.ts --outfile bin/windows-x64/LogosNotesExporter.exe"
-  },
-  "bin": {
-    "logos-export": "src/cli.ts"
+    "build": "pnpm run build:core && pnpm run build:cli && pnpm run build:electron",
+    "build:core": "pnpm --filter @logos-notes-exporter/core build",
+    "build:cli": "pnpm --filter @logos-notes-exporter/cli build",
+    "build:electron": "pnpm --filter @logos-notes-exporter/electron build",
+    "dev:cli": "pnpm --filter @logos-notes-exporter/cli dev",
+    "dev:electron": "pnpm --filter @logos-notes-exporter/electron start",
+    "start": "pnpm run dev:electron",
+    "test:electron": "pnpm --filter @logos-notes-exporter/electron start",
+    "test:cli": "pnpm --filter @logos-notes-exporter/cli dev",
+    "clean": "rm -rf node_modules pnpm-lock.yaml packages/*/dist packages/*/node_modules packages/*/.webpack",
+    "reinstall": "pnpm clean && pnpm install && pnpm run build:core"
   },
   "keywords": [
     "logos",
@@ -26,29 +25,18 @@
     "export",
     "converter",
     "cli",
+    "electron",
     "typescript",
     "bun"
   ],
   "author": "Logos Notes Exporter",
   "license": "MIT",
-  "engines": {
-    "bun": ">=1.0.0"
-  },
-  "dependencies": {
-    "bun": "^1.0.0",
-    "fast-xml-parser": "^5.2.5",
-    "yaml": "^2.8.0"
-  },
   "devDependencies": {
-    "@types/bun": "latest",
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   },
-  "files": [
-    "src/**/*",
-    "dist/**/*",
-    "docs/**/*",
-    "README.md"
-  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/agape-apps/logos-notes-exporter.git"
@@ -56,5 +44,9 @@
   "bugs": {
     "url": "https://github.com/agape-apps/logos-notes-exporter/issues"
   },
-  "homepage": "https://github.com/agape-apps/logos-notes-exporter#readme"
+  "homepage": "https://github.com/agape-apps/logos-notes-exporter#readme",
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad",
+  "dependencies": {
+    "better-sqlite3": "^12.2.0"
+  }
 }
