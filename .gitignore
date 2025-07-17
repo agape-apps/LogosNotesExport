@@ -9,6 +9,11 @@ exported-notes*/
 test-export*
 Logos-Exported-Notes/
 
+packages/cli/dist/
+packages/core/dist/
+packages/electron/dist/
+packages/electron/.webpack/
+
 bin/
 node_modules/
 .DS_Store

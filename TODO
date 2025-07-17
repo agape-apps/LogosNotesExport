@@ -45,6 +45,15 @@ OPTIONS
 
 - this option may not be needed: --no-notebook-info Exclude notebook information (default: include)
 
+### KEEP bun:sqlite !
+**DO NOT IMPLEMENT THE STEPS BELOW, because then the Bun binary builds will not work any more**
+- Update core package to use better-sqlite3 instead of bun:sqlite for universal Node.js/Bun compatibility.
+- Removed 55-line database adapter layer from Electron package as it's no longer needed.
+- Eliminated duplicate SQLite dependencies between packages for simplified dependency management.
+- Verified CLI functionality works correctly with Bun runtime using better-sqlite3 Node.js module.
+- Verified Electron functionality works correctly using better-sqlite3 Node.js module.
+- Tested this version, but does not work for this project as binary builds become impractical.
+
 ## Main Use Cases
 
 ### Backup (working)

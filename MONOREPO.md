@@ -56,9 +56,11 @@ pnpm --version
 
 ```bash
 # Remove any existing node_modules and lock files
+rm pnpm-lock.yaml
 rm -rf node_modules
 rm -rf packages/*/node_modules
 rm -rf packages/*/dist
+rm -rf packages/*/.webpack 
 ```
 
 #### 4. Install Dependencies
@@ -79,6 +81,12 @@ pnpm install
 ```bash
 # Build the core library (required by other packages)
 pnpm run build:core
+```
+
+#### 3. 4. and 5. ALL IN ONE STEP
+
+```bash
+pnpm reinstall
 ```
 
 #### 6. Verify Installation
