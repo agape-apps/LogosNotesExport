@@ -1,12 +1,13 @@
 import { ipcMain, dialog, shell, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
+import type { ChildProcess } from 'child_process';
 import type { ExportSettings, ExportProgress, ExportResult, AppMode } from '../renderer/types';
 import { loadSettings, saveSettings, resetSettings } from './settings';
-import { executeExport, detectDatabaseLocations, getDefaultDatabasePath, getDatabaseSearchInstructions } from './export-handler';
+import { executeExport, getDefaultDatabasePath } from './export-handler';
 
 let exportInProgress = false;
-let exportProcess: any = null; // Will be used when we integrate with core
+let exportProcess: ChildProcess | null = null; // Process handle for export cancellation
 
 /**
  * Sets up all IPC handlers for communication with renderer process
@@ -208,54 +209,6 @@ export function setupIpcHandlers(): void {
       throw error;
     }
   });
-}
-
-/**
- * Detects Logos database files on the system
- */
-async function detectLogosDatabase(): Promise<string | null> {
-  // Platform-specific search paths for Logos databases
-  const searchPaths: string[] = [];
-  
-  if (process.platform === 'win32') {
-    // Windows paths
-    const userProfile = process.env.USERPROFILE || '';
-    searchPaths.push(
-      path.join(userProfile, 'Documents', 'Logos', 'Data'),
-      path.join(userProfile, 'AppData', 'Local', 'Logos', 'Data'),
-      path.join(userProfile, 'AppData', 'Roaming', 'Logos', 'Data')
-    );
-  } else if (process.platform === 'darwin') {
-    // macOS paths
-    const homeDir = process.env.HOME || '';
-    searchPaths.push(
-      path.join(homeDir, 'Documents', 'Logos', 'Data'),
-      path.join(homeDir, 'Library', 'Application Support', 'Logos', 'Data'),
-      path.join(homeDir, 'Logos', 'Data')
-    );
-  }
-
-  // Search for database files
-  for (const searchPath of searchPaths) {
-    try {
-      if (fs.existsSync(searchPath)) {
-        const files = fs.readdirSync(searchPath);
-        const dbFiles = files.filter(file => 
-          file.toLowerCase().includes('notes') && 
-          (file.endsWith('.db') || file.endsWith('.sqlite') || file.endsWith('.sqlite3'))
-        );
-        
-        if (dbFiles.length > 0) {
-          return path.join(searchPath, dbFiles[0]);
-        }
-      }
-    } catch (error) {
-      // Continue searching in other paths
-      continue;
-    }
-  }
-
-  return null;
 }
 
  

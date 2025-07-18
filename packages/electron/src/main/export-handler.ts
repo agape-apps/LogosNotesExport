@@ -1,7 +1,7 @@
 import { BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
-import type { ExportSettings, ExportProgress, ExportResult } from '../renderer/types';
+import type { ExportSettings, ExportResult } from '../renderer/types';
 import { 
   LogosNotesExporter,
   DatabaseLocator,

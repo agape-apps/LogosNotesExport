@@ -42,7 +42,7 @@ const DEFAULT_SETTINGS: ExportSettings = {
 };
 
 export const useAppStore = create<AppStore>()(
-  subscribeWithSelector((set, get) => ({
+  subscribeWithSelector((set, _get) => ({
     // Initial state
     mode: "basic",
     settings: DEFAULT_SETTINGS,

@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import type { ExportSettings, RendererToMain, MainToRenderer } from '../renderer/types';
+import type { ExportSettings, MainToRenderer } from '../renderer/types';
 
 // Expose IPC API to renderer process
 contextBridge.exposeInMainWorld('electronAPI', {

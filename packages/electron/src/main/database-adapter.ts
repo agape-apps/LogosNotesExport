@@ -33,20 +33,20 @@ export class Database {
   query(sql: string) {
     const stmt = this.db.prepare(sql);
     return {
-      all: (...params: any[]) => stmt.all(...params),
-      get: (...params: any[]) => stmt.get(...params),
+      all: (...params: unknown[]) => stmt.all(...params),
+      get: (...params: unknown[]) => stmt.get(...params),
     };
   }
 
-  prepare(sql: string) {
+  prepare(sql: string): BetterSqlite3.Statement {
     return this.db.prepare(sql);
   }
 
-  run(sql: string, ...params: any[]) {
+  run(sql: string, ...params: unknown[]): BetterSqlite3.RunResult {
     return this.db.prepare(sql).run(...params);
   }
 
-  close() {
+  close(): void {
     this.db.close();
   }
 }
