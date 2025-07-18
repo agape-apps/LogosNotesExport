@@ -9,38 +9,6 @@ import globals from 'globals';
 export default [
   js.configs.recommended,
   
-  // JavaScript files configuration
-  {
-    files: ['packages/**/*.{js,jsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      sourceType: 'module',
-      globals: {
-        ...globals.node,
-        ...globals.es2020
-      }
-    },
-    plugins: {
-      'import': importPlugin
-    },
-    rules: {
-      'import/order': [
-        'error',
-        {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index'
-          ],
-          'newlines-between': 'ignore'
-        }
-      ]
-    }
-  },
-
   // TypeScript files configuration
   {
     files: ['packages/**/*.{ts,tsx}'],
@@ -53,7 +21,8 @@ export default [
           './packages/cli/tsconfig.json',
           './packages/core/tsconfig.json',
           './packages/electron/tsconfig.json'
-        ]
+        ],
+        noWarnOnMultipleProjects: true
       },
       globals: {
         ...globals.node,
@@ -94,7 +63,8 @@ export default [
             './packages/cli/tsconfig.json',
             './packages/core/tsconfig.json',
             './packages/electron/tsconfig.json'
-          ]
+          ],
+          noWarnOnMultipleProjects: true
         }
       }
     }
@@ -111,6 +81,7 @@ export default [
           './packages/core/tsconfig.json',
           './packages/electron/tsconfig.json'
         ],
+        noWarnOnMultipleProjects: true,
         ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: {
@@ -163,7 +134,8 @@ export default [
             './packages/cli/tsconfig.json',
             './packages/core/tsconfig.json',
             './packages/electron/tsconfig.json'
-          ]
+          ],
+          noWarnOnMultipleProjects: true
         }
       },
       react: {
