@@ -1,25 +1,22 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "allowJs": true,
     "module": "commonjs",
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "outDir": "dist", 
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "outDir": "dist",
     "jsx": "react-jsx",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "composite": true,
+    "noEmit": false,
     "paths": {
       "@/*": ["./src/renderer/*"],
       "@/lib/utils": ["./src/renderer/lib/utils.ts"]
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", ".webpack"]
+  "exclude": ["node_modules", ".webpack"],
+  "references": [
+    { "path": "../core" }
+  ]
 }

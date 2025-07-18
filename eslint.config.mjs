@@ -9,14 +9,51 @@ import globals from 'globals';
 export default [
   js.configs.recommended,
   
-  // Base TypeScript configuration for all packages
+  // JavaScript files configuration
   {
-    files: ['packages/**/*.{ts,js}'],
+    files: ['packages/**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+        ...globals.es2020
+      }
+    },
+    plugins: {
+      'import': importPlugin
+    },
+    rules: {
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index'
+          ],
+          'newlines-between': 'ignore'
+        }
+      ]
+    }
+  },
+
+  // TypeScript files configuration
+  {
+    files: ['packages/**/*.{ts,tsx}'],
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
         ecmaVersion: 2020,
-        sourceType: 'module'
+        sourceType: 'module',
+        project: [
+          './packages/cli/tsconfig.json',
+          './packages/core/tsconfig.json',
+          './packages/electron/tsconfig.json'
+        ]
       },
       globals: {
         ...globals.node,
@@ -28,7 +65,7 @@ export default [
       'import': importPlugin
     },
     rules: {
-      ...typescript.configs.recommended.rules,
+      ...typescript.configs['recommended'].rules,
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_' }
@@ -63,13 +100,17 @@ export default [
     }
   },
 
-  // Electron-specific React configuration (excluding webpack files)
+  // Electron-specific React configuration
   {
     files: ['packages/electron/src/**/*.{ts,tsx}'],
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
-        project: './packages/electron/tsconfig.json',
+        project: [
+          './packages/cli/tsconfig.json',
+          './packages/core/tsconfig.json',
+          './packages/electron/tsconfig.json'
+        ],
         ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: {
@@ -89,9 +130,9 @@ export default [
       'react-hooks': reactHooks
     },
     rules: {
-      ...typescript.configs.recommended.rules,
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
+      ...typescript.configs['recommended'].rules,
+      ...react.configs['recommended'].rules,
+      ...reactHooks.configs['recommended'].rules,
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_' }
@@ -118,7 +159,11 @@ export default [
     settings: {
       'import/resolver': {
         typescript: {
-          project: './packages/electron/tsconfig.json'
+          project: [
+            './packages/cli/tsconfig.json',
+            './packages/core/tsconfig.json',
+            './packages/electron/tsconfig.json'
+          ]
         }
       },
       react: {
@@ -138,7 +183,9 @@ export default [
       'packages/*/node_modules/',
       'packages/electron/webpack.*.ts',
       'packages/electron/forge.config.ts',
+      'packages/electron/postcss.config.js',
+      'packages/electron/tailwind.config.js',
       '*.d.ts'
     ]
   }
-]; 
+];

@@ -14,7 +14,6 @@
     "build": "tsc && bun build src/cli.ts --outdir dist --target bun",
     "start": "bun run dist/cli.js",
     "test": "bun test",
-
     "binary:macx64": "bun build --compile --target=bun-macos-x64 src/cli.ts --outfile ../../bin/macos-x64/LogosNotesExporter",
     "binary:macarm": "bun build --compile --target=bun-macos-arm64 src/cli.ts --outfile ../../bin/macos-arm64/LogosNotesExporter",
     "binary:windows": "bun build --compile --target=bun-windows-x64 src/cli.ts --outfile ../../bin/windows-x64/LogosNotesExporter.exe",
