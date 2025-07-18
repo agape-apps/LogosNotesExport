@@ -67,6 +67,8 @@ const App: React.FC = () => {
     };
 
     initialize();
+    // Zustand store actions are stable references and don't need to be in dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Auto-save settings when they change
@@ -159,7 +161,9 @@ const App: React.FC = () => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isExporting, selectedDatabasePath, lastExportSuccess, outputPath, mode]);
+    // Zustand store actions are stable references
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isExporting, selectedDatabasePath, lastExportSuccess, outputPath, mode, settings]);
 
   // Set up IPC event listeners
   useEffect(() => {
@@ -201,6 +205,8 @@ const App: React.FC = () => {
     return () => {
       unsubscribers.forEach(unsubscribe => unsubscribe());
     };
+    // Zustand store actions are stable references and don't need to be in dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleExport = async () => {
