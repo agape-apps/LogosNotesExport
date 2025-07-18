@@ -292,8 +292,8 @@ export class NotebookOrganizer {
    */
   private sanitizeFilename(name: string): string {
     return name
-      .replace(/[<>:\"/\\|?*]/g, '-') // Replace invalid file characters
-      .replace(/\\s+/g, '-') // Replace spaces with dashes
+      .replace(/[<>:"/\\|?*]/g, '-') // Replace invalid file characters
+      .replace(/\s+/g, '-') // Replace spaces with dashes
       .replace(/-+/g, '-') // Collapse multiple dashes
       .replace(/^-|-$/g, '') // Remove leading/trailing dashes
       .substring(0, 100) // Limit length

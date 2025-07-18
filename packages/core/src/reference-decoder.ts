@@ -62,7 +62,7 @@ export class BibleReferenceDecoder {
     const match = reference.match(/bible\+([^.]+)\.(\d+)\.(\d+)\.(\d+)(?:-(\d+)\.(\d+)\.(\d+))?/);
     if (!match) return null;
 
-    const [, version, bookNum, chapter, verse, endBook, endChapter, endVerse] = match;
+    const [, , bookNum, chapter, verse, , endChapter, endVerse] = match;
     const bookId = parseInt(bookNum || '0');
     const bookName = this.getBookName(anchorBookId || bookId);
     

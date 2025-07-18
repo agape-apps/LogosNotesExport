@@ -1,5 +1,5 @@
 import { XMLParser } from 'fast-xml-parser';
-import { cleanXamlText, UnicodeCleaner } from './unicode-cleaner.js';
+import { UnicodeCleaner } from './unicode-cleaner.js';
 
 export interface XamlConverterOptions {
   /** Font sizes that correspond to heading levels [H1, H2, H3, H4, H5, H6] */

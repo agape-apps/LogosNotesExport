@@ -525,9 +525,10 @@ export class MarkdownConverter {
     switch (this.options.dateFormat) {
       case 'locale':
         return date.toLocaleDateString();
-      case 'short':
+      case 'short': {
         const isoString = date.toISOString();
         return isoString.split('T')[0] || isoString; // YYYY-MM-DD
+      }
       case 'iso':
       default:
         return date.toISOString();

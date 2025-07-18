@@ -431,17 +431,17 @@ export class MetadataProcessor {
    * Escape YAML values to prevent syntax errors
    */
   private escapeYamlValue(value: string): string {
-    if (!value) return '\"\"';
+    if (!value) return '""';
 
     // Check if value needs quoting
-    const needsQuoting = /^[\\s]*$|[:\\[\\]{},\"|'>]|^[&*!|>%@`]/.test(value) ||
+    const needsQuoting = /^[\s]*$|[:[\]{},"|'>]|^[&*!|>%@`]/.test(value) ||
                         /^(true|false|null|yes|no|on|off)$/i.test(value) ||
                         /^[0-9]/.test(value);
 
     if (needsQuoting) {
       // Escape double quotes and backslashes
-      const escaped = value.replace(/\\\\/g, '\\\\\\\\').replace(/\"/g, '\\\\\"');
-      return `\"${escaped}\"`;
+      const escaped = value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+      return `"${escaped}"`;
     }
 
     return value;

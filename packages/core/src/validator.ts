@@ -1,7 +1,7 @@
-import { existsSync, statSync, readFileSync } from 'fs';
+import { existsSync, statSync, readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { parseDocument } from 'yaml';
-import type { OrganizedNote, NotebookGroup, FilePathInfo } from './types.js';
+import type { OrganizedNote, NotebookGroup } from './types.js';
 
 export interface ValidationOptions {
   /** Check that all notes were exported */
@@ -361,7 +361,6 @@ export class ExportValidator {
     const files: string[] = [];
     
     try {
-      const { readdirSync, statSync } = require('fs');
       const entries = readdirSync(dir);
       
       for (const entry of entries) {
@@ -374,7 +373,7 @@ export class ExportValidator {
           files.push(fullPath);
         }
       }
-    } catch (error) {
+    } catch {
       // Ignore directory read errors
     }
     

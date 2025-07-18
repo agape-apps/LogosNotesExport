@@ -6,11 +6,8 @@ import {
   ExportValidator, 
   NotesToolDatabase, 
   CatalogDatabase,
-  DEFAULT_FILE_OPTIONS,
-  DEFAULT_MARKDOWN_OPTIONS,
   type FileStructureOptions,
-  type MarkdownOptions,
-  type XamlConversionFailure
+  type MarkdownOptions
 } from './index.js';
 
 /**
@@ -171,7 +168,7 @@ export class LogosNotesExporter {
       // Step 3: Plan file structure
       this.log('\n📁 Planning file structure...');
       this.progress(25, 'Planning file structure...');
-      const structure = await this.fileOrganizer.planDirectoryStructure(notebookGroups);
+      await this.fileOrganizer.planDirectoryStructure(notebookGroups);
       const summary = this.fileOrganizer.getFileOperationSummary(notebookGroups);
       this.logFileSummary(summary);
 
@@ -406,7 +403,6 @@ export class LogosNotesExporter {
     
     if (stats.notesWithXaml > 0) {
       if (stats.xamlConversionsFailed > 0) {
-        const failureRate = ((stats.xamlConversionsFailed / stats.notesWithXaml) * 100).toFixed(1);
         this.log(`\n⚠️  Rich Text (XAML) Conversion Issues:\n   ${stats.xamlConversionsFailed} out of ${stats.notesWithXaml} conversions had issues`);
       } else {
         this.log(`\n✅ Rich Text (XAML) Conversion: All ${stats.notesWithXaml} Rich Text Notes converted successfully`);

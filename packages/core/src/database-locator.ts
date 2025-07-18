@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, statSync } from 'fs';
+import { existsSync, readdirSync, statSync, openSync, readSync, closeSync } from 'fs';
 import { join, resolve } from 'path';
 import { homedir } from 'os';
 
@@ -105,8 +105,6 @@ export class DatabaseLocator {
    * Find macOS Logos installations
    */
   private static findMacOSLocations(): DatabaseLocation[] {
-    const locations: DatabaseLocation[] = [];
-    
     const logosPath = join(homedir(), 'Library', 'Application Support', 'Logos4', 'Documents');
     return this.searchRandomIdDirectories(logosPath, 'macos', 'macOS Logos installation');
   }
@@ -138,7 +136,7 @@ export class DatabaseLocator {
           }
         }
       }
-    } catch (error) {
+    } catch {
       // Ignore directory read errors (permissions, etc.)
     }
 
@@ -160,7 +158,7 @@ export class DatabaseLocator {
         const stats = statSync(fullPath);
         size = stats.size;
         lastModified = stats.mtime;
-      } catch (error) {
+      } catch {
         // Ignore stat errors
       }
     }
@@ -196,19 +194,18 @@ export class DatabaseLocator {
 
       // Basic SQLite file signature check
       // SQLite files start with "SQLite format 3\000"
-      const fs = require('fs');
       const buffer = Buffer.alloc(16);
-      const fd = fs.openSync(path, 'r');
+      const fd = openSync(path, 'r');
       
       try {
-        fs.readSync(fd, buffer, 0, 16, 0);
+        readSync(fd, buffer, 0, 16, 0);
         const signature = buffer.toString('ascii', 0, 15);
         
         if (!signature.startsWith('SQLite format 3')) {
           return { valid: false, error: 'File does not appear to be a valid SQLite database' };
         }
       } finally {
-        fs.closeSync(fd);
+        closeSync(fd);
       }
 
       return { 
@@ -327,7 +324,7 @@ export class DatabaseLocator {
           const stats = statSync(catalogPath);
           size = stats.size;
           lastModified = stats.mtime;
-        } catch (error) {
+        } catch {
           // Ignore stat errors
         }
       }
@@ -338,7 +335,7 @@ export class DatabaseLocator {
         size,
         lastModified
       };
-    } catch (error) {
+    } catch {
       return null;
     }
   }

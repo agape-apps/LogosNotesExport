@@ -1,5 +1,5 @@
 import { mkdir, writeFile } from 'fs/promises';
-import { join, dirname } from 'path';
+import { join } from 'path';
 import { existsSync } from 'fs';
 import type { OrganizedNote, NotebookGroup } from './types.js';
 import { BibleReferenceDecoder } from './reference-decoder.js';
@@ -392,7 +392,7 @@ export class FileOrganizer {
    */
   private sanitizeFilename(name: string): string {
     return name
-      .replace(/[<>:\"/\\\\|?*]/g, '-') // Replace invalid characters
+      .replace(/[<>:"/\\\\|?*]/g, '-') // Replace invalid characters
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .replace(/-+/g, '-') // Collapse multiple hyphens
       .replace(/^-|-$/g, '') // Remove leading/trailing hyphens

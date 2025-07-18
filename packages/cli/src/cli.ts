@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 import { parseArgs } from 'util';
 import { existsSync, readFileSync } from 'fs';
-import { join, basename } from 'path';
+import { join } from 'path';
 import { 
   LogosNotesExporter,
   type CoreExportOptions,
@@ -18,7 +18,7 @@ function getPackageVersion(): string {
     const packageContent = readFileSync(packagePath, 'utf8');
     const packageJson = JSON.parse(packageContent);
     return packageJson.version || 'unknown';
-  } catch (error) {
+  } catch {
     return 'unknown';
   }
 }
