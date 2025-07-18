@@ -37,6 +37,7 @@
     "autoprefixer": "^10.4.21",
     "css-loader": "^6.11.0",
     "electron": "37.2.1",
+    "eslint": "^9.31.0",
     "fork-ts-checker-webpack-plugin": "^7.3.0",
     "node-loader": "^2.1.0",
     "postcss": "^8.5.6",

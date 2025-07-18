@@ -11,6 +11,7 @@ Logos-Exported-Notes/
 
 packages/cli/dist/
 packages/core/dist/
+packages/core/tsconfig.tsbuildinfo
 packages/electron/dist/
 packages/electron/.webpack/
 
