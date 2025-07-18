@@ -24,6 +24,7 @@ export const DEFAULT_OPTIONS: XamlConverterOptions = {
 };
 
 interface XamlElement {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
   '@_FontSize'?: string;
   '@_FontWeight'?: string;
@@ -107,6 +108,7 @@ export class XamlToMarkdownConverter {
     return cleaned.trim();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private processElement(element: any): string {
     if (!element) return '';
 
@@ -401,6 +403,7 @@ export class XamlToMarkdownConverter {
 
       // Process header row
       if (rows.length > 0) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const headerCells = this.extractTableCells(rows[0] as any);
         const headerRow = '| ' + headerCells.join(' | ') + ' |';
         const separatorRow = '| ' + headerCells.map(() => '---').join(' | ') + ' |';
@@ -409,6 +412,7 @@ export class XamlToMarkdownConverter {
 
         // Process data rows
         for (let i = 1; i < rows.length; i++) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const cells = this.extractTableCells(rows[i] as any);
           const dataRow = '| ' + cells.join(' | ') + ' |';
           result += dataRow + '\n';
@@ -495,6 +499,7 @@ export class XamlToMarkdownConverter {
     return result;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private getAttributes(element: XamlElement): any {
     // Handle preserveOrder attribute structure
     if (element[':@']) {
@@ -625,6 +630,7 @@ export class XamlToMarkdownConverter {
     if (Array.isArray(element)) {  // Added explicit array handling
       let content = '';
       for (const item of element) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         content += this.extractElementContent(item as any);
       }
       return content;
@@ -648,25 +654,32 @@ export class XamlToMarkdownConverter {
 
       switch (key.toLowerCase()) {
         case 'run':
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content += this.processRun(value as any);
           break;
         case 'span':
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content += this.processSpan(value as any);
           break;
         case 'hyperlink':
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content += this.processHyperlink(value as any);
           break;
         case 'urilink':  // Add this case
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content += this.processHyperlink(value as any);
           break;
         case 'list':
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content += this.processList(value as any);
           break;
         case 'table':
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content += this.processTable(value as any);
           break;
         default:
           if (typeof value === 'object' && value) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             content += this.extractElementContent(value as any);
           }
           break;
@@ -847,6 +860,7 @@ export class XamlToMarkdownConverter {
         const cellArray = Array.isArray(value) ? value : [value];
         for (const cell of cellArray) {
           if (cell && typeof cell === 'object') {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const content = this.extractElementContent(cell as any).trim();
             cells.push(content || '');
           }
@@ -884,10 +898,12 @@ export class XamlToMarkdownConverter {
       .replace(/[ \t]+$/gm, (match) => match === '  ' ? '  ' : '');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isParagraph(item: any): boolean {
     return !!item && !!item.Paragraph;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isCodeParagraph(paragraph: any): boolean {
     const runs = this.extractRunsFromParagraph(paragraph);
     if (runs.length === 0) return false;

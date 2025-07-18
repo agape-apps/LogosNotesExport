@@ -422,9 +422,20 @@ export class NotesToolDatabase {
       FROM Notebooks
     `;
 
-    const noteStats = this.db.query(statsQuery).get() as any;
-    const refStats = this.db.query(refStatsQuery).get() as any;
-    const notebookStats = this.db.query(notebookStatsQuery).get() as any;
+    const noteStats = this.db.query(statsQuery).get() as {
+      totalNotes: number;
+      activeNotes: number;
+      deletedNotes: number;
+      trashedNotes: number;
+      notesWithContent: number;
+    };
+    const refStats = this.db.query(refStatsQuery).get() as {
+      notesWithReferences: number;
+    };
+    const notebookStats = this.db.query(notebookStatsQuery).get() as {
+      totalNotebooks: number;
+      activeNotebooks: number;
+    };
 
     return {
       ...noteStats,

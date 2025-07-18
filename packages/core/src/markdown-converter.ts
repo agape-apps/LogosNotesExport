@@ -17,7 +17,7 @@ export interface MarkdownOptions {
   /** Include notebook information */
   includeNotebook: boolean;
   /** Custom frontmatter fields */
-  customFields: Record<string, any>;
+  customFields: Record<string, unknown>;
   /** Date format for display */
   dateFormat: 'iso' | 'locale' | 'short';
   /** Whether to include note ID */
@@ -51,7 +51,7 @@ export interface MarkdownResult {
   /** Final markdown content */
   content: string;
   /** YAML frontmatter object */
-  frontmatter: Record<string, any>;
+  frontmatter: Record<string, unknown>;
   /** Content without frontmatter */
   body: string;
   /** Word count */
@@ -191,11 +191,11 @@ export class MarkdownConverter {
   /**
    * Generate YAML frontmatter for a note
    */
-  private generateFrontmatter(note: OrganizedNote, group: NotebookGroup, fileInfo: FilePathInfo): Record<string, any> {
+  private generateFrontmatter(note: OrganizedNote, group: NotebookGroup, fileInfo: FilePathInfo): Record<string, unknown> {
     if (this.metadataProcessor) {
       // Use enhanced metadata processor
       const metadata = this.metadataProcessor.generateMetadata(note);
-      const frontmatter: Record<string, any> = { ...metadata };
+      const frontmatter: Record<string, unknown> = { ...metadata };
       
       // Add file information
       if (fileInfo.filename) {
@@ -215,8 +215,8 @@ export class MarkdownConverter {
   /**
    * Generate basic frontmatter when enhanced metadata processor is not available
    */
-  private generateBasicFrontmatter(note: OrganizedNote, group: NotebookGroup, fileInfo: FilePathInfo): Record<string, any> {
-    const frontmatter: Record<string, any> = {};
+  private generateBasicFrontmatter(note: OrganizedNote, group: NotebookGroup, fileInfo: FilePathInfo): Record<string, unknown> {
+    const frontmatter: Record<string, unknown> = {};
 
     // Title
     frontmatter.title = note.formattedTitle || this.generateTitleFromReferences(note) || 'Untitled Note';
@@ -409,7 +409,7 @@ export class MarkdownConverter {
   /**
    * Serialize frontmatter to YAML
    */
-  private serializeFrontmatter(frontmatter: Record<string, any>): string {
+  private serializeFrontmatter(frontmatter: Record<string, unknown>): string {
     const lines = ['---'];
     
     // Define the preferred field order for better readability
@@ -441,7 +441,7 @@ export class MarkdownConverter {
   /**
    * Serialize a YAML value with proper formatting
    */
-  private serializeYamlValue(key: string, value: any, indent: number = 0): string {
+  private serializeYamlValue(key: string, value: unknown, indent: number = 0): string {
     const prefix = '  '.repeat(indent);
     
     if (value === null || value === undefined) {
@@ -494,7 +494,7 @@ export class MarkdownConverter {
   /**
    * Format a scalar value for YAML
    */
-  private formatYamlScalar(value: any): string {
+  private formatYamlScalar(value: unknown): string {
     if (typeof value === 'string') {
       if (value.includes('"') || value.includes('\'') || value.includes('\n')) {
         return `"${value.replace(/"/g, '\\"')}"`;

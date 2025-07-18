@@ -25,7 +25,7 @@ export interface NoteMetadata {
   bibleVersion?: string;
   anchorLink?: string;
   filename?: string;
-  [key: string]: any; // Allow custom metadata
+  [key: string]: unknown; // Allow custom metadata
 }
 
 export interface MetadataLookups {
@@ -55,7 +55,7 @@ export interface MetadataOptions {
   dateFormat: 'iso' | 'readable';
 }
 
-export type MetadataExtractor = (note: OrganizedNote) => Record<string, any>;
+export type MetadataExtractor = (note: OrganizedNote) => Record<string, unknown>;
 
 export const DEFAULT_METADATA_OPTIONS: MetadataOptions = {
   includeDates: true,
@@ -297,12 +297,12 @@ export class MetadataProcessor {
       if (!standardFields.has(key) && value !== undefined && value !== null) {
         if (Array.isArray(value)) {
           yamlLines.push(`${key}:`);
-          value.forEach((item: any) => {
+          value.forEach((item: unknown) => {
             yamlLines.push(`  - ${this.escapeYamlValue(String(item))}`);
           });
         } else if (typeof value === 'object') {
           yamlLines.push(`${key}:`);
-          for (const [subKey, subValue] of Object.entries(value as any)) {
+          for (const [subKey, subValue] of Object.entries(value as Record<string, unknown>)) {
             yamlLines.push(`  ${subKey}: ${this.escapeYamlValue(String(subValue))}`);
           }
         } else {

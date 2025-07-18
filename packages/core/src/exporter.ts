@@ -1,4 +1,7 @@
 import { join } from 'path';
+import type { XamlConversionStats } from './markdown-converter.js';
+import type { OrganizationStats, NotebookGroup } from './notebook-organizer.js';
+import type { ValidationResult, ValidationIssue } from './validator.js';
 import { 
   NotebookOrganizer, 
   FileOrganizer, 
@@ -67,7 +70,7 @@ export interface ExportResult {
     notebooks: number;
     orphanedNotes: number;
     filesCreated: number;
-    xamlStats: any;
+    xamlStats: XamlConversionStats;
   };
 }
 
@@ -351,7 +354,7 @@ export class LogosNotesExporter {
   /**
    * Log organization statistics
    */
-  private logStats(stats: any): void {
+  private logStats(stats: OrganizationStats): void {
     this.log(`\n📊 Statistics:`);
     this.log(`  Total Notes: ${stats.totalNotes}`);
     this.log(`  Notes with Content: ${stats.notesWithContent}`);
@@ -363,7 +366,12 @@ export class LogosNotesExporter {
   /**
    * Log file operation summary
    */
-  private logFileSummary(summary: any): void {
+  private logFileSummary(summary: {
+    totalDirectories: number;
+    totalFiles: number;
+    totalIndexFiles: number;
+    estimatedSize: string;
+  }): void {
     this.log(`  Directories to create: ${summary.totalDirectories}`);
     this.log(`  Notes to export: ${summary.totalFiles}`);
     this.log(`  Index files to create: ${summary.totalIndexFiles}`);
@@ -373,7 +381,7 @@ export class LogosNotesExporter {
   /**
    * Log dry run summary
    */
-  private logDryRunSummary(notebookGroups: any[]): void {
+  private logDryRunSummary(notebookGroups: NotebookGroup[]): void {
     for (const group of notebookGroups) {
       const notebookName = group.notebook?.title || 'No Notebook';
       this.log(`\n📚 ${notebookName}:`);
@@ -393,7 +401,7 @@ export class LogosNotesExporter {
   /**
    * Display Rich Text (XAML) conversion statistics
    */
-  private displayXamlStats(stats: any): void {
+  private displayXamlStats(stats: XamlConversionStats): void {
     this.log(`  Total notes processed: ${stats.totalNotes}`);
     this.log(`  Notes with Rich Text content: ${stats.notesWithXaml}`);
     this.log(`  Conversions succeeded: ${stats.xamlConversionsSucceeded}`);
@@ -441,13 +449,13 @@ export class LogosNotesExporter {
   /**
    * Display validation results to the user
    */
-  private displayValidationResults(result: any): void {
+  private displayValidationResults(result: ValidationResult): void {
     this.log(`\n📋 ${result.summary}`);
     
     if (result.issues.length > 0) {
-      const errors = result.issues.filter((i: any) => i.severity === 'error');
-      const warnings = result.issues.filter((i: any) => i.severity === 'warning');
-      const info = result.issues.filter((i: any) => i.severity === 'info');
+      const errors = result.issues.filter((i: ValidationIssue) => i.severity === 'error');
+      const warnings = result.issues.filter((i: ValidationIssue) => i.severity === 'warning');
+      const info = result.issues.filter((i: ValidationIssue) => i.severity === 'info');
       
       if (errors.length > 0) {
         this.log('\n❌ Errors found:');

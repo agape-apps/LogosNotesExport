@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
-import type { OrganizedNote, NotebookGroup } from './types.js';
+import type { OrganizedNote, NotebookGroup, OrganizationStats } from './types.js';
 import { BibleReferenceDecoder } from './reference-decoder.js';
 import type { ResourceId } from './notestool-database.js';
 
@@ -165,7 +165,7 @@ export class FileOrganizer {
   /**
    * Generate a main README.md file
    */
-  public generateMainIndex(notebookGroups: NotebookGroup[], stats: any): string {
+  public generateMainIndex(notebookGroups: NotebookGroup[], stats: OrganizationStats): string {
     const lines = [
       '# Exported Logos Notes',
       '',

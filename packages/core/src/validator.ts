@@ -238,7 +238,7 @@ export class ExportValidator {
   /**
    * Lint YAML content for syntax validity
    */
-  private lintYaml(yamlContent: string): { valid: boolean; error?: string; data?: any; warnings?: string[] } {
+  private lintYaml(yamlContent: string): { valid: boolean; error?: string; data?: unknown; warnings?: string[] } {
     try {
       const doc = parseDocument(yamlContent);
       

@@ -1,5 +1,5 @@
 import { NotesToolDatabase } from './notestool-database.js';
-import type { NotesToolNote, Notebook, NoteAnchorTextRange } from './notestool-database.js';
+import type { NotesToolNote, Notebook, NoteAnchorTextRange, BibleReference } from './notestool-database.js';
 import { BibleReferenceDecoder } from './reference-decoder.js';
 import type { DecodedReference } from './reference-decoder.js';
 
@@ -62,7 +62,7 @@ export class NotebookOrganizer {
 
     // Create a map for quick reference lookup
     const referencesMap = new Map<number, DecodedReference[]>();
-    allReferences.forEach((ref: any) => {
+    allReferences.forEach((ref: BibleReference) => {
       const decoded = this.referenceDecoder.decodeReference(ref.reference, ref.bibleBook);
       if (decoded) {
         if (!referencesMap.has(ref.noteId)) {
@@ -140,7 +140,7 @@ export class NotebookOrganizer {
       n.contentRichText && n.contentRichText.trim() !== ''
     ).length;
 
-    const noteIdsWithReferences = new Set(references.map((r: any) => r.noteId));
+    const noteIdsWithReferences = new Set(references.map((r: BibleReference) => r.noteId));
     const notesWithReferences = notes.filter((n: NotesToolNote) => noteIdsWithReferences.has(n.id)).length;
 
     const notebookIds = new Set(notebooks.map((nb: Notebook) => nb.externalId));
@@ -160,21 +160,21 @@ export class NotebookOrganizer {
    */
   public getNotesByNotebook(notebookExternalId: string): OrganizedNote[] {
     const allNotes = this.database.getActiveNotes();
-    let notes = allNotes.filter((n: any) => n.notebookExternalId === notebookExternalId);
+    let notes = allNotes.filter((n: NotesToolNote) => n.notebookExternalId === notebookExternalId);
     
     // Filter out highlights if requested
     if (this.options.skipHighlights) {
-      notes = notes.filter((note: any) => note.kind !== 1); // 1 = highlight
+      notes = notes.filter((note: NotesToolNote) => note.kind !== 1); // 1 = highlight
     }
     const notebooks = this.database.getActiveNotebooks();
     const allReferences = this.database.getBibleReferences();
     const allTextRanges = this.database.getNoteAnchorTextRanges();
 
     const notebookMap = new Map<string, Notebook>();
-    notebooks.forEach((nb: any) => notebookMap.set(nb.externalId, nb));
+    notebooks.forEach((nb: Notebook) => notebookMap.set(nb.externalId, nb));
 
     const referencesMap = new Map<number, DecodedReference[]>();
-    allReferences.forEach((ref: any) => {
+    allReferences.forEach((ref: BibleReference) => {
       const decoded = this.referenceDecoder.decodeReference(ref.reference, ref.bibleBook);
       if (decoded) {
         if (!referencesMap.has(ref.noteId)) {
@@ -191,7 +191,7 @@ export class NotebookOrganizer {
       }
     });
 
-    return notes.map((note: any) => this.processNote(note, notebookMap, referencesMap, textRangesMap));
+    return notes.map((note: NotesToolNote) => this.processNote(note, notebookMap, referencesMap, textRangesMap));
   }
 
   /**
