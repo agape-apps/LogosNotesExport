@@ -1,7 +1,7 @@
-import { ipcMain, dialog, shell, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 import type { ChildProcess } from 'child_process';
+import { ipcMain, dialog, shell, BrowserWindow } from 'electron';
 import type { ExportSettings, ExportProgress, ExportResult, AppMode } from '../renderer/types';
 import { loadSettings, saveSettings, resetSettings } from './settings';
 import { executeExport, getDefaultDatabasePath } from './export-handler';

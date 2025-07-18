@@ -1,13 +1,13 @@
-import { BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
-import type { ExportSettings, ExportResult } from '../renderer/types';
+import { BrowserWindow } from 'electron';
 import { 
   LogosNotesExporter,
   DatabaseLocator,
   type CoreExportOptions,
   type ExportCallbacks
 } from '@logos-notes-exporter/core';
+import type { ExportSettings, ExportResult } from '../renderer/types';
 
 /**
  * Validates export settings before starting export

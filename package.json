@@ -14,6 +14,11 @@
     "start": "pnpm run dev:electron",
     "test:electron": "pnpm --filter @logos-notes-exporter/electron start",
     "test:cli": "pnpm --filter @logos-notes-exporter/cli dev",
+    "lint": "eslint packages/",
+    "lint:fix": "eslint packages/ --fix",
+    "lint:cli": "eslint packages/cli/",
+    "lint:core": "eslint packages/core/",
+    "lint:electron": "eslint packages/electron/",
     "clean": "rm -rf node_modules pnpm-lock.yaml packages/*/dist packages/*/node_modules packages/*/.webpack",
     "reinstall": "pnpm clean && pnpm install && pnpm run build:core"
   },
@@ -32,7 +37,16 @@
   "author": "Logos Notes Exporter",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@eslint/js": "^9.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "eslint": "^9.31.0",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.3.0"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { HelpCircleIcon } from 'lucide-react';
+import type { ExportSettings } from '../types';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -7,9 +9,7 @@ import { Checkbox } from './ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
-import { HelpCircleIcon } from 'lucide-react';
 import { OutputLog } from './OutputLog';
-import type { ExportSettings } from '../types';
 
 interface AdvancedModeProps {
   settings: ExportSettings;
