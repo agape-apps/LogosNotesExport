@@ -10,6 +10,7 @@ test-export*
 Logos-Exported-Notes/
 
 packages/cli/dist/
+packages/cli/tsconfig.tsbuildinfo
 packages/core/dist/
 packages/core/tsconfig.tsbuildinfo
 packages/electron/dist/

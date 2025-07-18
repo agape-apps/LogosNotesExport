@@ -16,7 +16,7 @@ export interface XamlConverterOptions {
 
 // TODO: Add support for other monospace Font Names
 export const DEFAULT_OPTIONS: XamlConverterOptions = {
-  headingSizes: [24, 22, 20, 18, 16, 14],
+  headingSizes: [], // No longer used - we use ranges instead
   monospaceFontName: 'Courier New',
   blockQuoteLineThickness: 3,
   horizontalLineThickness: 3,
@@ -37,6 +37,7 @@ interface XamlElement {
   '@_NavigateUri'?: string;
   '@_MarkerStyle'?: string;
   '@_Kind'?: string; // Added for list Kind
+  '@_Margin'?: string; // Added for paragraph indentation
   '#text'?: string;
 }
 
@@ -251,6 +252,10 @@ export class XamlToMarkdownConverter {
     for (const para of paragraphs) {
       if (!para) continue;
 
+      // Get paragraph attributes for margin processing
+      const attrs = this.getAttributes(para);
+      const margin = attrs['@_Margin'] || '';
+
       // Handle preserveOrder structure - get Paragraph content array
       const paragraphContent = para.Paragraph || para.paragraph || [];
       
@@ -270,11 +275,17 @@ export class XamlToMarkdownConverter {
           continue;
         }
 
+        // Calculate indent level from margin
+        const indentLevel = this.parseIndentLevel(margin);
+        const indentPrefix = this.formatIndent(indentLevel);
+
         const headingLevel = this.getHeadingLevelFromParagraph(para);
         if (headingLevel > 0) {
-          result += '#'.repeat(headingLevel) + ' ' + content.trim() + '\n';
+          // For headings, add indent prefix before the hash marks
+          result += indentPrefix + '#'.repeat(headingLevel) + ' ' + content.trim() + '\n';
         } else {
-          result += content.trimEnd() + '  \n';
+          // For regular paragraphs, add indent prefix before content
+          result += indentPrefix + content.trimEnd() + '  \n';
         }
       }
     }
@@ -536,6 +547,19 @@ export class XamlToMarkdownConverter {
       return leadingSpace + formatted + trailingSpace; // Code formatting takes precedence
     }
 
+    // Check for special font sizes
+    const fontSize = attrs['@_FontSize'] ? parseFloat(attrs['@_FontSize']) : null;
+    if (fontSize !== null) {
+      if (fontSize <= 9) {
+        // Small font sizes (≤9) use <small> tag
+        formatted = '<small>' + formatted + '</small>';
+        return leadingSpace + formatted + trailingSpace;
+      } else if (fontSize >= 11 && fontSize <= 12) {
+        // Normal font sizes (11-12) - no special formatting needed
+        // Continue with regular formatting checks
+      }
+    }
+
     // Apply text formatting in order: bold, italic, underline, strikethrough, small caps, sub/superscript, highlight
     let needsBold = false;
     let needsItalic = false;
@@ -598,7 +622,7 @@ export class XamlToMarkdownConverter {
     }
 
     if (needsSmallCaps) {
-      formatted = '<small>' + formatted.toUpperCase() + '</small>';
+      formatted = formatted.toUpperCase();
     }
 
     if (needsStrikethrough) {
@@ -691,8 +715,16 @@ export class XamlToMarkdownConverter {
 
   private getHeadingLevel(fontSize: number | null): number {
     if (fontSize === null) return 0;
-    const index = this.options.headingSizes.indexOf(fontSize);
-    return index >= 0 ? index + 1 : 0;
+    
+    // Use font size ranges to determine heading levels
+    if (fontSize >= 23) return 1;      // H1: >= 23
+    if (fontSize >= 21) return 2;      // H2: 21-22
+    if (fontSize >= 19) return 3;      // H3: 19-20
+    if (fontSize >= 17) return 4;      // H4: 17-18
+    if (fontSize >= 15) return 5;      // H5: 15-16
+    if (fontSize >= 13) return 6;      // H6: 13-14
+    
+    return 0; // Not a heading size
   }
 
   private getHeadingLevelFromParagraph(paragraph: XamlElement): number {
@@ -913,5 +945,38 @@ export class XamlToMarkdownConverter {
       const font = attrs['@_FontFamily'] || '';
       return this.isMonospaceFont(font);
     });
+  }
+
+  /**
+   * Parse margin string and calculate indent level based on left margin.
+   * XAML margin format: "left,top,right,bottom" where left margin indicates indent level.
+   * Each indent level is 36 units (36, 72, 108, etc.)
+   */
+  private parseIndentLevel(margin: string): number {
+    if (!margin) return 0;
+    
+    const parts = margin.split(',').map(s => parseFloat(s.trim()));
+    if (parts.length !== 4 || isNaN(parts[0])) return 0;
+    
+    const leftMargin = parts[0];
+    if (leftMargin <= 0) return 0;
+    
+    // Calculate indent level: each level is 36 units
+    const indentLevel = Math.round(leftMargin / 36);
+    
+    // Cap at maximum 6 levels
+    return Math.min(indentLevel, 6);
+  }
+
+  /**
+   * Format indent level as markdown using non-breaking spaces pattern.
+   * Each level uses: &nbsp; followed by 3 regular spaces
+   */
+  private formatIndent(level: number): string {
+    if (level <= 0) return '';
+    
+    // Each indent level: &nbsp; + 3 spaces
+    const singleIndent = '&nbsp;   ';
+    return singleIndent.repeat(level);
   }
 } 
