@@ -68,7 +68,8 @@ OPTIONS:
   ORGANIZATION:
   --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
   --date-folders           Create date-based subdirectories
-  --skip-highlights        Skip highlight notes, export only text and annotation notes
+  --skip-highlights        Skip highlight notes, export only text and annotation notes (default: enabled)
+  --include-highlights     Include highlight notes in export (overrides default)
   --no-index-files         Do not create README.md index files (default: create them)
   
   MARKDOWN:
@@ -104,6 +105,9 @@ EXAMPLES:
   
   # Export without frontmatter and show metadata in content
   LogosNotesExporter --no-frontmatter --show-metadata
+  
+  # Include highlight notes (overrides default skip behavior)
+  LogosNotesExporter --include-highlights
 
 NOTES:
   - Database is auto-detected in standard Logos installation locations
@@ -146,6 +150,7 @@ function parseCommandLine(): CLIOptions {
       
       // Processing options
       'skip-highlights': { type: 'boolean' },
+      'include-highlights': { type: 'boolean' },
       'html-sub-superscript': { type: 'boolean' },
       verbose: { type: 'boolean', short: 'v' },
       'dry-run': { type: 'boolean' },
@@ -169,8 +174,8 @@ function parseCommandLine(): CLIOptions {
     includeNotebook: !parsed.values['no-notebook-info'],
     includeId: parsed.values['include-id'],
     dateFormat: parsed.values['date-format'] as 'iso' | 'locale' | 'short' | undefined,
-    skipHighlights: parsed.values['skip-highlights'],
-    htmlSubSuperscript: parsed.values['html-sub-superscript'],
+    skipHighlights: parsed.values['include-highlights'] ? false : (parsed.values['skip-highlights'] ?? DEFAULT_CONFIG.export.skipHighlights),
+    htmlSubSuperscript: parsed.values['html-sub-superscript'] ?? DEFAULT_CONFIG.xaml.htmlSubSuperscript,
     verbose: parsed.values.verbose,
     dryRun: parsed.values['dry-run'],
     help: parsed.values.help,

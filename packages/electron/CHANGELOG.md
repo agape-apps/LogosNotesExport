@@ -78,3 +78,13 @@
 - Added config package to all workspace dependencies and TypeScript project references
 - Successfully tested CLI and Electron functionality with centralized configuration
 - Exact LLM Model string: Claude Sonnet 4 (Anthropic, 2024)
+
+2025-07-19 fix: Fixed CLI not respecting default skipHighlights: true setting from centralized config
+- CLI was not applying centralized default skipHighlights: true, causing highlights to be included instead of skipped
+- Fixed CLI option parsing to use DEFAULT_CONFIG.export.skipHighlights when --skip-highlights flag not provided
+- Added --include-highlights flag to allow users to override the default skip behavior when needed
+- Updated CLI help text to clearly document both options and default behavior
+- CLI now correctly skips highlights by default (328 notes vs 1987), matching Electron behavior
+- Verified all flag combinations work: no flags (skip), --skip-highlights (skip), --include-highlights (include)
+- Both CLI and Electron now consistently respect the centralized skipHighlights: true default
+- Exact LLM Model string: Claude Sonnet 4 (Anthropic, 2024)
