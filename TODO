@@ -4,10 +4,15 @@
 - when exporting notes after the first start the screen refreshes and the log disappears
   - after centralizing the settings
 
+### Testing & Errors
 - testing with jest unit tests
 - more testing on Windows
 - test on Apple Silicon
 - improve error handling, for databases, for conversion issues
+
+### Settings
+- The CLI settings have their own defaults in spite of the centralized settings file, as the default is to run without flags. It would take a lot of changes to automatically follow each settings change in the CLI. Currently only done for including highlight notes, so the default can be easily changed. 
+  - a different CLI UI design would be needed to make it similar to the Electron version, but that is not really needed
 
 ### Binary Builds
 
