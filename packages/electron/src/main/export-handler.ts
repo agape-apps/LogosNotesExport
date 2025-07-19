@@ -137,6 +137,7 @@ export async function executeExport(
     includeId: updatedSettings.includeId,
     dateFormat: updatedSettings.dateFormat,
     skipHighlights: updatedSettings.skipHighlights,
+    htmlSubSuperscript: updatedSettings.htmlSubSuperscript,
     verbose: false, // Not verbose by default for Electron
     dryRun: updatedSettings.dryRun,
   };
