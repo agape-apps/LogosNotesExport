@@ -1,5 +1,6 @@
 import { XMLParser } from 'fast-xml-parser';
 import { UnicodeCleaner } from './unicode-cleaner.js';
+import { getDefaults } from './config/defaults.js';
 
 export interface XamlConverterOptions {
   /** Font sizes that correspond to heading levels [H1, H2, H3, H4, H5, H6] */
@@ -17,14 +18,7 @@ export interface XamlConverterOptions {
 }
 
 // TODO: Add support for other monospace Font Names
-export const DEFAULT_OPTIONS: XamlConverterOptions = {
-  headingSizes: [], // No longer used - we use ranges instead
-  monospaceFontName: 'Courier New',
-  blockQuoteLineThickness: 3,
-  horizontalLineThickness: 3,
-  ignoreUnknownElements: true,
-  htmlSubSuperscript: false, // Default to Pandoc-style ~text~ and ^text^
-};
+export const DEFAULT_OPTIONS: XamlConverterOptions = getDefaults.xaml();
 
 interface XamlElement {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

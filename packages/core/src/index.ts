@@ -9,6 +9,7 @@ export { MetadataProcessor } from './metadata-processor.js';
 export { UnicodeCleaner } from './unicode-cleaner.js';
 export { ExportValidator } from './validator.js';
 export { DatabaseLocator } from './database-locator.js';
+export { DEFAULT_CONFIG, getDefaults, type ConfigPath } from './config/defaults.js';
 export { 
   LogosNotesExporter, 
   type CoreExportOptions, 

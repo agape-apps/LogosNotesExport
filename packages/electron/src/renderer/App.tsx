@@ -9,6 +9,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './comp
 import { BasicMode } from './components/BasicMode';
 import { AdvancedMode } from './components/AdvancedMode';
 import type { ExportSettings, AppMode } from './types';
+import { DEFAULT_SETTINGS } from './types';
 
 /**
  * Main App component - Entry point for the Logos Notes Exporter Electron app
@@ -279,23 +280,7 @@ const App: React.FC = () => {
   };
 
   const handleRestoreDefaults = () => {
-    const defaultSettings = {
-      autoDetectDatabase: true,
-      outputDirectory: "~/Documents/Logos-Exported-Notes",
-      organizeByNotebooks: true,
-      includeDateFolders: false,
-      createIndexFiles: true,
-      skipHighlights: true,
-      includeFrontmatter: true,
-      includeMetadata: false,
-      includeDates: true,
-      includeNotebook: true,
-      includeId: false,
-      dateFormat: "iso" as const,
-      htmlSubSuperscript: false,
-      dryRun: false,
-    };
-    setSettings(defaultSettings);
+    setSettings(DEFAULT_SETTINGS);
     addLogMessage('🔄 Settings restored to defaults');
     toast.success('Settings restored to defaults');
   };

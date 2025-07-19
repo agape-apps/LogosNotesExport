@@ -51,3 +51,20 @@
 - ESLint now runs cleanly with zero errors on actual source code only
 - Removed lint.errors file as all linting issues have been resolved
 - Exact LLM Model string: Claude Sonnet 4 (Anthropic, 2024)
+
+2025-07-19 refactor: Centralized configuration to eliminate default settings duplication
+- Created central configuration module in packages/core/src/config/defaults.ts as single source of truth
+- Eliminated duplicate default settings across 7 locations in CLI and Electron packages
+- Updated XamlConverterOptions, MarkdownOptions, CLI help text, and all Electron default settings to use central config
+- Improved maintainability by ensuring future setting changes only require updates in one location
+- CLI help text now dynamically shows defaults from central configuration
+- All TypeScript interfaces maintain type safety while removing code duplication
+- Exact LLM Model string: Claude Sonnet 4 (Anthropic, 2024)
+
+2025-07-19 fix: Resolved Electron webpack bundling errors caused by core package imports in renderer
+- Fixed webpack errors where renderer process tried to bundle Node.js modules (fs, path, bun:sqlite) for browser
+- Created local defaults file in packages/electron/src/renderer/config/defaults.ts to avoid core package imports
+- Renderer process now uses local config while main process continues using central core config
+- Electron app now starts successfully without webpack compilation errors
+- Maintained centralized configuration benefits while respecting Electron's main/renderer process boundaries
+- Exact LLM Model string: Claude Sonnet 4 (Anthropic, 2024)

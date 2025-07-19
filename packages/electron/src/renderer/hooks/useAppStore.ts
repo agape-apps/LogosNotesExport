@@ -25,22 +25,7 @@ interface AppStore extends AppState {
   setSelectedDatabasePath: (path: string | undefined) => void;
 }
 
-const DEFAULT_SETTINGS: ExportSettings = {
-  autoDetectDatabase: true,
-  outputDirectory: "~/Documents/Logos-Exported-Notes",
-  organizeByNotebooks: true,
-  includeDateFolders: false,
-  createIndexFiles: true,
-  skipHighlights: true,
-  includeFrontmatter: true,
-  includeMetadata: false,
-  includeDates: true,
-  includeNotebook: true,
-  includeId: false,
-  dateFormat: "iso",
-  htmlSubSuperscript: false,
-  dryRun: false,
-};
+import { DEFAULT_SETTINGS } from '../types';
 
 export const useAppStore = create<AppStore>()(
   subscribeWithSelector((set, _get) => ({

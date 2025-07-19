@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import { app } from 'electron';
 import * as yaml from 'yaml';
 import type { ExportSettings, SettingsFile, AppMode } from '../renderer/types';
+import { DEFAULT_CONFIG } from '@logos-notes-exporter/core';
 
 const SETTINGS_FILE_NAME = 'settings.yaml';
 const SETTINGS_VERSION = '1.0';
@@ -46,10 +47,7 @@ function createDefaultSettingsFile(settings: ExportSettings, mode: AppMode = 'ba
     },
     ui: {
       mode: mode,
-      windowSize: {
-        width: 900,
-        height: 700,
-      },
+      windowSize: DEFAULT_CONFIG.ui.windowSize,
     },
   };
 }
@@ -87,26 +85,26 @@ export function loadSettings(): { settings: ExportSettings; mode: AppMode; windo
     if (!fs.existsSync(settingsPath)) {
       console.log('Settings file does not exist, using defaults');
       const defaultSettings: ExportSettings = {
-        autoDetectDatabase: true,
+        autoDetectDatabase: DEFAULT_CONFIG.export.autoDetectDatabase,
         outputDirectory: getDefaultOutputDirectory(),
-        organizeByNotebooks: true,
-        includeDateFolders: false,
-        createIndexFiles: true,
-        skipHighlights: true,
-        includeFrontmatter: true,
-        includeMetadata: false,
-        includeDates: true,
-        includeNotebook: true,
-        includeId: false,
-        dateFormat: 'iso',
-        htmlSubSuperscript: false,
-        dryRun: false,
+        organizeByNotebooks: DEFAULT_CONFIG.export.organizeByNotebooks,
+        includeDateFolders: DEFAULT_CONFIG.export.includeDateFolders,
+        createIndexFiles: DEFAULT_CONFIG.export.createIndexFiles,
+        skipHighlights: DEFAULT_CONFIG.export.skipHighlights,
+        includeFrontmatter: DEFAULT_CONFIG.markdown.includeFrontmatter,
+        includeMetadata: DEFAULT_CONFIG.markdown.includeMetadata,
+        includeDates: DEFAULT_CONFIG.markdown.includeDates,
+        includeNotebook: DEFAULT_CONFIG.markdown.includeNotebook,
+        includeId: DEFAULT_CONFIG.markdown.includeId,
+        dateFormat: DEFAULT_CONFIG.markdown.dateFormat,
+        htmlSubSuperscript: DEFAULT_CONFIG.markdown.htmlSubSuperscript,
+        dryRun: DEFAULT_CONFIG.export.dryRun,
       };
       
       return {
         settings: defaultSettings,
-        mode: 'basic',
-        windowSize: { width: 900, height: 700 },
+        mode: DEFAULT_CONFIG.ui.mode,
+        windowSize: DEFAULT_CONFIG.ui.windowSize,
       };
     }
 
@@ -128,26 +126,26 @@ export function loadSettings(): { settings: ExportSettings; mode: AppMode; windo
     console.error('Error loading settings:', error);
     // Return defaults on error
     const defaultSettings: ExportSettings = {
-      autoDetectDatabase: true,
+      autoDetectDatabase: DEFAULT_CONFIG.export.autoDetectDatabase,
       outputDirectory: getDefaultOutputDirectory(),
-      organizeByNotebooks: true,
-      includeDateFolders: false,
-      createIndexFiles: true,
-      skipHighlights: true,
-      includeFrontmatter: true,
-      includeMetadata: false,
-      includeDates: true,
-      includeNotebook: true,
-      includeId: false,
-      dateFormat: 'iso',
-      htmlSubSuperscript: false,
-      dryRun: false,
+      organizeByNotebooks: DEFAULT_CONFIG.export.organizeByNotebooks,
+      includeDateFolders: DEFAULT_CONFIG.export.includeDateFolders,
+      createIndexFiles: DEFAULT_CONFIG.export.createIndexFiles,
+      skipHighlights: DEFAULT_CONFIG.export.skipHighlights,
+      includeFrontmatter: DEFAULT_CONFIG.markdown.includeFrontmatter,
+      includeMetadata: DEFAULT_CONFIG.markdown.includeMetadata,
+      includeDates: DEFAULT_CONFIG.markdown.includeDates,
+      includeNotebook: DEFAULT_CONFIG.markdown.includeNotebook,
+      includeId: DEFAULT_CONFIG.markdown.includeId,
+      dateFormat: DEFAULT_CONFIG.markdown.dateFormat,
+      htmlSubSuperscript: DEFAULT_CONFIG.markdown.htmlSubSuperscript,
+      dryRun: DEFAULT_CONFIG.export.dryRun,
     };
     
     return {
       settings: defaultSettings,
-      mode: 'basic',
-      windowSize: { width: 900, height: 700 },
+      mode: DEFAULT_CONFIG.ui.mode,
+      windowSize: DEFAULT_CONFIG.ui.windowSize,
     };
   }
 }
@@ -165,7 +163,7 @@ export function saveSettings(settings: ExportSettings, mode: AppMode, windowSize
       fs.mkdirSync(userDataPath, { recursive: true });
     }
 
-    const currentWindowSize = windowSize || { width: 900, height: 700 };
+    const currentWindowSize = windowSize || DEFAULT_CONFIG.ui.windowSize;
     const settingsFile = createDefaultSettingsFile(settings, mode);
     settingsFile.ui.windowSize = currentWindowSize;
     

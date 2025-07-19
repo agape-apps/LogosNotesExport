@@ -6,7 +6,8 @@ import {
   LogosNotesExporter,
   type CoreExportOptions,
   type ExportCallbacks,
-  NotesToolDatabase
+  NotesToolDatabase,
+  DEFAULT_CONFIG
 } from '@logos-notes-exporter/core';
 
 /**
@@ -62,7 +63,7 @@ OPTIONS:
   --database, -d        Path to NotesTool database file (auto-detected if not specified)
   --list-databases      List all available database locations and exit
   --show-instructions   Show manual database location instructions and exit
-  --output, -o          Output directory (default: ./Logos-Exported-Notes)
+  --output, -o          Output directory (default: ${DEFAULT_CONFIG.export.outputDirectory})
   
   ORGANIZATION:
   --no-organize-notebooks  Disable organizing notes by notebooks (default: organize by notebooks)
@@ -77,7 +78,7 @@ OPTIONS:
   --no-dates             Exclude creation/modification dates (default: include)
   --no-notebook-info     Exclude notebook information (default: include)
   --include-id           Include note IDs
-  --date-format          Date format: iso, locale, short (default: iso)
+  --date-format          Date format: iso, locale, short (default: ${DEFAULT_CONFIG.markdown.dateFormat})
   
   PROCESSING:
   --verbose, -v         Verbose output

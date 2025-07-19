@@ -109,22 +109,24 @@ export interface SettingsFile {
   };
 }
 
+import { ELECTRON_DEFAULT_CONFIG } from '../config/defaults';
+
 // Default Settings
 export const DEFAULT_SETTINGS: ExportSettings = {
-  autoDetectDatabase: true,
-  outputDirectory: "~/Documents/Logos-Exported-Notes",
-  organizeByNotebooks: true,
-  includeDateFolders: false,
-  createIndexFiles: true,
-  skipHighlights: true,
-  includeFrontmatter: true,
-  includeMetadata: false,
-  includeDates: true,
-  includeNotebook: true,
-  includeId: false,
-  dateFormat: "iso",
-  htmlSubSuperscript: false,
-  dryRun: false,
+  autoDetectDatabase: ELECTRON_DEFAULT_CONFIG.export.autoDetectDatabase,
+  outputDirectory: ELECTRON_DEFAULT_CONFIG.export.outputDirectory,
+  organizeByNotebooks: ELECTRON_DEFAULT_CONFIG.export.organizeByNotebooks,
+  includeDateFolders: ELECTRON_DEFAULT_CONFIG.export.includeDateFolders,
+  createIndexFiles: ELECTRON_DEFAULT_CONFIG.export.createIndexFiles,
+  skipHighlights: ELECTRON_DEFAULT_CONFIG.export.skipHighlights,
+  includeFrontmatter: ELECTRON_DEFAULT_CONFIG.markdown.includeFrontmatter,
+  includeMetadata: ELECTRON_DEFAULT_CONFIG.markdown.includeMetadata,
+  includeDates: ELECTRON_DEFAULT_CONFIG.markdown.includeDates,
+  includeNotebook: ELECTRON_DEFAULT_CONFIG.markdown.includeNotebook,
+  includeId: ELECTRON_DEFAULT_CONFIG.markdown.includeId,
+  dateFormat: ELECTRON_DEFAULT_CONFIG.markdown.dateFormat,
+  htmlSubSuperscript: ELECTRON_DEFAULT_CONFIG.markdown.htmlSubSuperscript,
+  dryRun: ELECTRON_DEFAULT_CONFIG.export.dryRun,
 };
 
 export const DEFAULT_APP_STATE: AppState = {

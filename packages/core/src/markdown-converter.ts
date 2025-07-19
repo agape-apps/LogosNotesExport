@@ -4,6 +4,7 @@ import { cleanXamlText } from './unicode-cleaner.js';
 import { MetadataProcessor, type MetadataLookups, type MetadataOptions } from './metadata-processor.js';
 import type { NotesToolDatabase } from './notestool-database.js';
 import type { CatalogDatabase } from './catalog-database.js';
+import { getDefaults } from './config/defaults.js';
 
 export interface MarkdownOptions {
   /** Include YAML frontmatter */
@@ -62,17 +63,7 @@ export interface MarkdownResult {
   characterCount: number;
 }
 
-export const DEFAULT_MARKDOWN_OPTIONS: MarkdownOptions = {
-  includeFrontmatter: true,
-  includeMetadata: true,
-  includeDates: true,
-  includeKind: true,
-  includeNotebook: true,
-  customFields: {},
-  dateFormat: 'iso',
-  includeId: false,
-  htmlSubSuperscript: false
-};
+export const DEFAULT_MARKDOWN_OPTIONS: MarkdownOptions = getDefaults.markdown();
 
 export class MarkdownConverter {
   private options: MarkdownOptions;
