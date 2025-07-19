@@ -45,6 +45,7 @@ interface CLIOptions {
   dateFormat?: 'iso' | 'locale' | 'short';
   /** Processing options */
   skipHighlights?: boolean;
+  htmlSubSuperscript?: boolean;
   verbose?: boolean;
   dryRun?: boolean;
   help?: boolean;
@@ -70,12 +71,13 @@ OPTIONS:
   --no-index-files         Do not create README.md index files (default: create them)
   
   MARKDOWN:
-  --no-frontmatter      Exclude YAML frontmatter (default: include)
-  --show-metadata       Include metadata in markdown content (default: only shown in frontmatter)
-  --no-dates            Exclude creation/modification dates (default: include)
-  --no-notebook-info    Exclude notebook information (default: include)
-  --include-id          Include note IDs
-  --date-format         Date format: iso, locale, short (default: iso)
+  --html-sub-superscript Use HTML sub/superscript tags instead of Pandoc-style ~text~ and ^text^
+  --no-frontmatter       Exclude YAML frontmatter (default: include)
+  --show-metadata        Include metadata in markdown content (default: only shown in frontmatter)
+  --no-dates             Exclude creation/modification dates (default: include)
+  --no-notebook-info     Exclude notebook information (default: include)
+  --include-id           Include note IDs
+  --date-format          Date format: iso, locale, short (default: iso)
   
   PROCESSING:
   --verbose, -v         Verbose output
@@ -104,7 +106,7 @@ EXAMPLES:
 
 NOTES:
   - Database is auto-detected in standard Logos installation locations
-  - Windows: %LOCALAPPDATA%\\Logos4\\Documents\\{random-id}\\NotesToolManager\\notestool.db
+  - Windows: %LOCALAPPDATA%\\Logos\\Documents\\{random-id}\\NotesToolManager\\notestool.db
   - macOS: ~/Library/Application Support/Logos4/Documents/{random-id}/NotesToolManager/notestool.db
   - Use --list-databases to see all available locations
   - All database operations are READ-ONLY for safety
@@ -143,6 +145,7 @@ function parseCommandLine(): CLIOptions {
       
       // Processing options
       'skip-highlights': { type: 'boolean' },
+      'html-sub-superscript': { type: 'boolean' },
       verbose: { type: 'boolean', short: 'v' },
       'dry-run': { type: 'boolean' },
       help: { type: 'boolean', short: 'h' },
@@ -166,6 +169,7 @@ function parseCommandLine(): CLIOptions {
     includeId: parsed.values['include-id'],
     dateFormat: parsed.values['date-format'] as 'iso' | 'locale' | 'short' | undefined,
     skipHighlights: parsed.values['skip-highlights'],
+    htmlSubSuperscript: parsed.values['html-sub-superscript'],
     verbose: parsed.values.verbose,
     dryRun: parsed.values['dry-run'],
     help: parsed.values.help,
@@ -240,6 +244,7 @@ async function main(): Promise<void> {
     includeId: options.includeId,
     dateFormat: options.dateFormat,
     skipHighlights: options.skipHighlights,
+    htmlSubSuperscript: options.htmlSubSuperscript,
     verbose: options.verbose,
     dryRun: options.dryRun,
   };

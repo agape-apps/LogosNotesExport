@@ -20,6 +20,7 @@ export interface ExportSettings {
   dateFormat: "iso" | "locale" | "short";
 
   // Processing
+  htmlSubSuperscript: boolean;
   dryRun: boolean;
 }
 
@@ -96,6 +97,7 @@ export interface SettingsFile {
     dateFormat: "iso" | "locale" | "short";
   };
   processing: {
+    htmlSubSuperscript: boolean;
     dryRun: boolean;
   };
   ui: {
@@ -121,6 +123,7 @@ export const DEFAULT_SETTINGS: ExportSettings = {
   includeNotebook: true,
   includeId: false,
   dateFormat: "iso",
+  htmlSubSuperscript: false,
   dryRun: false,
 };
 

@@ -38,6 +38,7 @@ const DEFAULT_SETTINGS: ExportSettings = {
   includeNotebook: true,
   includeId: false,
   dateFormat: "iso",
+  htmlSubSuperscript: false,
   dryRun: false,
 };
 

@@ -292,6 +292,7 @@ const App: React.FC = () => {
       includeNotebook: true,
       includeId: false,
       dateFormat: "iso" as const,
+      htmlSubSuperscript: false,
       dryRun: false,
     };
     setSettings(defaultSettings);

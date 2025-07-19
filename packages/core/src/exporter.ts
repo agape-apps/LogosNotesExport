@@ -34,6 +34,7 @@ export interface CoreExportOptions {
   dateFormat?: 'iso' | 'locale' | 'short';
   /** Processing options */
   skipHighlights?: boolean;
+  htmlSubSuperscript?: boolean;
   verbose?: boolean;
   dryRun?: boolean;
 }
@@ -145,6 +146,7 @@ export class LogosNotesExporter {
       includeNotebook: options.includeNotebook !== false,
       includeId: options.includeId || false,
       dateFormat: options.dateFormat || 'iso',
+      htmlSubSuperscript: options.htmlSubSuperscript || false,
     };
     this.markdownConverter = new MarkdownConverter(markdownOptions, this.database, options.verbose || false, this.catalogDb);
     this.validator = new ExportValidator();

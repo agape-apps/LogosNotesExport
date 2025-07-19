@@ -13,26 +13,23 @@
 
 from Bear:
 
-
-
 ### XAML Conversion - add/check
 - If regular Markdown is copied into Notes using the default font (10 - 12 size), then the formatting will be maintained as plain text Markdown (should not be modified by the converter)
 - only convert formatting instructions from XAML formatting
 
-
 - [ ] fix complex unordered list
 - [ ] fix complex ordered list (fix)
-- [ ] fix indents, they get ignored
-- [ ] indent without list as block quote (Optional)
-- use single indent for Block Quote (optional)
+- [x] fix indents, they get ignored
+- [ ] use one indent without list as block quote (Optional)
 
-- tabs turn into code (in many Markdown readers), convert to spaces instead
+- tabs turn into code (in many Markdown readers), convert to indents instead (OPTION IN SETTINGS)
 - four spaces can turn into code (nut not always?)
 
-- [ ] improve subscript/superscript options 
-  * Subscript~123~ Superscript^123^ for Typora (maybe Obsidian with plugin)
+- [ ] improve subscript/superscript options (OPTION IN SETTINGS)
+  * Subscript~123~ Superscript^123^ for Typora (Obsidian with plugin)
 - [ ] improve small caps CAPITAL<small> only small letters in small caps (optional)
-- [ ] add more flexible conversion options (depending on Markdown target)
+
+- [ ] add more flexible conversion options (depending on Markdown target) (OPTIONS IN SETTINGS)
 - [ ] explore Images
 - [ ] font sizes 24 and up is H1
 - [ ] font size 9 and below is <small>

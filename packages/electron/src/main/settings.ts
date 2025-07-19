@@ -41,6 +41,7 @@ function createDefaultSettingsFile(settings: ExportSettings, mode: AppMode = 'ba
       dateFormat: settings.dateFormat,
     },
     processing: {
+      htmlSubSuperscript: settings.htmlSubSuperscript,
       dryRun: settings.dryRun,
     },
     ui: {
@@ -71,6 +72,7 @@ function settingsFileToExportSettings(settingsFile: SettingsFile): ExportSetting
     includeNotebook: settingsFile.markdown.includeNotebook ?? true,
     includeId: settingsFile.markdown.includeId ?? false,
     dateFormat: settingsFile.markdown.dateFormat || 'iso',
+    htmlSubSuperscript: settingsFile.processing.htmlSubSuperscript ?? false,
     dryRun: settingsFile.processing.dryRun ?? false,
   };
 }
@@ -97,6 +99,7 @@ export function loadSettings(): { settings: ExportSettings; mode: AppMode; windo
         includeNotebook: true,
         includeId: false,
         dateFormat: 'iso',
+        htmlSubSuperscript: false,
         dryRun: false,
       };
       
@@ -137,6 +140,7 @@ export function loadSettings(): { settings: ExportSettings; mode: AppMode; windo
       includeNotebook: true,
       includeId: false,
       dateFormat: 'iso',
+      htmlSubSuperscript: false,
       dryRun: false,
     };
     

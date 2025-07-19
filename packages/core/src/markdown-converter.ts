@@ -22,6 +22,8 @@ export interface MarkdownOptions {
   dateFormat: 'iso' | 'locale' | 'short';
   /** Whether to include note ID */
   includeId: boolean;
+  /** Use HTML sub/superscript tags instead of Pandoc-style formatting */
+  htmlSubSuperscript: boolean;
 }
 
 export interface XamlConversionStats {
@@ -68,7 +70,8 @@ export const DEFAULT_MARKDOWN_OPTIONS: MarkdownOptions = {
   includeNotebook: true,
   customFields: {},
   dateFormat: 'iso',
-  includeId: false
+  includeId: false,
+  htmlSubSuperscript: false
 };
 
 export class MarkdownConverter {
@@ -82,7 +85,9 @@ export class MarkdownConverter {
   constructor(options: Partial<MarkdownOptions> = {}, database?: NotesToolDatabase, verbose: boolean = false, catalogDb?: CatalogDatabase) {
     this.options = { ...DEFAULT_MARKDOWN_OPTIONS, ...options };
     this.verbose = verbose;
-    this.xamlConverter = new XamlToMarkdownConverter();
+    this.xamlConverter = new XamlToMarkdownConverter({
+      htmlSubSuperscript: this.options.htmlSubSuperscript
+    });
     this.xamlFailures = [];
     this.xamlStats = {
       totalNotes: 0,

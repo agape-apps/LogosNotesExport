@@ -433,10 +433,26 @@ export const AdvancedMode: React.FC<AdvancedModeProps> = ({
                   </Tooltip>
                 </div>
 
-                {/* Dry run option */}
+                {/* Processing options */}
                 <div className="space-y-3 pt-3 border-t">
-                  <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Testing</h4>
+                  <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Processing</h4>
                   
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <label className="text-sm font-medium">HTML sub/superscript</label>
+                      <p className="text-xs text-muted-foreground">Use HTML tags instead of Pandoc-style ~text~ and ^text^</p>
+                    </div>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Switch
+                          checked={settings.htmlSubSuperscript}
+                          onCheckedChange={(checked) => onSettingsChange({ htmlSubSuperscript: checked })}
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>Use &lt;sub&gt; and &lt;sup&gt; tags instead of Pandoc-style ~text~ and ^text^</TooltipContent>
+                    </Tooltip>
+                  </div>
+
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <label className="text-sm font-medium">Dry run mode</label>

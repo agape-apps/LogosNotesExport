@@ -12,6 +12,8 @@ export interface XamlConverterOptions {
   horizontalLineThickness: number;
   /** Whether to ignore unknown elements */
   ignoreUnknownElements: boolean;
+  /** Use HTML sub/superscript tags instead of Pandoc-style formatting */
+  htmlSubSuperscript: boolean;
 }
 
 // TODO: Add support for other monospace Font Names
@@ -21,6 +23,7 @@ export const DEFAULT_OPTIONS: XamlConverterOptions = {
   blockQuoteLineThickness: 3,
   horizontalLineThickness: 3,
   ignoreUnknownElements: true,
+  htmlSubSuperscript: false, // Default to Pandoc-style ~text~ and ^text^
 };
 
 interface XamlElement {
@@ -616,9 +619,9 @@ export class XamlToMarkdownConverter {
 
     // Apply formatting in the correct order (innermost to outermost)
     if (needsSubscript) {
-      formatted = '<sub>' + formatted + '</sub>';
+      formatted = this.options.htmlSubSuperscript ? '<sub>' + formatted + '</sub>' : '~' + formatted + '~';
     } else if (needsSuperscript) {
-      formatted = '<sup>' + formatted + '</sup>';
+      formatted = this.options.htmlSubSuperscript ? '<sup>' + formatted + '</sup>' : '^' + formatted + '^';
     }
 
     if (needsSmallCaps) {
