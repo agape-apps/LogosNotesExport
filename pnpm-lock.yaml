@@ -45,6 +45,9 @@ importers:
 
   packages/cli:
     dependencies:
+      '@logos-notes-exporter/config':
+        specifier: workspace:*
+        version: link:../config
       '@logos-notes-exporter/core':
         specifier: workspace:*
         version: link:../core
@@ -59,8 +62,17 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
+  packages/config:
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
   packages/core:
     dependencies:
+      '@logos-notes-exporter/config':
+        specifier: workspace:*
+        version: link:../config
       bun:
         specifier: ^1.0.0
         version: 1.2.18
@@ -80,6 +92,9 @@ importers:
 
   packages/electron:
     dependencies:
+      '@logos-notes-exporter/config':
+        specifier: workspace:*
+        version: link:../config
       '@logos-notes-exporter/core':
         specifier: workspace:*
         version: link:../core

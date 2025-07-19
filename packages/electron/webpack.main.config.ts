@@ -25,6 +25,9 @@ export const mainConfig: Configuration = {
   ],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
+    alias: {
+      '@logos-notes-exporter/config': path.resolve(__dirname, '../config/dist'),
+    },
   },
   // Mark better-sqlite3 as external to prevent webpack bundling
   externals: {

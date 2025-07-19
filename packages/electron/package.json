@@ -49,6 +49,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@logos-notes-exporter/config": "workspace:*",
     "@logos-notes-exporter/core": "workspace:*",
     "@radix-ui/react-checkbox": "1.0.4",
     "@radix-ui/react-dialog": "1.0.5",

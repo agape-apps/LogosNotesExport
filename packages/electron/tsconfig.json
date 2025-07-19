@@ -17,6 +17,7 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules", ".webpack"],
   "references": [
+    { "path": "../config" },
     { "path": "../core" }
   ]
 }

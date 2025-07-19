@@ -11,6 +11,7 @@
     "clean": "rm -rf dist && rm -f tsconfig.tsbuildinfo"
   },
   "dependencies": {
+    "@logos-notes-exporter/config": "workspace:*",
     "bun": "^1.0.0",
     "fast-xml-parser": "^5.2.5",
     "yaml": "^2.8.0"

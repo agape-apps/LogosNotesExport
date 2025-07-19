@@ -22,6 +22,7 @@ export const rendererConfig: Configuration = {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
     alias: {
       '@': path.resolve(__dirname, 'src/renderer'),
+      '@logos-notes-exporter/config': path.resolve(__dirname, '../config/dist'),
     },
   },
 };

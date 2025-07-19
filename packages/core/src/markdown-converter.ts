@@ -4,7 +4,7 @@ import { cleanXamlText } from './unicode-cleaner.js';
 import { MetadataProcessor, type MetadataLookups, type MetadataOptions } from './metadata-processor.js';
 import type { NotesToolDatabase } from './notestool-database.js';
 import type { CatalogDatabase } from './catalog-database.js';
-import { getDefaults } from './config/defaults.js';
+import { getDefaults } from '@logos-notes-exporter/config';
 
 export interface MarkdownOptions {
   /** Include YAML frontmatter */

@@ -68,3 +68,13 @@
 - Electron app now starts successfully without webpack compilation errors
 - Maintained centralized configuration benefits while respecting Electron's main/renderer process boundaries
 - Exact LLM Model string: Claude Sonnet 4 (Anthropic, 2024)
+
+2025-07-19 refactor: Implemented Separate Config Package architecture for true single source of truth
+- Created new @logos-notes-exporter/config package with zero Node.js dependencies for browser compatibility
+- Moved all default settings from core to centralized config package (packages/config/src/defaults.ts)
+- Updated all packages (core, cli, electron) to import from central config package instead of local duplicates
+- Configured webpack aliases in both main and renderer configs to resolve workspace packages properly
+- Removed all duplicated config files: packages/core/src/config/ and packages/electron/src/renderer/config/
+- Added config package to all workspace dependencies and TypeScript project references
+- Successfully tested CLI and Electron functionality with centralized configuration
+- Exact LLM Model string: Claude Sonnet 4 (Anthropic, 2024)

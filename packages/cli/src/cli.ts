@@ -6,9 +6,9 @@ import {
   LogosNotesExporter,
   type CoreExportOptions,
   type ExportCallbacks,
-  NotesToolDatabase,
-  DEFAULT_CONFIG
+  NotesToolDatabase
 } from '@logos-notes-exporter/core';
+import { DEFAULT_CONFIG } from '@logos-notes-exporter/config';
 
 /**
  * Read version from package.json

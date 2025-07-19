@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { app } from 'electron';
 import * as yaml from 'yaml';
 import type { ExportSettings, SettingsFile, AppMode } from '../renderer/types';
-import { DEFAULT_CONFIG } from '@logos-notes-exporter/core';
+import { DEFAULT_CONFIG } from '@logos-notes-exporter/config';
 
 const SETTINGS_FILE_NAME = 'settings.yaml';
 const SETTINGS_VERSION = '1.0';
