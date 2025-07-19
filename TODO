@@ -1,5 +1,9 @@
 # TODO
 
+### BUGS
+- when exporting notes after the first start the screen refreshes and the log disappears
+  - after centralizing the settings
+
 - testing with jest unit tests
 - more testing on Windows
 - test on Apple Silicon

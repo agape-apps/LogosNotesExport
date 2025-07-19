@@ -5,8 +5,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm run build:core && pnpm run build:cli && pnpm run build:electron",
-    "build:core": "pnpm --filter @logos-notes-exporter/core build",
+    "build": "pnpm run build:config && pnpm run build:core && pnpm run build:cli && pnpm run build:electron",
+    "build:config": "pnpm --filter @logos-notes-exporter/config build",
+    "build:core": "pnpm run build:config && pnpm --filter @logos-notes-exporter/core build",
     "build:cli": "pnpm --filter @logos-notes-exporter/cli build",
     "build:electron": "pnpm --filter @logos-notes-exporter/electron build",
     "dev:cli": "pnpm --filter @logos-notes-exporter/cli dev",
@@ -20,7 +21,7 @@
     "lint:core": "eslint packages/core/",
     "lint:electron": "eslint packages/electron/",
     "clean": "rm -rf node_modules pnpm-lock.yaml packages/*/dist packages/*/node_modules packages/*/.webpack packages/*/tsconfig.tsbuildinfo",
-    "reinstall": "pnpm clean && pnpm install && pnpm run build:core"
+    "reinstall": "pnpm clean && pnpm install && pnpm run build:config && pnpm run build:core"
   },
   "keywords": [
     "logos",

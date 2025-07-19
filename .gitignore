@@ -15,6 +15,8 @@ packages/core/dist/
 packages/core/tsconfig.tsbuildinfo
 packages/electron/dist/
 packages/electron/.webpack/
+packages/config/dist/
+packages/config/tsconfig.tsbuildinfo
 
 bin/
 node_modules/
